@@ -16,6 +16,6 @@
 
 ## Client
 
-### [기능 요구사항](https://docs.google.com/spreadsheets/d/1XzTZNhzeVAya7F7M2Y35TXloUKVHwpKfz6Fo7TVQkYs/edit#gid=0)
+### [기능 요구사항](https://docs.google.com/spreadsheets/d/1XzTZNhzeVAya7F7M2Y35TXloUKVHwpKfz6Fo7TVQkYs/edit?usp=sharing)
 
 ## Server
