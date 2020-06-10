@@ -1,19 +1,23 @@
 const merge = require("webpack-merge");
 const common = require("./webpack.common.js");
 const TerserPlugin = require("terser-webpack-plugin");
-const CleanWebpackPlugin = require("clean-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = merge(common, {
   mode: "production",
 
   devtool: "cheap-module-source-map",
 
-  output: {
-    path: path.join(__dirname, "/dist"),
-    filename: "[name].bundle.js",
-  },
-
   optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendors",
+          chunks: "all",
+        },
+      },
+    },
     minimize: true,
     minimizer: [
       new TerserPlugin({
@@ -23,18 +27,9 @@ module.exports = merge(common, {
             drop_console: true,
           },
         },
-        splitChunks: {
-          cacheGroups: {
-            commons: {
-              test: /[\\/]node_modules[\\/]/,
-              name: "vendors",
-              chunks: "all",
-            },
-          },
-        },
       }),
     ],
   },
 
-  plugins: [new CleanWebpackPlugin(["dist"])],
+  plugins: [new CleanWebpackPlugin()],
 });
