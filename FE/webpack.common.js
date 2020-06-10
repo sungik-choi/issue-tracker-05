@@ -4,18 +4,16 @@ const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   entry: "./src/index.jsx",
-  output: {
-    path: path.join(__dirname, "/dist"),
-    filename: "index_bundle.js",
-  },
+
   module: {
     rules: [
       {
         test: /\.js$/,
-        exclude: /node_module/,
-        use: {
-          loader: "babel-loader",
+        options: {
+          presets: ["@babel/preset-react", "@babel/preset-env"],
         },
+        loader: "babel-loader",
+        exclude: /node_module/,
       },
     ],
   },
