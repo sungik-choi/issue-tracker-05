@@ -19,9 +19,12 @@ module.exports = {
       },
     ],
   },
+
   resolve: {
+    module: ["node_modules"],
     extensions: [".js", ".jsx"],
   },
+
   plugins: [
     new HtmlWebpackPlugin({
       template: "./public/index.html",
