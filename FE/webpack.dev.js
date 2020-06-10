@@ -3,7 +3,9 @@ const common = require("./webpack.common.js");
 
 module.exports = merge(common, {
   mode: "development",
+
   devtool: "inline-source-map",
+
   devServer: {
     historyApiFallback: true,
     inline: true,
@@ -11,5 +13,4 @@ module.exports = merge(common, {
     hot: true,
     publicPath: "/",
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
 });
