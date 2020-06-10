@@ -21,7 +21,9 @@ module.exports = {
   },
 
   resolve: {
-    module: ["node_modules"],
+    alias: {
+      Components: path.resolve(__dirname, "./src/components/"),
+    },
     extensions: [".js", ".jsx"],
   },
 
