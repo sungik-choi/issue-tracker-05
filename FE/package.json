@@ -36,6 +36,7 @@
   "dependencies": {
     "@babel/runtime": "^7.10.2",
     "@babel/runtime-corejs3": "^7.10.2",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "webpack-merge": "^4.2.2"
