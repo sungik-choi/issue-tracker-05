@@ -1,7 +1,8 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const Dotenv = require('dotenv-webpack');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const Dotenv = require("dotenv-webpack");
+const TerserPlugin = require("terser-webpack-plugin");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.jsx",
@@ -21,25 +22,48 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: [".js", ".jsx"],
   },
   // common
-  plugins: [ 
-    new Dotenv(),
-  ],
+  plugins: [new Dotenv()],
+
   // dev
-  plugins: [ 
+  devServer: {
+    historyApiFallback: true,
+    inline: true,
+    port: 3000,
+    hot: true,
+    publicPath: "/",
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: "./public/index.html",
-      filename: 'index.html'
+      filename: "index.html",
+      showErrors: true,
     }),
   ],
+
   // prod
-  plugins: [ 
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        sourceMap: true,
+        terserOptions: {
+          compress: {
+            drop_console: true,
+          },
+        },
+      }),
+    ],
+  },
+
+  plugins: [
     new HtmlWebpackPlugin({
       template: "./public/index.html",
-      filename: 'index.html'
+      filename: "index.html",
     }),
-    new CleanWebpackPlugin(['dist']),
-  
+    new CleanWebpackPlugin(["dist"]),
+  ],
 };
