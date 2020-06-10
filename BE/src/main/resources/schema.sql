@@ -1,3 +1,9 @@
+DROP TABLE IF EXISTS issue;
+DROP TABLE IF EXISTS comment;
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS label;
+DROP TABLE IF EXISTS milestone;
+
 CREATE TABLE user (
     id                BIGINT AUTO_INCREMENT,
     name              VARCHAR(128),
