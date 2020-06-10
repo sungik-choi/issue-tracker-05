@@ -1,8 +1,10 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const Dotenv = require('dotenv-webpack');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: "./src/index.jsx",
   output: {
     path: path.join(__dirname, "/dist"),
     filename: "index_bundle.js",
@@ -18,9 +20,26 @@ module.exports = {
       },
     ],
   },
-  plugins: [
+  resolve: {
+    extensions: ['.js', '.jsx']
+  },
+  // common
+  plugins: [ 
+    new Dotenv(),
+  ],
+  // dev
+  plugins: [ 
     new HtmlWebpackPlugin({
-      template: "./src/index.html",
+      template: "./public/index.html",
+      filename: 'index.html'
     }),
   ],
+  // prod
+  plugins: [ 
+    new HtmlWebpackPlugin({
+      template: "./public/index.html",
+      filename: 'index.html'
+    }),
+    new CleanWebpackPlugin(['dist']),
+  
 };
