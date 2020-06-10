@@ -5,8 +5,6 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 
 module.exports = merge(common, {
   mode: "production",
-<<<<<<< HEAD
-=======
 
   devtool: "cheap-module-source-map",
 
@@ -15,7 +13,6 @@ module.exports = merge(common, {
     filename: "[name].bundle.js",
   },
 
->>>>>>> 146024a... [Fe/#2] Feat : split chunks 추가 및 소스맵 추가
   optimization: {
     minimize: true,
     minimizer: [
