@@ -32,8 +32,8 @@ public class IssueService {
 
     public IssuesDto findIssuesByIssueId(Long issueId) {
         IssuesDto issuesDto = issueDao.findIssueByIssueId(issueId);
-        issuesDto.setLabels(issueDao.findLabelsByIssuesId(issueId));
-        issuesDto.setAssignees(issueDao.findAssigneeByIssueId(issueId));
+        issuesDto.setAttachedLabels(issueDao.findLabelsByIssuesId(issueId));
+        issuesDto.setAllocatedAssignees(issueDao.findAssigneeByIssueId(issueId));
         return issuesDto;
     }
 }

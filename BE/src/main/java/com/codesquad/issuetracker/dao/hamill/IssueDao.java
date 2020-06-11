@@ -2,13 +2,17 @@ package com.codesquad.issuetracker.dao.hamill;
 
 import com.codesquad.issuetracker.controller.hamill.IssueController;
 import com.codesquad.issuetracker.dto.hamill.AssigneeDto;
+import com.codesquad.issuetracker.dto.hamill.AuthorDto;
 import com.codesquad.issuetracker.dto.hamill.info.IssuesDto;
 import com.codesquad.issuetracker.dto.hamill.label.LabelDto;
+import com.codesquad.issuetracker.dto.hamill.milestone.MilestoneDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 @Repository
@@ -33,31 +37,32 @@ public class IssueDao {
                 (rs, rowNum) ->
                         IssuesDto.builder()
                                  .issueId(rs.getLong("issue_id"))
-                                 .title(rs.getString("title"))
+                                 .issueTitle(rs.getString("title"))
                                  .isOpened(rs.getBoolean("is_opened"))
-                                 .milestoneTitle(rs.getString("milestone_title"))
+                                 .milestone(getMilestoneDto(rs))
                                  .createdDateTime(rs.getTimestamp("created_date_time").toLocalDateTime())
-                                 .author(rs.getString("author"))
+                                 .author(getAuthorDto(rs))
                                  .build()
         );
     }
 
     public IssuesDto findIssueByIssueId(Long issueId) {
         String sql =
-                "SELECT i.id AS issue_id, i.title, i.is_opened, m.title AS milestone_title, i.created_date_time, u.name AS author\n" +
+                "SELECT i.id AS issue_id, i.title, i.is_opened, m.id AS milestone_id, m.title AS milestone_title, i.created_date_time,u.id AS user_id, u.name AS user_name, u.avatar_url\n" +
                         "FROM issue i\n" +
                         "         JOIN milestone m on i.milestone_id = m.id\n" +
-                        "         JOIN user u on i.user_id = u.id WHERE i.id = ?;";
+                        "         JOIN user u on i.user_id = u.id " +
+                        "WHERE i.id = ?";
         return jdbcTemplate.queryForObject(
                 sql,
                 (rs, rowNum) ->
                         IssuesDto.builder()
                                  .issueId(rs.getLong("issue_id"))
-                                 .title(rs.getString("title"))
+                                 .issueTitle(rs.getString("title"))
                                  .isOpened(rs.getBoolean("is_opened"))
-                                 .milestoneTitle(rs.getString("milestone_title"))
+                                 .milestone(getMilestoneDto(rs))
                                  .createdDateTime(rs.getTimestamp("created_date_time").toLocalDateTime())
-                                 .author(rs.getString("author"))
+                                 .author(getAuthorDto(rs))
                                  .build()
         , issueId);
     }
@@ -82,7 +87,7 @@ public class IssueDao {
 
     public List<AssigneeDto> findAssigneeByIssueId(Long issueId) {
         String sql =
-                "SELECT u.id AS user_id, u.name AS user_name\n" +
+                "SELECT u.id AS user_id, u.name AS user_name, u.avatar_url" +
                         "                FROM assignee a\n" +
                         "                         JOIN user u on a.user_id = u.id\n" +
                         "JOIN issue i on a.issue_id = i.id WHERE i.id = ?";
@@ -92,7 +97,23 @@ public class IssueDao {
                         AssigneeDto.builder()
                                    .userId(rs.getLong("user_id"))
                                    .userName(rs.getString("user_name"))
+                                   .avatarUrl(rs.getString("avatar_url"))
                                    .build()
         , issueId);
+    }
+
+    private MilestoneDto getMilestoneDto(ResultSet rs) throws SQLException {
+        return MilestoneDto.builder()
+                           .milestoneId(rs.getLong("milestone_id"))
+                           .milestoneTitle(rs.getString("milestone_title"))
+                           .build();
+    }
+
+    private AuthorDto getAuthorDto(ResultSet rs) throws SQLException {
+        return AuthorDto.builder()
+                        .userId(rs.getLong("user_id"))
+                        .userName(rs.getString("user_name"))
+                        .avatarUrl(rs.getString("avatar_url"))
+                        .build();
     }
 }

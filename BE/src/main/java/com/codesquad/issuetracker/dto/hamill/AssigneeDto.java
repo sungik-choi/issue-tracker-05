@@ -12,4 +12,5 @@ import lombok.ToString;
 public class AssigneeDto {
     private long userId;
     private String userName;
+    private String avatarUrl;
 }
