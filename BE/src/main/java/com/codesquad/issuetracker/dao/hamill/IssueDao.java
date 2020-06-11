@@ -26,35 +26,13 @@ public class IssueDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<IssuesDto> findAllIssues() {
-        String sql =
-                "SELECT i.id AS issue_id, i.title, i.is_opened, m.title AS milestone_title, i.created_date_time, u.name AS author\n" +
-                        "FROM issue i\n" +
-                        "         JOIN milestone m on i.milestone_id = m.id\n" +
-                        "         JOIN user u on i.user_id = u.id;";
-        return jdbcTemplate.query(
-                sql,
-                (rs, rowNum) ->
-                        IssuesDto.builder()
-                                 .issueId(rs.getLong("issue_id"))
-                                 .issueTitle(rs.getString("title"))
-                                 .isOpened(rs.getBoolean("is_opened"))
-                                 .milestone(getMilestoneDto(rs))
-                                 .createdDateTime(rs.getTimestamp("created_date_time").toLocalDateTime())
-                                 .author(getAuthorDto(rs))
-                                 .build()
-        );
-    }
-
     public IssuesDto findIssueByIssueId(Long issueId) {
-        String sql =
-                "SELECT i.id AS issue_id, i.title, i.is_opened, m.id AS milestone_id, m.title AS milestone_title, i.created_date_time,u.id AS user_id, u.name AS user_name, u.avatar_url\n" +
+        return jdbcTemplate.queryForObject(
+                    "SELECT i.id AS issue_id, i.title, i.is_opened, m.id AS milestone_id, m.title AS milestone_title, i.created_date_time,u.id AS user_id, u.name AS user_name, u.avatar_url\n" +
                         "FROM issue i\n" +
                         "         JOIN milestone m on i.milestone_id = m.id\n" +
                         "         JOIN user u on i.user_id = u.id " +
-                        "WHERE i.id = ?";
-        return jdbcTemplate.queryForObject(
-                sql,
+                        "WHERE i.id = ?",
                 (rs, rowNum) ->
                         IssuesDto.builder()
                                  .issueId(rs.getLong("issue_id"))
@@ -68,14 +46,11 @@ public class IssueDao {
     }
 
     public List<LabelDto> findLabelsByIssuesId(Long issueId) {
-
-        String sql =
-                "SELECT l.id AS label_id, l.name AS label_name, l.hex_code AS hex_code\n" +
-                        "FROM label l\n" +
-                        "         JOIN issue_has_label ihl on l.id = ihl.label_id\n" +
-                        "WHERE ihl.issue_id = ?;";
         return jdbcTemplate.query(
-                sql,
+                    "SELECT l.id AS label_id, l.name AS label_name, l.hex_code AS hex_code\n" +
+                        "FROM label l\n" +
+                        "                         JOIN issue_has_label ihl on l.id = ihl.label_id\n" +
+                        "WHERE ihl.issue_id = ?;",
                 (rs, rowNum) ->
                         LabelDto.builder()
                                 .id(rs.getLong("label_id"))
@@ -86,13 +61,12 @@ public class IssueDao {
     }
 
     public List<AssigneeDto> findAssigneeByIssueId(Long issueId) {
-        String sql =
-                "SELECT u.id AS user_id, u.name AS user_name, u.avatar_url" +
-                        "                FROM assignee a\n" +
-                        "                         JOIN user u on a.user_id = u.id\n" +
-                        "JOIN issue i on a.issue_id = i.id WHERE i.id = ?";
         return jdbcTemplate.query(
-                sql,
+                    "SELECT u.id AS user_id, u.name AS user_name, u.avatar_url " +
+                        "FROM assignee a\n" +
+                        "                         JOIN user u on a.user_id = u.id\n " +
+                        "                         JOIN issue i on a.issue_id = i.id " +
+                        "WHERE i.id = ?",
                 (rs, rowNum) ->
                         AssigneeDto.builder()
                                    .userId(rs.getLong("user_id"))
@@ -115,5 +89,9 @@ public class IssueDao {
                         .userName(rs.getString("user_name"))
                         .avatarUrl(rs.getString("avatar_url"))
                         .build();
+    }
+
+    public Integer getCountOfIssues() {
+        return jdbcTemplate.queryForObject( "SELECT count(issue.id) FROM issue", Integer.TYPE);
     }
 }
