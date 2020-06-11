@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS comment;
-DROP TABLE IF EXISTS label_has_issue;
+DROP TABLE IF EXISTS issue_has_label;
 DROP TABLE IF EXISTS assignee;
 DROP TABLE IF EXISTS label;
 DROP TABLE IF EXISTS issue;
@@ -38,15 +38,15 @@ CREATE TABLE IF  NOT EXISTS issue (
 );
 
 CREATE TABLE IF  NOT EXISTS label (
-    id          INT,
+    id          INT AUTO_INCREMENT,
     name        VARCHAR(128),
     description VARCHAR(512),
     hex_code    VARCHAR(64),
     PRIMARY KEY (id)
 );
 
-CREATE TABLE IF  NOT EXISTS label_has_issue (
-    label_id INT,
+CREATE TABLE IF  NOT EXISTS issue_has_label (
+    label_id INT AUTO_INCREMENT,
     issue_id BIGINT,
     FOREIGN KEY (label_id) REFERENCES label (id),
     FOREIGN KEY (issue_id) REFERENCES issue (id)
