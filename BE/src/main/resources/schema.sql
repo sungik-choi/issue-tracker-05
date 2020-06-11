@@ -6,16 +6,19 @@ DROP TABLE IF EXISTS issue;
 DROP TABLE IF EXISTS milestone;
 DROP TABLE IF EXISTS user;
 
-CREATE TABLE IF  NOT EXISTS user (
+CREATE TABLE IF NOT EXISTS user
+(
     id                BIGINT AUTO_INCREMENT,
     name              VARCHAR(128),
     email             VARCHAR(128),
     github_id         BIGINT,
     created_date_time DATETIME,
+    avatar_url        VARCHAR(1024),
     PRIMARY KEY (id)
 );
 
-CREATE TABLE IF  NOT EXISTS milestone (
+CREATE TABLE IF NOT EXISTS milestone
+(
     id                INT AUTO_INCREMENT,
     title             VARCHAR(128),
     description       VARCHAR(2048),
@@ -25,7 +28,8 @@ CREATE TABLE IF  NOT EXISTS milestone (
     PRIMARY KEY (id)
 );
 
-CREATE TABLE IF  NOT EXISTS issue (
+CREATE TABLE IF NOT EXISTS issue
+(
     id                BIGINT AUTO_INCREMENT,
     title             VARCHAR(128),
     created_date_time DATETIME,
@@ -37,7 +41,8 @@ CREATE TABLE IF  NOT EXISTS issue (
     FOREIGN KEY (milestone_id) REFERENCES milestone (id)
 );
 
-CREATE TABLE IF  NOT EXISTS label (
+CREATE TABLE IF NOT EXISTS label
+(
     id          INT AUTO_INCREMENT,
     name        VARCHAR(128),
     description VARCHAR(512),
@@ -45,14 +50,16 @@ CREATE TABLE IF  NOT EXISTS label (
     PRIMARY KEY (id)
 );
 
-CREATE TABLE IF  NOT EXISTS issue_has_label (
+CREATE TABLE IF NOT EXISTS issue_has_label
+(
     label_id INT AUTO_INCREMENT,
     issue_id BIGINT,
     FOREIGN KEY (label_id) REFERENCES label (id),
     FOREIGN KEY (issue_id) REFERENCES issue (id)
 );
 
-CREATE TABLE IF  NOT EXISTS assignee (
+CREATE TABLE IF NOT EXISTS assignee
+(
     id       INT AUTO_INCREMENT,
     issue_id BIGINT,
     user_id  BIGINT,
@@ -61,7 +68,8 @@ CREATE TABLE IF  NOT EXISTS assignee (
     FOREIGN KEY (user_id) REFERENCES user (id)
 );
 
-CREATE TABLE IF  NOT EXISTS comment (
+CREATE TABLE IF NOT EXISTS comment
+(
     id                BIGINT AUTO_INCREMENT,
     description       VARCHAR(2048),
     created_date_time DATETIME,
