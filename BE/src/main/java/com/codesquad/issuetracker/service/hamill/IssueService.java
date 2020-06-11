@@ -13,6 +13,7 @@ import java.util.List;
 public class IssueService {
 
     private static final Logger logger = LoggerFactory.getLogger(IssueService.class);
+    private static final Long ZERO = 0L;
 
     private IssueDao issueDao;
 
@@ -21,16 +22,18 @@ public class IssueService {
     }
 
     public List<IssuesDto> findAllIssues() {
-        List<IssuesDto> issuesDtos = new ArrayList<>();
 
-        for (long i = 0; i < 5; i++) {
-            issuesDtos.add((int)i,findIssuesByIssueId(i+1));
+        List<IssuesDto> ListTypeIssuesDto = new ArrayList<>();
+
+        for (long i = ZERO; i < issueDao.getCountOfIssues(); i++) {
+            ListTypeIssuesDto.add((int)i, findIssuesByIssueId(i+1)); // issue ID는 1부터 시작
         }
 
-        return issuesDtos;
+        return ListTypeIssuesDto;
     }
 
     public IssuesDto findIssuesByIssueId(Long issueId) {
+
         IssuesDto issuesDto = issueDao.findIssueByIssueId(issueId);
         issuesDto.setAttachedLabels(issueDao.findLabelsByIssuesId(issueId));
         issuesDto.setAllocatedAssignees(issueDao.findAssigneeByIssueId(issueId));
