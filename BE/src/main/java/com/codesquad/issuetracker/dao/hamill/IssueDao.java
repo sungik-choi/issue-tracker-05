@@ -13,6 +13,8 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -94,4 +96,18 @@ public class IssueDao {
     public Integer getCountOfIssues() {
         return jdbcTemplate.queryForObject( "SELECT count(issue.id) FROM issue", Integer.TYPE);
     }
+
+    public void saveNewIssue(String title, Long userId, Long milestoneId) {
+        String sql =
+                "INSERT INTO issue(title, created_date_time, is_opened, user_id, milestone_id) " +
+                "VALUES (?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql,title, Timestamp.valueOf(LocalDateTime.now()), true, userId, milestoneId);
+    }
+
+    public void saveNewIssueHasLabel(Long labelId, Long issueId) {
+        String sql = "INSERT INTO issue_has_label(label_id, issue_id) VALUES (?, ?) ";
+        jdbcTemplate.update(sql, labelId, issueId);
+    }
+
+
 }

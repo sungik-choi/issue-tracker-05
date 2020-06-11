@@ -1,18 +1,14 @@
 package com.codesquad.issuetracker.controller.hamill;
 
-import com.codesquad.issuetracker.dto.hamill.IssueListDto;
+import com.codesquad.issuetracker.common.CommonMessage;
+import com.codesquad.issuetracker.dto.hamill.RequestNewIssueDto;
 import com.codesquad.issuetracker.dto.hamill.info.IssuesDto;
-import com.codesquad.issuetracker.dto.hamill.label.LabelDto;
-import com.codesquad.issuetracker.dto.hamill.label.LabelInfoDto;
 import com.codesquad.issuetracker.service.hamill.IssueService;
-import org.apache.coyote.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,12 +24,26 @@ public class IssueController {
     }
 
     @GetMapping("/api/issues")
-    public ResponseEntity<List<IssuesDto>> list() {
+    public ResponseEntity<List<IssuesDto>> showList() {
         return new ResponseEntity<>(issueService.findAllIssues(), HttpStatus.OK);
     }
 
     @GetMapping("/api/issues/{issueId}")
-    public ResponseEntity<IssuesDto> findIssuesByIssueId(@PathVariable Long issueId) {
-        return new ResponseEntity<>(issueService.findIssuesByIssueId(issueId), HttpStatus.OK);
+    public ResponseEntity<IssuesDto> findIssueByIssueId(@PathVariable Long issueId) {
+        return new ResponseEntity<>(issueService.findIssueByIssueId(issueId), HttpStatus.OK);
+    }
+
+    @PostMapping("/api/issues")
+    public ResponseEntity<IssuesDto> create(@RequestBody RequestNewIssueDto requestNewIssueDto) {
+        IssuesDto issuesDto = issueService.save(requestNewIssueDto);
+        return new ResponseEntity<>(issuesDto, HttpStatus.OK);
+    }
+
+    private CommonMessage getMessage(String statusCode, String message) {
+
+        return CommonMessage.builder()
+                            .statusCode(statusCode)
+                            .message(message)
+                            .build();
     }
  }
