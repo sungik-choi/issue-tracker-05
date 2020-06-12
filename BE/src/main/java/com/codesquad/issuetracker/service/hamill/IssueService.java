@@ -28,7 +28,7 @@ public class IssueService {
         List<IssuesDto> ListTypeIssuesDto = new ArrayList<>();
 
         for (int i = ZERO; i < issueDao.getCountOfIssues(); i++) {
-            ListTypeIssuesDto.add((int)i, findIssueByIssueId(i + 1L)); // issue ID는 1부터 시작
+            ListTypeIssuesDto.add(i, findIssueByIssueId(i + 1L)); // issue ID는 1부터 시작
         }
 
         return ListTypeIssuesDto;
@@ -43,22 +43,33 @@ public class IssueService {
     }
 
     public IssuesDto save(RequestNewIssueDto requestNewIssueDto) {
+        Long newIssueId = issueDao.getCountOfIssues() + 1L;
+        logger.info("#### request1: {}", requestNewIssueDto.getAttachedLabels());
         issueDao.saveNewIssue(
+                newIssueId,
                 requestNewIssueDto.getTitle(),
                 requestNewIssueDto.getUserId(),
                 requestNewIssueDto.getMilestone().getMilestoneId());
-        Long newIssueId = (long)issueDao.getCountOfIssues();
-
-        for (int i = ZERO; i < requestNewIssueDto.getAttachedLabels().size(); i++) {
-            issueDao.saveNewIssueHasLabel(newIssueId, requestNewIssueDto.getAttachedLabels().get(i).getId());
-        }
         logger.info("#### request1: {}", requestNewIssueDto.getAttachedLabels());
-        logger.info("#### request2: {}", requestNewIssueDto.getAllocatedAssignees());
+
+        saveNewIssueHasLabel(requestNewIssueDto);
 
         IssuesDto issuesDto = issueDao.findIssueByIssueId(newIssueId);
         issuesDto.setAttachedLabels(requestNewIssueDto.getAttachedLabels());
         issuesDto.setAllocatedAssignees(requestNewIssueDto.getAllocatedAssignees());
 
         return issuesDto;
+    }
+
+    private void saveNewIssueHasLabel(RequestNewIssueDto requestNewIssueDto) {
+        for (int i = ZERO; i < requestNewIssueDto.getAttachedLabels().size(); i++) {
+            logger.info("##### num: {}",requestNewIssueDto.getAttachedLabels().size());
+            logger.info("##### num: {}",requestNewIssueDto.getAttachedLabels().get(i).getLabelId());
+        }
+
+
+        for (int i = ZERO; i < requestNewIssueDto.getAttachedLabels().size(); i++) {
+            issueDao.saveNewIssueHasLabel(requestNewIssueDto.getAttachedLabels().get(i).getLabelId(), (long)issueDao.getCountOfIssues());
+        }
     }
 }

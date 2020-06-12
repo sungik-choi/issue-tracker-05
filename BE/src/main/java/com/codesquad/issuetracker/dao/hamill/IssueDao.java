@@ -55,7 +55,7 @@ public class IssueDao {
                         "WHERE ihl.issue_id = ?;",
                 (rs, rowNum) ->
                         LabelDto.builder()
-                                .id(rs.getLong("label_id"))
+                                .labelId(rs.getLong("label_id"))
                                 .labelName(rs.getString("label_name"))
                                 .hexCode(rs.getString("hex_code"))
                                 .build()
@@ -97,14 +97,16 @@ public class IssueDao {
         return jdbcTemplate.queryForObject( "SELECT count(issue.id) FROM issue", Integer.TYPE);
     }
 
-    public void saveNewIssue(String title, Long userId, Long milestoneId) {
+    public void saveNewIssue(Long issueId, String title, Long userId, Long milestoneId) {
         String sql =
-                "INSERT INTO issue(title, created_date_time, is_opened, user_id, milestone_id) " +
-                "VALUES (?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql,title, Timestamp.valueOf(LocalDateTime.now()), true, userId, milestoneId);
+                "INSERT INTO issue(id, title, created_date_time, is_opened, user_id, milestone_id) " +
+                "VALUES (?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, issueId,title, Timestamp.valueOf(LocalDateTime.now()), true, userId, milestoneId);
     }
 
     public void saveNewIssueHasLabel(Long labelId, Long issueId) {
+        logger.info("##### labelId: {}", labelId);
+        logger.info("##### issueId: {}", issueId);
         String sql = "INSERT INTO issue_has_label(label_id, issue_id) VALUES (?, ?) ";
         jdbcTemplate.update(sql, labelId, issueId);
     }

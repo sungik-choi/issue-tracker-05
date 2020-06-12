@@ -10,7 +10,7 @@ import lombok.ToString;
 @ToString
 @Builder
 public class LabelDto {
-    private long id;
+    private long labelId;
     private String labelName;
     private String hexCode;
 }
