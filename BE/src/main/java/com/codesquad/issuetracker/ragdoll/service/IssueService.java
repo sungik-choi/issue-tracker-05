@@ -36,22 +36,9 @@ public class IssueService {
 
     public ListOfIssuesDto findAllIssues() {
         List<Issue> allOfOpenedIssues = issueDao.findAllOpendIssues();
-        List<IssueDetails> issues = allOfOpenedIssues.stream().map(issue -> {
-            Milestone milestone = milestoneService.findMilestoneById(issue.getMilestoneId());
-            List<LabelSummary> attachedLabels = labelService.findAttachedLabelsByIssueId(issue.getId());
-            List<UserSummary> allocatedAssignees = userService.findAllocatedAssigneesByIds(issue.getId());
-            User user = userService.findUserById(issue.getUserId());
-            return new IssueDetails.Builder()
-                                   .issueId(issue.getId())
-                                   .issueTitle(issue.getTitle())
-                                   .milestone(MilestoneSummary.create(milestone.getId(), milestone.getTitle()))
-                                   .attachedLabels(attachedLabels)
-                                   .author(UserSummary.create(user.getId(), user.getName(), user.getAvatarUrl()))
-                                   .allocatedAssignees(allocatedAssignees)
-                                   .createdAt(issue.getCreatedDateTime())
-                                   .opened(issue.isOpened())
-                                   .build();
-        }).collect(Collectors.toList());
+        List<IssueDetails> issues = allOfOpenedIssues.stream()
+                                                     .map(this::mapToIssueDetails)
+                                                     .collect(Collectors.toList());
         LabelInformation labelInformation = labelService.findAllLabels();
         MilestoneInformation milestoneInformation = milestoneService.findAllMilestones();
         List<UserSummary> assigneeInformation = userService.findAllAssignees();
@@ -61,5 +48,22 @@ public class IssueService {
                                   .milestoneInfo(milestoneInformation)
                                   .assigneeInfo(assigneeInformation)
                                   .build();
+    }
+
+    private IssueDetails mapToIssueDetails(Issue issue) {
+        Milestone milestone = milestoneService.findMilestoneById(issue.getMilestoneId());
+        List<LabelSummary> attachedLabels = labelService.findAttachedLabelsByIssueId(issue.getId());
+        List<UserSummary> allocatedAssignees = userService.findAllocatedAssigneesByIds(issue.getId());
+        User user = userService.findUserById(issue.getUserId());
+        return new IssueDetails.Builder()
+                               .issueId(issue.getId())
+                               .issueTitle(issue.getTitle())
+                               .milestone(MilestoneSummary.create(milestone.getId(), milestone.getTitle()))
+                               .attachedLabels(attachedLabels)
+                               .author(UserSummary.create(user.getId(), user.getName(), user.getAvatarUrl()))
+                               .allocatedAssignees(allocatedAssignees)
+                               .createdAt(issue.getCreatedDateTime())
+                               .opened(issue.isOpened())
+                               .build();
     }
 }
