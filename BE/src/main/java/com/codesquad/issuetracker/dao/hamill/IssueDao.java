@@ -111,5 +111,10 @@ public class IssueDao {
         jdbcTemplate.update(sql, labelId, issueId);
     }
 
+    public void saveAssginees(Long issueId, Long userId) {
+        String sql = "INSERT INTO assignee(issue_id, user_id) VALUES (?, ?)";
+        jdbcTemplate.update(sql, issueId, userId);
+    }
+
 
 }
