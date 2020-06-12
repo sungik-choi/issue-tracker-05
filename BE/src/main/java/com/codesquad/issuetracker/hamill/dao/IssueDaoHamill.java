@@ -1,6 +1,6 @@
 package com.codesquad.issuetracker.hamill.dao;
 
-import com.codesquad.issuetracker.hamill.controller.IssueController;
+import com.codesquad.issuetracker.hamill.controller.IssueControllerHamill;
 import com.codesquad.issuetracker.hamill.dto.AssigneeDto;
 import com.codesquad.issuetracker.hamill.dto.AuthorDto;
 import com.codesquad.issuetracker.hamill.dto.info.IssuesDto;
@@ -18,13 +18,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
-public class IssueDao {
+public class IssueDaoHamill {
 
-    private static final Logger logger = LoggerFactory.getLogger(IssueController.class);
+    private static final Logger logger = LoggerFactory.getLogger(IssueControllerHamill.class);
 
     private JdbcTemplate jdbcTemplate;
 
-    public IssueDao(JdbcTemplate jdbcTemplate) {
+    public IssueDaoHamill(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
