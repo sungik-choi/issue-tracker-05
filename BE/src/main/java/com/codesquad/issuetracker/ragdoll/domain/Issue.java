@@ -87,6 +87,8 @@ public class Issue {
         private Long userId;
         private Integer milestoneId;
 
+        public Builder() {}
+
         public Builder id(Long id) {
             this.id = id;
             return this;

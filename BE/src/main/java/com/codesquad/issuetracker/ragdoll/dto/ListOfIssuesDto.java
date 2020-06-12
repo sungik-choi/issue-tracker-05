@@ -1,6 +1,6 @@
 package com.codesquad.issuetracker.ragdoll.dto;
 
-import com.codesquad.issuetracker.ragdoll.dto.UserVO.UserSummary;
+import com.codesquad.issuetracker.ragdoll.dto.userVO.UserSummary;
 import com.codesquad.issuetracker.ragdoll.dto.issueVO.IssueDetails;
 import com.codesquad.issuetracker.ragdoll.dto.labelVO.LabelInformation;
 import com.codesquad.issuetracker.ragdoll.dto.milestoneVO.MilestoneInformation;

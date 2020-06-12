@@ -10,7 +10,7 @@ public class User {
 
     private String email;
 
-    private Integer githubId;
+    private Long githubId;
 
     private String avatarUrl;
 
@@ -18,7 +18,7 @@ public class User {
 
     public User () {}
 
-    private User(Long id, String name, String email, Integer githubId, String avatarUrl, LocalDateTime createdDateTime) {
+    private User(Long id, String name, String email, Long githubId, String avatarUrl, LocalDateTime createdDateTime) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -27,7 +27,7 @@ public class User {
         this.createdDateTime = createdDateTime;
     }
 
-    public static User create(Long id, String name, String email, Integer githubId, String avatarUrl, LocalDateTime createdDateTime) {
+    public static User create(Long id, String name, String email, Long githubId, String avatarUrl, LocalDateTime createdDateTime) {
         return new User(id, name, email, githubId, avatarUrl, createdDateTime);
     }
 
@@ -55,11 +55,11 @@ public class User {
         this.email = email;
     }
 
-    public Integer getGithubId() {
+    public Long getGithubId() {
         return githubId;
     }
 
-    public void setGithubId(Integer githubId) {
+    public void setGithubId(Long githubId) {
         this.githubId = githubId;
     }
 
@@ -83,7 +83,7 @@ public class User {
         private Long id;
         private String name;
         private String email;
-        private Integer githubId;
+        private Long githubId;
         private String avatarUrl;
         private LocalDateTime createdDateTime;
 
@@ -104,7 +104,7 @@ public class User {
             return this;
         }
 
-        public Builder githubId(Integer githubId) {
+        public Builder githubId(Long githubId) {
             this.githubId = githubId;
             return this;
         }

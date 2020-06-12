@@ -1,7 +1,7 @@
 package com.codesquad.issuetracker.ragdoll.dto.issueVO;
 
-import com.codesquad.issuetracker.ragdoll.dto.UserVO.UserSummary;
-import com.codesquad.issuetracker.ragdoll.dto.labelVO.LabelDetails;
+import com.codesquad.issuetracker.ragdoll.dto.userVO.UserSummary;
+import com.codesquad.issuetracker.ragdoll.dto.labelVO.LabelSummary;
 import com.codesquad.issuetracker.ragdoll.dto.milestoneVO.MilestoneSummary;
 
 import java.time.LocalDateTime;
@@ -15,7 +15,7 @@ public class IssueDetails {
 
     private MilestoneSummary milestone;
 
-    private List<LabelDetails> attachedLabels;
+    private List<LabelSummary> attachedLabels;
 
     private UserSummary author;
 
@@ -27,7 +27,7 @@ public class IssueDetails {
 
     public IssueDetails() {}
 
-    private IssueDetails(Long issueId, String issueTitle, MilestoneSummary milestone, List<LabelDetails> attachedLabels, UserSummary author, List<UserSummary> allocatedAssignees, LocalDateTime createdAt, boolean opened) {
+    private IssueDetails(Long issueId, String issueTitle, MilestoneSummary milestone, List<LabelSummary> attachedLabels, UserSummary author, List<UserSummary> allocatedAssignees, LocalDateTime createdAt, boolean opened) {
         this.issueId = issueId;
         this.issueTitle = issueTitle;
         this.milestone = milestone;
@@ -62,11 +62,11 @@ public class IssueDetails {
         this.milestone = milestone;
     }
 
-    public List<LabelDetails> getAttachedLabels() {
+    public List<LabelSummary> getAttachedLabels() {
         return attachedLabels;
     }
 
-    public void setAttachedLabels(List<LabelDetails> attachedLabels) {
+    public void setAttachedLabels(List<LabelSummary> attachedLabels) {
         this.attachedLabels = attachedLabels;
     }
 
@@ -106,7 +106,7 @@ public class IssueDetails {
         private Long issueId;
         private String issueTitle;
         private MilestoneSummary milestone;
-        private List<LabelDetails> attachedLabels;
+        private List<LabelSummary> attachedLabels;
         private UserSummary author;
         private List<UserSummary> allocatedAssignees;
         private LocalDateTime createdAt;
@@ -127,7 +127,7 @@ public class IssueDetails {
             return this;
         }
 
-        public Builder attachedLabels(List<LabelDetails> attachedLabels) {
+        public Builder attachedLabels(List<LabelSummary> attachedLabels) {
             this.attachedLabels = attachedLabels;
             return this;
         }

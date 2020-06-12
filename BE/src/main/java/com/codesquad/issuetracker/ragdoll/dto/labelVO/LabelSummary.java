@@ -1,6 +1,6 @@
 package com.codesquad.issuetracker.ragdoll.dto.labelVO;
 
-public class LabelDetails {
+public class LabelSummary {
 
     private Integer labelId;
 
@@ -8,16 +8,16 @@ public class LabelDetails {
 
     private String hexCode;
 
-    public LabelDetails() {}
+    public LabelSummary() {}
 
-    private LabelDetails(Integer labelId, String labelName, String hexCode) {
+    private LabelSummary(Integer labelId, String labelName, String hexCode) {
         this.labelId = labelId;
         this.labelName = labelName;
         this.hexCode = hexCode;
     }
 
-    public static LabelDetails create(Integer labelId, String labelName, String hexCode) {
-        return new LabelDetails(labelId, labelName, hexCode);
+    public static LabelSummary create(Integer labelId, String labelName, String hexCode) {
+        return new LabelSummary(labelId, labelName, hexCode);
     }
 
     public Integer getLabelId() {
