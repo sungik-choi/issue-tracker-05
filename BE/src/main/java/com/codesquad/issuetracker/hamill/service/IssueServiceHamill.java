@@ -1,6 +1,6 @@
 package com.codesquad.issuetracker.hamill.service;
 
-import com.codesquad.issuetracker.hamill.dao.IssueDao;
+import com.codesquad.issuetracker.hamill.dao.IssueDaoHamill;
 import com.codesquad.issuetracker.hamill.dto.RequestNewIssueDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,22 +11,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class IssueService {
+public class IssueServiceHamill {
 
-    private static final Logger logger = LoggerFactory.getLogger(IssueService.class);
+    private static final Logger logger = LoggerFactory.getLogger(IssueServiceHamill.class);
     private static final int ZERO = 0;
 
-    private IssueDao issueDao;
+    private IssueDaoHamill issueDaoHamill;
 
-    public IssueService(IssueDao issueDao) {
-        this.issueDao = issueDao;
+    public IssueServiceHamill(IssueDaoHamill issueDaoHamill) {
+        this.issueDaoHamill = issueDaoHamill;
     }
 
     public List<IssuesDto> findAllIssues() {
 
         List<IssuesDto> ListTypeIssuesDto = new ArrayList<>();
 
-        for (int i = ZERO; i < issueDao.getCountOfIssues(); i++) {
+        for (int i = ZERO; i < issueDaoHamill.getCountOfIssues(); i++) {
             ListTypeIssuesDto.add(i, findIssueByIssueId(i + 1L)); // issue ID는 1부터 시작
         }
 
@@ -35,15 +35,15 @@ public class IssueService {
 
     public IssuesDto findIssueByIssueId(Long issueId) {
 
-        IssuesDto issuesDto = issueDao.findIssueByIssueId(issueId);
-        issuesDto.setAttachedLabels(issueDao.findLabelsByIssuesId(issueId));
-        issuesDto.setAllocatedAssignees(issueDao.findAssigneeByIssueId(issueId));
+        IssuesDto issuesDto = issueDaoHamill.findIssueByIssueId(issueId);
+        issuesDto.setAttachedLabels(issueDaoHamill.findLabelsByIssuesId(issueId));
+        issuesDto.setAllocatedAssignees(issueDaoHamill.findAssigneeByIssueId(issueId));
         return issuesDto;
     }
 
     public IssuesDto save(RequestNewIssueDto requestNewIssueDto) {
-        Long newIssueId = issueDao.getCountOfIssues() + 1L;
-        issueDao.saveNewIssue(
+        Long newIssueId = issueDaoHamill.getCountOfIssues() + 1L;
+        issueDaoHamill.saveNewIssue(
                 newIssueId,
                 requestNewIssueDto.getTitle(),
                 requestNewIssueDto.getUserId(),
@@ -52,7 +52,7 @@ public class IssueService {
         saveNewIssueHasLabel(requestNewIssueDto);
         saveAssignees(requestNewIssueDto);
 
-        IssuesDto issuesDto = issueDao.findIssueByIssueId(newIssueId);
+        IssuesDto issuesDto = issueDaoHamill.findIssueByIssueId(newIssueId);
         issuesDto.setAttachedLabels(requestNewIssueDto.getAttachedLabels());
         issuesDto.setAllocatedAssignees(requestNewIssueDto.getAllocatedAssignees());
         logger.info("##### issueDto: {}", issuesDto);
@@ -64,13 +64,13 @@ public class IssueService {
 
     private void saveNewIssueHasLabel(RequestNewIssueDto requestNewIssueDto) {
         for (int i = ZERO; i < requestNewIssueDto.getAttachedLabels().size(); i++) {
-            issueDao.saveNewIssueHasLabel(requestNewIssueDto.getAttachedLabels().get(i).getLabelId(), (long)issueDao.getCountOfIssues());
+            issueDaoHamill.saveNewIssueHasLabel(requestNewIssueDto.getAttachedLabels().get(i).getLabelId(), (long)issueDaoHamill.getCountOfIssues());
         }
     }
 
     private void saveAssignees(RequestNewIssueDto requestNewIssueDto) {
         for (int i = ZERO; i < requestNewIssueDto.getAllocatedAssignees().size(); i++) {
-            issueDao.saveAssignees((long)issueDao.getCountOfIssues(), requestNewIssueDto.getAllocatedAssignees().get(i).getUserId());
+            issueDaoHamill.saveAssignees((long)issueDaoHamill.getCountOfIssues(), requestNewIssueDto.getAllocatedAssignees().get(i).getUserId());
         }
     }
 
