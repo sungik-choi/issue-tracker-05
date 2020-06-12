@@ -1,7 +1,7 @@
-package com.codesquad.issuetracker.dto.hamill;
+package com.codesquad.issuetracker.hamill.dto;
 
-import com.codesquad.issuetracker.dto.hamill.label.LabelDto;
-import com.codesquad.issuetracker.dto.hamill.milestone.MilestoneDto;
+import com.codesquad.issuetracker.hamill.dto.label.LabelDto;
+import com.codesquad.issuetracker.hamill.dto.milestone.MilestoneDto;
 import lombok.Getter;
 
 import java.util.List;

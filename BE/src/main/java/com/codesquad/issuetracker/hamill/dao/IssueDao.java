@@ -1,11 +1,11 @@
-package com.codesquad.issuetracker.dao.hamill;
+package com.codesquad.issuetracker.hamill.dao;
 
-import com.codesquad.issuetracker.controller.hamill.IssueController;
-import com.codesquad.issuetracker.dto.hamill.AssigneeDto;
-import com.codesquad.issuetracker.dto.hamill.AuthorDto;
-import com.codesquad.issuetracker.dto.hamill.info.IssuesDto;
-import com.codesquad.issuetracker.dto.hamill.label.LabelDto;
-import com.codesquad.issuetracker.dto.hamill.milestone.MilestoneDto;
+import com.codesquad.issuetracker.hamill.controller.IssueController;
+import com.codesquad.issuetracker.hamill.dto.AssigneeDto;
+import com.codesquad.issuetracker.hamill.dto.AuthorDto;
+import com.codesquad.issuetracker.hamill.dto.info.IssuesDto;
+import com.codesquad.issuetracker.hamill.dto.label.LabelDto;
+import com.codesquad.issuetracker.hamill.dto.milestone.MilestoneDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -111,7 +111,7 @@ public class IssueDao {
         jdbcTemplate.update(sql, labelId, issueId);
     }
 
-    public void saveAssginees(Long issueId, Long userId) {
+    public void saveAssignees(Long issueId, Long userId) {
         String sql = "INSERT INTO assignee(issue_id, user_id) VALUES (?, ?)";
         jdbcTemplate.update(sql, issueId, userId);
     }

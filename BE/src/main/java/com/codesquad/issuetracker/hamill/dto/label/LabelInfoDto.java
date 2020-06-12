@@ -1,5 +1,6 @@
-package com.codesquad.issuetracker.dto.hamill.label;
+package com.codesquad.issuetracker.hamill.dto.label;
 
+import com.codesquad.issuetracker.hamill.dto.label.LabelDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

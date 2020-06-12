@@ -1,12 +1,11 @@
-package com.codesquad.issuetracker.service.hamill;
+package com.codesquad.issuetracker.hamill.service;
 
-import com.codesquad.issuetracker.dao.hamill.IssueDao;
-import com.codesquad.issuetracker.dto.hamill.RequestNewIssueDto;
-import com.codesquad.issuetracker.dto.hamill.info.IssuesDto;
-import com.codesquad.issuetracker.dto.hamill.label.LabelDto;
+import com.codesquad.issuetracker.hamill.dao.IssueDao;
+import com.codesquad.issuetracker.hamill.dto.RequestNewIssueDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import com.codesquad.issuetracker.hamill.dto.info.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +70,7 @@ public class IssueService {
 
     private void saveAssignees(RequestNewIssueDto requestNewIssueDto) {
         for (int i = ZERO; i < requestNewIssueDto.getAllocatedAssignees().size(); i++) {
-            issueDao.saveAssginees((long)issueDao.getCountOfIssues(), requestNewIssueDto.getAllocatedAssignees().get(i).getUserId());
+            issueDao.saveAssignees((long)issueDao.getCountOfIssues(), requestNewIssueDto.getAllocatedAssignees().get(i).getUserId());
         }
     }
 

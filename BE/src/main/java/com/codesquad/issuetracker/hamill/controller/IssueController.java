@@ -1,9 +1,9 @@
-package com.codesquad.issuetracker.controller.hamill;
+package com.codesquad.issuetracker.hamill.controller;
 
 import com.codesquad.issuetracker.common.CommonMessage;
-import com.codesquad.issuetracker.dto.hamill.RequestNewIssueDto;
-import com.codesquad.issuetracker.dto.hamill.info.IssuesDto;
-import com.codesquad.issuetracker.service.hamill.IssueService;
+import com.codesquad.issuetracker.hamill.dto.RequestNewIssueDto;
+import com.codesquad.issuetracker.hamill.hamill.info.IssuesDto;
+import com.codesquad.issuetracker.hamill.service.IssueService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

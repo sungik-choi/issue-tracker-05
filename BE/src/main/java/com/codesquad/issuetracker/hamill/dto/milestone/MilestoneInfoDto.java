@@ -1,4 +1,4 @@
-package com.codesquad.issuetracker.dto.hamill.milestone;
+package com.codesquad.issuetracker.hamill.dto.milestone;
 
 import lombok.Builder;
 import lombok.Getter;

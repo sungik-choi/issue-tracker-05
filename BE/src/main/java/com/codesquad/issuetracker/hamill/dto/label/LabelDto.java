@@ -1,4 +1,4 @@
-package com.codesquad.issuetracker.dto.hamill.label;
+package com.codesquad.issuetracker.hamill.dto.label;
 
 import lombok.Builder;
 import lombok.Getter;

@@ -1,8 +1,8 @@
-package com.codesquad.issuetracker.dto.hamill;
+package com.codesquad.issuetracker.hamill.dto;
 
-import com.codesquad.issuetracker.dto.hamill.info.*;
-import com.codesquad.issuetracker.dto.hamill.label.LabelInfoDto;
-import com.codesquad.issuetracker.dto.hamill.milestone.MilestoneInfoDto;
+import com.codesquad.issuetracker.hamill.dto.info.IssuesDto;
+import com.codesquad.issuetracker.hamill.dto.label.LabelInfoDto;
+import com.codesquad.issuetracker.hamill.dto.milestone.MilestoneInfoDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
