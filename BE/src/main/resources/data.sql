@@ -15,11 +15,11 @@ INSERT INTO label (name, description, hex_code) VALUES ('레이블4', '레이블
 INSERT INTO label (name, description, hex_code) VALUES ('레이블5', '레이블5입니다.', '#eeeeee');
 INSERT INTO label (name, description, hex_code) VALUES ('레이블6', '레이블6입니다.', '#ffffff');
 
-INSERT INTO issue (title, created_date_time, is_opened, user_id, milestone_id) VALUES ('이슈제목1', '2020-06-11 01:28:30', true, 1, 1);
-INSERT INTO issue (title, created_date_time, is_opened, user_id, milestone_id) VALUES ('이슈제목2', '2020-06-11 01:28:30', true, 2, 1);
-INSERT INTO issue (title, created_date_time, is_opened, user_id, milestone_id) VALUES ('이슈제목3', '2020-06-11 01:28:30', true, 3, 2);
-INSERT INTO issue (title, created_date_time, is_opened, user_id, milestone_id) VALUES ('이슈제목4', '2020-06-11 01:28:30', true, 4, 3);
-INSERT INTO issue (title, created_date_time, is_opened, user_id, milestone_id) VALUES ('이슈제목5', '2020-06-11 01:28:30', true, 4, 4);
+INSERT INTO issue (id, title, created_date_time, is_opened, user_id, milestone_id) VALUES (1, '이슈제목1', '2020-06-11 01:28:30', true, 1, 1);
+INSERT INTO issue (id, title, created_date_time, is_opened, user_id, milestone_id) VALUES (2, '이슈제목2', '2020-06-11 01:28:30', true, 2, 1);
+INSERT INTO issue (id, title, created_date_time, is_opened, user_id, milestone_id) VALUES (3, '이슈제목3', '2020-06-11 01:28:30', true, 3, 2);
+INSERT INTO issue (id, title, created_date_time, is_opened, user_id, milestone_id) VALUES (4, '이슈제목4', '2020-06-11 01:28:30', true, 4, 3);
+INSERT INTO issue (id, title, created_date_time, is_opened, user_id, milestone_id) VALUES (5, '이슈제목5', '2020-06-11 01:28:30', true, 4, 4);
 
 INSERT INTO issue_has_label (label_id, issue_id) VALUES (1, 1);
 INSERT INTO issue_has_label (label_id, issue_id) VALUES (2, 1);

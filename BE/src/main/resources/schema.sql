@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS milestone
 
 CREATE TABLE IF NOT EXISTS issue
 (
-    id                BIGINT AUTO_INCREMENT,
+    id                BIGINT,
     title             VARCHAR(128),
     created_date_time DATETIME,
     is_opened         BOOLEAN,
