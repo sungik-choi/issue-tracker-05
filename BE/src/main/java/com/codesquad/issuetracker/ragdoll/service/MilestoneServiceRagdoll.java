@@ -1,6 +1,6 @@
 package com.codesquad.issuetracker.ragdoll.service;
 
-import com.codesquad.issuetracker.ragdoll.dao.MilestoneDao;
+import com.codesquad.issuetracker.ragdoll.dao.MilestoneDaoRagdoll;
 import com.codesquad.issuetracker.ragdoll.domain.Milestone;
 import com.codesquad.issuetracker.ragdoll.dto.milestoneVO.MilestoneInformation;
 import com.codesquad.issuetracker.ragdoll.dto.milestoneVO.MilestoneSummary;
@@ -11,20 +11,20 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-public class MilestoneService {
+public class MilestoneServiceRagdoll {
 
-    private MilestoneDao milestoneDao;
+    private MilestoneDaoRagdoll milestoneDaoRagdoll;
 
-    public MilestoneService(MilestoneDao milestoneDao) {
-        this.milestoneDao = milestoneDao;
+    public MilestoneServiceRagdoll(MilestoneDaoRagdoll milestoneDaoRagdoll) {
+        this.milestoneDaoRagdoll = milestoneDaoRagdoll;
     }
 
     public Milestone findMilestoneById(Integer milestoneId) {
-        return milestoneDao.findMilestoneById(milestoneId);
+        return milestoneDaoRagdoll.findMilestoneById(milestoneId);
     }
 
     public MilestoneInformation findAllMilestones() {
-        List<Milestone> milestones = milestoneDao.findAllMilestones();
+        List<Milestone> milestones = milestoneDaoRagdoll.findAllMilestones();
         Set<MilestoneSummary> milestoneSummaries = milestones.stream()
                                                              .map(milestone -> MilestoneSummary.create(milestone.getId(), milestone.getTitle()))
                                                              .collect(Collectors.toSet());

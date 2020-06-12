@@ -10,11 +10,11 @@ import java.util.List;
 import java.util.Set;
 
 @Repository
-public class MilestoneDao {
+public class MilestoneDaoRagdoll {
 
     private JdbcTemplate jdbcTemplate;
 
-    public MilestoneDao(DataSource dataSource) {
+    public MilestoneDaoRagdoll(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 

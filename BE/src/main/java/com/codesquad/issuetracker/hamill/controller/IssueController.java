@@ -2,7 +2,6 @@ package com.codesquad.issuetracker.hamill.controller;
 
 import com.codesquad.issuetracker.common.CommonMessage;
 import com.codesquad.issuetracker.hamill.dto.RequestNewIssueDto;
-import com.codesquad.issuetracker.hamill.hamill.info.IssuesDto;
 import com.codesquad.issuetracker.hamill.service.IssueService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
