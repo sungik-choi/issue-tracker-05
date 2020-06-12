@@ -18,7 +18,7 @@ public class IssueController {
     public IssueController(IssueService issueService) {
         this.issueService = issueService;
     }
-    
+
     @GetMapping("/issues")
     public ResponseEntity<ApiResponse<ListOfIssuesDto>> listing() {
         return new ResponseEntity(issueService.findAllIssues(), HttpStatus.OK);

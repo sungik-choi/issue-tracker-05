@@ -1,4 +1,4 @@
-package com.codesquad.issuetracker.ragdoll.dto.UserVO;
+package com.codesquad.issuetracker.ragdoll.dto.userVO;
 
 public class UserSummary {
 
