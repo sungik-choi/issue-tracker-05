@@ -1,19 +1,20 @@
 package com.codesquad.issuetracker.ragdoll.dto.milestoneVO;
 
 import java.util.List;
+import java.util.Set;
 
 public class MilestoneInformation {
 
     private int countOfMilestone;
 
-    private List<MilestoneSummary> milestones;
+    private Set<MilestoneSummary> milestones;
 
-    private MilestoneInformation(int countOfMilestone, List<MilestoneSummary> milestones) {
+    private MilestoneInformation(int countOfMilestone, Set<MilestoneSummary> milestones) {
         this.countOfMilestone = countOfMilestone;
         this.milestones = milestones;
     }
 
-    public MilestoneInformation create(int countOfMilestone, List<MilestoneSummary> milestones) {
+    public static MilestoneInformation create(int countOfMilestone, Set<MilestoneSummary> milestones) {
         return new MilestoneInformation(countOfMilestone, milestones);
     }
 
@@ -25,11 +26,11 @@ public class MilestoneInformation {
         this.countOfMilestone = countOfMilestone;
     }
 
-    public List<MilestoneSummary> getMilestones() {
+    public Set<MilestoneSummary> getMilestones() {
         return milestones;
     }
 
-    public void setMilestones(List<MilestoneSummary> milestones) {
+    public void setMilestones(Set<MilestoneSummary> milestones) {
         this.milestones = milestones;
     }
 }

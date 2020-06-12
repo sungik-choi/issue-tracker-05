@@ -92,7 +92,7 @@ public class Comment {
             return this;
         }
 
-        public Builder issuId(Long issueId) {
+        public Builder issueId(Long issueId) {
             this.issueId = issueId;
             return this;
         }
