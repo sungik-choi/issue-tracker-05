@@ -17,7 +17,7 @@ public class UserDao {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public List<UserSummary> findAllocatedAssigneesByIds(Long issueId) {
+    public List<UserSummary> findAllocatedAssigneesByIssueId(Long issueId) {
         String sql = "SELECT u.id, u.name, u.avatar_url " +
                      "FROM user u JOIN assignee a ON u.id = a.user_id " +
                      "WHERE a.issue_id = ?";

@@ -17,8 +17,8 @@ public class UserService {
         this.userDao = userDao;
     }
 
-    public List<UserSummary> findAllocatedAssigneesByIds(Long issueId) {
-        return userDao.findAllocatedAssigneesByIds(issueId);
+    public List<UserSummary> findAllocatedAssigneesByIssueId(Long issueId) {
+        return userDao.findAllocatedAssigneesByIssueId(issueId);
     }
 
     public User findUserById(Long userId) {

@@ -53,7 +53,7 @@ public class IssueService {
     private IssueDetails mapToIssueDetails(Issue issue) {
         Milestone milestone = milestoneService.findMilestoneById(issue.getMilestoneId());
         List<LabelSummary> attachedLabels = labelService.findAttachedLabelsByIssueId(issue.getId());
-        List<UserSummary> allocatedAssignees = userService.findAllocatedAssigneesByIds(issue.getId());
+        List<UserSummary> allocatedAssignees = userService.findAllocatedAssigneesByIssueId(issue.getId());
         User user = userService.findUserById(issue.getUserId());
         return new IssueDetails.Builder()
                                .issueId(issue.getId())
