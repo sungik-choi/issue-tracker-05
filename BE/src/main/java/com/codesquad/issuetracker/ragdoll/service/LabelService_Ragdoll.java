@@ -1,6 +1,6 @@
 package com.codesquad.issuetracker.ragdoll.service;
 
-import com.codesquad.issuetracker.ragdoll.dao.LabelDaoRagdoll;
+import com.codesquad.issuetracker.ragdoll.dao.LabelDao_Ragdoll;
 import com.codesquad.issuetracker.ragdoll.domain.Label;
 import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelInformation;
 import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelSummary;
@@ -11,11 +11,11 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-public class LabelServiceRagdoll {
+public class LabelService_Ragdoll {
 
-    private final LabelDaoRagdoll labelDaoRagdoll;
+    private final LabelDao_Ragdoll labelDaoRagdoll;
 
-    public LabelServiceRagdoll(LabelDaoRagdoll labelDaoRagdoll) {
+    public LabelService_Ragdoll(LabelDao_Ragdoll labelDaoRagdoll) {
         this.labelDaoRagdoll = labelDaoRagdoll;
     }
 

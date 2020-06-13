@@ -9,11 +9,11 @@ import javax.sql.DataSource;
 import java.util.List;
 
 @Repository
-public class LabelDaoRagdoll {
+public class LabelDao_Ragdoll {
 
     private final JdbcTemplate jdbcTemplate;
 
-    public LabelDaoRagdoll(DataSource dataSource) {
+    public LabelDao_Ragdoll(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 

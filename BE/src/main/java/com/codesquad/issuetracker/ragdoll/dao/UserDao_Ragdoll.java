@@ -9,15 +9,15 @@ import javax.sql.DataSource;
 import java.util.List;
 
 @Repository
-public class UserDaoRagdoll {
+public class UserDao_Ragdoll {
 
     private final JdbcTemplate jdbcTemplate;
 
-    public UserDaoRagdoll(DataSource dataSource) {
+    public UserDao_Ragdoll(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public List<UserSummary> findAllocatedAssigneesByIds(Long issueId) {
+    public List<UserSummary> findAllocatedAssigneesByIssueId(Long issueId) {
         String sql = "SELECT u.id, u.name, u.avatar_url " +
                      "FROM user u JOIN assignee a ON u.id = a.user_id " +
                      "WHERE a.issue_id = ?";

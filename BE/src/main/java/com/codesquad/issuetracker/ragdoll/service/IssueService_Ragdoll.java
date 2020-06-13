@@ -1,6 +1,6 @@
 package com.codesquad.issuetracker.ragdoll.service;
 
-import com.codesquad.issuetracker.ragdoll.dao.IssueDaoRagdoll;
+import com.codesquad.issuetracker.ragdoll.dao.IssueDao_Ragdoll;
 import com.codesquad.issuetracker.ragdoll.domain.Issue;
 import com.codesquad.issuetracker.ragdoll.domain.Milestone;
 import com.codesquad.issuetracker.ragdoll.domain.User;
@@ -17,31 +17,31 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class IssueServiceRagdoll {
+public class IssueService_Ragdoll {
 
-    private final IssueDaoRagdoll issueDaoRagdoll;
+    private final IssueDao_Ragdoll issueDao;
 
-    private final UserServiceRagdoll userServiceRagdoll;
+    private final UserService_Ragdoll userService;
 
-    private final MilestoneServiceRagdoll milestoneServiceRagdoll;
+    private final MilestoneService_Ragdoll milestoneService;
 
-    private final LabelServiceRagdoll labelServiceRagdoll;
+    private final LabelService_Ragdoll labelService;
 
-    public IssueServiceRagdoll(IssueDaoRagdoll issueDaoRagdoll, UserServiceRagdoll userServiceRagdoll, MilestoneServiceRagdoll milestoneServiceRagdoll, LabelServiceRagdoll labelServiceRagdoll) {
-        this.issueDaoRagdoll = issueDaoRagdoll;
-        this.userServiceRagdoll = userServiceRagdoll;
-        this.milestoneServiceRagdoll = milestoneServiceRagdoll;
-        this.labelServiceRagdoll = labelServiceRagdoll;
+    public IssueService_Ragdoll(IssueDao_Ragdoll issueDao, UserService_Ragdoll userService, MilestoneService_Ragdoll milestoneService, LabelService_Ragdoll labelService) {
+        this.issueDao = issueDao;
+        this.userService = userService;
+        this.milestoneService = milestoneService;
+        this.labelService = labelService;
     }
 
     public ListOfIssuesDto findAllIssues() {
-        List<Issue> allOfOpenedIssues = issueDaoRagdoll.findAllOpendIssues();
+        List<Issue> allOfOpenedIssues = issueDao.findAllOpendIssues();
         List<IssueDetails> issues = allOfOpenedIssues.stream()
                                                      .map(this::mapToIssueDetails)
                                                      .collect(Collectors.toList());
-        LabelInformation labelInformation = labelServiceRagdoll.findAllLabels();
-        MilestoneInformation milestoneInformation = milestoneServiceRagdoll.findAllMilestones();
-        List<UserSummary> assigneeInformation = userServiceRagdoll.findAllAssignees();
+        LabelInformation labelInformation = labelService.findAllLabels();
+        MilestoneInformation milestoneInformation = milestoneService.findAllMilestones();
+        List<UserSummary> assigneeInformation = userService.findAllAssignees();
         return new ListOfIssuesDto.Builder()
                                   .issues(issues)
                                   .labelInfo(labelInformation)
@@ -51,10 +51,10 @@ public class IssueServiceRagdoll {
     }
 
     private IssueDetails mapToIssueDetails(Issue issue) {
-        Milestone milestone = milestoneServiceRagdoll.findMilestoneById(issue.getMilestoneId());
-        List<LabelSummary> attachedLabels = labelServiceRagdoll.findAttachedLabelsByIssueId(issue.getId());
-        List<UserSummary> allocatedAssignees = userServiceRagdoll.findAllocatedAssigneesByIds(issue.getId());
-        User user = userServiceRagdoll.findUserById(issue.getUserId());
+        Milestone milestone = milestoneService.findMilestoneById(issue.getMilestoneId());
+        List<LabelSummary> attachedLabels = labelService.findAttachedLabelsByIssueId(issue.getId());
+        List<UserSummary> allocatedAssignees = userService.findAllocatedAssigneesByIssueId(issue.getId());
+        User user = userService.findUserById(issue.getUserId());
         return new IssueDetails.Builder()
                                .issueId(issue.getId())
                                .issueTitle(issue.getTitle())

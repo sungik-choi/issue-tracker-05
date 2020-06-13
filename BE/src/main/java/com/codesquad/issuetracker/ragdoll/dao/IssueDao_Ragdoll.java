@@ -9,11 +9,11 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Repository
-public class IssueDaoRagdoll {
+public class IssueDao_Ragdoll {
 
     private final JdbcTemplate jdbcTemplate;
 
-    public IssueDaoRagdoll(DataSource dataSource) {
+    public IssueDao_Ragdoll(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
