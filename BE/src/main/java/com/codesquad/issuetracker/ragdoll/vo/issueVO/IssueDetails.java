@@ -1,8 +1,9 @@
-package com.codesquad.issuetracker.ragdoll.dto.issueVO;
+package com.codesquad.issuetracker.ragdoll.vo.issueVO;
 
-import com.codesquad.issuetracker.ragdoll.dto.userVO.UserSummary;
-import com.codesquad.issuetracker.ragdoll.dto.labelVO.LabelSummary;
-import com.codesquad.issuetracker.ragdoll.dto.milestoneVO.MilestoneSummary;
+import com.codesquad.issuetracker.ragdoll.vo.userVO.UserSummary;
+import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelSummary;
+import com.codesquad.issuetracker.ragdoll.vo.milestoneVO.MilestoneSummary;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -23,6 +24,7 @@ public class IssueDetails {
 
     private LocalDateTime createdAt;
 
+    @JsonProperty("isOpened")
     private boolean opened;
 
     public IssueDetails() {}
