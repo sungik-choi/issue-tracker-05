@@ -2,7 +2,7 @@ package com.codesquad.issuetracker.ragdoll.service;
 
 import com.codesquad.issuetracker.ragdoll.dao.UserDaoRagdoll;
 import com.codesquad.issuetracker.ragdoll.domain.User;
-import com.codesquad.issuetracker.ragdoll.dto.userVO.UserSummary;
+import com.codesquad.issuetracker.ragdoll.vo.userVO.UserSummary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

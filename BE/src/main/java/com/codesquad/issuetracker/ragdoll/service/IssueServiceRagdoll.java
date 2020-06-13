@@ -5,12 +5,12 @@ import com.codesquad.issuetracker.ragdoll.domain.Issue;
 import com.codesquad.issuetracker.ragdoll.domain.Milestone;
 import com.codesquad.issuetracker.ragdoll.domain.User;
 import com.codesquad.issuetracker.ragdoll.dto.ListOfIssuesDto;
-import com.codesquad.issuetracker.ragdoll.dto.issueVO.IssueDetails;
-import com.codesquad.issuetracker.ragdoll.dto.labelVO.LabelSummary;
-import com.codesquad.issuetracker.ragdoll.dto.labelVO.LabelInformation;
-import com.codesquad.issuetracker.ragdoll.dto.milestoneVO.MilestoneInformation;
-import com.codesquad.issuetracker.ragdoll.dto.milestoneVO.MilestoneSummary;
-import com.codesquad.issuetracker.ragdoll.dto.userVO.UserSummary;
+import com.codesquad.issuetracker.ragdoll.vo.issueVO.IssueDetails;
+import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelSummary;
+import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelInformation;
+import com.codesquad.issuetracker.ragdoll.vo.milestoneVO.MilestoneInformation;
+import com.codesquad.issuetracker.ragdoll.vo.milestoneVO.MilestoneSummary;
+import com.codesquad.issuetracker.ragdoll.vo.userVO.UserSummary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,13 +19,13 @@ import java.util.stream.Collectors;
 @Service
 public class IssueServiceRagdoll {
 
-    private IssueDaoRagdoll issueDaoRagdoll;
+    private final IssueDaoRagdoll issueDaoRagdoll;
 
-    private UserServiceRagdoll userServiceRagdoll;
+    private final UserServiceRagdoll userServiceRagdoll;
 
-    private MilestoneServiceRagdoll milestoneServiceRagdoll;
+    private final MilestoneServiceRagdoll milestoneServiceRagdoll;
 
-    private LabelServiceRagdoll labelServiceRagdoll;
+    private final LabelServiceRagdoll labelServiceRagdoll;
 
     public IssueServiceRagdoll(IssueDaoRagdoll issueDaoRagdoll, UserServiceRagdoll userServiceRagdoll, MilestoneServiceRagdoll milestoneServiceRagdoll, LabelServiceRagdoll labelServiceRagdoll) {
         this.issueDaoRagdoll = issueDaoRagdoll;

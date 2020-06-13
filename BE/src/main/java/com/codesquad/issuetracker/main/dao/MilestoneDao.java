@@ -1,4 +1,4 @@
-package com.codesquad.issuetracker.ragdoll.dao;
+package com.codesquad.issuetracker.main.dao;
 
 import com.codesquad.issuetracker.ragdoll.domain.Milestone;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -8,11 +8,11 @@ import javax.sql.DataSource;
 import java.util.List;
 
 @Repository
-public class MilestoneDaoRagdoll {
+public class MilestoneDao {
 
     private final JdbcTemplate jdbcTemplate;
 
-    public MilestoneDaoRagdoll(DataSource dataSource) {
+    public MilestoneDao(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 

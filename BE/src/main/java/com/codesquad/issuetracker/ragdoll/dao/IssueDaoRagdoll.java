@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public class IssueDaoRagdoll {
 
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     public IssueDaoRagdoll(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);

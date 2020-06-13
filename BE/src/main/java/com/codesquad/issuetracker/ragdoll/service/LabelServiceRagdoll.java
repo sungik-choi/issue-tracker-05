@@ -2,8 +2,8 @@ package com.codesquad.issuetracker.ragdoll.service;
 
 import com.codesquad.issuetracker.ragdoll.dao.LabelDaoRagdoll;
 import com.codesquad.issuetracker.ragdoll.domain.Label;
-import com.codesquad.issuetracker.ragdoll.dto.labelVO.LabelInformation;
-import com.codesquad.issuetracker.ragdoll.dto.labelVO.LabelSummary;
+import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelInformation;
+import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelSummary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @Service
 public class LabelServiceRagdoll {
 
-    private LabelDaoRagdoll labelDaoRagdoll;
+    private final LabelDaoRagdoll labelDaoRagdoll;
 
     public LabelServiceRagdoll(LabelDaoRagdoll labelDaoRagdoll) {
         this.labelDaoRagdoll = labelDaoRagdoll;

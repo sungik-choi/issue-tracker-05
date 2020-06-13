@@ -1,4 +1,4 @@
-package com.codesquad.issuetracker.ragdoll.dao;
+package com.codesquad.issuetracker.main.dao;
 
 import com.codesquad.issuetracker.ragdoll.domain.User;
 import com.codesquad.issuetracker.ragdoll.vo.userVO.UserSummary;
@@ -9,11 +9,11 @@ import javax.sql.DataSource;
 import java.util.List;
 
 @Repository
-public class UserDaoRagdoll {
+public class UserDao {
 
     private final JdbcTemplate jdbcTemplate;
 
-    public UserDaoRagdoll(DataSource dataSource) {
+    public UserDao(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 

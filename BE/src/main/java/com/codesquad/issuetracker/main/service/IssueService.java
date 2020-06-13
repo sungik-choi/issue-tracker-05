@@ -1,20 +1,16 @@
 package com.codesquad.issuetracker.main.service;
 
 import com.codesquad.issuetracker.main.dao.IssueDao;
-import com.codesquad.issuetracker.ragdoll.dao.IssueDaoRagdoll;
 import com.codesquad.issuetracker.ragdoll.domain.Issue;
 import com.codesquad.issuetracker.ragdoll.domain.Milestone;
 import com.codesquad.issuetracker.ragdoll.domain.User;
 import com.codesquad.issuetracker.ragdoll.dto.ListOfIssuesDto;
-import com.codesquad.issuetracker.ragdoll.dto.issueVO.IssueDetails;
-import com.codesquad.issuetracker.ragdoll.dto.labelVO.LabelInformation;
-import com.codesquad.issuetracker.ragdoll.dto.labelVO.LabelSummary;
-import com.codesquad.issuetracker.ragdoll.dto.milestoneVO.MilestoneInformation;
-import com.codesquad.issuetracker.ragdoll.dto.milestoneVO.MilestoneSummary;
-import com.codesquad.issuetracker.ragdoll.dto.userVO.UserSummary;
-import com.codesquad.issuetracker.ragdoll.service.LabelServiceRagdoll;
-import com.codesquad.issuetracker.ragdoll.service.MilestoneServiceRagdoll;
-import com.codesquad.issuetracker.ragdoll.service.UserServiceRagdoll;
+import com.codesquad.issuetracker.ragdoll.vo.issueVO.IssueDetails;
+import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelInformation;
+import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelSummary;
+import com.codesquad.issuetracker.ragdoll.vo.milestoneVO.MilestoneInformation;
+import com.codesquad.issuetracker.ragdoll.vo.milestoneVO.MilestoneSummary;
+import com.codesquad.issuetracker.ragdoll.vo.userVO.UserSummary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,13 +19,13 @@ import java.util.stream.Collectors;
 @Service
 public class IssueService {
 
-    private IssueDao issueDao;
+    private final IssueDao issueDao;
 
-    private UserService userService;
+    private final UserService userService;
 
-    private MilestoneService milestoneService;
+    private final MilestoneService milestoneService;
 
-    private LabelService labelService;
+    private final LabelService labelService;
 
     public IssueService(IssueDao issueDao, UserService userService, MilestoneService milestoneService, LabelService labelService) {
         this.issueDao = issueDao;

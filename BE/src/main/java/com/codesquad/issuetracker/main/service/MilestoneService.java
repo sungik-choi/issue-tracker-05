@@ -1,9 +1,9 @@
 package com.codesquad.issuetracker.main.service;
 
-import com.codesquad.issuetracker.ragdoll.dao.MilestoneDaoRagdoll;
+import com.codesquad.issuetracker.main.dao.MilestoneDao;
 import com.codesquad.issuetracker.ragdoll.domain.Milestone;
-import com.codesquad.issuetracker.ragdoll.dto.milestoneVO.MilestoneInformation;
-import com.codesquad.issuetracker.ragdoll.dto.milestoneVO.MilestoneSummary;
+import com.codesquad.issuetracker.ragdoll.vo.milestoneVO.MilestoneInformation;
+import com.codesquad.issuetracker.ragdoll.vo.milestoneVO.MilestoneSummary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,18 +13,18 @@ import java.util.stream.Collectors;
 @Service
 public class MilestoneService {
 
-    private MilestoneDaoRagdoll milestoneDaoRagdoll;
+    private final MilestoneDao milestoneDao;
 
-    public MilestoneService(MilestoneDaoRagdoll milestoneDaoRagdoll) {
-        this.milestoneDaoRagdoll = milestoneDaoRagdoll;
+    public MilestoneService(MilestoneDao milestoneDao) {
+        this.milestoneDao = milestoneDao;
     }
 
     public Milestone findMilestoneById(Integer milestoneId) {
-        return milestoneDaoRagdoll.findMilestoneById(milestoneId);
+        return milestoneDao.findMilestoneById(milestoneId);
     }
 
     public MilestoneInformation findAllMilestones() {
-        List<Milestone> milestones = milestoneDaoRagdoll.findAllMilestones();
+        List<Milestone> milestones = milestoneDao.findAllMilestones();
         Set<MilestoneSummary> milestoneSummaries = milestones.stream()
                                                              .map(milestone -> MilestoneSummary.create(milestone.getId(), milestone.getTitle()))
                                                              .collect(Collectors.toSet());

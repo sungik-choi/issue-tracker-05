@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public class IssueDao {
 
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     public IssueDao(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);

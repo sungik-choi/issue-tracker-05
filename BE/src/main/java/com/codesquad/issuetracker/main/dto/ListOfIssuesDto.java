@@ -1,9 +1,9 @@
 package com.codesquad.issuetracker.main.dto;
 
-import com.codesquad.issuetracker.ragdoll.dto.issueVO.IssueDetails;
-import com.codesquad.issuetracker.ragdoll.dto.labelVO.LabelInformation;
-import com.codesquad.issuetracker.ragdoll.dto.milestoneVO.MilestoneInformation;
-import com.codesquad.issuetracker.ragdoll.dto.userVO.UserSummary;
+import com.codesquad.issuetracker.ragdoll.vo.issueVO.IssueDetails;
+import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelInformation;
+import com.codesquad.issuetracker.ragdoll.vo.milestoneVO.MilestoneInformation;
+import com.codesquad.issuetracker.ragdoll.vo.userVO.UserSummary;
 
 import java.util.List;
 

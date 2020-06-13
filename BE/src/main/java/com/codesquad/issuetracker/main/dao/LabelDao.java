@@ -1,4 +1,4 @@
-package com.codesquad.issuetracker.ragdoll.dao;
+package com.codesquad.issuetracker.main.dao;
 
 import com.codesquad.issuetracker.ragdoll.domain.Label;
 import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelSummary;
@@ -9,11 +9,11 @@ import javax.sql.DataSource;
 import java.util.List;
 
 @Repository
-public class LabelDaoRagdoll {
+public class LabelDao {
 
     private final JdbcTemplate jdbcTemplate;
 
-    public LabelDaoRagdoll(DataSource dataSource) {
+    public LabelDao(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
