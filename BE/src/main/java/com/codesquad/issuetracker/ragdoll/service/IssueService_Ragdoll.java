@@ -1,10 +1,12 @@
 package com.codesquad.issuetracker.ragdoll.service;
 
+import com.codesquad.issuetracker.ragdoll.commonconstant.ResponseMessages;
 import com.codesquad.issuetracker.ragdoll.dao.IssueDao_Ragdoll;
 import com.codesquad.issuetracker.ragdoll.domain.Issue;
 import com.codesquad.issuetracker.ragdoll.domain.Milestone;
 import com.codesquad.issuetracker.ragdoll.domain.User;
 import com.codesquad.issuetracker.ragdoll.dto.ListOfIssuesDto;
+import com.codesquad.issuetracker.ragdoll.dto.SubmitNewIssueRequestDto;
 import com.codesquad.issuetracker.ragdoll.vo.issueVO.IssueDetails;
 import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelSummary;
 import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelInformation;
@@ -65,5 +67,13 @@ public class IssueService_Ragdoll {
                                .createdAt(issue.getCreatedDateTime())
                                .opened(issue.isOpened())
                                .build();
+    }
+
+    public String submitNewIssue(SubmitNewIssueRequestDto submitNewIssueRequestDto) {
+        Long registeredNewIssueId = issueDao.submitNewIssue(submitNewIssueRequestDto.getAuthorId(),
+                                                            submitNewIssueRequestDto.getTitle());
+        issueDao.registerNewComment(submitNewIssueRequestDto.getAuthorId(), registeredNewIssueId,
+                                    submitNewIssueRequestDto.getDescription());
+        return ResponseMessages.SUCCESSFULLY_CREATED;
     }
 }
