@@ -51,7 +51,7 @@ public class IssueDao_Ragdoll {
                                                 .addValue("milestoneId", null);
         KeyHolder keyHolder = new GeneratedKeyHolder();
         Number registeredNewIssueId = namedParameterJdbcTemplate.update(sql, namedParameters, keyHolder, new String[]{"registeredNewIssueId"});
-        return registeredNewIssueId.longValue();
+        return keyHolder.getKey().longValue();
     }
 
     public void registerNewComment(Long commenterId, Long issueId, String description) {
