@@ -39,6 +39,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "styled-components": "^5.1.1",
     "webpack-merge": "^4.2.2"
   }
 }
