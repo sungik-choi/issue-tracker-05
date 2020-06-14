@@ -1,15 +1,15 @@
 import React from "react";
 
-// import styled from "styled-components";
+import styled from "styled-components";
 
 const Header = () => {
-  return <div>a</div>;
+  return <HeaderWrap>a</HeaderWrap>;
 };
 
-// const HeaderWrap = styled.header`
-//   width: 100%;
-//   height: 30%;
-//   background-color: #24292e;
-// `;
+const HeaderWrap = styled.header`
+  width: 100%;
+  height: 30%;
+  background-color: #24292e;
+`;
 
 export default Header;
