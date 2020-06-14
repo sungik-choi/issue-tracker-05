@@ -31,7 +31,7 @@ const Title = styled.span`
 `;
 
 const BookIcon = styled(Title)`
-  padding: 0 5px;
+  padding: 4px 5px 0;
 `;
 
 export default Header;
