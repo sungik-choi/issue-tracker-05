@@ -33,8 +33,8 @@ const useStyles = makeStyles((theme) => ({
 AvatarStack.propTypes = {
   userData: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string,
-      url: PropTypes.string,
+      id: PropTypes.string.isRequired,
+      url: PropTypes.string.isRequired,
     }),
   ).isRequired,
 };
