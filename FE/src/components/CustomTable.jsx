@@ -10,7 +10,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 
-const CustomTable = ({ ariaLabel = "table", headContents, bodyContents }) => {
+const CustomTable = ({ ariaLabel, headContents, bodyContents }) => {
   return (
     <TableContainer>
       <Table aria-label={ariaLabel}>
@@ -46,8 +46,12 @@ const StyledTableCell = withStyles((theme) => ({
   },
 }))(TableCell);
 
+CustomTable.defaultProps = {
+  ariaLabel: "table",
+};
+
 CustomTable.propTypes = {
-  ariaLabel: PropTypes.string.isRequired,
+  ariaLabel: PropTypes.string,
   headContents: PropTypes.element.isRequired,
   bodyContents: PropTypes.arrayOf(
     PropTypes.shape({
