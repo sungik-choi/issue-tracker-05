@@ -16,6 +16,7 @@ import com.codesquad.issuetracker.ragdoll.vo.userVO.UserSummary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -53,14 +54,14 @@ public class IssueService_Ragdoll {
     }
 
     private IssueDetails mapToIssueDetails(Issue issue) {
-        Milestone milestone = milestoneService.findMilestoneById(issue.getMilestoneId());
+        Optional<Milestone> foundMilestone = Optional.ofNullable(milestoneService.findMilestoneById(issue.getMilestoneId()));
         List<LabelSummary> attachedLabels = labelService.findAttachedLabelsByIssueId(issue.getId());
         List<UserSummary> allocatedAssignees = userService.findAllocatedAssigneesByIssueId(issue.getId());
         User user = userService.findUserById(issue.getUserId());
         return new IssueDetails.Builder()
                                .issueId(issue.getId())
                                .issueTitle(issue.getTitle())
-                               .milestone(MilestoneSummary.create(milestone.getId(), milestone.getTitle()))
+                               .milestone(determineMilestone(foundMilestone))
                                .attachedLabels(attachedLabels)
                                .author(UserSummary.create(user.getId(), user.getName(), user.getAvatarUrl()))
                                .allocatedAssignees(allocatedAssignees)
@@ -69,10 +70,18 @@ public class IssueService_Ragdoll {
                                .build();
     }
 
+    private MilestoneSummary determineMilestone(Optional<Milestone> foundMilestone) {
+        if (foundMilestone.isPresent()) {
+            Milestone milestone = foundMilestone.get();
+            return MilestoneSummary.create(milestone.getId(), milestone.getTitle());
+        }
+        return null;
+    }
+
     public String submitNewIssue(SubmitNewIssueRequestDto submitNewIssueRequestDto) {
-        Long registeredNewIssueId = issueDao.submitNewIssue(submitNewIssueRequestDto.getAuthorId(),
+        Long newIssueId = issueDao.submitNewIssue(submitNewIssueRequestDto.getUserId(),
                                                             submitNewIssueRequestDto.getTitle());
-        issueDao.registerNewComment(submitNewIssueRequestDto.getAuthorId(), registeredNewIssueId,
+        issueDao.submitNewComment(submitNewIssueRequestDto.getUserId(), newIssueId,
                                     submitNewIssueRequestDto.getDescription());
         return ResponseMessages.SUCCESSFULLY_CREATED;
     }

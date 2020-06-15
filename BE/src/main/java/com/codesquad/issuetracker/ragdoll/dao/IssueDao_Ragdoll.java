@@ -54,7 +54,7 @@ public class IssueDao_Ragdoll {
         return keyHolder.getKey().longValue();
     }
 
-    public void registerNewComment(Long commenterId, Long issueId, String description) {
+    public void submitNewComment(Long commenterId, Long issueId, String description) {
         String sql = "INSERT INTO comment (description, created_date_time, issue_id, user_id) " +
                      "VALUES (:description, :createdDateTime, :issueId, :commenterId)";
         SqlParameterSource namedParameters = new MapSqlParameterSource()
