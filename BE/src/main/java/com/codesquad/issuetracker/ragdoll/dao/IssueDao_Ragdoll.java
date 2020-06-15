@@ -127,4 +127,14 @@ public class IssueDao_Ragdoll {
         String sql = "DELETE FROM assignee WHERE issue_id = ? AND user_id = ?";
         jdbcTemplate.update(sql, new Object[]{issueId, deletedAssigneeId});
     }
+
+    public void addAttachedLabelId(Long issueId, Integer labelId) {
+        String sql = "INSERT issue_has_label (label_id, issue_id) VALUES (?, ?)";
+        jdbcTemplate.update(sql, new Object[]{labelId, issueId});
+    }
+
+    public void deleteAttachedLabelId(Long issueId, Integer labelId) {
+        String sql = "DELETE FROM issue_has_label WHERE issue_id = ? AND label_id = ?";
+        jdbcTemplate.update(sql, new Object[]{issueId, labelId});
+    }
 }
