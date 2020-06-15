@@ -10,7 +10,7 @@ const Contents = () => {
   return (
     <>
       <Box display="flex" flexDirection="column" marginLeft={2}>
-        <Box display="flex" flexWrap="wrap" alignItems="center">
+        <Box display="flex" alignItems="center">
           <Title />
           <Labels />
         </Box>
