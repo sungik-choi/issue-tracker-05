@@ -8,6 +8,7 @@ import com.codesquad.issuetracker.ragdoll.domain.Milestone;
 import com.codesquad.issuetracker.ragdoll.domain.User;
 import com.codesquad.issuetracker.ragdoll.dto.DetailedInformationOfIssueDto;
 import com.codesquad.issuetracker.ragdoll.dto.ListOfIssuesDto;
+import com.codesquad.issuetracker.ragdoll.dto.ModifyIssueTitleRequestDto;
 import com.codesquad.issuetracker.ragdoll.dto.SubmitNewIssueRequestDto;
 import com.codesquad.issuetracker.ragdoll.vo.commentVO.CommentDetails;
 import com.codesquad.issuetracker.ragdoll.vo.issueVO.IssueDetails;
@@ -107,5 +108,10 @@ public class IssueService_Ragdoll {
                                                 .milestoneInfo(milestoneService.findAllMilestones())
                                                 .assigneeInfo(userService.findAllAssignees())
                                                 .build();
+    }
+
+    public String modifyIssueTitle(Long issueId, ModifyIssueTitleRequestDto modifyIssueTitleRequestDto) {
+        issueDao.modifyIssueTitle(issueId, modifyIssueTitleRequestDto.getIssueTitle());
+        return ResponseMessages.SUCCESSFULLY_MODIFIED;
     }
 }

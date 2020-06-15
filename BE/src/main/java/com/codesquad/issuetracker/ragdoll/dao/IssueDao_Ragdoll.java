@@ -105,4 +105,10 @@ public class IssueDao_Ragdoll {
                                          .milestoneId(rs.getInt("milestone_id"))
                                          .build());
     }
+
+    public void modifyIssueTitle(Long issueId, String issueTitle) {
+        String sql = "UPDATE issue SET title = ? " +
+                     "WHERE id = ?";
+        jdbcTemplate.update(sql, new Object[]{issueTitle, issueId});
+    }
 }
