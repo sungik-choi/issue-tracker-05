@@ -98,7 +98,7 @@ public class IssueService_Ragdoll {
             return CommentDetails.create(commenter, comment.getDescription(), comment.getCreatedDateTime());
         }).collect(Collectors.toList());
         return new DetailedInformationOfIssueDto.Builder()
-                                                .issueDeatils(mapToIssueDetails(issue))
+                                                .issue(mapToIssueDetails(issue))
                                                 .comments(comments)
                                                 .labelInfo(labelService.findAllLabels())
                                                 .milestoneInfo(milestoneService.findAllMilestones())

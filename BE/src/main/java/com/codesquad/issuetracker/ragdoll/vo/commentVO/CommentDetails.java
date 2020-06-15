@@ -11,18 +11,18 @@ public class CommentDetails {
 
     private String description;
 
-    private LocalDateTime createdDateTime;
+    private LocalDateTime createdAt;
 
     public CommentDetails() {}
 
-    private CommentDetails(UserSummary commenter, String description, LocalDateTime createdDateTime) {
+    private CommentDetails(UserSummary commenter, String description, LocalDateTime createdAt) {
         this.commenter = commenter;
         this.description = description;
-        this.createdDateTime = createdDateTime;
+        this.createdAt = createdAt;
     }
 
-    public static CommentDetails create(UserSummary commenter, String description, LocalDateTime createdDateTime) {
-        return new CommentDetails(commenter, description, createdDateTime);
+    public static CommentDetails create(UserSummary commenter, String description, LocalDateTime createdAt) {
+        return new CommentDetails(commenter, description, createdAt);
     }
 
     public UserSummary getCommenter() {
@@ -41,11 +41,11 @@ public class CommentDetails {
         this.description = description;
     }
 
-    public LocalDateTime getCreatedDateTime() {
-        return createdDateTime;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreatedDateTime(LocalDateTime createdDateTime) {
-        this.createdDateTime = createdDateTime;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }
