@@ -137,4 +137,9 @@ public class IssueDao_Ragdoll {
         String sql = "DELETE FROM issue_has_label WHERE issue_id = ? AND label_id = ?";
         jdbcTemplate.update(sql, new Object[]{issueId, labelId});
     }
+
+    public void updateRelatedMilestone(Long issueId, Integer milestoneId) {
+        String sql = "UPDATE issue SET milestone_id = ? WHERE id = ?";
+        jdbcTemplate.update(sql, new Object[]{milestoneId, issueId});
+    }
 }
