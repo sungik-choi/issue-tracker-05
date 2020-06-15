@@ -2,6 +2,7 @@ package com.codesquad.issuetracker.ragdoll.dto;
 
 import com.codesquad.issuetracker.ragdoll.vo.commentVO.CommentDetails;
 import com.codesquad.issuetracker.ragdoll.vo.issueVO.IssueDetails;
+import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelInformation;
 import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelSummary;
 import com.codesquad.issuetracker.ragdoll.vo.milestoneVO.MilestoneInformation;
 import com.codesquad.issuetracker.ragdoll.vo.userVO.UserSummary;
@@ -14,15 +15,15 @@ public class DetailedInformationOfIssueDto {
 
     private List<CommentDetails> comments;
 
-    private List<LabelSummary> labelInfo;
+    private LabelInformation labelInfo;
 
-    private List<MilestoneInformation> milestoneInfo;
+    private MilestoneInformation milestoneInfo;
 
     private List<UserSummary> assigneeInfo;
 
     public DetailedInformationOfIssueDto() {}
 
-    public DetailedInformationOfIssueDto(IssueDetails issueDetails, List<CommentDetails> comments, List<LabelSummary> labelInfo, List<MilestoneInformation> milestoneInfo, List<UserSummary> assigneeInfo) {
+    public DetailedInformationOfIssueDto(IssueDetails issueDetails, List<CommentDetails> comments, LabelInformation labelInfo, MilestoneInformation milestoneInfo, List<UserSummary> assigneeInfo) {
         this.issueDetails = issueDetails;
         this.comments = comments;
         this.labelInfo = labelInfo;
@@ -46,19 +47,19 @@ public class DetailedInformationOfIssueDto {
         this.comments = comments;
     }
 
-    public List<LabelSummary> getLabelInfo() {
+    public LabelInformation getLabelInfo() {
         return labelInfo;
     }
 
-    public void setLabelInfo(List<LabelSummary> labelInfo) {
+    public void setLabelInfo(LabelInformation labelInfo) {
         this.labelInfo = labelInfo;
     }
 
-    public List<MilestoneInformation> getMilestoneInfo() {
+    public MilestoneInformation getMilestoneInfo() {
         return milestoneInfo;
     }
 
-    public void setMilestoneInfo(List<MilestoneInformation> milestoneInfo) {
+    public void setMilestoneInfo(MilestoneInformation milestoneInfo) {
         this.milestoneInfo = milestoneInfo;
     }
 
@@ -73,8 +74,8 @@ public class DetailedInformationOfIssueDto {
     public static class Builder {
         private IssueDetails issueDetails;
         private List<CommentDetails> comments;
-        private List<LabelSummary> labelInfo;
-        private List<MilestoneInformation> milestoneInfo;
+        private LabelInformation labelInfo;
+        private MilestoneInformation milestoneInfo;
         private List<UserSummary> assigneeInfo;
 
         public Builder issueDeatils(IssueDetails issueDetails) {
@@ -87,12 +88,12 @@ public class DetailedInformationOfIssueDto {
             return this;
         }
 
-        public Builder labelInfo(List<LabelSummary> labelInfo) {
+        public Builder labelInfo(LabelInformation labelInfo) {
             this.labelInfo = labelInfo;
             return this;
         }
 
-        public Builder milestoneInfo(List<MilestoneInformation> milestoneInfo) {
+        public Builder milestoneInfo(MilestoneInformation milestoneInfo) {
             this.milestoneInfo = milestoneInfo;
             return this;
         }

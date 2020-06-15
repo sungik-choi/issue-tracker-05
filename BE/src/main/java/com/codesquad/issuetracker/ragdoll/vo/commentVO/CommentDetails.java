@@ -1,6 +1,7 @@
 package com.codesquad.issuetracker.ragdoll.vo.commentVO;
 
-import com.codesquad.issuetracker.main.vo.UserVO.UserSummary;
+
+import com.codesquad.issuetracker.ragdoll.vo.userVO.UserSummary;
 
 import java.time.LocalDateTime;
 
