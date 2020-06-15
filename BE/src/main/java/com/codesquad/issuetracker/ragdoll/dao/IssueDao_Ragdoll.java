@@ -91,4 +91,18 @@ public class IssueDao_Ragdoll {
                                            .userId(rs.getLong("user_id"))
                                            .build());
     }
+
+    public List<Issue> findIssuesByMilestoneId(Integer milestoneId) {
+        String sql = "SELECT id, title, created_date_time, is_opened, user_id, milestone_id " +
+                     "FROM issue WHERE milestone_id = ?";
+        return jdbcTemplate.query(sql, new Object[]{milestoneId},
+                (rs, rowNum) -> new Issue.Builder()
+                                         .id(rs.getLong("id"))
+                                         .title(rs.getString("title"))
+                                         .createdDateTime(rs.getTimestamp("created_date_time").toLocalDateTime())
+                                         .opened(rs.getBoolean("is_opened"))
+                                         .userId(rs.getLong("user_id"))
+                                         .milestoneId(rs.getInt("milestone_id"))
+                                         .build());
+    }
 }

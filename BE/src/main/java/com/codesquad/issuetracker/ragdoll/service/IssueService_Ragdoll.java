@@ -76,16 +76,19 @@ public class IssueService_Ragdoll {
     private MilestoneSummary determineMilestone(Optional<Milestone> foundMilestone) {
         if (foundMilestone.isPresent()) {
             Milestone milestone = foundMilestone.get();
-            return MilestoneSummary.create(milestone.getId(), milestone.getTitle());
+            List<Issue> issuesInMilestone = issueDao.findIssuesByMilestoneId(milestone.getId());
+            int countOfOpenedIssue = (int) issuesInMilestone.stream().filter(Issue::isOpened).count();
+            double progress = (1 - (double) countOfOpenedIssue / issuesInMilestone.size()) * 100;
+            return MilestoneSummary.create(milestone.getId(), milestone.getTitle(), progress);
         }
         return null;
     }
 
     public String submitNewIssue(SubmitNewIssueRequestDto submitNewIssueRequestDto) {
         Long newIssueId = issueDao.submitNewIssue(submitNewIssueRequestDto.getUserId(),
-                                                            submitNewIssueRequestDto.getTitle());
+                                                  submitNewIssueRequestDto.getTitle());
         issueDao.submitNewComment(submitNewIssueRequestDto.getUserId(), newIssueId,
-                                    submitNewIssueRequestDto.getDescription());
+                                  submitNewIssueRequestDto.getDescription());
         return ResponseMessages.SUCCESSFULLY_CREATED;
     }
 
