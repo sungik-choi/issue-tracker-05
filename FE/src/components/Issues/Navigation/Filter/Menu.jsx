@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     verticalAlign: "middle",
   },
   popupBox: {
-    width: "290px",
+    width: "250px",
     padding: "8px 16px",
     cursor: "pointer",
     borderTop: "1px solid #e1e4e8",
@@ -73,10 +73,10 @@ function PopoverPopupState() {
             }}
           >
             <Box p={1} className={classes.popupBox}>
-              <Typography style={{ fontSize: "14px" }}>Filter lssues</Typography>
+              <Typography style={{ fontSize: "13px" }}>Filter lssues</Typography>
             </Box>
             <Box p={1} className={classes.popupBox}>
-              <Typography style={{ fontSize: "14px" }}>Open issues</Typography>
+              <Typography style={{ fontSize: "13px" }}>Open issues</Typography>
             </Box>
           </Popover>
         </div>
