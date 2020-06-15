@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 import Popover from "@material-ui/core/Popover";
 import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import { makeStyles } from "@material-ui/core/styles";
 
 const Menu = () => {
   return (
@@ -15,15 +16,28 @@ const Menu = () => {
   );
 };
 
+const useStyles = makeStyles((theme) => ({
+  filterText: {
+    fontSize: "13px",
+    fontWeight: "bold",
+  },
+
+  downIcon: {
+    verticalAlign: "middle",
+  },
+}));
+
 function PopoverPopupState() {
+  const classes = useStyles();
+
   return (
     <PopupState variant="popover" popupId="demo-popup-popover">
       {(popupState) => (
         <div>
           <Button variant="contained" color="default" {...bindTrigger(popupState)}>
-            <span style={{ fontSize: "13px", fontWeight: "bold" }}>
+            <span className={classes.filterText}>
               Filters
-              <ArrowDropDownIcon style={{ verticalAlign: "middle" }} />
+              <ArrowDropDownIcon className={classes.downIcon} />
             </span>
           </Button>
           <Popover
