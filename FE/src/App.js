@@ -1,6 +1,7 @@
 import React from "react";
 
 import Header from "./components/common/Header";
+import Navigation from "./components/Issues/Navigation/Navigation";
 
 import GlobalStyle from "./style/GlobalStyle";
 
@@ -9,6 +10,7 @@ const App = () => {
     <>
       <GlobalStyle />
       <Header />
+      <Navigation />
     </>
   );
 };
