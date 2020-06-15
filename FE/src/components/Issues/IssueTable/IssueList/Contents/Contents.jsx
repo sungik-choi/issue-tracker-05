@@ -14,7 +14,7 @@ const Contents = () => {
           <Title title="[FE] 개발환경 구축하기" />
           <Label name="레이블 내용" backgroundColor="#000" color="#FFF" />
         </Box>
-        <Details />
+        <Details id="18" time="4day ago" author="sungik-choi" />
       </Box>
     </>
   );
