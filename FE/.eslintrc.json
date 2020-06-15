@@ -26,6 +26,7 @@
     "jsx-a11y/href-no-hash": ["off"],
     "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "react/require-default-props": [0],
     "max-len": [
       "warn",
       {
