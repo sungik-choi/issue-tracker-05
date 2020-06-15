@@ -35,3 +35,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default MenuList;
+
+// 사용 용도는 두 가지가 있습니다
+// 1. title로써 상단에 사용
+// 2. menuList로써 hover와 마우스 클릭이 되는 list로 사용
+// title로 사용 시 : props로 title을 사용하고 title에 들어갈 text를 넣어주면 됩니다.
+// (예) <MenuList title={"Filter lssues"} />
+//menuList로 사용 시 : props로 text를 사용하고 list에 들어갈 text를 넣어주면 됩니다.
+// (예) <MenuList text={"Open issues"} />
