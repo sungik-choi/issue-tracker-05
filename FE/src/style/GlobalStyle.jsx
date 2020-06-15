@@ -1,8 +1,16 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, css } from "styled-components";
 import reset from "styled-reset";
+
+const variables = css`
+  :root {
+    --button-border: 1px solid rgba(27, 31, 35, 0.2);
+    --popup-backgroundColor: #f6f8fa;
+  }
+`;
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
+  ${variables}
   
   * {
     font-size: 14px;

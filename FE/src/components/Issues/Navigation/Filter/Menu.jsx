@@ -17,6 +17,9 @@ const Menu = () => {
 };
 
 const useStyles = makeStyles((theme) => ({
+  button: {
+    border: "var(--button-border)",
+  },
   filterText: {
     fontSize: "13px",
     fontWeight: "bold",
@@ -30,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     cursor: "pointer",
     borderTop: "1px solid #e1e4e8",
     "&:hover": {
-      backgroundColor: "#f6f8fa",
+      backgroundColor: "var(--popup-backgroundColor)",
     },
 
     popupTitle: {
@@ -46,7 +49,13 @@ function PopoverPopupState() {
     <PopupState variant="popover" popupId="demo-popup-popover">
       {(popupState) => (
         <div>
-          <Button variant="contained" color="default" size="small" {...bindTrigger(popupState)}>
+          <Button
+            className={classes.button}
+            variant="contained"
+            color="default"
+            size="small"
+            {...bindTrigger(popupState)}
+          >
             <span className={classes.filterText}>
               Filters
               <ArrowDropDownIcon className={classes.downIcon} />
