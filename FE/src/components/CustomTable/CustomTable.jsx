@@ -26,7 +26,11 @@ const CustomTable = ({ ariaLabel = "table", headContents = null, bodyContents = 
         <TableBody>
           {bodyContents.map((content) => (
             <TableRow>
-              <TableCell>{content}</TableCell>
+              <TableCell>
+                <Box display="flex" alignContent="center">
+                  {content}
+                </Box>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -43,9 +47,9 @@ const StyledTableCell = withStyles((theme) => ({
 }))(TableCell);
 
 CustomTable.propTypes = {
-  ariaLabel: PropTypes.string,
-  headContents: PropTypes.element,
-  bodyContents: PropTypes.arrayOf(PropTypes.element),
+  ariaLabel: PropTypes.string.isRequired,
+  headContents: PropTypes.element.isRequired,
+  bodyContents: PropTypes.arrayOf(PropTypes.element).isRequired,
 };
 
 export default CustomTable;
