@@ -5,6 +5,7 @@ import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Popover from "@material-ui/core/Popover";
 import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
+import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 
 const Menu = () => {
   return (
@@ -19,8 +20,11 @@ function PopoverPopupState() {
     <PopupState variant="popover" popupId="demo-popup-popover">
       {(popupState) => (
         <div>
-          <Button variant="contained" color="primary" {...bindTrigger(popupState)}>
-            Open Popover
+          <Button variant="contained" color="default" {...bindTrigger(popupState)}>
+            <span style={{ fontSize: "13px", fontWeight: "bold" }}>
+              Filters
+              <ArrowDropDownIcon style={{ verticalAlign: "middle" }} />
+            </span>
           </Button>
           <Popover
             {...bindPopover(popupState)}

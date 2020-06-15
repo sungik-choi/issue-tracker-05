@@ -4,9 +4,9 @@ import Menu from "./Menu";
 
 const Filter = () => {
   return (
-    <div>
+    <>
       <Menu></Menu>
-    </div>
+    </>
   );
 };
 
