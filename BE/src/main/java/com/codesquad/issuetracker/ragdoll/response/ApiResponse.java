@@ -19,7 +19,9 @@ public class ApiResponse<T> {
         return new ApiResponse(true, response);
     }
 
-    public static <T> ApiResponse<T> CREATED(T response) {return new ApiResponse(true, response); }
+    public static <T> ApiResponse<T> CREATED(T response) { return new ApiResponse(true, response); }
+
+    public static <T> ApiResponse<T> UNAUTHORIZED(T response) { return new ApiResponse(false, response); }
 
     public boolean isStatus() {
         return status;
