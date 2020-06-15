@@ -10,7 +10,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 
-const CustomTable = ({ ariaLabel = "table", headContents = null, bodyContents = null }) => {
+const CustomTable = ({ ariaLabel = "table", headContents, bodyContents }) => {
   return (
     <TableContainer>
       <Table aria-label={ariaLabel}>
@@ -24,12 +24,11 @@ const CustomTable = ({ ariaLabel = "table", headContents = null, bodyContents = 
           </TableRow>
         </TableHead>
         <TableBody>
-          {bodyContents.map((content) => (
-            // ! TableRow 내부 key value 삽입 필요
-            <TableRow hover>
+          {bodyContents.map(({ id, contents }) => (
+            <TableRow hover key={id}>
               <TableCell>
                 <Box display="flex" justifyContent="space-between">
-                  {content}
+                  {contents}
                 </Box>
               </TableCell>
             </TableRow>
@@ -50,7 +49,12 @@ const StyledTableCell = withStyles((theme) => ({
 CustomTable.propTypes = {
   ariaLabel: PropTypes.string.isRequired,
   headContents: PropTypes.element.isRequired,
-  bodyContents: PropTypes.arrayOf(PropTypes.element).isRequired,
+  bodyContents: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      contents: PropTypes.element,
+    }),
+  ).isRequired,
 };
 
 export default CustomTable;

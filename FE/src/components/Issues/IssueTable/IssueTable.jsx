@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
 import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
@@ -38,9 +37,20 @@ const IssueTable = () => {
     </>
   );
 
-  const bodyContents = [<IssueList />, <Typography>TEST 2</Typography>];
+  const bodyContents = [
+    {
+      id: 1,
+      contents: <IssueList />,
+    },
+    {
+      id: 2,
+      contents: <IssueList />,
+    },
+  ];
 
-  return <CustomTable headContents={headContents} bodyContents={bodyContents} />;
+  return (
+    <CustomTable ariaLabel="issueTable" headContents={headContents} bodyContents={bodyContents} />
+  );
 };
 
 export default IssueTable;
