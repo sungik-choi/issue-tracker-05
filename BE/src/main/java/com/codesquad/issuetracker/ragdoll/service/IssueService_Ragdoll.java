@@ -1,5 +1,6 @@
 package com.codesquad.issuetracker.ragdoll.service;
 
+import com.codesquad.issuetracker.ragdoll.commonconstant.ErrorMessages;
 import com.codesquad.issuetracker.ragdoll.commonconstant.ResponseMessages;
 import com.codesquad.issuetracker.ragdoll.dao.IssueDao_Ragdoll;
 import com.codesquad.issuetracker.ragdoll.domain.Comment;
@@ -10,6 +11,7 @@ import com.codesquad.issuetracker.ragdoll.dto.DetailedInformationOfIssueDto;
 import com.codesquad.issuetracker.ragdoll.dto.ListOfIssuesDto;
 import com.codesquad.issuetracker.ragdoll.dto.ModifyIssueTitleRequestDto;
 import com.codesquad.issuetracker.ragdoll.dto.SubmitNewIssueRequestDto;
+import com.codesquad.issuetracker.ragdoll.exception.UserUnauthorizedException;
 import com.codesquad.issuetracker.ragdoll.vo.commentVO.CommentDetails;
 import com.codesquad.issuetracker.ragdoll.vo.issueVO.IssueDetails;
 import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelSummary;
@@ -111,7 +113,15 @@ public class IssueService_Ragdoll {
     }
 
     public String modifyIssueTitle(Long issueId, ModifyIssueTitleRequestDto modifyIssueTitleRequestDto) {
+        Issue targetIssue = issueDao.findIssueById(issueId);
+        if (isUnauthorizedUser(targetIssue.getUserId(), modifyIssueTitleRequestDto.getUserId())) {
+            throw new UserUnauthorizedException(ErrorMessages.USER_UNAUTHORIZED);
+        }
         issueDao.modifyIssueTitle(issueId, modifyIssueTitleRequestDto.getIssueTitle());
         return ResponseMessages.SUCCESSFULLY_MODIFIED;
+    }
+
+    private boolean isUnauthorizedUser(Long bindUserId, Long requestUserId) {
+        return !bindUserId.equals(requestUserId);
     }
 }
