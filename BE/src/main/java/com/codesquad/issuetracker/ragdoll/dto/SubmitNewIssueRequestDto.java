@@ -2,7 +2,7 @@ package com.codesquad.issuetracker.ragdoll.dto;
 
 public class SubmitNewIssueRequestDto {
 
-    private Long authorId;
+    private Long userId;
 
     private String title;
 
@@ -10,18 +10,18 @@ public class SubmitNewIssueRequestDto {
 
     public SubmitNewIssueRequestDto() {}
 
-    public SubmitNewIssueRequestDto(Long authorId, String title, String description) {
-        this.authorId = authorId;
+    public SubmitNewIssueRequestDto(Long userId, String title, String description) {
+        this.userId = userId;
         this.title = title;
         this.description = description;
     }
 
-    public Long getAuthorId() {
-        return authorId;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setAuthorId(Long authorId) {
-        this.authorId = authorId;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getTitle() {
