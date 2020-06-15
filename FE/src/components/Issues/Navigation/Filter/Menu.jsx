@@ -24,12 +24,17 @@ const useStyles = makeStyles((theme) => ({
   downIcon: {
     verticalAlign: "middle",
   },
-  popUpBox: {
+  popupBox: {
     width: "290px",
     padding: "8px 16px",
     cursor: "pointer",
+    borderTop: "1px solid #e1e4e8",
     "&:hover": {
       backgroundColor: "#f6f8fa",
+    },
+
+    popupText: {
+      fontSize: "10px",
     },
   },
 }));
@@ -58,8 +63,13 @@ function PopoverPopupState() {
               horizontal: "center",
             }}
           >
-            <Box p={1} className={classes.popUpBox}>
-              <Typography>The content of the Popover.</Typography>
+            <Box p={1} className={classes.popupBox}>
+              <Typography>
+                <span className={classes.popupText}>Filter lssues</span>
+              </Typography>
+            </Box>
+            <Box p={1} className={classes.popupBox}>
+              <Typography className={classes.popupText}>Open issues</Typography>
             </Box>
           </Popover>
         </div>
