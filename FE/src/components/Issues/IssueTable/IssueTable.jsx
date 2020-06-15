@@ -6,7 +6,7 @@ import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
-import CustomTable from "@Components/CustomTable";
+import CustomTable from "@Components/common/CustomTable";
 import IssueList from "./IssueList/IssueList";
 
 const IssueTable = () => {
