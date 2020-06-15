@@ -8,7 +8,7 @@ const MenuList = ({ text, title }) => {
   const classes = useStyles();
 
   const boxClassName = title ? classes.titleBox : classes.popupBox;
-  const boxText = title ? "Filter lssues" : text;
+  const boxText = title ? title : text;
   const boxFontWeight = title ? "bold" : "none";
 
   return (

@@ -9,6 +9,7 @@ import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import { makeStyles } from "@material-ui/core/styles";
 
 const mockArr = ["Filter lssues", "Open issues", "Close issues"];
+const MENU_LIST_TITLE = "Filter lssues";
 
 const Menu = () => {
   const menuList = mockArr.map((text) => <MenuList text={text} />);
@@ -50,7 +51,7 @@ const PopoverPopupState = ({ menuList }) => {
               horizontal: "center",
             }}
           >
-            <MenuList title />
+            <MenuList title={MENU_LIST_TITLE} />
             {menuList}
           </Popover>
         </div>
