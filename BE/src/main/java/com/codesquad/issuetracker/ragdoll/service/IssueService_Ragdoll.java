@@ -2,11 +2,14 @@ package com.codesquad.issuetracker.ragdoll.service;
 
 import com.codesquad.issuetracker.ragdoll.commonconstant.ResponseMessages;
 import com.codesquad.issuetracker.ragdoll.dao.IssueDao_Ragdoll;
+import com.codesquad.issuetracker.ragdoll.domain.Comment;
 import com.codesquad.issuetracker.ragdoll.domain.Issue;
 import com.codesquad.issuetracker.ragdoll.domain.Milestone;
 import com.codesquad.issuetracker.ragdoll.domain.User;
+import com.codesquad.issuetracker.ragdoll.dto.DetailedInformationOfIssueDto;
 import com.codesquad.issuetracker.ragdoll.dto.ListOfIssuesDto;
 import com.codesquad.issuetracker.ragdoll.dto.SubmitNewIssueRequestDto;
+import com.codesquad.issuetracker.ragdoll.vo.commentVO.CommentDetails;
 import com.codesquad.issuetracker.ragdoll.vo.issueVO.IssueDetails;
 import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelSummary;
 import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelInformation;
@@ -84,5 +87,22 @@ public class IssueService_Ragdoll {
         issueDao.submitNewComment(submitNewIssueRequestDto.getUserId(), newIssueId,
                                     submitNewIssueRequestDto.getDescription());
         return ResponseMessages.SUCCESSFULLY_CREATED;
+    }
+
+    public DetailedInformationOfIssueDto showIssueDetails(Long issueId) {
+        Issue issue = issueDao.findIssueById(issueId);
+        List<Comment> allCommentsOfIssue = issueDao.findAllCommentsByIssueId(issueId);
+        List<CommentDetails> comments = allCommentsOfIssue.stream().map(comment -> {
+            User user = userService.findUserById(comment.getUserId());
+            UserSummary commenter = UserSummary.create(user.getId(), user.getName(), user.getAvatarUrl());
+            return CommentDetails.create(commenter, comment.getDescription(), comment.getCreatedDateTime());
+        }).collect(Collectors.toList());
+        return new DetailedInformationOfIssueDto.Builder()
+                                                .issueDeatils(mapToIssueDetails(issue))
+                                                .comments(comments)
+                                                .labelInfo(labelService.findAllLabels())
+                                                .milestoneInfo(milestoneService.findAllMilestones())
+                                                .assigneeInfo(userService.findAllAssignees())
+                                                .build();
     }
 }
