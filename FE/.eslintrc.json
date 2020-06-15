@@ -7,6 +7,7 @@
           ["@Components", "./src/components/"],
           ["@Pages", "./src/pages/"],
           ["@Styles", "./src/styles/"],
+          ["@Mock", "./src/mock/"],
           ["@Public", "./public/"]
         ],
         "extensions": [".js", ".jsx", ".json"]
