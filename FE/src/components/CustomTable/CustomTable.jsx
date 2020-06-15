@@ -25,9 +25,10 @@ const CustomTable = ({ ariaLabel = "table", headContents = null, bodyContents = 
         </TableHead>
         <TableBody>
           {bodyContents.map((content) => (
-            <TableRow>
+            // ! TableRow 내부 key value 삽입 필요
+            <TableRow hover>
               <TableCell>
-                <Box display="flex" alignContent="center">
+                <Box display="flex" justifyContent="space-between">
                   {content}
                 </Box>
               </TableCell>
