@@ -41,4 +41,9 @@ public class IssueController_Ragdoll {
     public ResponseEntity<ApiResponse<String>> modifyIssueStatus(@PathVariable Long issueId, @RequestBody ModifyIssueStatusRequestDto modifyIssueStatusRequestDto) {
         return new ResponseEntity(ApiResponse.OK(issueService.modifyIssueStatus(issueId, modifyIssueStatusRequestDto)), HttpStatus.OK);
     }
+
+    @PutMapping("/issues/{issueId}/assignees")
+    public ResponseEntity<ApiResponse<String>> updateAssignees(@PathVariable Long issueId, @RequestBody UpdateAssigneesRequestDto updateAssigneesRequestDto) {
+        return new ResponseEntity(ApiResponse.OK(issueService.updateAssignees(issueId, updateAssigneesRequestDto)), HttpStatus.OK);
+    }
 }
