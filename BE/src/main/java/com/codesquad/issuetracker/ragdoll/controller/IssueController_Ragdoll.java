@@ -2,6 +2,7 @@ package com.codesquad.issuetracker.ragdoll.controller;
 
 import com.codesquad.issuetracker.ragdoll.dto.DetailedInformationOfIssueDto;
 import com.codesquad.issuetracker.ragdoll.dto.ListOfIssuesDto;
+import com.codesquad.issuetracker.ragdoll.dto.ModifyIssueTitleRequestDto;
 import com.codesquad.issuetracker.ragdoll.dto.SubmitNewIssueRequestDto;
 import com.codesquad.issuetracker.ragdoll.response.ApiResponse;
 import com.codesquad.issuetracker.ragdoll.service.IssueService_Ragdoll;
@@ -32,5 +33,10 @@ public class IssueController_Ragdoll {
     @GetMapping("/issues/{issueId}")
     public ResponseEntity<ApiResponse<DetailedInformationOfIssueDto>> showDetails(@PathVariable Long issueId) {
         return new ResponseEntity(ApiResponse.OK(issueService.showIssueDetails(issueId)), HttpStatus.OK);
+    }
+
+    @PatchMapping("/issues/{issueId}/title")
+    public ResponseEntity<ApiResponse<String>> modifyTitle(@PathVariable Long issueId, @RequestBody ModifyIssueTitleRequestDto modifyIssueTitleRequestDto) {
+        return new ResponseEntity(ApiResponse.OK(issueService.modifyIssueTitle(issueId, modifyIssueTitleRequestDto)), HttpStatus.OK);
     }
 }
