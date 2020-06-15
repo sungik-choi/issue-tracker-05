@@ -1,8 +1,9 @@
 import React from "react";
 
-import Header from "./components/common/Header";
+import Issues from "Pages/Issues";
+import Header from "Components/common/Header";
 
-import GlobalStyle from "./style/GlobalStyle";
+import GlobalStyle from "Styles/GlobalStyle";
 
 const App = () => {
   return (
