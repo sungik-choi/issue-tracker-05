@@ -4,23 +4,18 @@ import Header from "./components/common/Header";
 import Navigation from "./components/Issues/Navigation/Navigation";
 
 import GlobalStyle from "./style/GlobalStyle";
-import styled from "styled-components";
+import Container from "@material-ui/core/Container";
 
 const App = () => {
   return (
     <>
       <GlobalStyle />
       <Header />
-      <MainWrap>
+      <Container maxWidth="lg">
         <Navigation />
-      </MainWrap>
+      </Container>
     </>
   );
 };
-
-const MainWrap = styled.div`
-  margin: 0 auto;
-  width: 80%;
-`;
 
 export default App;
