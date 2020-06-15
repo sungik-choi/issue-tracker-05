@@ -24,6 +24,14 @@ const useStyles = makeStyles((theme) => ({
   downIcon: {
     verticalAlign: "middle",
   },
+  popUpBox: {
+    width: "290px",
+    padding: "8px 16px",
+    cursor: "pointer",
+    "&:hover": {
+      backgroundColor: "#f6f8fa",
+    },
+  },
 }));
 
 function PopoverPopupState() {
@@ -50,7 +58,7 @@ function PopoverPopupState() {
               horizontal: "center",
             }}
           >
-            <Box p={2}>
+            <Box p={1} className={classes.popUpBox}>
               <Typography>The content of the Popover.</Typography>
             </Box>
           </Popover>
