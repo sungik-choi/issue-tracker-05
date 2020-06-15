@@ -13,7 +13,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 
-import CustomTable from "@Components/CustomTable/CustomTable";
+import CustomTable from "@Components/CustomTable";
 
 const useStyles = makeStyles((theme) => ({
   small: {
