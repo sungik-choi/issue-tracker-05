@@ -4,13 +4,27 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 
-const MenuList = ({ text }) => {
+const MenuList = ({ text, title }) => {
   const classes = useStyles();
 
+  const titleRender = () => {
+    return (
+      <Box p={1} className={classes.titleBox}>
+        <Typography style={{ fontSize: "13px", fontWeight: "bold" }}>{"Filter lssues"}</Typography>
+      </Box>
+    );
+  };
+
   return (
-    <Box p={1} className={classes.popupBox}>
-      <Typography style={{ fontSize: "13px" }}>{text}</Typography>
-    </Box>
+    <>
+      {title ? (
+        titleRender()
+      ) : (
+        <Box p={1} className={classes.popupBox}>
+          <Typography style={{ fontSize: "13px" }}>{text}</Typography>
+        </Box>
+      )}
+    </>
   );
 };
 
@@ -23,6 +37,10 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: "var(--popup-backgroundColor)",
     },
+  },
+  titleBox: {
+    backgroundColor: "var(--popup-backgroundColor)",
+    padding: "8px 16px",
   },
 }));
 

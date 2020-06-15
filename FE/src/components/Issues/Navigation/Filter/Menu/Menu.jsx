@@ -22,34 +22,7 @@ const Menu = () => {
   );
 };
 
-const useStyles = makeStyles((theme) => ({
-  button: {
-    border: "var(--button-border)",
-  },
-  filterText: {
-    fontSize: "13px",
-    fontWeight: "bold",
-  },
-  downIcon: {
-    verticalAlign: "middle",
-  },
-  popupBox: {
-    width: "250px",
-    padding: "8px 16px",
-    cursor: "pointer",
-    borderTop: "1px solid #e1e4e8",
-    "&:hover": {
-      backgroundColor: "var(--popup-backgroundColor)",
-    },
-
-    popupTitle: {
-      fontWeight: "bold",
-    },
-  },
-}));
-
-function PopoverPopupState({ menuList }) {
-  console.log(menuList);
+const PopoverPopupState = ({ menuList }) => {
   const classes = useStyles();
 
   return (
@@ -79,18 +52,26 @@ function PopoverPopupState({ menuList }) {
               horizontal: "center",
             }}
           >
+            <MenuList title />
             {menuList}
-            {/* <Box p={1} className={classes.popupBox}>
-              <Typography style={{ fontSize: "13px" }}>Filter lssues</Typography>
-            </Box>
-            <Box p={1} className={classes.popupBox}>
-              <Typography style={{ fontSize: "13px" }}>Open issues</Typography>
-            </Box> */}
           </Popover>
         </div>
       )}
     </PopupState>
   );
-}
+};
+
+const useStyles = makeStyles((theme) => ({
+  button: {
+    border: "var(--button-border)",
+  },
+  filterText: {
+    fontSize: "13px",
+    fontWeight: "bold",
+  },
+  downIcon: {
+    verticalAlign: "middle",
+  },
+}));
 
 export default Menu;
