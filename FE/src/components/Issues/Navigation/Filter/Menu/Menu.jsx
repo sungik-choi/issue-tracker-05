@@ -1,5 +1,7 @@
 import React from "react";
 
+import MenuList from "./MenuList";
+
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
@@ -8,10 +10,14 @@ import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import { makeStyles } from "@material-ui/core/styles";
 
+const mockArr = ["Filter lssues", "Open issues", "Close issues"];
+
 const Menu = () => {
+  const menuList = mockArr.map((text) => <MenuList text={text} />);
+
   return (
     <>
-      <PopoverPopupState />
+      <PopoverPopupState menuList={menuList} />
     </>
   );
 };
@@ -42,7 +48,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function PopoverPopupState() {
+function PopoverPopupState({ menuList }) {
+  console.log(menuList);
   const classes = useStyles();
 
   return (
@@ -72,12 +79,13 @@ function PopoverPopupState() {
               horizontal: "center",
             }}
           >
-            <Box p={1} className={classes.popupBox}>
+            {menuList}
+            {/* <Box p={1} className={classes.popupBox}>
               <Typography style={{ fontSize: "13px" }}>Filter lssues</Typography>
             </Box>
             <Box p={1} className={classes.popupBox}>
               <Typography style={{ fontSize: "13px" }}>Open issues</Typography>
-            </Box>
+            </Box> */}
           </Popover>
         </div>
       )}

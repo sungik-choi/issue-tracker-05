@@ -1,12 +1,12 @@
 import React from "react";
 
-import Menu from "./Menu";
+import Menu from "./Menu/Menu";
 
 const Filter = () => {
   return (
-    <>
+    <div>
       <Menu></Menu>
-    </>
+    </div>
   );
 };
 
