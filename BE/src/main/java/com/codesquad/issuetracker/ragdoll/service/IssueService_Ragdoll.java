@@ -146,4 +146,20 @@ public class IssueService_Ragdoll {
     private void deleteAssigneeId(Long issueId, Long deletedAssigneeId) {
         issueDao.deleteAssigneeId(issueId, deletedAssigneeId);
     }
+
+    public String updateLabels(Long issueId, UpdateLabelsRequestDto updateLabelsRequestDto) {
+        Optional<List<Integer>> addedLabelsId = Optional.ofNullable(updateLabelsRequestDto.getAddedLabelsId());
+        Optional<List<Integer>> deletedLabelsId = Optional.ofNullable(updateLabelsRequestDto.getDeletedLabelsId());
+        addedLabelsId.ifPresent(labelIds -> labelIds.forEach(labelId -> addAttachedLabelId(issueId, labelId)));
+        deletedLabelsId.ifPresent(labelIds -> labelIds.forEach(labelId -> deleteAttachedLabelId(issueId, labelId)));
+        return ResponseMessages.SUCCESSFULLY_MODIFIED;
+    }
+
+    private void addAttachedLabelId(Long issueId, Integer labelId) {
+        issueDao.addAttachedLabelId(issueId, labelId);
+    }
+
+    private void deleteAttachedLabelId(Long issueId, Integer labelId) {
+        issueDao.deleteAttachedLabelId(issueId, labelId);
+    }
 }
