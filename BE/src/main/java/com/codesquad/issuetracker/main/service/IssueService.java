@@ -1,6 +1,8 @@
 package com.codesquad.issuetracker.main.service;
 
+import com.codesquad.issuetracker.hamill.dto.info.IssuesDto;
 import com.codesquad.issuetracker.main.dao.IssueDao;
+import com.codesquad.issuetracker.main.dto.RequestNewIssueDto;
 import com.codesquad.issuetracker.ragdoll.domain.Issue;
 import com.codesquad.issuetracker.ragdoll.domain.Milestone;
 import com.codesquad.issuetracker.ragdoll.domain.User;
@@ -18,6 +20,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class IssueService {
+
+    private static final int ZERO = 0;
 
     private final IssueDao issueDao;
 
@@ -65,5 +69,32 @@ public class IssueService {
                                .createdAt(issue.getCreatedDateTime())
                                .opened(issue.isOpened())
                                .build();
+    }
+
+    public void save(RequestNewIssueDto requestNewIssueDto) {
+        Long newIssueId = issueDao.getCountOfIssues() + 1L;
+        String title = requestNewIssueDto.getTitle();
+        Long userId = requestNewIssueDto.getUserId();
+        Long milestoneId = requestNewIssueDto.getMilestone().getMilestoneId();
+
+        issueDao.saveNewIssue(newIssueId, title, userId, milestoneId);
+        saveNewIssueHasLabel(requestNewIssueDto);
+        saveAssignees(requestNewIssueDto);
+
+        IssuesDto issuesDto = issueDao.findIssueByIssueId(newIssueId);
+        issuesDto.setAttachedLabels(requestNewIssueDto.getAttachedLabels());
+        issuesDto.setAllocatedAssignees(requestNewIssueDto.getAllocatedAssignees());
+    }
+
+    private void saveNewIssueHasLabel(RequestNewIssueDto requestNewIssueDto) {
+        for (int i = ZERO; i < requestNewIssueDto.getAttachedLabels().size(); i++) {
+            issueDao.saveNewIssueHasLabel(requestNewIssueDto.getAttachedLabels().get(i).getLabelId(), (long)issueDao.getCountOfIssues());
+        }
+    }
+
+    private void saveAssignees(RequestNewIssueDto requestNewIssueDto) {
+        for (int i = ZERO; i < requestNewIssueDto.getAllocatedAssignees().size(); i++) {
+            issueDao.saveAssignees((long)issueDao.getCountOfIssues(), requestNewIssueDto.getAllocatedAssignees().get(i).getUserId());
+        }
     }
 }

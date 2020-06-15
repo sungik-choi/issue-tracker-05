@@ -29,6 +29,15 @@ public class IssueDetails {
 
     public IssueDetails() {}
 
+    public IssueDetails(Long issueId, String issueTitle, MilestoneSummary milestone, UserSummary author, LocalDateTime createdAt, boolean opened) {
+        this.issueId = issueId;
+        this.issueTitle = issueTitle;
+        this.milestone = milestone;
+        this.author = author;
+        this.createdAt = createdAt;
+        this.opened = opened;
+    }
+
     private IssueDetails(Long issueId, String issueTitle, MilestoneSummary milestone, List<LabelSummary> attachedLabels, UserSummary author, List<UserSummary> allocatedAssignees, LocalDateTime createdAt, boolean opened) {
         this.issueId = issueId;
         this.issueTitle = issueTitle;
