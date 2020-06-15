@@ -3,6 +3,7 @@ import React from "react";
 import Box from "@material-ui/core/Box";
 import Checkbox from "@material-ui/core/Checkbox";
 
+import { userList } from "@Mock/data";
 import Contents from "./Contents/Contents";
 import StatusIcon from "./StatusIcon";
 import AvatarStack from "./AvatarStack";
@@ -15,7 +16,7 @@ const IssueList = () => {
         <StatusIcon />
         <Contents />
       </Box>
-      <AvatarStack />
+      <AvatarStack userData={userList} />
     </>
   );
 };
