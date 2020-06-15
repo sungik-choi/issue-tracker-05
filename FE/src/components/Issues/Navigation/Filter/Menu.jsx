@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "13px",
     fontWeight: "bold",
   },
-
   downIcon: {
     verticalAlign: "middle",
   },
