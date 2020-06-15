@@ -33,7 +33,7 @@ function PopoverPopupState() {
     <PopupState variant="popover" popupId="demo-popup-popover">
       {(popupState) => (
         <div>
-          <Button variant="contained" color="default" {...bindTrigger(popupState)}>
+          <Button variant="contained" color="default" size="small" {...bindTrigger(popupState)}>
             <span className={classes.filterText}>
               Filters
               <ArrowDropDownIcon className={classes.downIcon} />
