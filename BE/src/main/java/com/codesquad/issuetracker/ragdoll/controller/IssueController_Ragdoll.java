@@ -51,4 +51,9 @@ public class IssueController_Ragdoll {
     public ResponseEntity<ApiResponse<String>> updateLabels(@PathVariable Long issueId, @RequestBody UpdateLabelsRequestDto updateLabelsRequestDto) {
         return new ResponseEntity(ApiResponse.OK(issueService.updateLabels(issueId, updateLabelsRequestDto)), HttpStatus.OK);
     }
+
+    @PatchMapping("/issues/{issueId}/milestones")
+    public ResponseEntity<ApiResponse<String>> updateMilestone(@PathVariable Long issueId, @RequestBody UpdateMilestoneRequestDto updateMilestoneRequestDto) {
+        return new ResponseEntity(ApiResponse.OK(issueService.updateRelatedMilestone(issueId, updateMilestoneRequestDto)), HttpStatus.OK);
+    }
 }
