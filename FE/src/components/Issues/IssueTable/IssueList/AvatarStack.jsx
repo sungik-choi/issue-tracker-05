@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     width: theme.spacing(3),
     height: theme.spacing(3),
     fontSize: "1rem",
-    border: `2px solid ${theme.palette.common.white}`,
+    borderColor: `${theme.palette.common.white}`,
   },
 }));
 
