@@ -33,8 +33,8 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#f6f8fa",
     },
 
-    popupText: {
-      fontSize: "10px",
+    popupTitle: {
+      fontWeight: "bold",
     },
   },
 }));
@@ -64,12 +64,10 @@ function PopoverPopupState() {
             }}
           >
             <Box p={1} className={classes.popupBox}>
-              <Typography>
-                <span className={classes.popupText}>Filter lssues</span>
-              </Typography>
+              <Typography style={{ fontSize: "14px" }}>Filter lssues</Typography>
             </Box>
             <Box p={1} className={classes.popupBox}>
-              <Typography className={classes.popupText}>Open issues</Typography>
+              <Typography style={{ fontSize: "14px" }}>Open issues</Typography>
             </Box>
           </Popover>
         </div>

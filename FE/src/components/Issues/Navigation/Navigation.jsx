@@ -13,7 +13,7 @@ const Navigation = () => {
 };
 
 const Nav = styled.nav`
-  border: 1px solid red;
+  margin: 50px 0 40px;
 `;
 
 export default Navigation;
