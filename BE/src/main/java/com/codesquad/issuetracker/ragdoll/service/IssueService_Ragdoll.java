@@ -162,4 +162,9 @@ public class IssueService_Ragdoll {
     private void deleteAttachedLabelId(Long issueId, Integer labelId) {
         issueDao.deleteAttachedLabelId(issueId, labelId);
     }
+
+    public String updateRelatedMilestone(Long issueId, UpdateMilestoneRequestDto updateMilestoneRequestDto) {
+        issueDao.updateRelatedMilestone(issueId, updateMilestoneRequestDto.getMilestoneId());
+        return ResponseMessages.SUCCESSFULLY_MODIFIED;
+    }
 }
