@@ -1,5 +1,6 @@
 package com.codesquad.issuetracker.ragdoll.dao;
 
+import com.codesquad.issuetracker.ragdoll.domain.Comment;
 import com.codesquad.issuetracker.ragdoll.domain.Issue;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -26,6 +27,19 @@ public class IssueDao_Ragdoll {
         this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
     }
 
+    public Issue findIssueById(Long issueId) {
+        String sql = "SELECT id, title, created_date_time, is_opened, user_id, milestone_id " +
+                     "FROM issue WHERE id = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{issueId},
+                (rs, rowNum) -> new Issue.Builder()
+                                         .id(rs.getLong("id"))
+                                         .title(rs.getString("title"))
+                                         .createdDateTime(rs.getTimestamp("created_date_time").toLocalDateTime())
+                                         .opened(rs.getBoolean("is_opened"))
+                                         .userId(rs.getLong("user_id"))
+                                         .milestoneId(rs.getInt("milestone_id"))
+                                         .build());
+    }
 
     public List<Issue> findAllOpendIssues() {
         String sql = "SELECT id, title, created_date_time, is_opened, user_id, milestone_id " +
@@ -63,5 +77,18 @@ public class IssueDao_Ragdoll {
                                                 .addValue("issueId", issueId)
                                                 .addValue("commenterId", commenterId);
         namedParameterJdbcTemplate.update(sql, namedParameters);
+    }
+
+    public List<Comment> findAllCommentsByIssueId(Long issueId) {
+        String sql = "SELECT id, description, created_date_time, issue_id, user_id " +
+                     "FROM comment WHERE issue_id = ?";
+        return jdbcTemplate.query(sql, new Object[]{issueId},
+                (rs, rowNum) -> new Comment.Builder()
+                                           .id(rs.getLong("id"))
+                                           .description(rs.getString("description"))
+                                           .createdDateTime(rs.getTimestamp("created_date_time").toLocalDateTime())
+                                           .issueId(rs.getLong("issue_id"))
+                                           .userId(rs.getLong("user_id"))
+                                           .build());
     }
 }
