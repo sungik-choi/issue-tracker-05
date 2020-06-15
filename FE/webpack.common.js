@@ -28,9 +28,11 @@ module.exports = {
 
   resolve: {
     alias: {
-      Components: path.resolve(__dirname, "./src/components/"),
-      Pages: path.resolve(__dirname, "./src/pages/"),
-      Styles: path.resolve(__dirname, "./src/styles/"),
+      "@": path.resolve(__dirname, "src"),
+      "@Components": path.resolve(__dirname, "src/components/"),
+      "@Pages": path.resolve(__dirname, "src/pages/"),
+      "@Styles": path.resolve(__dirname, "src/styles/"),
+      "@Public": path.resolve(__dirname, "public/"),
     },
     extensions: [".js", ".jsx"],
   },

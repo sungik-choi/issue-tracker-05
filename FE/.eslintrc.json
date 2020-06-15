@@ -1,4 +1,18 @@
 {
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["@", "src"],
+          ["@Components", "./src/components/"],
+          ["@Pages", "./src/pages/"],
+          ["@Styles", "./src/styles/"],
+          ["@Public", "./public/"]
+        ],
+        "extensions": [".js", ".jsx", ".json"]
+      }
+    }
+  },
   "extends": ["airbnb", "plugin:prettier/recommended", "prettier/react"],
   "env": {
     "browser": true,
