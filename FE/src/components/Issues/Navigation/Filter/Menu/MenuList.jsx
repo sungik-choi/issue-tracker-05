@@ -7,24 +7,14 @@ import { makeStyles } from "@material-ui/core/styles";
 const MenuList = ({ text, title }) => {
   const classes = useStyles();
 
-  const titleRender = () => {
-    return (
-      <Box p={1} className={classes.titleBox}>
-        <Typography style={{ fontSize: "13px", fontWeight: "bold" }}>{"Filter lssues"}</Typography>
-      </Box>
-    );
-  };
+  const boxClassName = title ? classes.titleBox : classes.popupBox;
+  const boxText = title ? "Filter lssues" : text;
+  const boxFontWeight = title ? "bold" : "none";
 
   return (
-    <>
-      {title ? (
-        titleRender()
-      ) : (
-        <Box p={1} className={classes.popupBox}>
-          <Typography style={{ fontSize: "13px" }}>{text}</Typography>
-        </Box>
-      )}
-    </>
+    <Box p={1} className={boxClassName}>
+      <Typography style={{ fontSize: "13px", fontWeight: boxFontWeight }}>{boxText}</Typography>
+    </Box>
   );
 };
 
