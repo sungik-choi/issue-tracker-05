@@ -6,7 +6,7 @@ import grey from "@material-ui/core/colors/grey";
 
 const LinkButton = ({ text, count }) => {
   const classes = useStyles();
-  console.log(text, count);
+
   return (
     <Button variant="outlined" className={classes.root}>
       <span>{text}</span>
