@@ -8,7 +8,7 @@ import Contents from "./Contents/Contents";
 import StatusIcon from "./StatusIcon";
 import AvatarStack from "./AvatarStack";
 
-const IssueList = ({ id, isSelected, clickHandler }) => {
+const Issue = ({ id, isSelected, clickHandler }) => {
   return (
     <>
       <Box display="flex" alignItems="center">
@@ -21,4 +21,4 @@ const IssueList = ({ id, isSelected, clickHandler }) => {
   );
 };
 
-export default IssueList;
+export default Issue;

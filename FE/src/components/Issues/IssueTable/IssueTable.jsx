@@ -8,7 +8,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
 import CustomTable from "@Components/common/CustomTable";
-import IssueList from "./IssueList/IssueList";
+import Issue from "./Issue/Issue";
 
 const IssueTable = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -50,11 +50,11 @@ const IssueTable = () => {
   const bodyContents = [
     {
       id: 1,
-      contents: <IssueList id={1} isSelected={isSelected} clickHandler={handleCheckboxClick} />,
+      contents: <Issue id={1} isSelected={isSelected} clickHandler={handleCheckboxClick} />,
     },
     {
       id: 2,
-      contents: <IssueList id={2} isSelected={isSelected} clickHandler={handleCheckboxClick} />,
+      contents: <Issue id={2} isSelected={isSelected} clickHandler={handleCheckboxClick} />,
     },
   ];
 
