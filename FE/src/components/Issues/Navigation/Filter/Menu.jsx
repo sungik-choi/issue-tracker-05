@@ -12,7 +12,7 @@ const mockArr = ["Filter lssues", "Open issues", "Close issues"];
 const MENU_LIST_TITLE = "Filter lssues";
 
 const Menu = () => {
-  const menuList = mockArr.map((text) => <MenuList text={text} />);
+  const menuList = mockArr.map((text, i) => <MenuList text={text} key={text + i} />);
 
   return (
     <>
@@ -35,8 +35,8 @@ const PopoverPopupState = ({ menuList }) => {
             size="small"
             {...bindTrigger(popupState)}
           >
-            <span className={classes.filterText}>
-              Filters
+            <span className={classes.filterText}>Filters</span>
+            <span>
               <ArrowDropDownIcon className={classes.downIcon} />
             </span>
           </Button>
@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
     border: "var(--button-border)",
   },
   filterText: {
-    fontSize: "13px",
+    fontSize: 13,
     fontWeight: "bold",
   },
   downIcon: {

@@ -20,7 +20,7 @@ const MenuList = ({ text, title }) => {
 
 const useStyles = makeStyles((theme) => ({
   popupBox: {
-    width: "250px",
+    width: 250,
     padding: "8px 16px",
     cursor: "pointer",
     borderTop: "1px solid #e1e4e8",
