@@ -1,16 +1,20 @@
 import React from "react";
 
-import Issues from "@Pages/Issues";
-import Header from "@Components/common/Header";
-
 import GlobalStyle from "@Styles/GlobalStyle";
+import Header from "@Components/common/Header";
+import Issues from "@Pages/Issues";
+import Navigation from "@Components/Issues/Navigation/Navigation";
+import Container from "@material-ui/core/Container";
 
 const App = () => {
   return (
     <>
       <GlobalStyle />
       <Header />
-      <Issues />
+      <Container maxWidth="lg">
+        <Navigation />
+        <Issues />
+      </Container>
     </>
   );
 };
