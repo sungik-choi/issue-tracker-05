@@ -9,10 +9,22 @@ import grey from "@material-ui/core/colors/grey";
 const SEARCH_PLACEHOLDER = "Search all issues";
 
 const SearchBar = () => {
+  const classes = useStyles();
+
   return (
-    <>
-      <PrimarySearchAppBar />
-    </>
+    <div className={classes.search}>
+      <div className={classes.searchIcon}>
+        <SearchIcon />
+      </div>
+      <InputBase
+        placeholder={SEARCH_PLACEHOLDER}
+        classes={{
+          root: classes.inputRoot,
+          input: classes.inputInput,
+        }}
+        inputProps={{ "aria-label": "search" }}
+      />
+    </div>
   );
 };
 
@@ -53,27 +65,5 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-
-function PrimarySearchAppBar() {
-  const classes = useStyles();
-
-  return (
-    <>
-      <div className={classes.search}>
-        <div className={classes.searchIcon}>
-          <SearchIcon />
-        </div>
-        <InputBase
-          placeholder={SEARCH_PLACEHOLDER}
-          classes={{
-            root: classes.inputRoot,
-            input: classes.inputInput,
-          }}
-          inputProps={{ "aria-label": "search" }}
-        />
-      </div>
-    </>
-  );
-}
 
 export default SearchBar;
