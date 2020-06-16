@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
@@ -45,6 +46,13 @@ const Toolbar = ({
       </Menu>
     </>
   );
+};
+
+Toolbar.propTypes = {
+  selectedIssueSize: PropTypes.number.isRequired,
+  bAtLeastOneSelectedIssue: PropTypes.bool.isRequired,
+  bAllSelectedIssue: PropTypes.bool.isRequired,
+  clickHandler: PropTypes.func.isRequired,
 };
 
 export default Toolbar;
