@@ -7,6 +7,7 @@ import Popover from "@material-ui/core/Popover";
 import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import { makeStyles } from "@material-ui/core/styles";
+import grey from "@material-ui/core/colors/grey";
 
 const mockArr = ["Filter lssues", "Open issues", "Close issues"];
 const MENU_LIST_TITLE = "Filter lssues";
@@ -62,7 +63,7 @@ const PopoverPopupState = ({ menuList }) => {
 
 const useStyles = makeStyles((theme) => ({
   button: {
-    border: "var(--button-border)",
+    border: "1px solid" + grey[400],
   },
   filterText: {
     fontSize: 13,
