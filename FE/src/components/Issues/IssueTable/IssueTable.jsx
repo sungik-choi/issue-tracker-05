@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
 import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
@@ -11,40 +12,49 @@ import IssueList from "./IssueList/IssueList";
 
 const IssueTable = () => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [selected, setSelected] = useState(new Set());
 
-  const handleClick = (e) => setAnchorEl(e.currentTarget);
-  const handleClose = () => setAnchorEl(null);
+  const isSelected = (id) => selected.has(id);
+  const handleCheckboxClick = (id) => {
+    const updatedSet = new Set(selected);
+    isSelected(id) ? updatedSet.delete(id) : updatedSet.add(id);
+    setSelected(updatedSet);
+  };
+
+  const handleMenuClick = (e) => setAnchorEl(e.currentTarget);
+  const handleMenuClose = () => setAnchorEl(null);
 
   const headContents = (
     <>
-      <Checkbox color="primary" />
-      <Box>
-        <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-          Open Menu
-        </Button>
-        <Menu
-          id="simple-menu"
-          anchorEl={anchorEl}
-          keepMounted
-          open={!!anchorEl}
-          onClose={handleClose}
-        >
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
-          <MenuItem onClick={handleClose}>My account</MenuItem>
-          <MenuItem onClick={handleClose}>Logout</MenuItem>
-        </Menu>
+      <Box display="flex" alignItems="center">
+        <Checkbox color="primary" />
+        <Typography>{selected.size} selected</Typography>
       </Box>
+      <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleMenuClick}>
+        Open Menu
+      </Button>
+      <Menu
+        id="simple-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={!!anchorEl}
+        onClose={handleMenuClose}
+      >
+        <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+        <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+        <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+      </Menu>
     </>
   );
 
   const bodyContents = [
     {
       id: 1,
-      contents: <IssueList />,
+      contents: <IssueList id={1} isSelected={isSelected} clickHandler={handleCheckboxClick} />,
     },
     {
       id: 2,
-      contents: <IssueList />,
+      contents: <IssueList id={2} isSelected={isSelected} clickHandler={handleCheckboxClick} />,
     },
   ];
 

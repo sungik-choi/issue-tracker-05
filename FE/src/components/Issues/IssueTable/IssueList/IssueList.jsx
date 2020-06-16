@@ -8,11 +8,11 @@ import Contents from "./Contents/Contents";
 import StatusIcon from "./StatusIcon";
 import AvatarStack from "./AvatarStack";
 
-const IssueList = () => {
+const IssueList = ({ id, isSelected, clickHandler }) => {
   return (
     <>
       <Box display="flex" alignItems="center">
-        <Checkbox color="primary" />
+        <Checkbox color="primary" checked={isSelected(id)} onClick={() => clickHandler(id)} />
         <StatusIcon />
         <Contents />
       </Box>
