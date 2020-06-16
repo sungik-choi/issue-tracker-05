@@ -3,6 +3,7 @@ import React from "react";
 import LinkButton from "./LinkButton";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
 
 const labelCount = 8,
   milestonesCount = 3; //상태값으로 변경
@@ -10,7 +11,6 @@ const labelCount = 8,
 const LinkButtons = () => {
   const LABELS = "Labels";
   const MILESTONES = "Milestones";
-  console.log(LABELS, 1);
 
   const classes = useStyles();
   return (
@@ -18,6 +18,7 @@ const LinkButtons = () => {
       <ButtonGroup aria-label="outlined primary button group">
         <LinkButton text={LABELS} count={labelCount} />
         <LinkButton text={MILESTONES} count={milestonesCount} />
+        <Button></Button>
       </ButtonGroup>
     </div>
   );
