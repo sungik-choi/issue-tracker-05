@@ -11,7 +11,6 @@ const MenuList = ({ text, title }) => {
   const boxClassName = title ? classes.titleBox : classes.popupBox;
   const boxText = title ? title : text;
   const boxFontWeight = title ? "bold" : "none";
-
   return (
     <Box py={1} px={2} className={boxClassName}>
       <Typography style={{ fontSize: "13px", fontWeight: boxFontWeight }}>{boxText}</Typography>

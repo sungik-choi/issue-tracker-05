@@ -1,7 +1,7 @@
 import React from "react";
 
 const Labels = () => {
-  return <div />;
+  return <></>;
 };
 
 export default Labels;
