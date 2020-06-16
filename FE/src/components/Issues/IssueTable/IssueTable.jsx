@@ -32,7 +32,7 @@ const IssueTable = () => {
     setSelectedIssue(new Set());
   };
 
-  const isSelectedIssueAtLeastOne = (issueList) =>
+  const isAtLeastOneSelectedIssue = (issueList) =>
     selectedIssue.size > 0 && selectedIssue.size < issueList.length;
 
   const isAllSelectedIssue = (issueList) =>
@@ -62,7 +62,7 @@ const IssueTable = () => {
       <Box display="flex" alignItems="center">
         <Checkbox
           color="primary"
-          indeterminate={isSelectedIssueAtLeastOne(issueList)}
+          indeterminate={isAtLeastOneSelectedIssue(issueList)}
           checked={isAllSelectedIssue(issueList)}
           onChange={(event) => handleAllCheckBoxClick(event, issueList)}
         />
