@@ -1,20 +1,18 @@
 import React, { useState } from "react";
 
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
-import Checkbox from "@material-ui/core/Checkbox";
-import Button from "@material-ui/core/Button";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-
 import CustomTable from "@Components/common/CustomTable";
+import Toolbar from "./Toolbar/Toolbar";
 import Issue from "./Issue/Issue";
 
 const IssueTable = () => {
-  const [anchorEl, setAnchorEl] = useState(null);
   const [selectedIssue, setSelectedIssue] = useState(new Set());
 
+  const selectedIssueSize = selectedIssue.size;
   const isSelectedIssue = (id) => selectedIssue.has(id);
+  const isAtLeastOneSelectedIssue = (issueList) =>
+    selectedIssueSize > 0 && selectedIssueSize < issueList.length;
+  const isAllSelectedIssue = (issueList) =>
+    selectedIssueSize > 0 && selectedIssueSize === issueList.length;
 
   const handleCheckboxClick = (id) => {
     const updatedSet = new Set(selectedIssue);
@@ -32,16 +30,6 @@ const IssueTable = () => {
     setSelectedIssue(new Set());
   };
 
-  const isAtLeastOneSelectedIssue = (issueList) =>
-    selectedIssue.size > 0 && selectedIssue.size < issueList.length;
-
-  const isAllSelectedIssue = (issueList) =>
-    selectedIssue.size > 0 && selectedIssue.size === issueList.length;
-
-  const handleMenuClick = (event) => setAnchorEl(event.currentTarget);
-
-  const handleMenuClose = () => setAnchorEl(null);
-
   const issueList = [
     {
       id: 1,
@@ -58,31 +46,12 @@ const IssueTable = () => {
   ];
 
   const toolbar = (
-    <>
-      <Box display="flex" alignItems="center">
-        <Checkbox
-          color="primary"
-          indeterminate={isAtLeastOneSelectedIssue(issueList)}
-          checked={isAllSelectedIssue(issueList)}
-          onChange={(event) => handleAllCheckBoxClick(event, issueList)}
-        />
-        {!!selectedIssue.size && <Typography>{selectedIssue.size} selected</Typography>}
-      </Box>
-      <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleMenuClick}>
-        Open Menu
-      </Button>
-      <Menu
-        id="simple-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={!!anchorEl}
-        onClose={handleMenuClose}
-      >
-        <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-        <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-        <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
-      </Menu>
-    </>
+    <Toolbar
+      selectedIssueSize={selectedIssueSize}
+      bAtLeastOneSelectedIssue={isAtLeastOneSelectedIssue(issueList)}
+      bAllSelectedIssue={isAllSelectedIssue(issueList)}
+      clickHandler={(event) => handleAllCheckBoxClick(event, issueList)}
+    />
   );
 
   return <CustomTable ariaLabel="issueTable" headContents={toolbar} bodyContents={issueList} />;
