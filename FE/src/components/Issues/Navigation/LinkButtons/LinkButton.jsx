@@ -17,6 +17,7 @@ const LinkButton = ({ text, count }) => {
 
 const useStyles = makeStyles(() => ({
   root: {
+    textTransform: "none",
     "& span": {
       fontWeight: "bold",
       fontSize: 13,
