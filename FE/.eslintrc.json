@@ -1,4 +1,19 @@
 {
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["@", "src"],
+          ["@Components", "./src/components/"],
+          ["@Pages", "./src/pages/"],
+          ["@Styles", "./src/styles/"],
+          ["@Mock", "./src/mock/"],
+          ["@Public", "./public/"]
+        ],
+        "extensions": [".js", ".jsx", ".json"]
+      }
+    }
+  },
   "extends": ["airbnb", "plugin:prettier/recommended", "prettier/react"],
   "env": {
     "browser": true,
@@ -11,6 +26,13 @@
     "jsx-a11y/href-no-hash": ["off"],
     "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "no-use-before-define": 0,
+    "no-unused-expressions": [
+      "warn",
+      {
+        "allowTernary": true
+      }
+    ],
     "max-len": [
       "warn",
       {

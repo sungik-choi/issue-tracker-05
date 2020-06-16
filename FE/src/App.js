@@ -1,9 +1,9 @@
 import React from "react";
 
-import Header from "./components/common/Header";
-import Navigation from "./components/Issues/Navigation/Navigation";
-
-import GlobalStyle from "./style/GlobalStyle";
+import GlobalStyle from "@Styles/GlobalStyle";
+import Header from "@Components/common/Header";
+import Issues from "@Pages/Issues";
+import Navigation from "@Components/Issues/Navigation/Navigation";
 import Container from "@material-ui/core/Container";
 
 const App = () => {
@@ -13,6 +13,7 @@ const App = () => {
       <Header />
       <Container maxWidth="lg">
         <Navigation />
+        <Issues />
       </Container>
     </>
   );
