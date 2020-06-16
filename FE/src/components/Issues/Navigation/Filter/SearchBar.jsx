@@ -6,6 +6,8 @@ import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
 import grey from "@material-ui/core/colors/grey";
 
+const SEARCH_PLACEHOLDER = "Search all issues";
+
 const SearchBar = () => {
   return (
     <>
@@ -20,14 +22,15 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "0 5px 5px 0",
     border: "1px solid" + grey[400],
     borderLeft: "none",
-    backgroundColor: grey[100],
+    backgroundColor: grey[50],
     "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
+      backgroundColor: fade(grey[300], 0.25),
     },
-    width: 500,
+    width: 450,
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
+    color: grey[400],
     height: "100%",
     position: "absolute",
     pointerEvents: "none",
@@ -39,12 +42,14 @@ const useStyles = makeStyles((theme) => ({
     color: "inherit",
   },
   inputInput: {
+    boxSizing: "border-box",
     padding: theme.spacing(1, 1, 1, 0),
+    color: grey[700],
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
-    width: "100%",
+    height: "100%",
     [theme.breakpoints.up("md")]: {
-      width: "20ch",
+      width: "450px",
     },
   },
 }));
@@ -59,7 +64,7 @@ function PrimarySearchAppBar() {
           <SearchIcon />
         </div>
         <InputBase
-          placeholder="Search…"
+          placeholder={SEARCH_PLACEHOLDER}
           classes={{
             root: classes.inputRoot,
             input: classes.inputInput,
