@@ -8,12 +8,10 @@ const LinkButton = ({ text, count }) => {
   const classes = useStyles();
   console.log(text, count);
   return (
-    <div>
-      <Button variant="outlined" className={classes.root}>
-        <span>{text}</span>
-        <span className={classes.count}>{count}</span>
-      </Button>
-    </div>
+    <Button variant="outlined" className={classes.root}>
+      <span>{text}</span>
+      <span className={classes.count}>{count}</span>
+    </Button>
   );
 };
 

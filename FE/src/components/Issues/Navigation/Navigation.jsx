@@ -7,7 +7,7 @@ import Box from "@material-ui/core/Box";
 
 const Navigation = () => {
   return (
-    <Box component="nav" mt={6} mb={5} display="flex">
+    <Box component="nav" mt={6} mb={5} display="flex" justifyContent="space-between">
       <Filter />
       <LinkButtons />
     </Box>

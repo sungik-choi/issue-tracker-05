@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: fade(grey[300], 0.25),
     },
-    width: 450,
+    width: "100%",
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
     transition: theme.transitions.create("width"),
     height: "100%",
     [theme.breakpoints.up("md")]: {
-      width: "450px",
+      width: "500px",
     },
   },
 }));
