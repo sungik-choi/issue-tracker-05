@@ -4,20 +4,28 @@ import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import grey from "@material-ui/core/colors/grey";
 
-const LinkButton = () => {
+const LinkButton = ({ text, count }) => {
   const classes = useStyles();
-
+  console.log(text, count);
   return (
     <div>
-      <Button variant="outlined">
-        <span>Default</span>
-        <span className={classes.count}>2</span>
+      <Button variant="outlined" className={classes.root}>
+        <span>{text}</span>
+        <span className={classes.count}>{count}</span>
       </Button>
     </div>
   );
 };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
+  root: {
+    "& span": {
+      fontWeight: "bold",
+      fontSize: 13,
+      color: grey[700],
+    },
+  },
+
   count: {
     borderRadius: "50%",
     marginLeft: 5,

@@ -1,7 +1,7 @@
 import React from "react";
 
 import Filter from "./Filter/Filter";
-import LinkButtons from "./LinkButtons/LinkButton";
+import LinkButtons from "./LinkButtons/LinkButtons";
 
 import Box from "@material-ui/core/Box";
 
