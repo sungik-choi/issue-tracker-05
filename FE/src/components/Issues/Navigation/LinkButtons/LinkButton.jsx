@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
@@ -10,7 +11,7 @@ const LinkButton = ({ text, count }) => {
   return (
     <Button variant="outlined" className={classes.root}>
       <span>{text}</span>
-      <span className={classes.count}>{count}</span>
+      {count && <span className={classes.count}>{count}</span>}
     </Button>
   );
 };
@@ -33,5 +34,10 @@ const useStyles = makeStyles(() => ({
     backgroundColor: grey[300],
   },
 }));
+
+LinkButton.propTypes = {
+  text: PropTypes.string.isRequired,
+  count: PropTypes.number,
+};
 
 export default LinkButton;
