@@ -43,7 +43,7 @@ public class IssueService_Ragdoll {
     public ListOfIssuesDto findAllIssues() {
         List<Issue> allOfOpenedIssues = issueDao.findAllOpendIssues();
         List<IssueDetails> issues = allOfOpenedIssues.stream()
-                                                     .map(this::mapToIssueDetails)
+                                                     .map(issue -> mapToIssueDetails(issue, false))
                                                      .collect(Collectors.toList());
         LabelInformation labelInformation = labelService.findAllLabels();
         MilestoneInformation milestoneInformation = milestoneService.findAllMilestones();
@@ -56,7 +56,7 @@ public class IssueService_Ragdoll {
                                   .build();
     }
 
-    private IssueDetails mapToIssueDetails(Issue issue) {
+    private IssueDetails mapToIssueDetails(Issue issue, boolean milestoneWithProgress) {
         Optional<Milestone> foundMilestone = Optional.ofNullable(milestoneService.findMilestoneById(issue.getMilestoneId()));
         List<LabelSummary> attachedLabels = labelService.findAttachedLabelsByIssueId(issue.getId());
         List<UserSummary> allocatedAssignees = userService.findAllocatedAssigneesByIssueId(issue.getId());
@@ -64,7 +64,7 @@ public class IssueService_Ragdoll {
         return new IssueDetails.Builder()
                                .issueId(issue.getId())
                                .issueTitle(issue.getTitle())
-                               .milestone(determineMilestone(foundMilestone))
+                               .milestone(determineMilestone(foundMilestone, milestoneWithProgress))
                                .attachedLabels(attachedLabels)
                                .author(UserSummary.create(user.getId(), user.getName(), user.getAvatarUrl()))
                                .allocatedAssignees(allocatedAssignees)
@@ -73,12 +73,12 @@ public class IssueService_Ragdoll {
                                .build();
     }
 
-    private MilestoneSummary determineMilestone(Optional<Milestone> foundMilestone) {
+    private MilestoneSummary determineMilestone(Optional<Milestone> foundMilestone, boolean milestoneWithProgress) {
         if (foundMilestone.isPresent()) {
             Milestone milestone = foundMilestone.get();
             List<Issue> issuesInMilestone = issueDao.findIssuesByMilestoneId(milestone.getId());
             int countOfOpenedIssue = (int) issuesInMilestone.stream().filter(Issue::isOpened).count();
-            double progress = (1 - (double) countOfOpenedIssue / issuesInMilestone.size()) * 100;
+            Double progress = milestoneWithProgress ? (1 - (double) countOfOpenedIssue / issuesInMilestone.size()) * 100 : null;
             return MilestoneSummary.create(milestone.getId(), milestone.getTitle(), progress);
         }
         return null;
@@ -101,7 +101,7 @@ public class IssueService_Ragdoll {
             return CommentDetails.create(commenter, comment.getDescription(), comment.getCreatedDateTime());
         }).collect(Collectors.toList());
         return new DetailedInformationOfIssueDto.Builder()
-                                                .issue(mapToIssueDetails(issue))
+                                                .issue(mapToIssueDetails(issue, true))
                                                 .comments(comments)
                                                 .labelInfo(labelService.findAllLabels())
                                                 .milestoneInfo(milestoneService.findAllMilestones())

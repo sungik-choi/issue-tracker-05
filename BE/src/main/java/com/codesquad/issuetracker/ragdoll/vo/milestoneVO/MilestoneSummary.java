@@ -1,11 +1,14 @@
 package com.codesquad.issuetracker.ragdoll.vo.milestoneVO;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 public class MilestoneSummary {
 
     private Integer milestoneId;
 
     private String milestoneTitle;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Double progress;
 
     public MilestoneSummary() {}
