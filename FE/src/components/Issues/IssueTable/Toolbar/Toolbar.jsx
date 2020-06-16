@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
-import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+
+import TotalCheckbox from "./TotalCheckbox";
+import SelectedNumber from "./SelectedNumber";
 
 const Toolbar = ({
   selectedIssueSize,
@@ -22,13 +23,12 @@ const Toolbar = ({
   return (
     <>
       <Box display="flex" alignItems="center">
-        <Checkbox
-          color="primary"
-          indeterminate={bAtLeastOneSelectedIssue}
-          checked={bAllSelectedIssue}
-          onChange={clickHandler}
+        <TotalCheckbox
+          bIndeterminate={bAtLeastOneSelectedIssue}
+          bChecked={bAllSelectedIssue}
+          clickHandler={clickHandler}
         />
-        {!!selectedIssueSize && <Typography>{selectedIssueSize} selected</Typography>}
+        <SelectedNumber selectedIssueSize={selectedIssueSize} />
       </Box>
       <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleMenuClick}>
         Open Menu
