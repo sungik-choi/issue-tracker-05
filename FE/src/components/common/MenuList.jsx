@@ -12,6 +12,7 @@ const MenuList = ({ text, title }) => {
   const boxClassName = title ? classes.titleBox : classes.popupBox;
   const boxText = title || text;
   const boxFontWeight = title ? "bold" : "none";
+
   return (
     <Box py={1} px={2} className={boxClassName}>
       <Typography style={{ fontSize: "13px", fontWeight: boxFontWeight }}>{boxText}</Typography>
@@ -33,9 +34,14 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+MenuList.defaultProps = {
+  text: "",
+  title: "",
+};
+
 MenuList.propTypes = {
-  text: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  text: PropTypes.string,
+  title: PropTypes.string,
 };
 
 export default MenuList;
