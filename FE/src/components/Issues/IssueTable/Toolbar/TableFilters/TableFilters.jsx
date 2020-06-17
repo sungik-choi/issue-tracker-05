@@ -3,10 +3,11 @@ import PropTypes from "prop-types";
 
 import Box from "@material-ui/core/Box";
 
+import { filterButtonList } from "@Mock/data";
+
 import FilterButton from "./FilterButton";
 
 const TableFilters = ({ bSelectedIssueExist }) => {
-  const FILTER_BY_TEXT = "Filter by";
   const markAsFilterButton = {
     type: "Mark as",
     menuTitle: "Actions",
@@ -21,82 +22,6 @@ const TableFilters = ({ bSelectedIssueExist }) => {
       },
     ],
   };
-  const filterButtonList = [
-    {
-      type: "Author",
-      menuTitle: `${FILTER_BY_TEXT} Author`,
-      menuList: [
-        {
-          text: "Unlabeled",
-          clickHandler: null,
-        },
-        {
-          text: "Pororo123",
-          avatar: {
-            id: "pororo",
-            url:
-              "https://lh3.googleusercontent.com/lv3q0LxixvhfsBwhLKzpp53EPMQO92jq98uOKqT9sL0hv4gF8l9bl6SRN23FLxkeJH3ldxZt-PreP1zddg",
-          },
-          name: "roro po",
-          clickHandler: null,
-        },
-        {
-          text: "ETC",
-          clickHandler: null,
-        },
-      ],
-    },
-    {
-      type: "Label",
-      menuTitle: `${FILTER_BY_TEXT} Label`,
-      menuList: [
-        {
-          text: "Unlabeled",
-          clickHandler: null,
-        },
-        {
-          text: "ETC",
-          clickHandler: null,
-        },
-        {
-          text: "something is wrong",
-          label: {
-            name: "BUG",
-            backgroundColor: "#000",
-            color: "#FFF",
-          },
-        },
-      ],
-    },
-    {
-      type: "Milestone",
-      menuTitle: `${FILTER_BY_TEXT} Milestone`,
-      menuList: [
-        {
-          text: "Unlabeled",
-          clickHandler: null,
-        },
-        {
-          text: "ETC",
-          clickHandler: null,
-        },
-      ],
-    },
-    {
-      type: "Assignee",
-      menuTitle: `${FILTER_BY_TEXT} who's assigned`,
-      menuList: [
-        {
-          text: "Unlabeled",
-          clickHandler: null,
-        },
-        {
-          text: "ETC",
-          clickHandler: null,
-        },
-      ],
-    },
-  ];
 
   return (
     <Box display="flex">
