@@ -17,7 +17,7 @@ const NewIssueButton = () => {
 
 const useStyles = makeStyles((theme) => ({
   button: {
-    border: "1px solid" + grey[600],
+    border: `1px solid${grey[600]}`,
     textTransform: "none",
     backgroundColor: theme.palette.success.main,
     color: theme.palette.common.white,

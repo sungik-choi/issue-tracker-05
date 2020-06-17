@@ -10,7 +10,7 @@ const MenuList = ({ text, title }) => {
   const classes = useStyles();
 
   const boxClassName = title ? classes.titleBox : classes.popupBox;
-  const boxText = title ? title : text;
+  const boxText = title || text;
   const boxFontWeight = title ? "bold" : "none";
   return (
     <Box py={1} px={2} className={boxClassName}>
@@ -23,7 +23,7 @@ const useStyles = makeStyles(() => ({
   popupBox: {
     width: 250,
     cursor: "pointer",
-    borderTop: "1px solid" + grey[300],
+    borderTop: `1px solid${grey[300]}`,
     "&:hover": {
       backgroundColor: grey[200],
     },
@@ -45,5 +45,5 @@ export default MenuList;
 // 2. menuList로써 hover와 마우스 클릭이 되는 list로 사용
 // title로 사용 시 : props로 title을 사용하고 title에 들어갈 text를 넣어주면 됩니다.
 // (예) <MenuList title="Filter lssues" />
-//menuList로 사용 시 : props로 text를 사용하고 list에 들어갈 text를 넣어주면 됩니다.
+// menuList로 사용 시 : props로 text를 사용하고 list에 들어갈 text를 넣어주면 됩니다.
 // (예) <MenuList text="Open issues" />

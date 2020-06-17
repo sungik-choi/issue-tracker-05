@@ -55,7 +55,7 @@ const Menu = () => {
 
 const useStyles = makeStyles((theme) => ({
   button: {
-    border: "1px solid" + grey[400],
+    border: `1px solid${grey[400]}`,
     borderRadius: "5px 0  0 5px",
     textTransform: "none",
   },

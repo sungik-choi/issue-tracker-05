@@ -1,10 +1,9 @@
 import React from "react";
 
+import Box from "@material-ui/core/Box";
 import Filter from "./Filter/Filter";
 import LinkButtons from "./LinkButtons/LinkButtons";
 import NewIssueButton from "./NewIssueButton";
-
-import Box from "@material-ui/core/Box";
 
 const Navigation = () => {
   return (
