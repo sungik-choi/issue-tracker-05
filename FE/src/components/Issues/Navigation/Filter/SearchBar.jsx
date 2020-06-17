@@ -30,6 +30,7 @@ const SearchBar = () => {
 
 const useStyles = makeStyles((theme) => ({
   search: {
+    height: 32.5,
     position: "relative",
     borderRadius: "0 5px 5px 0",
     border: "1px solid" + grey[400],
@@ -38,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: fade(grey[300], 0.25),
     },
-    width: 450,
+    width: "100%",
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
@@ -54,14 +55,13 @@ const useStyles = makeStyles((theme) => ({
     color: "inherit",
   },
   inputInput: {
-    boxSizing: "border-box",
     padding: theme.spacing(1, 1, 1, 0),
     color: grey[700],
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
     height: "100%",
     [theme.breakpoints.up("md")]: {
-      width: "450px",
+      width: "500px",
     },
   },
 }));
