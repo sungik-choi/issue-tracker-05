@@ -30,7 +30,7 @@ const FilterButton = ({ type, menuTitle, menuList }) => {
           >
             <MenuList title={menuTitle} />
             {menuList.map(({ text, clickHandler }) => (
-              <MenuList text={text} clickHandler={clickHandler} />
+              <MenuList key={text} text={text} clickHandler={clickHandler} />
             ))}
           </Popover>
         </div>
