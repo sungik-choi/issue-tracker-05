@@ -6,15 +6,92 @@ import Box from "@material-ui/core/Box";
 import FilterButton from "./FilterButton";
 
 const TableFilters = ({ bSelectedIssueExist }) => {
-  const markAsFilterButton = "Mark as";
-  const filterButtonList = ["Author", "Label", "Projects", "Milestones", "Assignees", "Sort"];
+  const FILTER_BY_TEXT = "Filter by";
+  const markAsFilterButton = {
+    type: "Mark as",
+    menuTitle: "Actions",
+    menuList: [
+      {
+        text: "open",
+        clickHandler: null,
+      },
+      {
+        text: "close",
+        clickHandler: null,
+      },
+    ],
+  };
+  const filterButtonList = [
+    {
+      type: "Author",
+      menuTitle: `${FILTER_BY_TEXT} Author`,
+      menuList: [
+        {
+          text: "Unlabeled",
+          clickHandler: null,
+        },
+        {
+          text: "ETC",
+          clickHandler: null,
+        },
+      ],
+    },
+    {
+      type: "Label",
+      menuTitle: `${FILTER_BY_TEXT} Label`,
+      menuList: [
+        {
+          text: "Unlabeled",
+          clickHandler: null,
+        },
+        {
+          text: "ETC",
+          clickHandler: null,
+        },
+      ],
+    },
+    {
+      type: "Milestone",
+      menuTitle: `${FILTER_BY_TEXT} Milestone`,
+      menuList: [
+        {
+          text: "Unlabeled",
+          clickHandler: null,
+        },
+        {
+          text: "ETC",
+          clickHandler: null,
+        },
+      ],
+    },
+    {
+      type: "Assignee",
+      menuTitle: `${FILTER_BY_TEXT} who's assigned`,
+      menuList: [
+        {
+          text: "Unlabeled",
+          clickHandler: null,
+        },
+        {
+          text: "ETC",
+          clickHandler: null,
+        },
+      ],
+    },
+  ];
 
   return (
-    <Box>
+    <Box display="flex">
       {bSelectedIssueExist ? (
-        <FilterButton text={markAsFilterButton} />
+        <FilterButton
+          type={markAsFilterButton.type}
+          menuTitle={markAsFilterButton.menuTitle}
+          menuList={markAsFilterButton.menuList}
+        />
       ) : (
-        filterButtonList.map((buttonText) => <FilterButton key={buttonText} text={buttonText} />)
+        filterButtonList.map(({ type, menuTitle, menuList }) => (
+          <FilterButton key={type} type={type} menuTitle={menuTitle} menuList={menuList} />
+        ))
       )}
     </Box>
   );
