@@ -7,7 +7,7 @@ import Avatar from "@material-ui/core/Avatar";
 const CustomAvatar = ({ id, url }) => {
   const classes = useStyles();
 
-  return <Avatar key={id} alt={id} src={url} className={classes.avatar} />;
+  return <Avatar alt={id} src={url} className={classes.avatar} />;
 };
 
 const useStyles = makeStyles((theme) => ({

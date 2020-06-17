@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import Box from "@material-ui/core/Box";
 
 import { filterButtonList } from "@Mock/data";
-
 import FilterButton from "./FilterButton";
 
 const TableFilters = ({ bSelectedIssueExist }) => {

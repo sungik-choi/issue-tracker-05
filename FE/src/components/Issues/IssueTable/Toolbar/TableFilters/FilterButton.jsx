@@ -4,9 +4,9 @@ import PropTypes from "prop-types";
 import Button from "@material-ui/core/Button";
 import Popover from "@material-ui/core/Popover";
 import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
+import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 
 import MenuList from "@Components/common/MenuList";
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 
 const FilterButton = ({ type, menuTitle, menuList }) => {
   return (
