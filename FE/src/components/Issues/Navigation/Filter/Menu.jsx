@@ -1,6 +1,6 @@
 import React from "react";
 
-import MenuList from "../../../common/MenuList";
+import MenuList from "@Components/common/MenuList";
 
 import Button from "@material-ui/core/Button";
 import Popover from "@material-ui/core/Popover";
