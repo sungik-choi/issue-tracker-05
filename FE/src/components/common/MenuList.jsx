@@ -34,8 +34,8 @@ const useStyles = makeStyles(() => ({
 }));
 
 MenuList.propTypes = {
-  text: PropTypes.string,
-  title: PropTypes.string,
+  text: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default MenuList;
