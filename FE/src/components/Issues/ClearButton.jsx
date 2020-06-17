@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     "& button": {
       textTransform: "none",
       fontWeight: "bold",
-      color: theme.palette.text.secondary,
+      color: theme.palette.grey[600],
       fontSize: 17,
       "&:hover": {
         background: "none",
