@@ -70,7 +70,7 @@ MenuList.propTypes = {
   clickHandler: PropTypes.func,
   options: PropTypes.shape({
     avatar: PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
       url: PropTypes.string.isRequired,
     }),
     name: PropTypes.string,
