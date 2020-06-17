@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 
-const MenuList = ({ text, title }) => {
+const MenuList = ({ text, title, clickHandler }) => {
   const classes = useStyles();
 
   const boxClassName = title ? classes.titleBox : classes.popupBox;
@@ -13,7 +13,7 @@ const MenuList = ({ text, title }) => {
   const boxFontWeight = title ? "bold" : "none";
 
   return (
-    <Box py={1} px={2} className={boxClassName}>
+    <Box py={1} px={2} className={boxClassName} onClick={clickHandler}>
       <Typography style={{ fontSize: "13px", fontWeight: boxFontWeight }}>{boxText}</Typography>
     </Box>
   );
@@ -36,11 +36,13 @@ const useStyles = makeStyles((theme) => ({
 MenuList.defaultProps = {
   text: "",
   title: "",
+  clickHandler: null,
 };
 
 MenuList.propTypes = {
   text: PropTypes.string,
   title: PropTypes.string,
+  clickHandler: PropTypes.func,
 };
 
 export default MenuList;
