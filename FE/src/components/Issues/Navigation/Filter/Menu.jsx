@@ -16,7 +16,7 @@ const Menu = () => {
   const FILTER_BTN_TEXT = "Filters";
   const classes = useStyles();
 
-  const menuList = mockArr.map((text, i) => <MenuList text={text} key={text + i} />);
+  const menuList = mockArr.map((text) => <MenuList text={text} key={text} />);
   return (
     <PopupState variant="popover" popupId="demo-popup-popover">
       {(popupState) => (
@@ -53,9 +53,9 @@ const Menu = () => {
   );
 };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   button: {
-    border: "1px solid" + grey[400],
+    border: `1px solid${grey[400]}`,
     borderRadius: "5px 0  0 5px",
     textTransform: "none",
   },

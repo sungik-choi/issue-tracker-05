@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     height: 32.5,
     position: "relative",
     borderRadius: "0 5px 5px 0",
-    border: "1px solid" + grey[400],
+    border: `1px solid${grey[400]}`,
     borderLeft: "none",
     backgroundColor: grey[50],
     "&:hover": {

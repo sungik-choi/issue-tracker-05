@@ -4,12 +4,14 @@ import styled from "styled-components";
 import CollectionsBookmarkIcon from "@material-ui/icons/CollectionsBookmark";
 
 const Header = () => {
+  const TITLE_TEXT = "Issues";
+
   return (
     <HeaderWrap>
       <BookIcon>
         <CollectionsBookmarkIcon fontSize="small" />
       </BookIcon>
-      <Title>lssues</Title>
+      <Title>{TITLE_TEXT}</Title>
     </HeaderWrap>
   );
 };
