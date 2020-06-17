@@ -41,6 +41,14 @@ const FilterButton = ({ type, menuTitle, menuList }) => {
 
 FilterButton.propTypes = {
   type: PropTypes.string.isRequired,
+  menuTitle: PropTypes.string.isRequired,
+  menuList: PropTypes.arrayOf(
+    PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      clickHandler: PropTypes.func.isRequired,
+      options: PropTypes.any,
+    }),
+  ).isRequired,
 };
 
 export default FilterButton;
