@@ -31,6 +31,16 @@ const TableFilters = ({ bSelectedIssueExist }) => {
           clickHandler: null,
         },
         {
+          text: "Pororo123",
+          avatar: {
+            id: "pororo",
+            url:
+              "https://lh3.googleusercontent.com/lv3q0LxixvhfsBwhLKzpp53EPMQO92jq98uOKqT9sL0hv4gF8l9bl6SRN23FLxkeJH3ldxZt-PreP1zddg",
+          },
+          name: "roro po",
+          clickHandler: null,
+        },
+        {
           text: "ETC",
           clickHandler: null,
         },
