@@ -45,7 +45,7 @@ FilterButton.propTypes = {
   menuList: PropTypes.arrayOf(
     PropTypes.shape({
       text: PropTypes.string.isRequired,
-      clickHandler: PropTypes.func.isRequired,
+      clickHandler: PropTypes.oneOf([PropTypes.func, PropTypes.null]),
       options: PropTypes.any,
     }),
   ).isRequired,
