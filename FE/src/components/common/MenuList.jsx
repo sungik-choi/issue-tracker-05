@@ -6,8 +6,9 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 
 import CustomAvatar from "./CustomAvatar";
+import Label from "./Label";
 
-const MenuList = ({ text, title, clickHandler, options: { avatar, name } }) => {
+const MenuList = ({ text, title, clickHandler, options: { avatar, label, name } }) => {
   const classes = useStyles();
 
   const boxClassName = title ? classes.titleBox : classes.popupBox;
@@ -26,6 +27,11 @@ const MenuList = ({ text, title, clickHandler, options: { avatar, name } }) => {
       {avatar && (
         <Box mr={1}>
           <CustomAvatar id={avatar.id} url={avatar.url} />
+        </Box>
+      )}
+      {label && (
+        <Box mr={1}>
+          <Label name={label.name} backgroundColor={label.backgroundColor} color={label.color} />
         </Box>
       )}
       <Typography variant={textVariant}>{boxText}</Typography>

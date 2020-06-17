@@ -58,6 +58,14 @@ const TableFilters = ({ bSelectedIssueExist }) => {
           text: "ETC",
           clickHandler: null,
         },
+        {
+          text: "something is wrong",
+          label: {
+            name: "BUG",
+            backgroundColor: "#000",
+            color: "#FFF",
+          },
+        },
       ],
     },
     {
