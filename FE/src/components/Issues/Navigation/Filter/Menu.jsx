@@ -9,14 +9,21 @@ import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import { makeStyles } from "@material-ui/core/styles";
 import grey from "@material-ui/core/colors/grey";
 
-const mockArr = ["Filter lssues", "Open issues", "Close issues"];
+const menuListText = [
+  "Open issues",
+  "Close issues",
+  "Your issues",
+  "Everything assigned to you",
+  "Everything mentioning you",
+  "Closed issues",
+];
 const MENU_LIST_TITLE = "Filter lssues";
 
 const Menu = () => {
   const FILTER_BTN_TEXT = "Filters";
   const classes = useStyles();
 
-  const menuList = mockArr.map((text, i) => <MenuList text={text} key={text + i} />);
+  const menuList = menuListText.map((text, i) => <MenuList text={text} key={text + i} />);
   return (
     <PopupState variant="popover" popupId="demo-popup-popover">
       {(popupState) => (
