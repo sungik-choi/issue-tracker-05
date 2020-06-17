@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
@@ -19,7 +20,7 @@ const MenuList = ({ text, title }) => {
   );
 };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   popupBox: {
     width: 250,
     cursor: "pointer",
@@ -32,6 +33,11 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: grey[200],
   },
 }));
+
+MenuList.propTypes = {
+  text: PropTypes.string,
+  title: PropTypes.string,
+};
 
 export default MenuList;
 
