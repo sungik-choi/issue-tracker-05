@@ -13,18 +13,10 @@ const mockArr = ["Filter lssues", "Open issues", "Close issues"];
 const MENU_LIST_TITLE = "Filter lssues";
 
 const Menu = () => {
-  const menuList = mockArr.map((text, i) => <MenuList text={text} key={text + i} />);
-
-  return (
-    <>
-      <PopoverPopupState menuList={menuList} />
-    </>
-  );
-};
-
-const PopoverPopupState = ({ menuList }) => {
+  const FILTER_BTN_TEXT = "Filters";
   const classes = useStyles();
 
+  const menuList = mockArr.map((text, i) => <MenuList text={text} key={text + i} />);
   return (
     <PopupState variant="popover" popupId="demo-popup-popover">
       {(popupState) => (
@@ -36,7 +28,7 @@ const PopoverPopupState = ({ menuList }) => {
             size="small"
             {...bindTrigger(popupState)}
           >
-            <span className={classes.filterText}>Filters</span>
+            <span className={classes.filterText}>{FILTER_BTN_TEXT}</span>
             <span>
               <ArrowDropDownIcon className={classes.downIcon} />
             </span>
