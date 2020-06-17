@@ -1,10 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
-import grey from "@material-ui/core/colors/grey";
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
 
 const MenuList = ({ text, title }) => {
   const classes = useStyles();
@@ -20,17 +19,17 @@ const MenuList = ({ text, title }) => {
   );
 };
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   popupBox: {
     width: 250,
     cursor: "pointer",
-    borderTop: `1px solid${grey[300]}`,
+    borderTop: `1px solid${theme.palette.grey[300]}`,
     "&:hover": {
-      backgroundColor: grey[200],
+      backgroundColor: theme.palette.grey[200],
     },
   },
   titleBox: {
-    backgroundColor: grey[200],
+    backgroundColor: theme.palette.grey[200],
   },
 }));
 
