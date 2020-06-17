@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
     transition: theme.transitions.create("width"),
     height: "100%",
     [theme.breakpoints.up("md")]: {
-      width: "500px",
+      width: "550px",
     },
   },
 }));
