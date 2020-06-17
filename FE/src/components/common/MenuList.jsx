@@ -80,6 +80,11 @@ MenuList.propTypes = {
       url: PropTypes.string.isRequired,
     }),
     name: PropTypes.string,
+    label: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      backgroundColor: PropTypes.string.isRequired,
+      color: PropTypes.string.isRequired,
+    }),
   }),
 };
 
