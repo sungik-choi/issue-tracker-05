@@ -3,18 +3,37 @@ import PropTypes from "prop-types";
 
 import Box from "@material-ui/core/Box";
 
+import { filterButtonList } from "@Mock/data";
 import FilterButton from "./FilterButton";
 
 const TableFilters = ({ bSelectedIssueExist }) => {
-  const markAsFilterButton = "Mark as";
-  const filterButtonList = ["Author", "Label", "Projects", "Milestones", "Assignees", "Sort"];
+  const markAsFilterButton = {
+    type: "Mark as",
+    menuTitle: "Actions",
+    menuList: [
+      {
+        text: "open",
+        clickHandler: null,
+      },
+      {
+        text: "close",
+        clickHandler: null,
+      },
+    ],
+  };
 
   return (
-    <Box>
+    <Box display="flex">
       {bSelectedIssueExist ? (
-        <FilterButton text={markAsFilterButton} />
+        <FilterButton
+          type={markAsFilterButton.type}
+          menuTitle={markAsFilterButton.menuTitle}
+          menuList={markAsFilterButton.menuList}
+        />
       ) : (
-        filterButtonList.map((buttonText) => <FilterButton key={buttonText} text={buttonText} />)
+        filterButtonList.map(({ type, menuTitle, menuList }) => (
+          <FilterButton key={type} type={type} menuTitle={menuTitle} menuList={menuList} />
+        ))
       )}
     </Box>
   );

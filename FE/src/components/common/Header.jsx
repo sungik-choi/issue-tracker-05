@@ -1,38 +1,32 @@
 import React from "react";
 
-import styled from "styled-components";
+import { makeStyles } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
 import CollectionsBookmarkIcon from "@material-ui/icons/CollectionsBookmark";
 
 const Header = () => {
-  const TITLE_TEXT = "Issues";
+  const classes = useStyles();
+  const TITLE_TEXT = "Issue Tracker";
 
   return (
-    <HeaderWrap>
-      <BookIcon>
-        <CollectionsBookmarkIcon fontSize="small" />
-      </BookIcon>
-      <Title>{TITLE_TEXT}</Title>
-    </HeaderWrap>
+    <AppBar position="static" className={classes.colorDefault}>
+      <Toolbar>
+        <Box mr={2}>
+          <CollectionsBookmarkIcon />
+        </Box>
+        <Typography variant="h6">{TITLE_TEXT}</Typography>
+      </Toolbar>
+    </AppBar>
   );
 };
 
-const HeaderWrap = styled.header`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: 55px;
-  background-color: #24292e;
-  line-height: 55px;
-`;
-
-const Title = styled.span`
-  color: hsla(0, 0%, 100%, 0.7);
-  font-weight: 600;
-  font-size: 20px;
-`;
-
-const BookIcon = styled(Title)`
-  padding: 4px 5px 0;
-`;
+const useStyles = makeStyles((theme) => ({
+  colorDefault: {
+    backgroundColor: theme.palette.grey[900],
+  },
+}));
 
 export default Header;

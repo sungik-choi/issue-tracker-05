@@ -42,7 +42,7 @@ const CustomTable = ({ ariaLabel, headContents, bodyContents }) => {
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    backgroundColor: theme.palette.action.hover,
+    backgroundColor: theme.palette.grey[100],
     color: theme.palette.text.secondary,
   },
 }))(TableCell);

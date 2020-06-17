@@ -24,7 +24,6 @@ const Menu = () => {
           <Button
             className={classes.button}
             variant="contained"
-            color="default"
             size="small"
             {...bindTrigger(popupState)}
           >
@@ -37,11 +36,11 @@ const Menu = () => {
             {...bindPopover(popupState)}
             anchorOrigin={{
               vertical: "bottom",
-              horizontal: "center",
+              horizontal: "left",
             }}
             transformOrigin={{
               vertical: "top",
-              horizontal: "center",
+              horizontal: "left",
             }}
           >
             <MenuList title={MENU_LIST_TITLE} />
