@@ -37,9 +37,16 @@ public class MilestoneDao_Ragdoll {
         return jdbcTemplate.query(sql, (rs, rowNum) -> new Milestone.Builder()
                                                                     .id(rs.getInt("id"))
                                                                     .title(rs.getString("title"))
+                                                                    .description(rs.getString("description"))
                                                                     .dueDate(rs.getDate("due_date").toLocalDate())
                                                                     .createdDateTime(rs.getTimestamp("created_date_time").toLocalDateTime())
                                                                     .updatedDateTime(rs.getTimestamp("updated_date_time").toLocalDateTime())
                                                                     .build());
+    }
+
+    public Integer findCountOfOpenedIssueById(Integer milestoneId, boolean isOpened) {
+        String sql = "SELECT COUNT(*) FROM issue i JOIN milestone m ON i.milestone_id = m.id " +
+                     "WHERE i.milestone_id = ? AND i.is_opened = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{milestoneId, isOpened}, Integer.class);
     }
 }
