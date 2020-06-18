@@ -1,7 +1,9 @@
 package com.codesquad.issuetracker.ragdoll.service;
 
+import com.codesquad.issuetracker.ragdoll.commonconstant.ResponseMessages;
 import com.codesquad.issuetracker.ragdoll.dao.LabelDao_Ragdoll;
 import com.codesquad.issuetracker.ragdoll.domain.Label;
+import com.codesquad.issuetracker.ragdoll.dto.LabelRequestDto;
 import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelInformation;
 import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelSummary;
 import org.springframework.stereotype.Service;
@@ -39,5 +41,10 @@ public class LabelService_Ragdoll {
     public String createNewLabel(LabelRequestDto labelRequestDto) {
         labelDaoRagdoll.createNewLabel(labelRequestDto.getLabelName(), labelRequestDto.getDescription(), labelRequestDto.getHexCode());
         return ResponseMessages.SUCCESSFULLY_CREATED;
+    }
+
+    public String deleteLabel(Integer labelId) {
+        labelDaoRagdoll.deleteNewLabel(labelId);
+        return ResponseMessages.SUCCESSFULLY_DELETED;
     }
 }
