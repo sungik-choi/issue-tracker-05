@@ -75,4 +75,9 @@ public class MilestoneDao_Ragdoll {
                      "WHERE id = :milestoneId";
         namedParameterJdbcTemplate.update(sql, namedParameters);
     }
+
+    public void deleteMilestone(Integer milestoneId) {
+        String sql = "DELETE FROM milestone WHERE id = ?";
+        jdbcTemplate.update(sql, milestoneId);
+    }
 }
