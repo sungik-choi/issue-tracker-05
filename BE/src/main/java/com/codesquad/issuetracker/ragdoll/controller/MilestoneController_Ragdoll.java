@@ -5,9 +5,7 @@ import com.codesquad.issuetracker.ragdoll.response.ApiResponse;
 import com.codesquad.issuetracker.ragdoll.service.MilestoneService_Ragdoll;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/ragdoll")
@@ -22,5 +20,10 @@ public class MilestoneController_Ragdoll {
     @GetMapping("/milestones")
     public ResponseEntity<ApiResponse<ListOfMilestonesDto>> list() {
         return new ResponseEntity(ApiResponse.OK(milestoneService.findAllMilestonesWithDetails()), HttpStatus.OK);
+    }
+
+    @PostMapping("/milestones")
+    public ResponseEntity<ApiResponse<String>> create(@RequestBody MilestoneRequestDto milestoneRequestDto) {
+        return new ResponseEntity(ApiResponse.CREATED(milestoneService.createNewMilestone()), HttpStatus.OK);
     }
 }
