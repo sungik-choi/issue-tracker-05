@@ -67,8 +67,7 @@ public class IssueService_Hamill {
                 UserSummary.of(user.getId(), user.getName(), user.getAvatarUrl()),
                 allocatedAssignees,
                 issue.getCreatedDateTime(),
-                issue.isOpened()
-                );
+                issue.isOpened());
     }
 
 

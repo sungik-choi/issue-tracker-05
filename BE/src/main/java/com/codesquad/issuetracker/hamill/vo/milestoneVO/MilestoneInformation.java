@@ -1,19 +1,19 @@
 package com.codesquad.issuetracker.hamill.vo.milestoneVO;
 
-import java.util.Set;
+import java.util.List;
 
 public class MilestoneInformation {
 
     private int countOfMilestone;
 
-    private Set<MilestoneSummary> milestones;
+    private List<MilestoneSummary> milestones;
 
-    private MilestoneInformation(int countOfMilestone, Set<MilestoneSummary> milestones) {
+    private MilestoneInformation(int countOfMilestone, List<MilestoneSummary> milestones) {
         this.countOfMilestone = countOfMilestone;
         this.milestones = milestones;
     }
 
-    public static MilestoneInformation of(int countOfMilestone, Set<MilestoneSummary> milestones) {
+    public static MilestoneInformation of(int countOfMilestone, List<MilestoneSummary> milestones) {
         return new MilestoneInformation(countOfMilestone, milestones);
     }
 
@@ -21,7 +21,7 @@ public class MilestoneInformation {
         return countOfMilestone;
     }
 
-    public Set<MilestoneSummary> getMilestones() {
+    public List<MilestoneSummary> getMilestones() {
         return milestones;
     }
 }

@@ -37,9 +37,9 @@ public class LabelService_Hamill {
 //        }
 
         // 함수형 프로그래밍
-        Set<LabelSummary> labelSummaries = labels.stream()
+        List<LabelSummary> labelSummaries = labels.stream()
                                                  .map(label -> of(label.getId(), label.getName(), label.getHexCode()))
-                                                 .collect(Collectors.toSet());
+                                                 .collect(Collectors.toList());
 
         return LabelInformation.of(labels.size(), labelSummaries);
     }

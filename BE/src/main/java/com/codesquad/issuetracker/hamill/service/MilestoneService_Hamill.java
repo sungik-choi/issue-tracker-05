@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -26,7 +27,7 @@ public class MilestoneService_Hamill {
     public MilestoneInformation findMilestoneInformation() {
         List<Milestone> milestones = milestoneDao_hamill.findAllMilestones();
 
-        Set<MilestoneSummary> milestoneSummaries = new HashSet<>();
+        List<MilestoneSummary> milestoneSummaries = new ArrayList<>();
         for (Milestone value : milestones) {
             MilestoneSummary milestoneSummary = MilestoneSummary.of(value.getId(), value.getTitle());
             milestoneSummaries.add(milestoneSummary);

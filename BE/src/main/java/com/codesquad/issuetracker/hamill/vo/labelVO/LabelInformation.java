@@ -1,19 +1,19 @@
 package com.codesquad.issuetracker.hamill.vo.labelVO;
 
-import java.util.Set;
+import java.util.List;
 
 public class LabelInformation {
 
     private int countOfLabel;
 
-    private Set<LabelSummary> labels;
+    private List<LabelSummary> labels;
 
-    private LabelInformation(int countOfLabel, Set<LabelSummary> labels) {
+    private LabelInformation(int countOfLabel, List<LabelSummary> labels) {
         this.countOfLabel = countOfLabel;
         this.labels = labels;
     }
 
-    public static LabelInformation of(int countOfLabel, Set<LabelSummary> labels) {
+    public static LabelInformation of(int countOfLabel, List<LabelSummary> labels) {
         return new LabelInformation(countOfLabel, labels);
     }
 
@@ -21,7 +21,7 @@ public class LabelInformation {
         return countOfLabel;
     }
 
-    public Set<LabelSummary> getLabels() {
+    public List<LabelSummary> getLabels() {
         return labels;
     }
 }
