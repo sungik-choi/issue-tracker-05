@@ -61,4 +61,9 @@ public class IssueController_Ragdoll {
     public ResponseEntity<ApiResponse<String>> submitComment(@PathVariable Long issueId, @RequestBody CommentsRequestDto commentsRequestDto) {
         return new ResponseEntity(ApiResponse.CREATED(issueService.submitNewComment(issueId, commentsRequestDto)), HttpStatus.CREATED);
     }
+
+    @PatchMapping("/issues/{issueId}/comments/{commentId}")
+    public ResponseEntity<ApiResponse<String>> updateComment(@PathVariable Long issueId, @PathVariable Long commentId, @RequestBody CommentsRequestDto commentsRequestDto) {
+        return new ResponseEntity(ApiResponse.OK(issueService.updateComment(issueId, commentId, commentsRequestDto)), HttpStatus.OK);
+    }
 }
