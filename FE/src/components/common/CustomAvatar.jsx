@@ -3,11 +3,16 @@ import PropTypes from "prop-types";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
+import Tooltip from "@material-ui/core/Tooltip";
 
 const CustomAvatar = ({ id, url }) => {
   const classes = useStyles();
 
-  return <Avatar alt={id} src={url} className={classes.avatar} />;
+  return (
+    <Tooltip title={id}>
+      <Avatar alt={id} src={url} className={classes.avatar} />
+    </Tooltip>
+  );
 };
 
 const useStyles = makeStyles((theme) => ({
