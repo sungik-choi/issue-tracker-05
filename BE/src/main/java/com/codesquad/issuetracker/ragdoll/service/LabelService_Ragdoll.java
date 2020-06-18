@@ -31,6 +31,11 @@ public class LabelService_Ragdoll {
         return LabelInformation.create(labelSummaries.size(), labelSummaries);
     }
 
+    public String updateLabel(Integer labelId, String labelName, String description, String hexCode) {
+        labelDaoRagdoll.updateLabel(labelId, labelName, description, hexCode);
+        return ResponseMessages.SUCCESSFULLY_MODIFIED;
+    }
+
     public String createNewLabel(LabelRequestDto labelRequestDto) {
         labelDaoRagdoll.createNewLabel(labelRequestDto.getLabelName(), labelRequestDto.getDescription(), labelRequestDto.getHexCode());
         return ResponseMessages.SUCCESSFULLY_CREATED;
