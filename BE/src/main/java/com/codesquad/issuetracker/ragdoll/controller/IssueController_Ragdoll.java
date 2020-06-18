@@ -56,4 +56,9 @@ public class IssueController_Ragdoll {
     public ResponseEntity<ApiResponse<String>> updateMilestone(@PathVariable Long issueId, @RequestBody UpdateMilestoneRequestDto updateMilestoneRequestDto) {
         return new ResponseEntity(ApiResponse.OK(issueService.updateRelatedMilestone(issueId, updateMilestoneRequestDto)), HttpStatus.OK);
     }
+
+    @PostMapping("/issues/{issueId}/comments")
+    public ResponseEntity<ApiResponse<String>> submitComment(@PathVariable Long issueId, @RequestBody CommentsRequestDto commentsRequestDto) {
+        return new ResponseEntity(ApiResponse.CREATED(issueService.submitNewComment(issueId, commentsRequestDto)), HttpStatus.CREATED);
+    }
 }
