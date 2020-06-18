@@ -5,12 +5,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Tooltip from "@material-ui/core/Tooltip";
 
-const CustomAvatar = ({ id, url }) => {
+const CustomAvatar = ({ id, url, ...props }) => {
   const classes = useStyles();
 
   return (
     <Tooltip title={id}>
-      <Avatar alt={id} src={url} className={classes.avatar} />
+      <Avatar alt={id} src={url} className={classes.avatar} {...props} />
     </Tooltip>
   );
 };

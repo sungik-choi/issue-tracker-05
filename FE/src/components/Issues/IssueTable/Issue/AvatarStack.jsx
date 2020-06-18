@@ -25,6 +25,8 @@ const AvatarStack = ({ userData }) => {
 const useStyles = makeStyles((theme) => ({
   avatar: {
     fontSize: "1rem",
+    width: theme.spacing(3),
+    height: theme.spacing(3),
     borderColor: `${theme.palette.common.white}`,
   },
 }));
