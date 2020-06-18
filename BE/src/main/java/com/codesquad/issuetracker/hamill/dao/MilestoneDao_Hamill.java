@@ -22,7 +22,8 @@ public class MilestoneDao_Hamill {
 
     public List<Milestone> findAllMilestones() {
         return jdbcTemplate.query(
-                "SELECT * FROM issue_tracker.milestone",
+                "SELECT m.id, m.title, m.description, m.due_date, m.created_date_time, m.updated_date_time " +
+                        "FROM milestone m",
                 (rs, rowNum) ->
                         Milestone.of(rs.getInt("id"),
                                 rs.getString("title"),
@@ -35,7 +36,8 @@ public class MilestoneDao_Hamill {
 
     public Milestone findMilestoneByMilestoneId(Integer milestoneId) {
         return jdbcTemplate.queryForObject(
-                "SELECT * FROM milestone WHERE milestone.id = ?",
+                "SELECT m.id, m.title, m.description, m.due_date, m.created_date_time, m.updated_date_time " +
+                        "FROM milestone m WHERE m.id = ?",
                 (rs, rowNum) ->
                         Milestone.of(rs.getInt("id"),
                                 rs.getString("title"),

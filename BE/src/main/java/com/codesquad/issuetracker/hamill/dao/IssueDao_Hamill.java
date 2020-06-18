@@ -31,7 +31,7 @@ public class IssueDao_Hamill {
 
     public List<Issue> findAllIssues() {
         return jdbcTemplate.query(
-                "SELECT * FROM issue",
+                "SELECT i.id, i.title, i.created_date_time, i.is_opened, i.user_id, i.milestone_id FROM issue i",
                 (rs, rowNum) ->
                         Issue.of(rs.getLong("id"),
                                 rs.getString("title"),
@@ -40,75 +40,6 @@ public class IssueDao_Hamill {
                                 rs.getLong("user_id"),
                                 rs.getInt("milestone_id"))
         );
-    }
-
-    public IssuesDto findIssueByIssueId(Long issueId) {
-        return jdbcTemplate.queryForObject(
-                    "SELECT i.id AS issue_id, i.title, i.is_opened, m.id AS milestone_id, m.title AS milestone_title, i.created_date_time,u.id AS user_id, u.name AS user_name, u.avatar_url\n" +
-                        "FROM issue i\n" +
-                        "         JOIN milestone m on i.milestone_id = m.id\n" +
-                        "         JOIN user u on i.user_id = u.id " +
-                        "WHERE i.id = ?",
-                (rs, rowNum) ->
-                        IssuesDto.builder()
-                                 .issueId(rs.getLong("issue_id"))
-                                 .issueTitle(rs.getString("title"))
-                                 .isOpened(rs.getBoolean("is_opened"))
-                                 .milestone(getMilestoneDto(rs))
-                                 .createdDateTime(rs.getTimestamp("created_date_time").toLocalDateTime())
-                                 .author(getAuthorDto(rs))
-                                 .build()
-        , issueId);
-    }
-
-    public List<LabelDto> findLabelsByIssuesId(Long issueId) {
-        return jdbcTemplate.query(
-                    "SELECT l.id AS label_id, l.name AS label_name, l.hex_code AS hex_code\n" +
-                        "FROM label l\n" +
-                        "                         JOIN issue_has_label ihl on l.id = ihl.label_id\n" +
-                        "WHERE ihl.issue_id = ?;",
-                (rs, rowNum) ->
-                        LabelDto.builder()
-                                .labelId(rs.getLong("label_id"))
-                                .labelName(rs.getString("label_name"))
-                                .hexCode(rs.getString("hex_code"))
-                                .build()
-        , issueId);
-    }
-
-    public List<AssigneeDto> findAssigneeByIssueId(Long issueId) {
-        return jdbcTemplate.query(
-                    "SELECT u.id AS user_id, u.name AS user_name, u.avatar_url " +
-                        "FROM assignee a\n" +
-                        "                         JOIN user u on a.user_id = u.id\n " +
-                        "                         JOIN issue i on a.issue_id = i.id " +
-                        "WHERE i.id = ?",
-                (rs, rowNum) ->
-                        AssigneeDto.builder()
-                                   .userId(rs.getLong("user_id"))
-                                   .userName(rs.getString("user_name"))
-                                   .avatarUrl(rs.getString("avatar_url"))
-                                   .build()
-        , issueId);
-    }
-
-    private MilestoneDto getMilestoneDto(ResultSet rs) throws SQLException {
-        return MilestoneDto.builder()
-                           .milestoneId(rs.getLong("milestone_id"))
-                           .milestoneTitle(rs.getString("milestone_title"))
-                           .build();
-    }
-
-    private AuthorDto getAuthorDto(ResultSet rs) throws SQLException {
-        return AuthorDto.builder()
-                        .userId(rs.getLong("user_id"))
-                        .userName(rs.getString("user_name"))
-                        .avatarUrl(rs.getString("avatar_url"))
-                        .build();
-    }
-
-    public Integer getCountOfIssues() {
-        return jdbcTemplate.queryForObject( "SELECT count(issue.id) FROM issue", Integer.TYPE);
     }
 
     public void saveNewIssue(Long issueId, String title, Long userId, Long milestoneId) {

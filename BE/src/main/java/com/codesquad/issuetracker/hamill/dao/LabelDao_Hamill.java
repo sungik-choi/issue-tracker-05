@@ -22,7 +22,7 @@ public class LabelDao_Hamill {
 
     public List<Label> findAllLabels() {
         return jdbcTemplate.query(
-                "SELECT * FROM label",
+                "SELECT label.id, label.name, label.description, label.background_color, label.color FROM label",
                 (rs, rowNum) ->
                         Label.of(rs.getInt("id"),
                                 rs.getString("name"),

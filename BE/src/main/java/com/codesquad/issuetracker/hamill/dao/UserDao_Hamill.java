@@ -23,7 +23,7 @@ public class UserDao_Hamill {
     public List<User> findAllUsers() {
 
         return jdbcTemplate.query(
-                "SELECT * FROM user",
+                "SELECT u.id, u.name, u.email, u.github_id, u.avatar_url, u.created_date_time FROM user u",
                 (rs, rowNum) ->
                         User.of(rs.getLong("id"),
                                 rs.getString("name"),
