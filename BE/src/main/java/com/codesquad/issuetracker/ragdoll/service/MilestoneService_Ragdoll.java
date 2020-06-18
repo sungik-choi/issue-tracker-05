@@ -60,4 +60,10 @@ public class MilestoneService_Ragdoll {
         milestoneDao.createNewMilestone(milestoneRequestDto.getTitle(), milestoneRequestDto.getDueDate(), milestoneRequestDto.getDescription());
         return ResponseMessages.SUCCESSFULLY_CREATED;
     }
+
+    public String updateMilestone(Integer milestoneId, MilestoneRequestDto milestoneRequestDto) {
+        milestoneDao.updateMilestone(milestoneId, milestoneRequestDto.getTitle(), milestoneRequestDto.getDueDate(),
+                                     milestoneRequestDto.getDescription());
+        return ResponseMessages.SUCCESSFULLY_MODIFIED;
+    }
 }
