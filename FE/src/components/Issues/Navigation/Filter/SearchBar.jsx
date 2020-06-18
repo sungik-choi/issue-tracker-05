@@ -1,6 +1,6 @@
 import React from "react";
 
-import { fade, makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
 import Box from "@material-ui/core/Box";
 import InputBase from "@material-ui/core/InputBase";
