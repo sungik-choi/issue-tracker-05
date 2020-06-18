@@ -8,12 +8,12 @@ INSERT INTO milestone (title, description, due_date, created_date_time, updated_
 INSERT INTO milestone (title, description, due_date, created_date_time, updated_date_time) VALUES ('마일스톤3', '마일스톤3입니다.', '2020-06-20', '2020-06-11 01:22:32', '2020-06-11 01:22:32');
 INSERT INTO milestone (title, description, due_date, created_date_time, updated_date_time) VALUES ('마일스톤4', '마일스톤4입니다.', '2020-06-21', '2020-06-11 01:22:32', '2020-06-11 01:22:32');
 
-INSERT INTO label (name, description, hex_code) VALUES ('레이블1', '레이블1입니다.', '#aaaaaa');
-INSERT INTO label (name, description, hex_code) VALUES ('레이블2', '레이블2입니다.', '#bbbbbb');
-INSERT INTO label (name, description, hex_code) VALUES ('레이블3', '레이블3입니다.', '#cccccc');
-INSERT INTO label (name, description, hex_code) VALUES ('레이블4', '레이블4입니다.', '#dddddd');
-INSERT INTO label (name, description, hex_code) VALUES ('레이블5', '레이블5입니다.', '#eeeeee');
-INSERT INTO label (name, description, hex_code) VALUES ('레이블6', '레이블6입니다.', '#ffffff');
+INSERT INTO label (name, description, background_color, color) VALUES ('레이블1', '레이블1입니다.', '#aaaaaa', '#hhhhhh');
+INSERT INTO label (name, description, background_color, color) VALUES ('레이블2', '레이블2입니다.', '#bbbbbb', '#jjjjjj');
+INSERT INTO label (name, description, background_color, color) VALUES ('레이블3', '레이블3입니다.', '#cccccc', '#kkkkkk');
+INSERT INTO label (name, description, background_color, color) VALUES ('레이블4', '레이블4입니다.', '#dddddd', '#mmmmmm');
+INSERT INTO label (name, description, background_color, color) VALUES ('레이블5', '레이블5입니다.', '#eeeeee', '#nnnnnn');
+INSERT INTO label (name, description, background_color, color) VALUES ('레이블6', '레이블6입니다.', '#ffffff', '#oooooo');
 
 INSERT INTO issue (id, title, created_date_time, is_opened, user_id, milestone_id) VALUES (1, '이슈제목1', '2020-06-11 01:28:30', true, 1, 1);
 INSERT INTO issue (id, title, created_date_time, is_opened, user_id, milestone_id) VALUES (2, '이슈제목2', '2020-06-11 01:28:30', true, 2, 1);

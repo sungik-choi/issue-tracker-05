@@ -27,19 +27,21 @@ public class LabelDao_Hamill {
                         Label.of(rs.getInt("id"),
                                 rs.getString("name"),
                                 rs.getString("description"),
-                                rs.getString("hex_code"))
+                                rs.getString("background_color"),
+                                rs.getString("color"))
         );
     }
 
     public List<LabelSummary> findLabelSummaryByIssueId(Long issueId) {
         return jdbcTemplate.query(
-                "SELECT label.id, label.name, label.hex_code FROM label " +
+                "SELECT label.id, label.name, label.background_color, label.color FROM label " +
                         "JOIN issue_has_label ON label.id = issue_has_label.label_id " +
                         "WHERE issue_has_label.issue_id = ?",
                 (rs, rowNum) ->
                         LabelSummary.of(rs.getInt("id"),
                                 rs.getString("name"),
-                                rs.getString("hex_code"))
+                                rs.getString("background_color"),
+                                rs.getString("color"))
         , issueId);
     }
 }

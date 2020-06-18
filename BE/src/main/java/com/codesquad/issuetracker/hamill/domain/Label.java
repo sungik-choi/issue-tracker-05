@@ -1,7 +1,5 @@
 package com.codesquad.issuetracker.hamill.domain;
 
-import java.time.LocalDateTime;
-
 public class Label {
 
     private Integer id;
@@ -10,21 +8,25 @@ public class Label {
 
     private String description;
 
-    private String hexCode;
+    private String backgroundColor;
 
-    private Label(Integer id, String name, String description, String hexCode) {
+    private String color;
+
+    private Label(Integer id, String name, String description, String backgroundColor, String color) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.hexCode = hexCode;
+        this.backgroundColor = backgroundColor;
+        this.color = color;
     }
 
-    public static Label of(Integer id, String name, String description, String hexCode) {
+    public static Label of(Integer id, String name, String description, String backgroundColor, String color) {
         return new Builder()
                 .id(id)
                 .name(name)
                 .description(description)
-                .hexCode(hexCode)
+                .backgroundColor(backgroundColor)
+                .color(color)
                 .build();
     }
 
@@ -40,15 +42,20 @@ public class Label {
         return description;
     }
 
-    public String getHexCode() {
-        return hexCode;
+    public String getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    public String getColor() {
+        return color;
     }
 
     private static class Builder {
         private Integer id;
         private String name;
         private String description;
-        private String hexCode;
+        private String backgroundColor;
+        private String color;
 
         private Builder() {}
 
@@ -67,13 +74,18 @@ public class Label {
             return this;
         }
 
-        private Builder hexCode(String hexCode) {
-            this.hexCode = hexCode;
+        private Builder backgroundColor(String backgroundColor) {
+            this.backgroundColor = backgroundColor;
+            return this;
+        }
+
+        private Builder color(String color) {
+            this.color = color;
             return this;
         }
 
         private Label build() {
-            return new Label(id, name, description, hexCode);
+            return new Label(id, name, description, backgroundColor, color);
         }
     }
 

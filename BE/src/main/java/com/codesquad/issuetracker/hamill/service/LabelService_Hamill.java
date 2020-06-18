@@ -38,7 +38,7 @@ public class LabelService_Hamill {
 
         // 함수형 프로그래밍
         List<LabelSummary> labelSummaries = labels.stream()
-                                                 .map(label -> of(label.getId(), label.getName(), label.getHexCode()))
+                                                 .map(label -> of(label.getId(), label.getName(), label.getBackgroundColor(), label.getColor()))
                                                  .collect(Collectors.toList());
 
         return LabelInformation.of(labels.size(), labelSummaries);

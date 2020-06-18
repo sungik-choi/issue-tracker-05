@@ -6,16 +6,19 @@ public class LabelSummary {
 
     private String labelName;
 
-    private String hexCode;
+    private String backgroundColor;
 
-    private LabelSummary(Integer labelId, String labelName, String hexCode) {
+    private String color;
+
+    private LabelSummary(Integer labelId, String labelName, String backgroundColor, String color) {
         this.labelId = labelId;
         this.labelName = labelName;
-        this.hexCode = hexCode;
+        this.backgroundColor = backgroundColor;
+        this.color = color;
     }
 
-    public static LabelSummary of(Integer labelId, String labelName, String hexCode) {
-        return new LabelSummary(labelId, labelName, hexCode);
+    public static LabelSummary of(Integer labelId, String labelName, String backgroundColor, String color) {
+        return new LabelSummary(labelId, labelName, backgroundColor, color);
     }
 
     public Integer getLabelId() {
@@ -26,7 +29,11 @@ public class LabelSummary {
         return labelName;
     }
 
-    public String getHexCode() {
-        return hexCode;
+    public String getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    public String getColor() {
+        return color;
     }
 }
