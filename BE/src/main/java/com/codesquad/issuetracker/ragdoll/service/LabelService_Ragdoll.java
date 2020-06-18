@@ -30,4 +30,9 @@ public class LabelService_Ragdoll {
                                                  .collect(Collectors.toSet());
         return LabelInformation.create(labelSummaries.size(), labelSummaries);
     }
+
+    public String createNewLabel(LabelRequestDto labelRequestDto) {
+        labelDaoRagdoll.createNewLabel(labelRequestDto.getLabelName(), labelRequestDto.getDescription(), labelRequestDto.getHexCode());
+        return ResponseMessages.SUCCESSFULLY_CREATED;
+    }
 }
