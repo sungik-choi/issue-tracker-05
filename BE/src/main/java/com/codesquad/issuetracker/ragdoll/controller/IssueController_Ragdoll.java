@@ -27,6 +27,11 @@ public class IssueController_Ragdoll {
         return new ResponseEntity(ApiResponse.CREATED(issueService.submitNewIssue(submitNewIssueRequestDto)), HttpStatus.CREATED);
     }
 
+    @GetMapping("/issues")
+    public ResponseEntity<ApiResponse<ListOfIssuesDto>> filter(@RequestParam FilterParameters filterParameters) {
+        return new ResponseEntity(ApiResponse.OK(issueService.findIssuesByFilterParameters(filterParameters)), HttpStatus.OK);
+    }
+
     @GetMapping("/issues/{issueId}")
     public ResponseEntity<ApiResponse<DetailedInformationOfIssueDto>> showDetails(@PathVariable Long issueId) {
         return new ResponseEntity(ApiResponse.OK(issueService.showIssueDetails(issueId)), HttpStatus.OK);
