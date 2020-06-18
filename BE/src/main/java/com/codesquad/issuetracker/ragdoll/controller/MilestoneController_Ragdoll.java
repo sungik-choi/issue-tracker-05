@@ -25,6 +25,11 @@ public class MilestoneController_Ragdoll {
 
     @PostMapping("/milestones")
     public ResponseEntity<ApiResponse<String>> create(@RequestBody MilestoneRequestDto milestoneRequestDto) {
-        return new ResponseEntity(ApiResponse.CREATED(milestoneService.createNewMilestone(milestoneRequestDto)), HttpStatus.OK);
+        return new ResponseEntity(ApiResponse.CREATED(milestoneService.createNewMilestone(milestoneRequestDto)), HttpStatus.CREATED);
+    }
+
+    @PatchMapping("milestones/{milestoneId}")
+    public ResponseEntity<ApiResponse<String>> update(@PathVariable Integer milestoneId, @RequestBody MilestoneRequestDto milestoneRequestDto) {
+        return new ResponseEntity(ApiResponse.OK(milestoneService.updateMilestone(milestoneId, milestoneRequestDto)), HttpStatus.OK);
     }
 }
