@@ -142,4 +142,9 @@ public class IssueDao_Ragdoll {
         String sql = "UPDATE issue SET milestone_id = ? WHERE id = ?";
         jdbcTemplate.update(sql, new Object[]{milestoneId, issueId});
     }
+
+    public void updateComment(Long issueId, Long commentId, String description) {
+        String sql = "UPDATE comment SET description = ? WHERE issue_id = ? AND id = ?";
+        jdbcTemplate.update(sql, new Object[]{description, issueId, commentId});
+    }
 }
