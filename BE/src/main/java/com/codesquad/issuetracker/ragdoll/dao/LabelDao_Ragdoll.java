@@ -15,6 +15,10 @@ public class LabelDao_Ragdoll {
 
     public LabelDao_Ragdoll(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
+
+    public void createNewLabel(String labelName, String description, String hexCode) {
+        String sql = "INSERT INTO label (name, description, hex_code) VALUES (?, ?, ?)";
+        jdbcTemplate.update(sql,new Object[]{labelName, description, hexCode});
     }
 
     public List<LabelSummary> findAttachedLabelsByIssueId(Long issueId) {
