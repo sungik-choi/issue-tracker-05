@@ -1,6 +1,7 @@
 package com.codesquad.issuetracker.hamill.controller;
 
 import com.codesquad.issuetracker.common.CommonMessage;
+import com.codesquad.issuetracker.hamill.dto.ListOfIssuesDto;
 import com.codesquad.issuetracker.hamill.dto.RequestNewIssueDto;
 import com.codesquad.issuetracker.hamill.dto.info.IssuesDto;
 import com.codesquad.issuetracker.hamill.service.IssueService_Hamill;
@@ -24,9 +25,14 @@ public class IssueController_Hamill {
         this.issueService_Hamill = issueService_Hamill;
     }
 
+//    @GetMapping("/api/issues")
+//    public ResponseEntity<List<IssuesDto>> showList() {
+//        return new ResponseEntity<>(issueService_Hamill.findAllIssues(), HttpStatus.OK);
+//    }
+
     @GetMapping("/api/issues")
-    public ResponseEntity<List<IssuesDto>> showList() {
-        return new ResponseEntity<>(issueService_Hamill.findAllIssues(), HttpStatus.OK);
+    public ResponseEntity<ListOfIssuesDto> showList() {
+        return new ResponseEntity<>(issueService_Hamill.getIssuesAndAllElements(), HttpStatus.OK);
     }
 
     @GetMapping("/api/issues/{issueId}")

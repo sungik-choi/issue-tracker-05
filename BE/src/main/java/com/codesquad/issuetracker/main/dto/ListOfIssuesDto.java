@@ -3,7 +3,7 @@ package com.codesquad.issuetracker.main.dto;
 import com.codesquad.issuetracker.ragdoll.vo.issueVO.IssueDetails;
 import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelInformation;
 import com.codesquad.issuetracker.ragdoll.vo.milestoneVO.MilestoneInformation;
-import com.codesquad.issuetracker.ragdoll.vo.userVO.UserSummary;
+import com.codesquad.issuetracker.main.vo.UserVO.UserSummary;
 
 import java.util.List;
 

@@ -1,9 +1,10 @@
-package com.codesquad.issuetracker.ragdoll.dto;
+package com.codesquad.issuetracker.hamill.dto;
 
-import com.codesquad.issuetracker.main.vo.UserVO.UserSummary;
-import com.codesquad.issuetracker.ragdoll.vo.issueVO.IssueDetails;
-import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelInformation;
-import com.codesquad.issuetracker.ragdoll.vo.milestoneVO.MilestoneInformation;
+
+import com.codesquad.issuetracker.hamill.vo.UserVO.UserSummary;
+import com.codesquad.issuetracker.hamill.vo.issueVO.IssueDetails;
+import com.codesquad.issuetracker.hamill.vo.labelVO.LabelInformation;
+import com.codesquad.issuetracker.hamill.vo.milestoneVO.MilestoneInformation;
 
 import java.util.List;
 
@@ -17,8 +18,6 @@ public class ListOfIssuesDto {
 
     private List<UserSummary> assigneeInfo;
 
-    public ListOfIssuesDto() {}
-
     private ListOfIssuesDto(List<IssueDetails> issues, LabelInformation labelInfo, MilestoneInformation milestoneInfo, List<UserSummary> assigneeInfo) {
         this.issues = issues;
         this.labelInfo = labelInfo;
@@ -26,43 +25,32 @@ public class ListOfIssuesDto {
         this.assigneeInfo = assigneeInfo;
     }
 
-    public static ListOfIssuesDto create(List<IssueDetails> issues, LabelInformation labelInfo, MilestoneInformation milestoneInfo, List<UserSummary> assigneeInfo) {
-        return new ListOfIssuesDto(issues, labelInfo, milestoneInfo, assigneeInfo);
+    public static ListOfIssuesDto of(List<IssueDetails> issues, LabelInformation labelInfo, MilestoneInformation milestoneInfo, List<UserSummary> assigneeInfo) {
+        return new Builder()
+                .issues(issues)
+                .labelInfo(labelInfo)
+                .milestoneInfo(milestoneInfo)
+                .assigneeInfo(assigneeInfo)
+                .build();
     }
 
     public List<IssueDetails> getIssues() {
         return issues;
     }
 
-    public void setIssues(List<IssueDetails> issues) {
-        this.issues = issues;
-    }
-
     public LabelInformation getLabelInfo() {
         return labelInfo;
-    }
-
-    public void setLabelInfo(LabelInformation labelInfo) {
-        this.labelInfo = labelInfo;
     }
 
     public MilestoneInformation getMilestoneInfo() {
         return milestoneInfo;
     }
 
-    public void setMilestoneInfo(MilestoneInformation milestoneInfo) {
-        this.milestoneInfo = milestoneInfo;
-    }
-
     public List<UserSummary> getAssigneeInfo() {
         return assigneeInfo;
     }
 
-    public void setAssigneeInfo(List<UserSummary> assigneeInfo) {
-        this.assigneeInfo = assigneeInfo;
-    }
-
-    public static class Builder {
+    private static class Builder {
         private List<IssueDetails> issues;
         private LabelInformation labelInfo;
         private MilestoneInformation milestoneInfo;

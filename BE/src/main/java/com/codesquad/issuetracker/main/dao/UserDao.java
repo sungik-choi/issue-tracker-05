@@ -1,7 +1,7 @@
 package com.codesquad.issuetracker.main.dao;
 
-import com.codesquad.issuetracker.ragdoll.domain.User;
-import com.codesquad.issuetracker.ragdoll.vo.userVO.UserSummary;
+import com.codesquad.issuetracker.main.domain.User;
+import com.codesquad.issuetracker.main.vo.UserVO.UserSummary;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 

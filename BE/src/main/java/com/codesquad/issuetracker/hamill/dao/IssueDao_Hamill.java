@@ -1,6 +1,7 @@
 package com.codesquad.issuetracker.hamill.dao;
 
 import com.codesquad.issuetracker.hamill.controller.IssueController_Hamill;
+import com.codesquad.issuetracker.hamill.domain.Issue;
 import com.codesquad.issuetracker.hamill.dto.AssigneeDto;
 import com.codesquad.issuetracker.hamill.dto.AuthorDto;
 import com.codesquad.issuetracker.hamill.dto.info.IssuesDto;
@@ -20,12 +21,25 @@ import java.util.List;
 @Repository
 public class IssueDao_Hamill {
 
-    private static final Logger logger = LoggerFactory.getLogger(IssueController_Hamill.class);
+    private static final Logger logger = LoggerFactory.getLogger(IssueDao_Hamill.class);
 
     private JdbcTemplate jdbcTemplate;
 
     public IssueDao_Hamill(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    public List<Issue> findAllIssues() {
+        return jdbcTemplate.query(
+                "SELECT * FROM issue",
+                (rs, rowNum) ->
+                        Issue.of(rs.getLong("id"),
+                                rs.getString("title"),
+                                rs.getTimestamp("created_date_time").toLocalDateTime(),
+                                rs.getBoolean("is_opened"),
+                                rs.getLong("user_id"),
+                                rs.getInt("milestone_id"))
+        );
     }
 
     public IssuesDto findIssueByIssueId(Long issueId) {

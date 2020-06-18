@@ -1,8 +1,8 @@
 package com.codesquad.issuetracker.main.service;
 
 import com.codesquad.issuetracker.main.dao.UserDao;
-import com.codesquad.issuetracker.ragdoll.domain.User;
-import com.codesquad.issuetracker.ragdoll.vo.userVO.UserSummary;
+import com.codesquad.issuetracker.main.domain.User;
+import com.codesquad.issuetracker.main.vo.UserVO.UserSummary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
