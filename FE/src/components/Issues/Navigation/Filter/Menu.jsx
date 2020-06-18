@@ -51,8 +51,9 @@ const Menu = () => {
 
 const useStyles = makeStyles((theme) => ({
   button: {
+    backgroundColor: theme.palette.grey[100],
     border: `1px solid ${theme.palette.divider}`,
-    borderRadius: "5px 0  0 5px",
+    borderRadius: "4px 0  0 4px",
     paddingRight: theme.spacing(1),
   },
 }));

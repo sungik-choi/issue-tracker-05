@@ -29,15 +29,13 @@ const SearchBar = () => {
 
 const useStyles = makeStyles((theme) => ({
   search: {
-    borderRadius: "0 5px 5px 0",
-    border: `1px solid ${theme.palette.grey[400]}`,
+    borderRadius: "0 4px 4px 0",
+    border: `1px solid ${theme.palette.divider}`,
     borderLeft: "none",
   },
   searchIcon: {
     padding: theme.spacing(0, 1),
     color: theme.palette.grey[400],
-    height: "100%",
-    position: "absolute",
     pointerEvents: "none",
     display: "flex",
     alignItems: "center",
@@ -47,10 +45,7 @@ const useStyles = makeStyles((theme) => ({
     color: "inherit",
   },
   inputInput: {
-    color: theme.palette.grey[800],
-    paddingLeft: `calc(1rem + ${theme.spacing(3)}px)`,
     transition: theme.transitions.create("width"),
-    height: "100%",
     [theme.breakpoints.up("md")]: {
       width: "550px",
     },
