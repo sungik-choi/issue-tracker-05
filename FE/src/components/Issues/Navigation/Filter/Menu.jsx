@@ -53,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
   button: {
     border: `1px solid ${theme.palette.divider}`,
     borderRadius: "5px 0  0 5px",
+    paddingRight: theme.spacing(1),
   },
 }));
 
