@@ -17,10 +17,10 @@ public class IssueController_Ragdoll {
         this.issueService = issueService;
     }
 
-    @GetMapping("/issues")
-    public ResponseEntity<ApiResponse<ListOfIssuesDto>> listing() {
-        return new ResponseEntity(ApiResponse.OK(issueService.findAllIssues()), HttpStatus.OK);
-    }
+//    @GetMapping("/issues")
+//    public ResponseEntity<ApiResponse<ListOfIssuesDto>> list() {
+//        return new ResponseEntity(ApiResponse.OK(issueService.findAllIssues()), HttpStatus.OK);
+//    }
 
     @PostMapping("/issues")
     public ResponseEntity<ApiResponse<String>> submit(@RequestBody SubmitNewIssueRequestDto submitNewIssueRequestDto) {
@@ -28,7 +28,7 @@ public class IssueController_Ragdoll {
     }
 
     @GetMapping("/issues")
-    public ResponseEntity<ApiResponse<ListOfIssuesDto>> filter(@RequestParam FilterParameters filterParameters) {
+    public ResponseEntity<ApiResponse<ListOfIssuesDto>> filter(@ModelAttribute FilterParameters filterParameters) {
         return new ResponseEntity(ApiResponse.OK(issueService.findIssuesByFilterParameters(filterParameters)), HttpStatus.OK);
     }
 
