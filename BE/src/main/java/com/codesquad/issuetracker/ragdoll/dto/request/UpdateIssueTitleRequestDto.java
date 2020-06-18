@@ -1,19 +1,19 @@
-package com.codesquad.issuetracker.ragdoll.dto;
+package com.codesquad.issuetracker.ragdoll.dto.request;
 
-public class ModifyIssueTitleRequestDto {
+public class UpdateIssueTitleRequestDto {
     private Long userId;
 
     private String issueTitle;
 
-    public ModifyIssueTitleRequestDto() {}
+    public UpdateIssueTitleRequestDto() {}
 
-    private ModifyIssueTitleRequestDto(Long userId, String issueTitle) {
+    private UpdateIssueTitleRequestDto(Long userId, String issueTitle) {
         this.userId = userId;
         this.issueTitle = issueTitle;
     }
 
-    public static ModifyIssueTitleRequestDto create(Long userId, String issueTitle) {
-        return new ModifyIssueTitleRequestDto(userId, issueTitle);
+    public static UpdateIssueTitleRequestDto create(Long userId, String issueTitle) {
+        return new UpdateIssueTitleRequestDto(userId, issueTitle);
     }
 
     public Long getUserId() {

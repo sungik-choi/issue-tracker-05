@@ -8,6 +8,7 @@ import com.codesquad.issuetracker.ragdoll.domain.Issue;
 import com.codesquad.issuetracker.ragdoll.domain.Milestone;
 import com.codesquad.issuetracker.ragdoll.domain.User;
 import com.codesquad.issuetracker.ragdoll.dto.*;
+import com.codesquad.issuetracker.ragdoll.dto.request.*;
 import com.codesquad.issuetracker.ragdoll.exception.UserUnauthorizedException;
 import com.codesquad.issuetracker.ragdoll.vo.commentVO.CommentDetails;
 import com.codesquad.issuetracker.ragdoll.vo.issueVO.IssueDetails;
@@ -110,12 +111,12 @@ public class IssueService_Ragdoll {
                                                 .build();
     }
 
-    public String modifyIssueTitle(Long issueId, ModifyIssueTitleRequestDto modifyIssueTitleRequestDto) {
+    public String modifyIssueTitle(Long issueId, UpdateIssueTitleRequestDto updateIssueTitleRequestDto) {
         Issue targetIssue = issueDao.findIssueById(issueId);
-        if (isUnauthorizedUser(targetIssue.getUserId(), modifyIssueTitleRequestDto.getUserId())) {
+        if (isUnauthorizedUser(targetIssue.getUserId(), updateIssueTitleRequestDto.getUserId())) {
             throw new UserUnauthorizedException(ErrorMessages.USER_UNAUTHORIZED);
         }
-        issueDao.modifyIssueTitle(issueId, modifyIssueTitleRequestDto.getIssueTitle());
+        issueDao.modifyIssueTitle(issueId, updateIssueTitleRequestDto.getIssueTitle());
         return ResponseMessages.SUCCESSFULLY_MODIFIED;
     }
 
@@ -123,12 +124,12 @@ public class IssueService_Ragdoll {
         return !bindUserId.equals(requestUserId);
     }
 
-    public String modifyIssueStatus(Long issueId, ModifyIssueStatusRequestDto modifyIssueStatusRequestDto) {
+    public String modifyIssueStatus(Long issueId, UpdateIssueStatusRequestDto updateIssueStatusRequestDto) {
         Issue targetIssue = issueDao.findIssueById(issueId);
-        if (isUnauthorizedUser(targetIssue.getUserId(), modifyIssueStatusRequestDto.getUserId())) {
+        if (isUnauthorizedUser(targetIssue.getUserId(), updateIssueStatusRequestDto.getUserId())) {
             throw new UserUnauthorizedException(ErrorMessages.USER_UNAUTHORIZED);
         }
-        issueDao.modifyIssueStats(issueId, modifyIssueStatusRequestDto.isOpened());
+        issueDao.modifyIssueStats(issueId, updateIssueStatusRequestDto.isOpened());
         return ResponseMessages.SUCCESSFULLY_MODIFIED;
     }
 

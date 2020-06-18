@@ -2,10 +2,9 @@ package com.codesquad.issuetracker.ragdoll.service;
 
 import com.codesquad.issuetracker.ragdoll.commonconstant.ResponseMessages;
 import com.codesquad.issuetracker.ragdoll.dao.MilestoneDao_Ragdoll;
-import com.codesquad.issuetracker.ragdoll.domain.Issue;
 import com.codesquad.issuetracker.ragdoll.domain.Milestone;
 import com.codesquad.issuetracker.ragdoll.dto.ListOfMilestonesDto;
-import com.codesquad.issuetracker.ragdoll.dto.MilestoneRequestDto;
+import com.codesquad.issuetracker.ragdoll.dto.request.MilestoneRequestDto;
 import com.codesquad.issuetracker.ragdoll.vo.milestoneVO.MilestoneDetails;
 import com.codesquad.issuetracker.ragdoll.vo.milestoneVO.MilestoneInformation;
 import com.codesquad.issuetracker.ragdoll.vo.milestoneVO.MilestoneSummary;

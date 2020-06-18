@@ -1,6 +1,7 @@
 package com.codesquad.issuetracker.ragdoll.controller;
 
 import com.codesquad.issuetracker.ragdoll.dto.*;
+import com.codesquad.issuetracker.ragdoll.dto.request.*;
 import com.codesquad.issuetracker.ragdoll.response.ApiResponse;
 import com.codesquad.issuetracker.ragdoll.service.IssueService_Ragdoll;
 import org.springframework.http.HttpStatus;
@@ -38,13 +39,13 @@ public class IssueController_Ragdoll {
     }
 
     @PatchMapping("/issues/{issueId}/title")
-    public ResponseEntity<ApiResponse<String>> modifyTitle(@PathVariable Long issueId, @RequestBody ModifyIssueTitleRequestDto modifyIssueTitleRequestDto) {
-        return new ResponseEntity(ApiResponse.OK(issueService.modifyIssueTitle(issueId, modifyIssueTitleRequestDto)), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<String>> modifyTitle(@PathVariable Long issueId, @RequestBody UpdateIssueTitleRequestDto updateIssueTitleRequestDto) {
+        return new ResponseEntity(ApiResponse.OK(issueService.modifyIssueTitle(issueId, updateIssueTitleRequestDto)), HttpStatus.OK);
     }
 
     @PatchMapping("/issues/{issueId}/mark")
-    public ResponseEntity<ApiResponse<String>> modifyIssueStatus(@PathVariable Long issueId, @RequestBody ModifyIssueStatusRequestDto modifyIssueStatusRequestDto) {
-        return new ResponseEntity(ApiResponse.OK(issueService.modifyIssueStatus(issueId, modifyIssueStatusRequestDto)), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<String>> modifyIssueStatus(@PathVariable Long issueId, @RequestBody UpdateIssueStatusRequestDto updateIssueStatusRequestDto) {
+        return new ResponseEntity(ApiResponse.OK(issueService.modifyIssueStatus(issueId, updateIssueStatusRequestDto)), HttpStatus.OK);
     }
 
     @PutMapping("/issues/{issueId}/assignees")

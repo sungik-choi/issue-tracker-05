@@ -1,12 +1,12 @@
-package com.codesquad.issuetracker.ragdoll.dto;
+package com.codesquad.issuetracker.ragdoll.dto.request;
 
-public class ModifyIssueStatusRequestDto {
+public class UpdateIssueStatusRequestDto {
 
     private Long userId;
 
     private boolean opened;
 
-    public ModifyIssueStatusRequestDto(Long userId, boolean opened) {
+    public UpdateIssueStatusRequestDto(Long userId, boolean opened) {
         this.userId = userId;
         this.opened = opened;
     }

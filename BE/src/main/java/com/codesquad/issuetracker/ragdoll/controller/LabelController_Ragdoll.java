@@ -1,6 +1,6 @@
 package com.codesquad.issuetracker.ragdoll.controller;
 
-import com.codesquad.issuetracker.ragdoll.dto.LabelRequestDto;
+import com.codesquad.issuetracker.ragdoll.dto.request.LabelRequestDto;
 import com.codesquad.issuetracker.ragdoll.response.ApiResponse;
 import com.codesquad.issuetracker.ragdoll.service.LabelService_Ragdoll;
 import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelInformation;

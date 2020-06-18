@@ -1,7 +1,7 @@
 package com.codesquad.issuetracker.ragdoll.controller;
 
 import com.codesquad.issuetracker.ragdoll.dto.ListOfMilestonesDto;
-import com.codesquad.issuetracker.ragdoll.dto.MilestoneRequestDto;
+import com.codesquad.issuetracker.ragdoll.dto.request.MilestoneRequestDto;
 import com.codesquad.issuetracker.ragdoll.response.ApiResponse;
 import com.codesquad.issuetracker.ragdoll.service.MilestoneService_Ragdoll;
 import org.springframework.http.HttpStatus;

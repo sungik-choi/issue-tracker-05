@@ -1,4 +1,4 @@
-package com.codesquad.issuetracker.ragdoll.dto;
+package com.codesquad.issuetracker.ragdoll.dto.request;
 
 import java.util.List;
 

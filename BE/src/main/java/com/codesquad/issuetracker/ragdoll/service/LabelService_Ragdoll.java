@@ -3,7 +3,7 @@ package com.codesquad.issuetracker.ragdoll.service;
 import com.codesquad.issuetracker.ragdoll.commonconstant.ResponseMessages;
 import com.codesquad.issuetracker.ragdoll.dao.LabelDao_Ragdoll;
 import com.codesquad.issuetracker.ragdoll.domain.Label;
-import com.codesquad.issuetracker.ragdoll.dto.LabelRequestDto;
+import com.codesquad.issuetracker.ragdoll.dto.request.LabelRequestDto;
 import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelInformation;
 import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelSummary;
 import org.springframework.stereotype.Service;

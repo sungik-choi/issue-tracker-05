@@ -2,7 +2,7 @@ package com.codesquad.issuetracker.ragdoll.dao;
 
 import com.codesquad.issuetracker.ragdoll.domain.Comment;
 import com.codesquad.issuetracker.ragdoll.domain.Issue;
-import com.codesquad.issuetracker.ragdoll.dto.FilterParameters;
+import com.codesquad.issuetracker.ragdoll.dto.request.FilterParameters;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -12,7 +12,6 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -150,24 +149,70 @@ public class IssueDao_Ragdoll {
     }
 
     public List<Issue> findIssuesByFilterParameters(FilterParameters filterParameters) {
-        String sql = "SELECT i.id, i.title, i.created_date_time, i.is_opened, i.user_id, i.milestone_id " +
-                     "FROM issue i LEFT OUTER JOIN issue_has_label il ON  i.id = il.issue_id " +
-                                  "LEFT OUTER JOIN assignee a ON i.id = a.issue_id " +
+        String sql = "SELECT DISTINCT i.id, i.title, i.created_date_time, i.is_opened, i.user_id, i.milestone_id " +
+                     "FROM issue_has_label il RIGHT OUTER JOIN issue i  ON  i.id = il.issue_id " +
+                                             "LEFT OUTER JOIN assignee a ON i.id = a.issue_id " +
                      "WHERE i.is_opened = COALESCE(:open, true) " +
                         "AND " +
-                      "i.user_id = COALESCE(:author, user_id) " +
+                            "( ( (i.user_id IS NOT NULL ) AND ( i.user_id = :author) ) " +
+                                                    "OR " +
+                            "( (i.user_id IS NULL ) AND ( i.user_id > 0) ) ) " +
                         "AND " +
-                      "il.label = COALESCE(:label, label) " +
+                            "( ( (il.label_id IS NOT NULL ) AND ( il.label_id = :label) ) " +
+                                                    "OR " +
+                            "( (il.label_id IS NULL) AND ( il.label_id > 0) ) ) " +
                         "AND " +
-                      "i.milestone_id = COALESCE(:milestones, milestone_id) " +
+                            "( ( (i.milestone_id IS NOT NULL ) AND ( i.milestone_id = :milestones) ) " +
+                                                    "OR " +
+                            "( (i.milestone_id IS NULL ) AND ( i.milestone_id > 0) ) ) " +
                         "AND " +
-                      "a.user_id = COALESCE(:assignee, user_id)";
+                            "( ( (a.user_id IS NOT NULL ) AND ( a.user_id = :assignee) ) " +
+                                                    "OR " +
+                            "( (a.user_id IS NULL ) AND ( a.user_id > 0 ) ) )";
         SqlParameterSource namedParameters = new MapSqlParameterSource()
                                                 .addValue("open", filterParameters.getOpen())
                                                 .addValue("author", filterParameters.getAuthor())
                                                 .addValue("label", filterParameters.getLabel())
                                                 .addValue("milestones", filterParameters.getMilestones())
                                                 .addValue("assignee", filterParameters.getAssignee());
+        return namedParameterJdbcTemplate.query(sql, namedParameters,
+                (rs, rowNum) -> new Issue.Builder()
+                                         .id(rs.getLong("i.id"))
+                                         .title(rs.getString("i.title"))
+                                         .createdDateTime(rs.getTimestamp("i.created_date_time").toLocalDateTime())
+                                         .opened(rs.getBoolean("is_opened"))
+                                         .userId(rs.getLong("user_id"))
+                                         .milestoneId(rs.getInt("milestone_id"))
+                                         .build());
+    }
+
+    public List<Long> findIssueIdsFilteredByLabels(Boolean open, Long author, Integer label, Integer milestones) {
+        String sql = "SELECT DISTINCT i.id " +
+                     "FROM issue i LEFT OUTER JOIN issue_has_label il ON i.id = il.issue_id " +
+                     "WHERE i.is_opened = COALESCE(:open, true) " +
+                        "AND " +
+                           "i.user_id = COALESCE(:author, i.user_id) " +
+                        "AND " +
+                           "( (il.label_id = COALESCE(:label, il.label_id) ) OR (il.label_id IS NULL) ) " +
+                        "AND " +
+                           "( (i.milestone_id = COALESCE(:milestones, i.milestone_id) ) OR (i.milestone_id IS NULL) )";
+        SqlParameterSource namedParameters = new MapSqlParameterSource()
+                                                .addValue("open", open)
+                                                .addValue("author", author)
+                                                .addValue("label", label)
+                                                .addValue("milestones", milestones);
+        return namedParameterJdbcTemplate.queryForList(sql, namedParameters, Long.class);
+    }
+
+    public List<Issue> findIssuesFilteredByAssignee(List<Long> issueIdsFilteredByLabels, Long assignee) {
+        String sql = "SELECT DISTINCT i.id, i.title, i.created_date_time, i.is_opened, i.user_id, i.milestone_id " +
+                     "FROM issue i LEFT OUTER JOIN assignee a ON i.id = a.issue_id " +
+                     "WHERE i.id IN (:issueIdsFilteredByLabels) " +
+                        "AND " +
+                     "( (a.user_id = COALESCE(:assignee, a.user_id) ) OR (a.user_id IS NULL ) )";
+        SqlParameterSource namedParameters = new MapSqlParameterSource()
+                                                .addValue("issueIdsFilteredByLabels", issueIdsFilteredByLabels)
+                                                .addValue("assignee", assignee);
         return namedParameterJdbcTemplate.query(sql, namedParameters,
                 (rs, rowNum) -> new Issue.Builder()
                                          .id(rs.getLong("i.id"))
