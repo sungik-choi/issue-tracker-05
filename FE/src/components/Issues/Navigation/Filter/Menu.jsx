@@ -1,36 +1,33 @@
 import React from "react";
 
-import MenuList from "@Components/common/MenuList";
-
+import { makeStyles } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Popover from "@material-ui/core/Popover";
 import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-import { makeStyles } from "@material-ui/core/styles";
-import grey from "@material-ui/core/colors/grey";
 
-const mockArr = ["Filter lssues", "Open issues", "Close issues"];
-const MENU_LIST_TITLE = "Filter lssues";
+import MenuList from "@Components/common/MenuList";
 
 const Menu = () => {
   const FILTER_BTN_TEXT = "Filters";
+  const MENU_LIST_TITLE = "Filter Issues";
+  const mockArr = ["Filter Issues", "Open issues", "Close issues"];
   const classes = useStyles();
 
   const menuList = mockArr.map((text) => <MenuList text={text} key={text} />);
   return (
     <PopupState variant="popover" popupId="demo-popup-popover">
       {(popupState) => (
-        <div>
+        <Box>
           <Button
-            className={classes.button}
+            disableElevation
             variant="contained"
-            size="small"
+            className={classes.button}
             {...bindTrigger(popupState)}
           >
-            <span className={classes.filterText}>{FILTER_BTN_TEXT}</span>
-            <span>
-              <ArrowDropDownIcon className={classes.downIcon} />
-            </span>
+            {FILTER_BTN_TEXT}
+            <ArrowDropDownIcon />
           </Button>
           <Popover
             {...bindPopover(popupState)}
@@ -46,24 +43,16 @@ const Menu = () => {
             <MenuList title={MENU_LIST_TITLE} />
             {menuList}
           </Popover>
-        </div>
+        </Box>
       )}
     </PopupState>
   );
 };
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   button: {
-    border: `1px solid${grey[400]}`,
+    border: `1px solid ${theme.palette.divider}`,
     borderRadius: "5px 0  0 5px",
-    textTransform: "none",
-  },
-  filterText: {
-    fontSize: 13,
-    fontWeight: "bold",
-  },
-  downIcon: {
-    verticalAlign: "middle",
   },
 }));
 
