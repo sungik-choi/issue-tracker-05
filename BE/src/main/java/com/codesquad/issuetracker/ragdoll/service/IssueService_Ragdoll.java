@@ -18,6 +18,7 @@ import com.codesquad.issuetracker.ragdoll.vo.milestoneVO.MilestoneSummary;
 import com.codesquad.issuetracker.ragdoll.vo.userVO.UserSummary;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -176,5 +177,28 @@ public class IssueService_Ragdoll {
     public String updateComment(Long issueId, Long commentId, CommentsRequestDto commentsRequestDto) {
         issueDao.updateComment(issueId, commentId, commentsRequestDto.getDescription());
         return ResponseMessages.SUCCESSFULLY_MODIFIED;
+    }
+
+    public ListOfIssuesDto findIssuesByFilterParameters(FilterParameters filterParameters) {
+        List<Long> issueIdsFilteredByLabels = issueDao.findIssueIdsFilteredByLabels(filterParameters.getOpen(), filterParameters.getAuthor(),
+                                                                                    filterParameters.getLabel(), filterParameters.getMilestones());
+        if (issueIdsFilteredByLabels.size() == 0) { return createListOfIssues(new ArrayList<>()); }
+        List<Issue> filteredIssues = issueDao.findIssuesFilteredByAssignee(issueIdsFilteredByLabels, filterParameters.getAssignee());
+        return createListOfIssues(filteredIssues);
+    }
+
+    private ListOfIssuesDto createListOfIssues(List<Issue> issues) {
+        List<IssueDetails> detailsOfIssues = issues.stream()
+                                                   .map(issue -> mapToIssueDetails(issue, false))
+                                                   .collect(Collectors.toList());
+        LabelInformation labelInformation = labelService.findAllLabels();
+        MilestoneInformation milestoneInformation = milestoneService.findAllMilestones();
+        List<UserSummary> assigneeInformation = userService.findAllAssignees();
+        return new ListOfIssuesDto.Builder()
+                                  .issues(detailsOfIssues)
+                                  .labelInfo(labelInformation)
+                                  .milestoneInfo(milestoneInformation)
+                                  .assigneeInfo(assigneeInformation)
+                                  .build();
     }
 }
