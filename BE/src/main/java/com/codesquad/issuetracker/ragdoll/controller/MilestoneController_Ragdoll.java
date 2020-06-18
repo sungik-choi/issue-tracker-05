@@ -1,6 +1,7 @@
 package com.codesquad.issuetracker.ragdoll.controller;
 
 import com.codesquad.issuetracker.ragdoll.dto.ListOfMilestonesDto;
+import com.codesquad.issuetracker.ragdoll.dto.MilestoneRequestDto;
 import com.codesquad.issuetracker.ragdoll.response.ApiResponse;
 import com.codesquad.issuetracker.ragdoll.service.MilestoneService_Ragdoll;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,6 @@ public class MilestoneController_Ragdoll {
 
     @PostMapping("/milestones")
     public ResponseEntity<ApiResponse<String>> create(@RequestBody MilestoneRequestDto milestoneRequestDto) {
-        return new ResponseEntity(ApiResponse.CREATED(milestoneService.createNewMilestone()), HttpStatus.OK);
+        return new ResponseEntity(ApiResponse.CREATED(milestoneService.createNewMilestone(milestoneRequestDto)), HttpStatus.OK);
     }
 }
