@@ -52,4 +52,9 @@ public class LabelDao_Ragdoll {
         String sql = "UPDATE label SET name = :labelName, description = :description, hex_code = :hexCode WHERE id = :labelId";
         namedParameterJdbcTemplate.update(sql, namedParameters);
     }
+
+    public void deleteNewLabel(Integer labelId) {
+        String sql = "DELETE FROM label WHERE id = ?";
+        jdbcTemplate.update(sql, new Object[]{labelId});
+    }
 }
