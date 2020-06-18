@@ -6,6 +6,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -48,5 +50,11 @@ public class MilestoneDao_Ragdoll {
         String sql = "SELECT COUNT(*) FROM issue i JOIN milestone m ON i.milestone_id = m.id " +
                      "WHERE i.milestone_id = ? AND i.is_opened = ?";
         return jdbcTemplate.queryForObject(sql, new Object[]{milestoneId, isOpened}, Integer.class);
+    }
+
+    public void createNewMilestone(String title, LocalDate dueDate, String description) {
+        String sql = "INSERT INTO milestone (title, description, due_date, created_date_time, updated_date_time) " +
+                     "VALUES (?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, new Object[]{title, description, dueDate, LocalDateTime.now(), LocalDateTime.now()});
     }
 }
