@@ -66,4 +66,9 @@ public class MilestoneService_Ragdoll {
                                      milestoneRequestDto.getDescription());
         return ResponseMessages.SUCCESSFULLY_MODIFIED;
     }
+
+    public String deleteMilestone(Integer milestoneId) {
+        milestoneDao.deleteMilestone(milestoneId);
+        return ResponseMessages.SUCCESSFULLY_DELETED;
+    }
 }
