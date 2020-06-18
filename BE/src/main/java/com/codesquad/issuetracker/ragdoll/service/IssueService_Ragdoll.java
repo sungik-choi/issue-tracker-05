@@ -167,4 +167,9 @@ public class IssueService_Ragdoll {
         issueDao.updateRelatedMilestone(issueId, updateMilestoneRequestDto.getMilestoneId());
         return ResponseMessages.SUCCESSFULLY_MODIFIED;
     }
+
+    public String submitNewComment(Long issueId, CommentsRequestDto commentsRequestDto) {
+        issueDao.submitNewComment(commentsRequestDto.getUserId(), issueId, commentsRequestDto.getDescription());
+        return ResponseMessages.SUCCESSFULLY_CREATED;
+    }
 }
