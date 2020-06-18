@@ -20,7 +20,7 @@ public class MilestoneController_Ragdoll {
     }
 
     @GetMapping("/milestones")
-    public ResponseEntity<ApiResponse<ListOfMilestonesDto>> listing() {
+    public ResponseEntity<ApiResponse<ListOfMilestonesDto>> list() {
         return new ResponseEntity(ApiResponse.OK(milestoneService.findAllMilestonesWithDetails()), HttpStatus.OK);
     }
 }
