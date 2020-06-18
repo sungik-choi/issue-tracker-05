@@ -21,6 +21,7 @@ const LinkButton = ({ text, icon, count, ...props }) => {
 const useStyles = makeStyles((theme) => ({
   count: {
     marginLeft: theme.spacing(0.5),
+    pointerEvents: "none",
   },
 }));
 
