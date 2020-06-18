@@ -1,44 +1,38 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
-import grey from "@material-ui/core/colors/grey";
+import Button from "@material-ui/core/Button";
+import Chip from "@material-ui/core/Chip";
 
-const LinkButton = ({ text, count }) => {
+const LinkButton = ({ text, icon, count, ...props }) => {
   const classes = useStyles();
 
   return (
-    <Button variant="outlined" className={classes.root}>
-      <span>{text}</span>
-      {count && <span className={classes.count}>{count}</span>}
-    </Button>
+    <>
+      <Button startIcon={icon} {...props}>
+        {text}
+        {count && <Chip label={count} size="small" className={classes.count} />}
+      </Button>
+    </>
   );
 };
 
-const useStyles = makeStyles(() => ({
-  root: {
-    textTransform: "none",
-    padding: "0 20px",
-    "& span": {
-      fontWeight: "bold",
-      fontSize: 13,
-      color: grey[700],
-    },
-  },
-
+const useStyles = makeStyles((theme) => ({
   count: {
-    borderRadius: "50%",
-    marginLeft: 5,
-    display: "inline-block",
-    padding: "0 8px",
-    backgroundColor: grey[300],
+    marginLeft: theme.spacing(0.5),
   },
 }));
 
+LinkButton.defaultProps = {
+  icon: null,
+  count: null,
+};
+
 LinkButton.propTypes = {
   text: PropTypes.string.isRequired,
-  count: PropTypes.number,
+  icon: PropTypes.oneOf([PropTypes.element, PropTypes.null]),
+  count: PropTypes.oneOf([PropTypes.number, PropTypes.null]),
 };
 
 export default LinkButton;
