@@ -32,8 +32,8 @@ LinkButton.defaultProps = {
 
 LinkButton.propTypes = {
   text: PropTypes.string.isRequired,
-  icon: PropTypes.oneOf([PropTypes.element, PropTypes.null]),
-  count: PropTypes.oneOf([PropTypes.number, PropTypes.null]),
+  icon: PropTypes.oneOfType([PropTypes.element, PropTypes.instanceOf(null)]),
+  count: PropTypes.oneOfType([PropTypes.number, PropTypes.instanceOf(null)]),
 };
 
 export default LinkButton;

@@ -11,9 +11,13 @@ const PrimaryButton = ({ text, clickHandler }) => {
   );
 };
 
+PrimaryButton.defaultProps = {
+  clickHandler: null,
+};
+
 PrimaryButton.propTypes = {
   text: PropTypes.string.isRequired,
-  clickHandler: PropTypes.func.isRequired,
+  clickHandler: PropTypes.oneOfType([PropTypes.func, PropTypes.instanceOf(null)]),
 };
 
 export default PrimaryButton;
