@@ -2,6 +2,7 @@ package com.codesquad.issuetracker.ragdoll.dao;
 
 import com.codesquad.issuetracker.ragdoll.domain.Comment;
 import com.codesquad.issuetracker.ragdoll.domain.Issue;
+import com.codesquad.issuetracker.ragdoll.dto.FilterParameters;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -146,5 +147,35 @@ public class IssueDao_Ragdoll {
     public void updateComment(Long issueId, Long commentId, String description) {
         String sql = "UPDATE comment SET description = ? WHERE issue_id = ? AND id = ?";
         jdbcTemplate.update(sql, new Object[]{description, issueId, commentId});
+    }
+
+    public List<Issue> findIssuesByFilterParameters(FilterParameters filterParameters) {
+        String sql = "SELECT i.id, i.title, i.created_date_time, i.is_opened, i.user_id, i.milestone_id " +
+                     "FROM issue i LEFT OUTER JOIN issue_has_label il ON  i.id = il.issue_id " +
+                                  "LEFT OUTER JOIN assignee a ON i.id = a.issue_id " +
+                     "WHERE i.is_opened = COALESCE(:open, true) " +
+                        "AND " +
+                      "i.user_id = COALESCE(:author, user_id) " +
+                        "AND " +
+                      "il.label = COALESCE(:label, label) " +
+                        "AND " +
+                      "i.milestone_id = COALESCE(:milestones, milestone_id) " +
+                        "AND " +
+                      "a.user_id = COALESCE(:assignee, user_id)";
+        SqlParameterSource namedParameters = new MapSqlParameterSource()
+                                                .addValue("open", filterParameters.getOpen())
+                                                .addValue("author", filterParameters.getAuthor())
+                                                .addValue("label", filterParameters.getLabel())
+                                                .addValue("milestones", filterParameters.getMilestones())
+                                                .addValue("assignee", filterParameters.getAssignee());
+        return namedParameterJdbcTemplate.query(sql, namedParameters,
+                (rs, rowNum) -> new Issue.Builder()
+                                         .id(rs.getLong("i.id"))
+                                         .title(rs.getString("i.title"))
+                                         .createdDateTime(rs.getTimestamp("i.created_date_time").toLocalDateTime())
+                                         .opened(rs.getBoolean("is_opened"))
+                                         .userId(rs.getLong("user_id"))
+                                         .milestoneId(rs.getInt("milestone_id"))
+                                         .build());
     }
 }
