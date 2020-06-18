@@ -14,7 +14,7 @@ const Issue = ({ id, isSelectedIssue, clickHandler }) => {
     <>
       <Box display="flex" alignItems="center">
         <Checkbox color="primary" checked={isSelectedIssue(id)} onChange={() => clickHandler(id)} />
-        <StatusIcon closed />
+        <StatusIcon />
         <Contents />
       </Box>
       <AvatarStack userData={userList} />

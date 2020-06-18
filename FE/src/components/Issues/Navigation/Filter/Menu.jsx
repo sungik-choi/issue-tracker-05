@@ -1,13 +1,12 @@
 import React from "react";
 
-import MenuList from "@Components/common/MenuList";
-
+import { makeStyles } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Popover from "@material-ui/core/Popover";
 import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-import { makeStyles } from "@material-ui/core/styles";
-import grey from "@material-ui/core/colors/grey";
+import MenuList from "@Components/common/MenuList";
 
 const menuListText = [
   "Open issues",
@@ -17,44 +16,41 @@ const menuListText = [
   "Everything mentioning you",
   "Closed issues",
 ];
-const MENU_LIST_TITLE = "Filter lssues";
+const FILTER_BTN_TEXT = "Filters";
+const MENU_LIST_TITLE = "Filter Issues";
 
-const Menu = () => {
-  const FILTER_BTN_TEXT = "Filters";
+const Menu = () => {  
   const classes = useStyles();
 
-  const menuList = menuListText.map((text, i) => <MenuList text={text} key={text + i} />);
+  const menuList = mockArr.map((text) => <MenuList text={text} key={text} />);
   return (
     <PopupState variant="popover" popupId="demo-popup-popover">
       {(popupState) => (
-        <div>
+        <Box>
           <Button
-            className={classes.button}
+            disableElevation
             variant="contained"
-            color="default"
-            size="small"
+            className={classes.button}
             {...bindTrigger(popupState)}
           >
-            <span className={classes.filterText}>{FILTER_BTN_TEXT}</span>
-            <span>
-              <ArrowDropDownIcon className={classes.downIcon} />
-            </span>
+            {FILTER_BTN_TEXT}
+            <ArrowDropDownIcon />
           </Button>
           <Popover
             {...bindPopover(popupState)}
             anchorOrigin={{
               vertical: "bottom",
-              horizontal: "center",
+              horizontal: "left",
             }}
             transformOrigin={{
               vertical: "top",
-              horizontal: "center",
+              horizontal: "left",
             }}
           >
             <MenuList title={MENU_LIST_TITLE} />
             {menuList}
           </Popover>
-        </div>
+        </Box>
       )}
     </PopupState>
   );
@@ -62,16 +58,10 @@ const Menu = () => {
 
 const useStyles = makeStyles((theme) => ({
   button: {
-    border: "1px solid" + grey[400],
-    borderRadius: "5px 0  0 5px",
-    textTransform: "none",
-  },
-  filterText: {
-    fontSize: 13,
-    fontWeight: "bold",
-  },
-  downIcon: {
-    verticalAlign: "middle",
+    backgroundColor: theme.palette.grey[100],
+    border: `1px solid ${theme.palette.divider}`,
+    borderRadius: "4px 0  0 4px",
+    paddingRight: theme.spacing(1),
   },
 }));
 

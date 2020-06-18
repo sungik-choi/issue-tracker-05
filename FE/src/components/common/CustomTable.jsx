@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { withStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -12,6 +12,8 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
 const CustomTable = ({ ariaLabel, headContents, bodyContents }) => {
+  const classes = useStyles();
+
   return (
     <TableContainer component={Paper} variant="outlined">
       <Table aria-label={ariaLabel}>
@@ -24,7 +26,7 @@ const CustomTable = ({ ariaLabel, headContents, bodyContents }) => {
             </StyledTableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
+        <TableBody className={classes.table}>
           {bodyContents.map(({ id, contents }) => (
             <TableRow hover key={id}>
               <TableCell>
@@ -42,10 +44,18 @@ const CustomTable = ({ ariaLabel, headContents, bodyContents }) => {
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    backgroundColor: theme.palette.action.hover,
+    backgroundColor: theme.palette.grey[100],
     color: theme.palette.text.secondary,
   },
 }))(TableCell);
+
+const useStyles = makeStyles(() => ({
+  table: {
+    "& tr:last-child > td": {
+      borderBottom: "none",
+    },
+  },
+}));
 
 CustomTable.defaultProps = {
   ariaLabel: "table",
