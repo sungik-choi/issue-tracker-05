@@ -28,8 +28,13 @@ public class MilestoneController_Ragdoll {
         return new ResponseEntity(ApiResponse.CREATED(milestoneService.createNewMilestone(milestoneRequestDto)), HttpStatus.CREATED);
     }
 
-    @PatchMapping("milestones/{milestoneId}")
+    @PatchMapping("/milestones/{milestoneId}")
     public ResponseEntity<ApiResponse<String>> update(@PathVariable Integer milestoneId, @RequestBody MilestoneRequestDto milestoneRequestDto) {
         return new ResponseEntity(ApiResponse.OK(milestoneService.updateMilestone(milestoneId, milestoneRequestDto)), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/milestones/{milestoneId}")
+    public ResponseEntity<ApiResponse<String>> delete(@PathVariable Integer milestoneId) {
+        return new ResponseEntity(ApiResponse.OK(milestoneService.deleteMilestone(milestoneId)), HttpStatus.OK);
     }
 }
