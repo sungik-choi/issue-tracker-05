@@ -54,9 +54,7 @@ public class DetailedInformationOfIssueDto {
         this.labelInfo = labelInfo;
     }
 
-    public MilestoneInformation getMilestoneInfo() {
-        return milestoneInfo;
-    }
+    public MilestoneInformation getMilestoneInfo() { return milestoneInfo; }
 
     public void setMilestoneInfo(MilestoneInformation milestoneInfo) {
         this.milestoneInfo = milestoneInfo;

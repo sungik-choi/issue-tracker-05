@@ -98,7 +98,7 @@ public class IssueService_Ragdoll {
         List<CommentDetails> comments = allCommentsOfIssue.stream().map(comment -> {
             User user = userService.findUserById(comment.getUserId());
             UserSummary commenter = UserSummary.create(user.getId(), user.getName(), user.getAvatarUrl());
-            return CommentDetails.create(commenter, comment.getDescription(), comment.getCreatedDateTime());
+            return CommentDetails.of(commenter, comment.getId(), comment.getDescription(), comment.getCreatedDateTime());
         }).collect(Collectors.toList());
         return new DetailedInformationOfIssueDto.Builder()
                                                 .issue(mapToIssueDetails(issue, true))
