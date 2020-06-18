@@ -74,7 +74,7 @@ MenuList.defaultProps = {
 MenuList.propTypes = {
   text: PropTypes.string,
   title: PropTypes.string,
-  clickHandler: PropTypes.oneOf([PropTypes.func, PropTypes.null]),
+  clickHandler: PropTypes.oneOfType([PropTypes.func, PropTypes.instanceOf(null)]),
   options: PropTypes.shape({
     avatar: PropTypes.shape({
       id: PropTypes.string.isRequired,

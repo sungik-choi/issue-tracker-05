@@ -1,18 +1,17 @@
 import React from "react";
 
-import { fade, makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
+import Box from "@material-ui/core/Box";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
-import grey from "@material-ui/core/colors/grey";
-
-const SEARCH_PLACEHOLDER = "Search all issues";
 
 const SearchBar = () => {
+  const SEARCH_PLACEHOLDER = "Search all issues";
   const classes = useStyles();
 
   return (
-    <div className={classes.search}>
+    <Box display="flex" alignItems="center" className={classes.search}>
       <div className={classes.searchIcon}>
         <SearchIcon />
       </div>
@@ -24,28 +23,19 @@ const SearchBar = () => {
         }}
         inputProps={{ "aria-label": "search" }}
       />
-    </div>
+    </Box>
   );
 };
 
 const useStyles = makeStyles((theme) => ({
   search: {
-    height: 32.5,
-    position: "relative",
-    borderRadius: "0 5px 5px 0",
-    border: `1px solid${grey[400]}`,
+    borderRadius: "0 4px 4px 0",
+    border: `1px solid ${theme.palette.divider}`,
     borderLeft: "none",
-    backgroundColor: grey[50],
-    "&:hover": {
-      backgroundColor: fade(grey[300], 0.25),
-    },
-    width: "100%",
   },
   searchIcon: {
-    padding: theme.spacing(0, 2),
-    color: grey[400],
-    height: "100%",
-    position: "absolute",
+    padding: theme.spacing(0, 1),
+    color: theme.palette.grey[400],
     pointerEvents: "none",
     display: "flex",
     alignItems: "center",
@@ -55,11 +45,7 @@ const useStyles = makeStyles((theme) => ({
     color: "inherit",
   },
   inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    color: grey[700],
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
-    height: "100%",
     [theme.breakpoints.up("md")]: {
       width: "550px",
     },

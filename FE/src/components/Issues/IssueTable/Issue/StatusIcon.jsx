@@ -12,8 +12,12 @@ const StatusIcon = ({ closed }) => {
   );
 };
 
+StatusIcon.defaultProps = {
+  closed: false,
+};
+
 StatusIcon.propTypes = {
-  closed: PropTypes.bool.isRequired,
+  closed: PropTypes.bool,
 };
 
 export default StatusIcon;

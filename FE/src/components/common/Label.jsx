@@ -23,6 +23,7 @@ const useStyles = makeStyles({
   root: ({ backgroundColor, color }) => ({
     backgroundColor,
     color,
+    pointerEvents: "none",
   }),
 });
 
