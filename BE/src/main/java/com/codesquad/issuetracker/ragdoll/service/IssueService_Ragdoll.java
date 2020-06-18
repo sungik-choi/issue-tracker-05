@@ -172,4 +172,9 @@ public class IssueService_Ragdoll {
         issueDao.submitNewComment(commentsRequestDto.getUserId(), issueId, commentsRequestDto.getDescription());
         return ResponseMessages.SUCCESSFULLY_CREATED;
     }
+
+    public String updateComment(Long issueId, Long commentId, CommentsRequestDto commentsRequestDto) {
+        issueDao.updateComment(issueId, commentId, commentsRequestDto.getDescription());
+        return ResponseMessages.SUCCESSFULLY_MODIFIED;
+    }
 }
