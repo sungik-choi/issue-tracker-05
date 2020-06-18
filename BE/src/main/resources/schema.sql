@@ -43,10 +43,11 @@ CREATE TABLE IF NOT EXISTS issue
 
 CREATE TABLE IF NOT EXISTS label
 (
-    id          INT AUTO_INCREMENT,
-    name        VARCHAR(128),
-    description VARCHAR(512),
-    hex_code    VARCHAR(64),
+    id               INT AUTO_INCREMENT,
+    name             VARCHAR(128),
+    description      VARCHAR(512),
+    background_color VARCHAR(64),
+    color            VARCHAR(64),
     PRIMARY KEY (id)
 );
 
