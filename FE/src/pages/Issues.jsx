@@ -4,21 +4,25 @@ import IssueTable from "@Components/Issues/IssueTable/IssueTable";
 import Navigation from "@Components/Issues/Navigation/Navigation";
 import ClearButton from "@Components/Issues/ClearButton";
 
-import { IssuesContext } from "@Contexts/issuesContext";
-import { fetchSuccess, fetchError } from "@Reducers/issuesReducer";
+import { IssueListContext } from "@Contexts/issueListContext";
+import { fetchSuccess } from "@Reducers/issueListReducer";
 
-const url = "http://52.79.67.245/api/issues";
+import useFetch from "@Hooks/useFetch";
+
+const url = "http://52.79.67.245/issues";
 
 const Issues = () => {
-  const { issues, issuesDispatch } = useContext(IssuesContext);
+  const { issueList, issueListDispatch } = useContext(IssueListContext);
 
-  fetch(url)
-    .then((res) => res.json())
-    .then((initialData) => issuesDispatch(fetchSuccess(initialData)));
+  useFetch({
+    url,
+    actionType: fetchSuccess,
+    dispatch: issueListDispatch,
+  });
 
   useEffect(() => {
-    console.log(issues);
-  }, [issues]);
+    console.log(issueList);
+  }, [issueList]);
 
   return (
     <>
