@@ -30,6 +30,7 @@ dependencies {
     compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
     compile group: 'com.jcraft', name: 'jsch', version:'0.1.55'
     compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
+    compile group: 'com.jcraft', name: 'jsch', version:'0.1.55'
 }
 
 test {
