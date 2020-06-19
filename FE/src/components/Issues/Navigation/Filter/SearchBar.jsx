@@ -11,6 +11,7 @@ const SearchBar = () => {
   const classes = useStyles();
 
   return (
+    <form className={classes.search} aria-label="Issues">
     <Box display="flex" alignItems="center" className={classes.search}>
       <div className={classes.searchIcon}>
         <SearchIcon />
@@ -21,9 +22,10 @@ const SearchBar = () => {
           root: classes.inputRoot,
           input: classes.inputInput,
         }}
-        inputProps={{ "aria-label": "search" }}
+        inputProps={{ "aria-label": "Search all issues" }}
       />
-    </Box>
+     </Box>
+    </form>
   );
 };
 
