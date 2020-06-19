@@ -15,7 +15,7 @@ const AvatarStack = ({ userData }) => {
     <Box display="flex" alignItems="center">
       <AvatarGroup max={MAX_AVATAR_NUM} classes={{ avatar: classes.avatar }}>
         {userData.map(({ id, url }) => (
-          <CustomAvatar key={id} id={id} url={url} />
+          <CustomAvatar key={id} id={id} url={url} tooltip />
         ))}
       </AvatarGroup>
     </Box>
