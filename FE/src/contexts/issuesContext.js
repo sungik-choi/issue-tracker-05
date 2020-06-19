@@ -3,18 +3,18 @@ import { issuesReducer } from "@Reducers/issuesReducer";
 
 export const initialState = [];
 
-export const IssueListContext = createContext();
+export const IssuesContext = createContext();
 
-export const IssueListProvider = ({ children }) => {
-  const [issueList, issueListDispatch] = useReducer(issuesReducer, initialState);
+export const IssuesProvider = ({ children }) => {
+  const [issues, issuesDispatch] = useReducer(issuesReducer, initialState);
 
   const contextValue = useMemo(
     () => ({
-      issueList,
-      issueListDispatch,
+      issues,
+      issuesDispatch,
     }),
-    [issueList, issueListDispatch],
+    [issues],
   );
 
-  return <IssueListContext.Provider value={contextValue}>{children}</IssueListContext.Provider>;
+  return <IssuesContext.Provider value={contextValue}>{children}</IssuesContext.Provider>;
 };
