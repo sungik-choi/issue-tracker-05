@@ -5,14 +5,18 @@ import Header from "@Components/common/Header/Header";
 import Issues from "@Pages/Issues";
 import Container from "@material-ui/core/Container";
 
+import { IssuesProvider, IssuesContext } from "@Contexts/issuesContext";
+
 const App = () => {
   return (
     <>
-      <GlobalStyle />
-      <Header />
-      <Container maxWidth="lg">
-        <Issues />
-      </Container>
+      <IssuesProvider>
+        <GlobalStyle />
+        <Header />
+        <Container maxWidth="lg">
+          <Issues />
+        </Container>
+      </IssuesProvider>
     </>
   );
 };
