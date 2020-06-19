@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Tooltip from "@material-ui/core/Tooltip";
-import CustomTable from "./CustomTable";
 
 const CustomAvatar = ({ id, url, tooltip, ...props }) => {
   const classes = useStyles();
