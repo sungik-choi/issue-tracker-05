@@ -25,9 +25,13 @@ public class LabelService {
 
     public LabelInformation findAllLabels() {
         List<Label> labels = labelDao.findAllLabels();
-        Set<LabelSummary> labelSummaries = labels.stream()
-                                                 .map(label -> LabelSummary.of(label.getId(), label.getName(), label.getHexCode()))
-                                                 .collect(Collectors.toSet());
+        List<LabelSummary> labelSummaries = labels.stream()
+                                                 .map(label -> new LabelSummary.Builder()
+                                                                               .id(label.getId())
+                                                                               .name(label.getName())
+                                                                               .backgroundColor(label.getBackgroundColor())
+                                                                               .color(label.getColor())
+                                                                               .build()).collect(Collectors.toList());
         return LabelInformation.create(labelSummaries.size(), labelSummaries);
     }
 }

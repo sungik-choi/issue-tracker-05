@@ -27,19 +27,24 @@ public class LabelService_Ragdoll {
 
     public LabelInformation findAllLabels() {
         List<Label> labels = labelDaoRagdoll.findAllLabels();
-        Set<LabelSummary> labelSummaries = labels.stream()
-                                                 .map(label -> LabelSummary.of(label.getId(), label.getName(), label.getHexCode()))
-                                                 .collect(Collectors.toSet());
+        List<LabelSummary> labelSummaries = labels.stream()
+                                                 .map(label -> new LabelSummary.Builder()
+                                                                               .id(label.getId())
+                                                                               .name(label.getName())
+                                                                               .backgroundColor(label.getBackgroundColor())
+                                                                               .color(label.getColor())
+                                                                               .build()).collect(Collectors.toList());
         return LabelInformation.create(labelSummaries.size(), labelSummaries);
     }
 
-    public String updateLabel(Integer labelId, String labelName, String description, String hexCode) {
-        labelDaoRagdoll.updateLabel(labelId, labelName, description, hexCode);
+    public String updateLabel(Integer labelId, String labelName, String description, String backgroundColor, String color) {
+        labelDaoRagdoll.updateLabel(labelId, labelName, description, backgroundColor, color);
         return ResponseMessages.SUCCESSFULLY_MODIFIED;
     }
 
     public String createNewLabel(LabelRequestDto labelRequestDto) {
-        labelDaoRagdoll.createNewLabel(labelRequestDto.getLabelName(), labelRequestDto.getDescription(), labelRequestDto.getHexCode());
+        labelDaoRagdoll.createNewLabel(labelRequestDto.getLabelName(), labelRequestDto.getDescription(),
+                                       labelRequestDto.getBackgroundColor(), labelRequestDto.getColor());
         return ResponseMessages.SUCCESSFULLY_CREATED;
     }
 

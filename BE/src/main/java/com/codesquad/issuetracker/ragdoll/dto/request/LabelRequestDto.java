@@ -6,7 +6,9 @@ public class LabelRequestDto {
 
     private String description;
 
-    private String hexCode;
+    private String backgroundColor;
+
+    private String color;
 
     public String getLabelName() {
         return labelName;
@@ -24,11 +26,19 @@ public class LabelRequestDto {
         this.description = description;
     }
 
-    public String getHexCode() {
-        return hexCode;
+    public String getBackgroundColor() {
+        return backgroundColor;
     }
 
-    public void setHexCode(String hexCode) {
-        this.hexCode = hexCode;
+    public void setBackgroundColor(String backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 }

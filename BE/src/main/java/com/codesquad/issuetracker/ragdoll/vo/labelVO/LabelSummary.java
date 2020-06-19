@@ -6,18 +6,17 @@ public class LabelSummary {
 
     private String name;
 
-    private String hexCode;
+    private String backgroundColor;
+
+    private String color;
 
     public LabelSummary() {}
 
-    private LabelSummary(Integer id, String name, String hexCode) {
+    private LabelSummary(Integer id, String name, String backgroundColor, String color) {
         this.id = id;
         this.name = name;
-        this.hexCode = hexCode;
-    }
-
-    public static LabelSummary of(Integer id, String name, String hexCode) {
-        return new LabelSummary(id, name, hexCode);
+        this.backgroundColor = backgroundColor;
+        this.color = color;
     }
 
     public Integer getId() {
@@ -36,11 +35,46 @@ public class LabelSummary {
         this.name = name;
     }
 
-    public String getHexCode() {
-        return hexCode;
+    public String getBackgroundColor() {
+        return backgroundColor;
     }
 
-    public void setHexCode(String hexCode) {
-        this.hexCode = hexCode;
+    public void setBackgroundColor(String backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public static class Builder {
+        private Integer id;
+        private String name;
+        private String backgroundColor;
+        private String color;
+
+        public Builder id(Integer id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder backgroundColor(String backgroundColor) {
+            this.backgroundColor = backgroundColor;
+            return this;
+        }
+
+        public Builder color(String color) {
+            this.color = color;
+            return this;
+        }
+
+        public LabelSummary build() {
+            return new LabelSummary(id, name, backgroundColor, color);
+        }
     }
 }

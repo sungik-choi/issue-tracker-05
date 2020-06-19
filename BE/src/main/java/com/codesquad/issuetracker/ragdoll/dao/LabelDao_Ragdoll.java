@@ -23,33 +23,45 @@ public class LabelDao_Ragdoll {
         this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
     }
 
-    public void createNewLabel(String labelName, String description, String hexCode) {
-        String sql = "INSERT INTO label (name, description, hex_code) VALUES (?, ?, ?)";
-        jdbcTemplate.update(sql,new Object[]{labelName, description, hexCode});
+    public void createNewLabel(String labelName, String description, String backgroundColor, String color) {
+        String sql = "INSERT INTO label (name, description, background_color, color) VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(sql,new Object[]{labelName, description, backgroundColor, color});
     }
 
     public List<LabelSummary> findAttachedLabelsByIssueId(Long issueId) {
-        String sql = "SELECT l.id, l.name, l.hex_code " +
+        String sql = "SELECT l.id, l.name, l.background_color, l.color " +
                      "FROM label l JOIN issue_has_label il ON l.id = il.label_id " +
                      "WHERE il.issue_id = ?";
         return jdbcTemplate.query(sql, new Object[]{issueId},
-                (rs, rowNum) -> LabelSummary.of(rs.getInt("l.id"), rs.getString("l.name"),
-                                                    rs.getString("l.hex_code")));
+                (rs, rowNum) -> new LabelSummary.Builder()
+                                                .id(rs.getInt("l.id"))
+                                                .name(rs.getString("l.name"))
+                                                .backgroundColor(rs.getString("l.background_color"))
+                                                .color(rs.getString("l.color"))
+                                                .build());
     }
 
     public List<Label> findAllLabels() {
-        String sql = "SELECT id, name, description, hex_code FROM label";
-        return jdbcTemplate.query(sql, (rs, rowNum) -> Label.create(rs.getInt("id"), rs.getString("name"),
-                                                                    rs.getString("description"), rs.getString("hex_code")));
+        String sql = "SELECT id, name, description, background_color, color FROM label";
+        return jdbcTemplate.query(sql, (rs, rowNum) -> new Label.Builder().id(rs.getInt("id"))
+                                                                          .name(rs.getString("name"))
+                                                                          .description(rs.getString("description"))
+                                                                          .backgroundColor(rs.getString("background_color"))
+                                                                          .color(rs.getString("color"))
+                                                                          .build());
     }
 
-    public void updateLabel(Integer labelId, String labelName, String description, String hexCode) {
+    public void updateLabel(Integer labelId, String labelName, String description, String backgroundColor, String color) {
         SqlParameterSource namedParameters = new MapSqlParameterSource()
                                                 .addValue("labelId", labelId)
                                                 .addValue("labelName", labelName)
                                                 .addValue("description", description)
-                                                .addValue("hexCode", hexCode);
-        String sql = "UPDATE label SET name = :labelName, description = :description, hex_code = :hexCode WHERE id = :labelId";
+                                                .addValue("backgroundColor", backgroundColor)
+                                                .addValue("color", color);
+        String sql = "UPDATE label SET name = :labelName, description = :description, " +
+                                                         "background_color = :backgroundColor, " +
+                                                         "color = :color " +
+                     "WHERE id = :labelId";
         namedParameterJdbcTemplate.update(sql, namedParameters);
     }
 

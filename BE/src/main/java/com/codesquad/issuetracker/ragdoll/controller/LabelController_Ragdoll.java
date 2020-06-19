@@ -30,9 +30,11 @@ public class LabelController_Ragdoll {
 
     @PatchMapping("/labels/{labelId}")
     public ResponseEntity<ApiResponse<String>> update(@PathVariable Integer labelId, @RequestBody LabelRequestDto labelRequestDto) {
-        return new ResponseEntity(ApiResponse.OK(labelService.updateLabel(labelId, labelRequestDto.getLabelName(),
+        return new ResponseEntity(ApiResponse.OK(labelService.updateLabel(labelId,
+                                                                          labelRequestDto.getLabelName(),
                                                                           labelRequestDto.getDescription(),
-                                                                          labelRequestDto.getHexCode())), HttpStatus.OK);
+                                                                          labelRequestDto.getBackgroundColor(),
+                                                                          labelRequestDto.getColor())), HttpStatus.OK);
     }
 
     @DeleteMapping("/labels/{labelId}")

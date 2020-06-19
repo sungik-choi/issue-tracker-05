@@ -18,17 +18,26 @@ public class LabelDao {
     }
 
     public List<LabelSummary> findAttachedLabelsByIssueId(Long issueId) {
-        String sql = "SELECT l.id, l.name, l.hex_code " +
+        String sql = "SELECT l.id, l.name, l.background_color, l.color " +
                      "FROM label l JOIN issue_has_label il ON l.id = il.label_id " +
                      "WHERE il.issue_id = ?";
         return jdbcTemplate.query(sql, new Object[]{issueId},
-                (rs, rowNum) -> LabelSummary.of(rs.getInt("l.id"), rs.getString("l.name"),
-                                                    rs.getString("l.hex_code")));
+                (rs, rowNum) -> new LabelSummary.Builder()
+                                                .id(rs.getInt("l.id"))
+                                                .name(rs.getString("l.name"))
+                                                .backgroundColor(rs.getString("l.background_color"))
+                                                .color("l.color")
+                                                .build());
     }
 
     public List<Label> findAllLabels() {
-        String sql = "SELECT id, name, description, hex_code FROM label";
-        return jdbcTemplate.query(sql, (rs, rowNum) -> Label.create(rs.getInt("id"), rs.getString("name"),
-                                                                    rs.getString("description"), rs.getString("hex_code")));
+        String sql = "SELECT id, name, description, background_color, color FROM label";
+        return jdbcTemplate.query(sql, (rs, rowNum) -> new Label.Builder()
+                                                                .id(rs.getInt("id"))
+                                                                .name(rs.getString("name"))
+                                                                .description(rs.getString("description"))
+                                                                .backgroundColor(rs.getString("color"))
+                                                                .color(rs.getString("color"))
+                                                                .build());
     }
 }
