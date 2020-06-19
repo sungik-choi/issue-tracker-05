@@ -11,17 +11,15 @@ import IconButton from "@material-ui/core/IconButton";
 
 import CustomAvatar from "@Components/common/CustomAvatar";
 
-const UserMenu = ({ id }) => {
+const UserMenu = ({ id, url }) => {
   const SIGN_OUT = "Sign out";
-
-  // ! CustomAvatar id, url 설정 추가
 
   return (
     <PopupState variant="popover" popupId="demo-popup-popover">
       {(popupState) => (
         <>
           <IconButton {...bindTrigger(popupState)}>
-            <CustomAvatar />
+            <CustomAvatar url={url} />
           </IconButton>
           <Popover
             {...bindPopover(popupState)}
@@ -52,6 +50,7 @@ const UserMenu = ({ id }) => {
 
 UserMenu.propTypes = {
   id: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
 };
 
 export default UserMenu;
