@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 
-const useFetch = ({ url, actionType, dispatch }) => {
+const useFetch = ({ url, actionType: { successAction, errorAction }, dispatch }) => {
   const getData = async () => {
     const data = await fetch(url);
     const { response } = await data.json();
 
     try {
-      dispatch(actionType(response));
+      dispatch(successAction(response));
     } catch (e) {
-      console.log(e);
+      dispatch(errorAction());
     }
   };
 

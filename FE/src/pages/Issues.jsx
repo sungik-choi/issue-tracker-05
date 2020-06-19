@@ -5,7 +5,7 @@ import Navigation from "@Components/Issues/Navigation/Navigation";
 import ClearButton from "@Components/Issues/ClearButton";
 
 import { IssueListContext } from "@Contexts/issueListContext";
-import { fetchSuccess } from "@Reducers/issueListReducer";
+import { fetchSuccess, fetchError } from "@Reducers/issueListReducer";
 
 import useFetch from "@Hooks/useFetch";
 
@@ -16,7 +16,10 @@ const Issues = () => {
 
   useFetch({
     url,
-    actionType: fetchSuccess,
+    actionType: {
+      successAction: fetchSuccess,
+      errorAction: fetchError,
+    },
     dispatch: issueListDispatch,
   });
 
