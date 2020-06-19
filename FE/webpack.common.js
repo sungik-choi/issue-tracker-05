@@ -33,6 +33,7 @@ module.exports = {
       "@Pages": path.resolve(__dirname, "src/pages/"),
       "@Styles": path.resolve(__dirname, "src/styles/"),
       "@Mock": path.resolve(__dirname, "src/mock/"),
+      "@Utils": path.resolve(__dirname, "src/utils/"),
       "@Public": path.resolve(__dirname, "public/"),
     },
     extensions: [".js", ".jsx"],
