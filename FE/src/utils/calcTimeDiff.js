@@ -22,6 +22,8 @@ const calcTimeDiff = (time) => {
 
   const second = moment.duration(currentTime.diff(previousTime)).seconds();
   if (second) return `${second} ${getPluralWord(second, SECOND)}`;
+
+  return "";
 };
 
 export default calcTimeDiff;
