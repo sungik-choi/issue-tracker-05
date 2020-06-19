@@ -9,9 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class MilestoneService_Hamill {
@@ -29,7 +27,7 @@ public class MilestoneService_Hamill {
 
         List<MilestoneSummary> milestoneSummaries = new ArrayList<>();
         for (Milestone value : milestones) {
-            MilestoneSummary milestoneSummary = MilestoneSummary.of(value.getId(), value.getTitle());
+            MilestoneSummary milestoneSummary = MilestoneSummary.of(value.getId(), value.getTitle(), value.getProgress());
             milestoneSummaries.add(milestoneSummary);
         }
 

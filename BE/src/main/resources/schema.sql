@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS milestone
     due_date          DATE,
     created_date_time DATETIME,
     updated_date_time DATETIME,
+    progress          Double,
     PRIMARY KEY (id)
 );
 

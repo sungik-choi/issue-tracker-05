@@ -52,9 +52,15 @@ public class IssueService_Hamill {
         List<UserSummary> allocatedAssignees = userService_hamill.findUserSummaryByIssueId(issue.getId());
         User user = userService_hamill.findUserByUserId(issue.getUserId());
 
-        return IssueDetails.of(issue.getId(), issue.getTitle(), MilestoneSummary.of(milestone.getId(), milestone.getTitle()),
-                attachedLabels, UserSummary.of(user.getId(), user.getName(), user.getAvatarUrl()), allocatedAssignees,
-                issue.getCreatedDateTime(), issue.isOpened());
+        return IssueDetails.of(
+                issue.getId(),
+                issue.getTitle(),
+                MilestoneSummary.of(milestone.getId(), milestone.getTitle(), milestone.getProgress()),
+                attachedLabels,
+                UserSummary.of(user.getId(), user.getName(), user.getAvatarUrl()),
+                allocatedAssignees,
+                issue.getCreatedDateTime(),
+                issue.isOpened());
     }
 
 
