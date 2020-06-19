@@ -1,6 +1,5 @@
 package com.codesquad.issuetracker.hamill.dao;
 
-import com.codesquad.issuetracker.hamill.domain.Label;
 import com.codesquad.issuetracker.hamill.domain.Milestone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +21,7 @@ public class MilestoneDao_Hamill {
 
     public List<Milestone> findAllMilestones() {
         return jdbcTemplate.query(
-                "SELECT m.id, m.title, m.description, m.due_date, m.created_date_time, m.updated_date_time " +
+                "SELECT m.id, m.title, m.description, m.due_date, m.created_date_time, m.updated_date_time, m.progress " +
                         "FROM milestone m",
                 (rs, rowNum) ->
                         Milestone.of(rs.getInt("id"),
@@ -30,13 +29,14 @@ public class MilestoneDao_Hamill {
                                 rs.getString("description"),
                                 rs.getDate("due_date").toLocalDate(),
                                 rs.getTimestamp("created_date_time").toLocalDateTime(),
-                                rs.getTimestamp("updated_date_time").toLocalDateTime())
+                                rs.getTimestamp("updated_date_time").toLocalDateTime(),
+                                rs.getDouble("progress"))
         );
     }
 
     public Milestone findMilestoneByMilestoneId(Integer milestoneId) {
         return jdbcTemplate.queryForObject(
-                "SELECT m.id, m.title, m.description, m.due_date, m.created_date_time, m.updated_date_time " +
+                "SELECT m.id, m.title, m.description, m.due_date, m.created_date_time, m.updated_date_time, m.progress " +
                         "FROM milestone m WHERE m.id = ?",
                 (rs, rowNum) ->
                         Milestone.of(rs.getInt("id"),
@@ -44,7 +44,8 @@ public class MilestoneDao_Hamill {
                                 rs.getString("description"),
                                 rs.getDate("due_date").toLocalDate(),
                                 rs.getTimestamp("created_date_time").toLocalDateTime(),
-                                rs.getTimestamp("updated_date_time").toLocalDateTime())
+                                rs.getTimestamp("updated_date_time").toLocalDateTime(),
+                                rs.getDouble("progress"))
         , milestoneId);
     }
 }
