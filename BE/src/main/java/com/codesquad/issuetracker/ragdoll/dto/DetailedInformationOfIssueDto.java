@@ -1,6 +1,7 @@
 package com.codesquad.issuetracker.ragdoll.dto;
 
 import com.codesquad.issuetracker.ragdoll.vo.commentVO.CommentDetails;
+import com.codesquad.issuetracker.ragdoll.vo.commentVO.CommentInformation;
 import com.codesquad.issuetracker.ragdoll.vo.issueVO.IssueDetails;
 import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelInformation;
 import com.codesquad.issuetracker.ragdoll.vo.milestoneVO.MilestoneInformation;
@@ -12,7 +13,7 @@ public class DetailedInformationOfIssueDto {
 
     private IssueDetails issue;
 
-    private List<CommentDetails> comments;
+    private CommentInformation commentInfo;
 
     private LabelInformation labelInfo;
 
@@ -20,11 +21,9 @@ public class DetailedInformationOfIssueDto {
 
     private List<UserSummary> assigneeInfo;
 
-    public DetailedInformationOfIssueDto() {}
-
-    public DetailedInformationOfIssueDto(IssueDetails issue, List<CommentDetails> comments, LabelInformation labelInfo, MilestoneInformation milestoneInfo, List<UserSummary> assigneeInfo) {
+    private DetailedInformationOfIssueDto(IssueDetails issue, CommentInformation commentInfo, LabelInformation labelInfo, MilestoneInformation milestoneInfo, List<UserSummary> assigneeInfo) {
         this.issue = issue;
-        this.comments = comments;
+        this.commentInfo = commentInfo;
         this.labelInfo = labelInfo;
         this.milestoneInfo = milestoneInfo;
         this.assigneeInfo = assigneeInfo;
@@ -38,12 +37,8 @@ public class DetailedInformationOfIssueDto {
         this.issue = issue;
     }
 
-    public List<CommentDetails> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<CommentDetails> comments) {
-        this.comments = comments;
+    public CommentInformation getCommentInfo() {
+        return commentInfo;
     }
 
     public LabelInformation getLabelInfo() {
@@ -70,7 +65,7 @@ public class DetailedInformationOfIssueDto {
 
     public static class Builder {
         private IssueDetails issue;
-        private List<CommentDetails> comments;
+        private CommentInformation commentInfo;
         private LabelInformation labelInfo;
         private MilestoneInformation milestoneInfo;
         private List<UserSummary> assigneeInfo;
@@ -80,8 +75,8 @@ public class DetailedInformationOfIssueDto {
             return this;
         }
 
-        public Builder comments(List<CommentDetails> comments) {
-            this.comments = comments;
+        public Builder commentInfo(CommentInformation commentInfo) {
+            this.commentInfo = commentInfo;
             return this;
         }
 
@@ -101,7 +96,7 @@ public class DetailedInformationOfIssueDto {
         }
 
         public DetailedInformationOfIssueDto build() {
-            return new DetailedInformationOfIssueDto(issue, comments, labelInfo, milestoneInfo, assigneeInfo);
+            return new DetailedInformationOfIssueDto(issue, commentInfo, labelInfo, milestoneInfo, assigneeInfo);
         }
     }
 }
