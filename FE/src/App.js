@@ -1,11 +1,12 @@
 import React from "react";
 
 import GlobalStyle from "@Styles/GlobalStyle";
-import Header from "@Components/common/Header/Header";
-import Issues from "@Pages/Issues";
 import Container from "@material-ui/core/Container";
 
-import { IssuesProvider, IssuesContext } from "@Contexts/issuesContext";
+import Header from "@Components/common/Header/Header";
+import Issues from "@Pages/Issues";
+
+import { IssuesProvider } from "@Contexts/issuesContext";
 
 const App = () => {
   return (
