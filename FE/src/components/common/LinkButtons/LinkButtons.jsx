@@ -5,6 +5,7 @@ import LocalOfferOutlinedIcon from "@material-ui/icons/LocalOfferOutlined";
 import OutlinedFlagIcon from "@material-ui/icons/OutlinedFlag";
 
 import { IssueListContext } from "@Contexts/issueListContext";
+
 import LinkButton from "./LinkButton";
 
 const LinkButtons = () => {
