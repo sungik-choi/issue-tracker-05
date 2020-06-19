@@ -16,6 +16,8 @@ import CustomAvatar from "@Components/common/CustomAvatar";
 const UserMenu = ({ id }) => {
   const SIGN_OUT = "Sign out";
 
+  // ! CustomAvatar id, url 설정 추가
+
   return (
     <PopupState variant="popover" popupId="demo-popup-popover">
       {(popupState) => (
