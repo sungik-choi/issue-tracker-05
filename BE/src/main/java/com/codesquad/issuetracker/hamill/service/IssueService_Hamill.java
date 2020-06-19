@@ -5,20 +5,16 @@ import com.codesquad.issuetracker.hamill.domain.Issue;
 import com.codesquad.issuetracker.hamill.domain.Milestone;
 import com.codesquad.issuetracker.hamill.domain.User;
 import com.codesquad.issuetracker.hamill.dto.ListOfIssuesDto;
-import com.codesquad.issuetracker.hamill.dto.RequestNewIssueDto;
+import com.codesquad.issuetracker.hamill.vo.UserVO.UserSummary;
 import com.codesquad.issuetracker.hamill.vo.issueVO.IssueDetails;
 import com.codesquad.issuetracker.hamill.vo.labelVO.LabelInformation;
 import com.codesquad.issuetracker.hamill.vo.labelVO.LabelSummary;
 import com.codesquad.issuetracker.hamill.vo.milestoneVO.MilestoneInformation;
-import com.codesquad.issuetracker.hamill.vo.UserVO.UserSummary;
-
 import com.codesquad.issuetracker.hamill.vo.milestoneVO.MilestoneSummary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import com.codesquad.issuetracker.hamill.dto.info.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,10 +38,7 @@ public class IssueService_Hamill {
 
     public ListOfIssuesDto getIssuesAndAllElements() {
         List<Issue> issues = issueDao_Hamill.findAllIssues();
-        List<IssueDetails> issueDetails = issues.stream()
-                .map(this::mapToIssueDetails)
-                .collect(Collectors.toList());
-
+        List<IssueDetails> issueDetails = issues.stream().map(this::mapToIssueDetails).collect(Collectors.toList());
         LabelInformation labelInfo = labelService_hamill.findLabelInformation();
         MilestoneInformation milestoneInfo = milestoneService_hamill.findMilestoneInformation();
         List<UserSummary> userSummary = userService_hamill.findUserInformation();
@@ -59,52 +52,46 @@ public class IssueService_Hamill {
         List<UserSummary> allocatedAssignees = userService_hamill.findUserSummaryByIssueId(issue.getId());
         User user = userService_hamill.findUserByUserId(issue.getUserId());
 
-        return IssueDetails.of(
-                issue.getId(),
-                issue.getTitle(),
-                MilestoneSummary.of(milestone.getId(), milestone.getTitle()),
-                attachedLabels,
-                UserSummary.of(user.getId(), user.getName(), user.getAvatarUrl()),
-                allocatedAssignees,
-                issue.getCreatedDateTime(),
-                issue.isOpened());
+        return IssueDetails.of(issue.getId(), issue.getTitle(), MilestoneSummary.of(milestone.getId(), milestone.getTitle()),
+                attachedLabels, UserSummary.of(user.getId(), user.getName(), user.getAvatarUrl()), allocatedAssignees,
+                issue.getCreatedDateTime(), issue.isOpened());
     }
 
 
-    public IssuesDto findIssueByIssueId(Long issueId) {
+//    public IssuesDto findIssueByIssueId(Long issueId) {
+//
+//        IssuesDto issuesDto = issueDao_Hamill.findIssueByIssueId(issueId);
+//        issuesDto.setAttachedLabels(issueDao_Hamill.findLabelsByIssuesId(issueId));
+//        issuesDto.setAllocatedAssignees(issueDao_Hamill.findAssigneeByIssueId(issueId));
+//        return issuesDto;
+//    }
+//
+//    public void save(RequestNewIssueDto requestNewIssueDto) {
+//        Long newIssueId = issueDao_Hamill.getCountOfIssues() + 1L;
+//        issueDao_Hamill.saveNewIssue(
+//                newIssueId,
+//                requestNewIssueDto.getTitle(),
+//                requestNewIssueDto.getUserId(),
+//                requestNewIssueDto.getMilestone().getMilestoneId());
+//
+//        saveNewIssueHasLabel(requestNewIssueDto);
+//        saveAssignees(requestNewIssueDto);
+//
+//        IssuesDto issuesDto = issueDao_Hamill.findIssueByIssueId(newIssueId);
+//        issuesDto.setAttachedLabels(requestNewIssueDto.getAttachedLabels());
+//        issuesDto.setAllocatedAssignees(requestNewIssueDto.getAllocatedAssignees());
+//    }
 
-        IssuesDto issuesDto = issueDao_Hamill.findIssueByIssueId(issueId);
-        issuesDto.setAttachedLabels(issueDao_Hamill.findLabelsByIssuesId(issueId));
-        issuesDto.setAllocatedAssignees(issueDao_Hamill.findAssigneeByIssueId(issueId));
-        return issuesDto;
-    }
-
-    public void save(RequestNewIssueDto requestNewIssueDto) {
-        Long newIssueId = issueDao_Hamill.getCountOfIssues() + 1L;
-        issueDao_Hamill.saveNewIssue(
-                newIssueId,
-                requestNewIssueDto.getTitle(),
-                requestNewIssueDto.getUserId(),
-                requestNewIssueDto.getMilestone().getMilestoneId());
-
-        saveNewIssueHasLabel(requestNewIssueDto);
-        saveAssignees(requestNewIssueDto);
-
-        IssuesDto issuesDto = issueDao_Hamill.findIssueByIssueId(newIssueId);
-        issuesDto.setAttachedLabels(requestNewIssueDto.getAttachedLabels());
-        issuesDto.setAllocatedAssignees(requestNewIssueDto.getAllocatedAssignees());
-    }
-
-    private void saveNewIssueHasLabel(RequestNewIssueDto requestNewIssueDto) {
-        for (int i = ZERO; i < requestNewIssueDto.getAttachedLabels().size(); i++) {
-            issueDao_Hamill.saveNewIssueHasLabel(requestNewIssueDto.getAttachedLabels().get(i).getLabelId(), (long)issueDao_Hamill.getCountOfIssues());
-        }
-    }
-
-    private void saveAssignees(RequestNewIssueDto requestNewIssueDto) {
-        for (int i = ZERO; i < requestNewIssueDto.getAllocatedAssignees().size(); i++) {
-            issueDao_Hamill.saveAssignees((long)issueDao_Hamill.getCountOfIssues(), requestNewIssueDto.getAllocatedAssignees().get(i).getUserId());
-        }
-    }
+//    private void saveNewIssueHasLabel(RequestNewIssueDto requestNewIssueDto) {
+//        for (int i = ZERO; i < requestNewIssueDto.getAttachedLabels().size(); i++) {
+//            issueDao_Hamill.saveNewIssueHasLabel(requestNewIssueDto.getAttachedLabels().get(i).getLabelId(), (long)issueDao_Hamill.getCountOfIssues());
+//        }
+//    }
+//
+//    private void saveAssignees(RequestNewIssueDto requestNewIssueDto) {
+//        for (int i = ZERO; i < requestNewIssueDto.getAllocatedAssignees().size(); i++) {
+//            issueDao_Hamill.saveAssignees((long)issueDao_Hamill.getCountOfIssues(), requestNewIssueDto.getAllocatedAssignees().get(i).getUserId());
+//        }
+//    }
 
 }
