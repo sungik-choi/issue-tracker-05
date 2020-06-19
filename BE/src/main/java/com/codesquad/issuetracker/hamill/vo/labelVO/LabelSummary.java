@@ -2,32 +2,28 @@ package com.codesquad.issuetracker.hamill.vo.labelVO;
 
 public class LabelSummary {
 
-    private Integer labelId;
+    private Integer id;
 
-    private String labelName;
+    private String name;
 
     private String backgroundColor;
 
     private String color;
 
-    private LabelSummary(Integer labelId, String labelName, String backgroundColor, String color) {
-        this.labelId = labelId;
-        this.labelName = labelName;
+    private LabelSummary(Integer id, String name, String backgroundColor, String color) {
+        this.id = id;
+        this.name = name;
         this.backgroundColor = backgroundColor;
         this.color = color;
     }
 
-    public static LabelSummary of(Integer labelId, String labelName, String backgroundColor, String color) {
-        return new LabelSummary(labelId, labelName, backgroundColor, color);
+    public static LabelSummary of(Integer id, String name, String backgroundColor, String color) {
+        return new LabelSummary(id, name, backgroundColor, color);
     }
 
-    public Integer getLabelId() {
-        return labelId;
-    }
+    public Integer getId() { return id; }
 
-    public String getLabelName() {
-        return labelName;
-    }
+    public String getName() { return name; }
 
     public String getBackgroundColor() {
         return backgroundColor;

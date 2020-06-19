@@ -2,25 +2,21 @@ package com.codesquad.issuetracker.hamill.vo.milestoneVO;
 
 public class MilestoneSummary {
 
-    private Integer milestoneId;
+    private Integer id;
 
-    private String milestoneTitle;
+    private String title;
 
-    private MilestoneSummary(Integer milestoneId, String milestoneTitle) {
-        this.milestoneId = milestoneId;
-        this.milestoneTitle = milestoneTitle;
+    private MilestoneSummary(Integer id, String title) {
+        this.id = id;
+        this.title = title;
     }
 
-    public static MilestoneSummary of(Integer milestoneId, String milestoneTitle) {
-        return new MilestoneSummary(milestoneId, milestoneTitle);
+    public static MilestoneSummary of(Integer id, String title) {
+        return new MilestoneSummary(id, title);
     }
 
-    public Integer getMilestoneId() {
-        return milestoneId;
-    }
+    public Integer getId() { return id; }
 
-    public String getMilestoneTitle() {
-        return milestoneTitle;
-    }
+    public String getTitle() { return title; }
 }
 

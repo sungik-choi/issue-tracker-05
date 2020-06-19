@@ -10,9 +10,9 @@ import java.util.List;
 
 public class IssueDetails {
 
-    private Long issueId;
+    private Long id;
 
-    private String issueTitle;
+    private String title;
 
     private MilestoneSummary milestone;
 
@@ -27,9 +27,9 @@ public class IssueDetails {
     @JsonProperty("isOpened")
     private boolean opened;
 
-    private IssueDetails(Long issueId, String issueTitle, MilestoneSummary milestone, List<LabelSummary> attachedLabels, UserSummary author, List<UserSummary> allocatedAssignees, LocalDateTime createdAt, boolean opened) {
-        this.issueId = issueId;
-        this.issueTitle = issueTitle;
+    private IssueDetails(Long id, String title, MilestoneSummary milestone, List<LabelSummary> attachedLabels, UserSummary author, List<UserSummary> allocatedAssignees, LocalDateTime createdAt, boolean opened) {
+        this.id = id;
+        this.title = title;
         this.milestone = milestone;
         this.attachedLabels = attachedLabels;
         this.author = author;
@@ -38,10 +38,10 @@ public class IssueDetails {
         this.opened = opened;
     }
 
-    public static IssueDetails of(Long issueId, String issueTitle, MilestoneSummary milestone, List<LabelSummary> attachedLabels, UserSummary author, List<UserSummary> allocatedAssignees, LocalDateTime createdAt, boolean opened) {
+    public static IssueDetails of(Long id, String title, MilestoneSummary milestone, List<LabelSummary> attachedLabels, UserSummary author, List<UserSummary> allocatedAssignees, LocalDateTime createdAt, boolean opened) {
         return new Builder()
-                .issueId(issueId)
-                .issueTitle(issueTitle)
+                .id(id)
+                .title(title)
                 .milestone(milestone)
                 .attachedLabels(attachedLabels)
                 .author(author)
@@ -51,13 +51,9 @@ public class IssueDetails {
                 .build();
     }
 
-    public Long getIssueId() {
-        return issueId;
-    }
+    public Long getId() { return id; }
 
-    public String getIssueTitle() {
-        return issueTitle;
-    }
+    public String getTitle() { return title; }
 
     public MilestoneSummary getMilestone() {
         return milestone;
@@ -85,8 +81,8 @@ public class IssueDetails {
     }
 
     private static class Builder {
-        private Long issueId;
-        private String issueTitle;
+        private Long id;
+        private String title;
         private MilestoneSummary milestone;
         private List<LabelSummary> attachedLabels;
         private UserSummary author;
@@ -94,13 +90,13 @@ public class IssueDetails {
         private LocalDateTime createdAt;
         private boolean opened;
 
-        private Builder issueId(Long issueId) {
-            this.issueId = issueId;
+        private Builder id(Long id) {
+            this.id = id;
             return this;
         }
 
-        private Builder issueTitle(String issueTitle) {
-            this.issueTitle = issueTitle;
+        private Builder title(String title) {
+            this.title = title;
             return this;
         }
 
@@ -135,7 +131,7 @@ public class IssueDetails {
         }
 
         private IssueDetails build() {
-            return new IssueDetails(issueId, issueTitle, milestone, attachedLabels, author, allocatedAssignees, createdAt, opened);
+            return new IssueDetails(id, title, milestone, attachedLabels, author, allocatedAssignees, createdAt, opened);
         }
     }
 }

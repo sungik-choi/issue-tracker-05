@@ -16,21 +16,21 @@ public class ListOfIssuesDto {
 
     private MilestoneInformation milestoneInfo;
 
-    private List<UserSummary> assigneeInfo;
+    private List<UserSummary> users;
 
-    private ListOfIssuesDto(List<IssueDetails> issues, LabelInformation labelInfo, MilestoneInformation milestoneInfo, List<UserSummary> assigneeInfo) {
+    private ListOfIssuesDto(List<IssueDetails> issues, LabelInformation labelInfo, MilestoneInformation milestoneInfo, List<UserSummary> users) {
         this.issues = issues;
         this.labelInfo = labelInfo;
         this.milestoneInfo = milestoneInfo;
-        this.assigneeInfo = assigneeInfo;
+        this.users = users;
     }
 
-    public static ListOfIssuesDto of(List<IssueDetails> issues, LabelInformation labelInfo, MilestoneInformation milestoneInfo, List<UserSummary> assigneeInfo) {
+    public static ListOfIssuesDto of(List<IssueDetails> issues, LabelInformation labelInfo, MilestoneInformation milestoneInfo, List<UserSummary> users) {
         return new Builder()
                 .issues(issues)
                 .labelInfo(labelInfo)
                 .milestoneInfo(milestoneInfo)
-                .assigneeInfo(assigneeInfo)
+                .users(users)
                 .build();
     }
 
@@ -46,17 +46,18 @@ public class ListOfIssuesDto {
         return milestoneInfo;
     }
 
-    public List<UserSummary> getAssigneeInfo() {
-        return assigneeInfo;
+    public List<UserSummary> getUsers() {
+        return users;
     }
 
     private static class Builder {
         private List<IssueDetails> issues;
         private LabelInformation labelInfo;
         private MilestoneInformation milestoneInfo;
-        private List<UserSummary> assigneeInfo;
+        private List<UserSummary> users;
 
-        public Builder() {}
+        public Builder() {
+        }
 
         public Builder issues(List<IssueDetails> issues) {
             this.issues = issues;
@@ -73,13 +74,13 @@ public class ListOfIssuesDto {
             return this;
         }
 
-        public Builder assigneeInfo(List<UserSummary> assigneeInfo) {
-            this.assigneeInfo = assigneeInfo;
+        public Builder users(List<UserSummary> users) {
+            this.users = users;
             return this;
         }
 
         public ListOfIssuesDto build() {
-            return new ListOfIssuesDto(issues, labelInfo, milestoneInfo, assigneeInfo);
+            return new ListOfIssuesDto(issues, labelInfo, milestoneInfo, users);
         }
     }
 }
