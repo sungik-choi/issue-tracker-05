@@ -19,10 +19,10 @@ const menuListText = [
 const FILTER_BTN_TEXT = "Filters";
 const MENU_LIST_TITLE = "Filter Issues";
 
-const Menu = () => {  
+const Menu = () => {
   const classes = useStyles();
 
-  const menuList = mockArr.map((text) => <MenuList text={text} key={text} />);
+  const menuList = menuListText.map((text) => <MenuList text={text} key={text} />);
   return (
     <PopupState variant="popover" popupId="demo-popup-popover">
       {(popupState) => (
