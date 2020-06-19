@@ -112,7 +112,7 @@ public class IssueService_Ragdoll {
                                                 .build();
     }
 
-    public String modifyIssueTitle(Long issueId, UpdateIssueTitleRequestDto updateIssueTitleRequestDto) {
+    public String updateIssueTitle(Long issueId, UpdateIssueTitleRequestDto updateIssueTitleRequestDto) {
         Issue targetIssue = issueDao.findIssueById(issueId);
         if (isUnauthorizedUser(targetIssue.getUserId(), updateIssueTitleRequestDto.getUserId())) {
             throw new UserUnauthorizedException(ErrorMessages.USER_UNAUTHORIZED);
@@ -125,12 +125,13 @@ public class IssueService_Ragdoll {
         return !bindUserId.equals(requestUserId);
     }
 
-    public String modifyIssueStatus(Long issueId, UpdateIssueStatusRequestDto updateIssueStatusRequestDto) {
-        Issue targetIssue = issueDao.findIssueById(issueId);
-        if (isUnauthorizedUser(targetIssue.getUserId(), updateIssueStatusRequestDto.getUserId())) {
-            throw new UserUnauthorizedException(ErrorMessages.USER_UNAUTHORIZED);
-        }
-        issueDao.modifyIssueStats(issueId, updateIssueStatusRequestDto.isOpened());
+    public String updateIssueStatus(UpdateIssueStatusRequestDto updateIssueStatusRequestDto) {
+//        Issue targetIssue = issueDao.findIssueById(issueId);
+//        if (isUnauthorizedUser(targetIssue.getUserId(), updateIssueStatusRequestDto.getUserId())) {
+//            throw new UserUnauthorizedException(ErrorMessages.USER_UNAUTHORIZED);
+//        }
+        updateIssueStatusRequestDto.getIssueId()
+                                   .forEach(issueId -> issueDao.updateIssueStatus(issueId, updateIssueStatusRequestDto.isOpened()));
         return ResponseMessages.SUCCESSFULLY_MODIFIED;
     }
 

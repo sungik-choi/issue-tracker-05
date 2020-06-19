@@ -112,7 +112,7 @@ public class IssueDao_Ragdoll {
         jdbcTemplate.update(sql, new Object[]{issueTitle, issueId});
     }
 
-    public void modifyIssueStats(Long issueId, boolean opened) {
+    public void updateIssueStatus(Long issueId, boolean opened) {
         String sql = "UPDATE issue SET is_opened = ? " +
                      "WHERE id = ?";
         jdbcTemplate.update(sql, new Object[]{opened, issueId});
