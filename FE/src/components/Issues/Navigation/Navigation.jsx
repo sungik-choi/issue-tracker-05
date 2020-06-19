@@ -10,7 +10,7 @@ const Navigation = () => {
   const NEW_ISSUE_BTN_TEXT = "New issue";
 
   return (
-    <Box component="div" mt={6} mb={4} maxHeight={38} display="flex" justifyContent="space-between">
+    <Box component="nav" mt={6} mb={2} maxHeight={38} display="flex" justifyContent="space-between">
       <Filter />
       <LinkButtons />
       <PrimaryButton text={NEW_ISSUE_BTN_TEXT} clickHandler={null} />
