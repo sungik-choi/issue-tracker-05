@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 
 import IssueTable from "@Components/Issues/IssueTable/IssueTable";
 import Navigation from "@Components/Issues/Navigation/Navigation";
@@ -11,9 +11,9 @@ import useFetch from "@Hooks/useFetch";
 import { issuesUrl } from "@Utils/urls";
 
 const Issues = () => {
-  const { issueList, issueListDispatch } = useContext(IssueListContext);
+  const { issueListDispatch } = useContext(IssueListContext);
 
-  useFetch({
+  const loading = useFetch({
     url: issuesUrl,
     actionType: {
       successAction: fetchSuccess,
@@ -22,15 +22,17 @@ const Issues = () => {
     dispatch: issueListDispatch,
   });
 
-  useEffect(() => {
-    console.log(issueList);
-  }, [issueList]);
+  console.log(loading);
 
   return (
     <>
-      <Navigation />
-      <ClearButton />
-      <IssueTable />
+      {!loading && (
+        <>
+          <Navigation />
+          <ClearButton />
+          <IssueTable />
+        </>
+      )}
     </>
   );
 };
