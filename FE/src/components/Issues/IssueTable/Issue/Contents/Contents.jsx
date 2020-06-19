@@ -6,15 +6,18 @@ import Label from "@Components/common/Label";
 import Title from "./Title";
 import Details from "./Details";
 
-const Contents = () => {
+const Contents = ({ id, title, attachedLabels, createdAt, author: { name } }) => {
   return (
     <>
       <Box display="flex" flexDirection="column" marginLeft={2}>
         <Box display="flex" alignItems="center">
-          <Title title="[FE] 개발환경 구축하기" />
-          <Label name="레이블 내용" backgroundColor="#000" color="#FFF" />
+          <Title title={title} />
+          {attachedLabels &&
+            attachedLabels.map(({ id, name, backgroundColor, color }) => (
+              <Label key={id} name={name} backgroundColor={backgroundColor} color={color} />
+            ))}
         </Box>
-        <Details id={18} time="2020-06-19 13:00:00" author="sungik-choi" />
+        <Details id={id} time={createdAt} author={name} />
       </Box>
     </>
   );

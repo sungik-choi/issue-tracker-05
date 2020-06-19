@@ -7,15 +7,15 @@ import AvatarGroup from "@material-ui/lab/AvatarGroup";
 
 import CustomAvatar from "@Components/common/CustomAvatar";
 
-const AvatarStack = ({ userData }) => {
+const AvatarStack = ({ allocatedAssignees }) => {
   const classes = useStyles();
   const MAX_AVATAR_NUM = 4;
 
   return (
     <Box display="flex" alignItems="center">
       <AvatarGroup max={MAX_AVATAR_NUM} classes={{ avatar: classes.avatar }}>
-        {userData.map(({ id, url }) => (
-          <CustomAvatar key={id} id={id} url={url} tooltip />
+        {allocatedAssignees.map(({ id, name, avatarUrl }) => (
+          <CustomAvatar key={id} userId={name} url={avatarUrl} tooltip />
         ))}
       </AvatarGroup>
     </Box>
@@ -32,10 +32,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 AvatarStack.propTypes = {
-  userData: PropTypes.arrayOf(
+  allocatedAssignees: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      avatarUrl: PropTypes.string.isRequired,
     }),
   ).isRequired,
 };

@@ -14,7 +14,7 @@ import ExitToAppOutlinedIcon from "@material-ui/icons/ExitToAppOutlined";
 
 import CustomAvatar from "@Components/common/CustomAvatar";
 
-const UserMenu = ({ id, url }) => {
+const UserMenu = ({ userId, url }) => {
   const SIGN_OUT = "Sign out";
 
   return (
@@ -22,7 +22,7 @@ const UserMenu = ({ id, url }) => {
       {(popupState) => (
         <>
           <IconButton {...bindTrigger(popupState)}>
-            <CustomAvatar url={url} />
+            <CustomAvatar userId={userId} url={url} />
           </IconButton>
           <Popover
             {...bindPopover(popupState)}
@@ -40,7 +40,7 @@ const UserMenu = ({ id, url }) => {
                 <ListItemIcon>
                   <AccountCircleOutlinedIcon />
                 </ListItemIcon>
-                <ListItemText primary={id} />
+                <ListItemText primary={userId} />
               </ListItem>
               <Divider />
               <ListItem button>
@@ -58,7 +58,7 @@ const UserMenu = ({ id, url }) => {
 };
 
 UserMenu.propTypes = {
-  id: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
 };
 

@@ -15,8 +15,9 @@ const Header = () => {
   const classes = useStyles();
   const TITLE_TEXT = "Issue Tracker";
 
-  const { user } = useContext(UserContext);
-  const { id, avatarUrl } = user;
+  const {
+    user: { id, avatarUrl },
+  } = useContext(UserContext);
 
   return (
     <div className={classes.root}>
@@ -28,7 +29,7 @@ const Header = () => {
           <Typography variant="h6" className={classes.title}>
             {TITLE_TEXT}
           </Typography>
-          {user && <UserMenu id={id} url={avatarUrl} />}
+          {id && <UserMenu userId={id} url={avatarUrl} />}
         </Toolbar>
       </AppBar>
     </div>
