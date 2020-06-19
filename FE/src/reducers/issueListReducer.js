@@ -9,14 +9,14 @@ export const fetchError = () => {
   return { type: FETCH_ERROR };
 };
 
-export const issuesReducer = (state, action) => {
+export const issueListReducer = (state, action) => {
   const { type, payload } = action;
 
   switch (type) {
     case FETCH_SUCCESS:
-      return [...payload];
+      return { ...state, ...payload };
     case FETCH_ERROR:
-      return [...state];
+      return { ...state };
     default:
       return state;
   }
