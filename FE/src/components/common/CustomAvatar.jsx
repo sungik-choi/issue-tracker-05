@@ -4,14 +4,21 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Tooltip from "@material-ui/core/Tooltip";
+import CustomTable from "./CustomTable";
 
-const CustomAvatar = ({ id, url, ...props }) => {
+const CustomAvatar = ({ id, url, tooltip, ...props }) => {
   const classes = useStyles();
 
   return (
-    <Tooltip title={id}>
-      <Avatar alt={id} src={url} className={classes.avatar} {...props} />
-    </Tooltip>
+    <>
+      {tooltip ? (
+        <Tooltip title={id}>
+          <Avatar alt={id} src={url} className={classes.avatar} {...props} />
+        </Tooltip>
+      ) : (
+        <Avatar alt={id} src={url} className={classes.avatar} {...props} />
+      )}
+    </>
   );
 };
 
@@ -22,9 +29,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+CustomTable.defaultProps = {
+  tooltip: false,
+};
+
 CustomAvatar.propTypes = {
   id: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
+  tooltip: PropTypes.bool,
 };
 
 export default CustomAvatar;
