@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-CustomTable.defaultProps = {
+CustomAvatar.defaultProps = {
   tooltip: false,
 };
 
