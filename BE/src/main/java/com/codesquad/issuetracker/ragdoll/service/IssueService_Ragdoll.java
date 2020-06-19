@@ -11,6 +11,7 @@ import com.codesquad.issuetracker.ragdoll.dto.*;
 import com.codesquad.issuetracker.ragdoll.dto.request.*;
 import com.codesquad.issuetracker.ragdoll.exception.UserUnauthorizedException;
 import com.codesquad.issuetracker.ragdoll.vo.commentVO.CommentDetails;
+import com.codesquad.issuetracker.ragdoll.vo.commentVO.CommentInformation;
 import com.codesquad.issuetracker.ragdoll.vo.issueVO.IssueDetails;
 import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelSummary;
 import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelInformation;
@@ -104,7 +105,7 @@ public class IssueService_Ragdoll {
         }).collect(Collectors.toList());
         return new DetailedInformationOfIssueDto.Builder()
                                                 .issue(mapToIssueDetails(issue))
-                                                .comments(comments)
+                                                .commentInfo(CommentInformation.of(comments.size(), comments))
                                                 .labelInfo(labelService.findAllLabels())
                                                 .milestoneInfo(milestoneService.findAllMilestones())
                                                 .assigneeInfo(userService.findAllAssignees())
