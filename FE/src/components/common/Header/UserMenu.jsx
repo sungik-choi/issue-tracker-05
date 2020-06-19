@@ -56,4 +56,8 @@ const UserMenu = ({ id }) => {
   );
 };
 
+UserMenu.propTypes = {
+  id: PropTypes.string.isRequired,
+};
+
 export default UserMenu;
