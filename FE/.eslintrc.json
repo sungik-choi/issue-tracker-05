@@ -9,6 +9,8 @@
           ["@Styles", "./src/styles/"],
           ["@Mock", "./src/mock/"],
           ["@Utils", "./src/utils/"],
+          ["@Reducers", "./src/reducers/"],
+          ["@Contexts", "./src/contexts/"],
           ["@Public", "./public/"]
         ],
         "extensions": [".js", ".jsx", ".json"]
