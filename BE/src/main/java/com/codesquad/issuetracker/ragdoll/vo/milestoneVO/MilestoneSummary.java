@@ -11,10 +11,19 @@ public class MilestoneSummary {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Double progress;
 
+    private MilestoneSummary(Integer id, String title) {
+        this.id = id;
+        this.title = title;
+    }
+
     private MilestoneSummary(Integer id, String title, Double progress) {
         this.id = id;
         this.title = title;
         this.progress = progress;
+    }
+
+    public static MilestoneSummary of(Integer id, String title) {
+        return new MilestoneSummary(id, title);
     }
 
     public static MilestoneSummary of(Integer id, String title, Double progress) {

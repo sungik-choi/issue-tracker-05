@@ -17,8 +17,6 @@ public class ListOfIssuesDto {
 
     private List<UserSummary> assigneeInfo;
 
-    public ListOfIssuesDto() {}
-
     private ListOfIssuesDto(List<IssueDetails> issues, LabelInformation labelInfo, MilestoneInformation milestoneInfo, List<UserSummary> assigneeInfo) {
         this.issues = issues;
         this.labelInfo = labelInfo;
@@ -26,7 +24,7 @@ public class ListOfIssuesDto {
         this.assigneeInfo = assigneeInfo;
     }
 
-    public static ListOfIssuesDto create(List<IssueDetails> issues, LabelInformation labelInfo, MilestoneInformation milestoneInfo, List<UserSummary> assigneeInfo) {
+    public static ListOfIssuesDto of(List<IssueDetails> issues, LabelInformation labelInfo, MilestoneInformation milestoneInfo, List<UserSummary> assigneeInfo) {
         return new ListOfIssuesDto(issues, labelInfo, milestoneInfo, assigneeInfo);
     }
 

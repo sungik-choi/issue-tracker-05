@@ -45,7 +45,7 @@ public class IssueService_Ragdoll {
     public ListOfIssuesDto findAllIssues() {
         List<Issue> allOfOpenedIssues = issueDao.findAllOpendIssues();
         List<IssueDetails> issues = allOfOpenedIssues.stream()
-                                                     .map(issue -> mapToIssueDetails(issue, false))
+                                                     .map(this::mapToIssueDetails)
                                                      .collect(Collectors.toList());
         LabelInformation labelInformation = labelService.findAllLabels();
         MilestoneInformation milestoneInformation = milestoneService.findAllMilestones();
@@ -58,7 +58,7 @@ public class IssueService_Ragdoll {
                                   .build();
     }
 
-    private IssueDetails mapToIssueDetails(Issue issue, boolean milestoneWithProgress) {
+    private IssueDetails mapToIssueDetails(Issue issue) {
         Optional<Milestone> foundMilestone = Optional.ofNullable(milestoneService.findMilestoneById(issue.getMilestoneId()));
         List<LabelSummary> attachedLabels = labelService.findAttachedLabelsByIssueId(issue.getId());
         List<UserSummary> allocatedAssignees = userService.findAllocatedAssigneesByIssueId(issue.getId());
@@ -66,7 +66,7 @@ public class IssueService_Ragdoll {
         return new IssueDetails.Builder()
                                .issueId(issue.getId())
                                .issueTitle(issue.getTitle())
-                               .milestone(determineMilestone(foundMilestone, milestoneWithProgress))
+                               .milestone(determineMilestone(foundMilestone))
                                .attachedLabels(attachedLabels)
                                .author(UserSummary.of(user.getId(), user.getName(), user.getAvatarUrl()))
                                .allocatedAssignees(allocatedAssignees)
@@ -75,12 +75,12 @@ public class IssueService_Ragdoll {
                                .build();
     }
 
-    private MilestoneSummary determineMilestone(Optional<Milestone> foundMilestone, boolean milestoneWithProgress) {
+    private MilestoneSummary determineMilestone(Optional<Milestone> foundMilestone) {
         if (foundMilestone.isPresent()) {
             Milestone milestone = foundMilestone.get();
             List<Issue> issuesInMilestone = issueDao.findIssuesByMilestoneId(milestone.getId());
             int countOfOpenedIssue = (int) issuesInMilestone.stream().filter(Issue::isOpened).count();
-            Double progress = milestoneWithProgress ? (1 - (double) countOfOpenedIssue / issuesInMilestone.size()) * 100 : null;
+            Double progress = (1 - (double) countOfOpenedIssue / issuesInMilestone.size()) * 100;
             return MilestoneSummary.of(milestone.getId(), milestone.getTitle(), progress);
         }
         return null;
@@ -103,7 +103,7 @@ public class IssueService_Ragdoll {
             return CommentDetails.of(commenter, comment.getId(), comment.getDescription(), comment.getCreatedDateTime());
         }).collect(Collectors.toList());
         return new DetailedInformationOfIssueDto.Builder()
-                                                .issue(mapToIssueDetails(issue, true))
+                                                .issue(mapToIssueDetails(issue))
                                                 .comments(comments)
                                                 .labelInfo(labelService.findAllLabels())
                                                 .milestoneInfo(milestoneService.findAllMilestones())
@@ -190,7 +190,7 @@ public class IssueService_Ragdoll {
 
     private ListOfIssuesDto createListOfIssues(List<Issue> issues) {
         List<IssueDetails> detailsOfIssues = issues.stream()
-                                                   .map(issue -> mapToIssueDetails(issue, false))
+                                                   .map(this::mapToIssueDetails)
                                                    .collect(Collectors.toList());
         LabelInformation labelInformation = labelService.findAllLabels();
         MilestoneInformation milestoneInformation = milestoneService.findAllMilestones();
