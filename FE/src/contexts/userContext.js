@@ -1,12 +1,14 @@
 import React, { createContext, useMemo, useReducer } from "react";
-import { issuesReducer } from "@Reducers/issuesReducer";
+import PropTypes from "prop-types";
+
+import { userReducer } from "@Reducers/userReducer";
 
 export const initialState = {};
 
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [user, userDispatch] = useReducer(issuesReducer, initialState);
+  const [user, userDispatch] = useReducer(userReducer, initialState);
 
   const contextValue = useMemo(
     () => ({
@@ -17,4 +19,8 @@ export const UserProvider = ({ children }) => {
   );
 
   return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>;
+};
+
+UserProvider.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
 };
