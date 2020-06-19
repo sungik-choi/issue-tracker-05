@@ -3,6 +3,12 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import AppBar from "@material-ui/core/AppBar";
+import Popover from "@material-ui/core/Popover";
+import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import Divider from "@material-ui/core/Divider";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
@@ -15,6 +21,7 @@ const Header = () => {
   const TITLE_TEXT = "Issue Tracker";
 
   // ! 현재 로그인한 유저의 정보를 CustomAvatar에 id 와 url 담을 것
+  // ! 정보가 없다면 유저 아이콘 보여주지 않음
   // ? Context API 사용하면 될 거 같다
 
   return (
@@ -27,9 +34,36 @@ const Header = () => {
           <Typography variant="h6" className={classes.title}>
             {TITLE_TEXT}
           </Typography>
-          <IconButton>
-            <CustomAvatar />
-          </IconButton>
+          <PopupState variant="popover" popupId="demo-popup-popover">
+            {(popupState) => (
+              <>
+                <IconButton {...bindTrigger(popupState)}>
+                  <CustomAvatar />
+                </IconButton>
+                <Popover
+                  {...bindPopover(popupState)}
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "right",
+                  }}
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                >
+                  <List>
+                    <ListItem>
+                      <ListItemText primary="Sungik choi" />
+                    </ListItem>
+                    <Divider />
+                    <ListItem button>
+                      <ListItemText primary="Logout" />
+                    </ListItem>
+                  </List>
+                </Popover>
+              </>
+            )}
+          </PopupState>
         </Toolbar>
       </AppBar>
     </div>
