@@ -8,14 +8,13 @@ import { IssueListContext } from "@Contexts/issueListContext";
 import { fetchSuccess, fetchError } from "@Reducers/issueListReducer";
 
 import useFetch from "@Hooks/useFetch";
-
-const url = "http://52.79.67.245/issues";
+import { issuesUrl } from "@Utils/urls";
 
 const Issues = () => {
   const { issueList, issueListDispatch } = useContext(IssueListContext);
 
   useFetch({
-    url,
+    url: issuesUrl,
     actionType: {
       successAction: fetchSuccess,
       errorAction: fetchError,
