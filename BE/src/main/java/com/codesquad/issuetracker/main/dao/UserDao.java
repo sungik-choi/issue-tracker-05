@@ -22,7 +22,7 @@ public class UserDao {
                      "FROM user u JOIN assignee a ON u.id = a.user_id " +
                      "WHERE a.issue_id = ?";
         return jdbcTemplate.query(sql, new Object[] {issueId},
-                (rs, rowNum) -> UserSummary.create(rs.getLong("u.id"), rs.getString("u.name"),
+                (rs, rowNum) -> UserSummary.of(rs.getLong("u.id"), rs.getString("u.name"),
                                                    rs.getString("u.avatar_url")));
     }
 

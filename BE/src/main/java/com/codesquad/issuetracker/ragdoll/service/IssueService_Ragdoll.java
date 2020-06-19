@@ -68,7 +68,7 @@ public class IssueService_Ragdoll {
                                .issueTitle(issue.getTitle())
                                .milestone(determineMilestone(foundMilestone, milestoneWithProgress))
                                .attachedLabels(attachedLabels)
-                               .author(UserSummary.create(user.getId(), user.getName(), user.getAvatarUrl()))
+                               .author(UserSummary.of(user.getId(), user.getName(), user.getAvatarUrl()))
                                .allocatedAssignees(allocatedAssignees)
                                .createdAt(issue.getCreatedDateTime())
                                .opened(issue.isOpened())
@@ -81,7 +81,7 @@ public class IssueService_Ragdoll {
             List<Issue> issuesInMilestone = issueDao.findIssuesByMilestoneId(milestone.getId());
             int countOfOpenedIssue = (int) issuesInMilestone.stream().filter(Issue::isOpened).count();
             Double progress = milestoneWithProgress ? (1 - (double) countOfOpenedIssue / issuesInMilestone.size()) * 100 : null;
-            return MilestoneSummary.create(milestone.getId(), milestone.getTitle(), progress);
+            return MilestoneSummary.of(milestone.getId(), milestone.getTitle(), progress);
         }
         return null;
     }
@@ -99,7 +99,7 @@ public class IssueService_Ragdoll {
         List<Comment> allCommentsOfIssue = issueDao.findAllCommentsByIssueId(issueId);
         List<CommentDetails> comments = allCommentsOfIssue.stream().map(comment -> {
             User user = userService.findUserById(comment.getUserId());
-            UserSummary commenter = UserSummary.create(user.getId(), user.getName(), user.getAvatarUrl());
+            UserSummary commenter = UserSummary.of(user.getId(), user.getName(), user.getAvatarUrl());
             return CommentDetails.of(commenter, comment.getId(), comment.getDescription(), comment.getCreatedDateTime());
         }).collect(Collectors.toList());
         return new DetailedInformationOfIssueDto.Builder()

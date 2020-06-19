@@ -26,7 +26,7 @@ public class LabelService {
     public LabelInformation findAllLabels() {
         List<Label> labels = labelDao.findAllLabels();
         Set<LabelSummary> labelSummaries = labels.stream()
-                                                 .map(label -> LabelSummary.create(label.getId(), label.getName(), label.getHexCode()))
+                                                 .map(label -> LabelSummary.of(label.getId(), label.getName(), label.getHexCode()))
                                                  .collect(Collectors.toSet());
         return LabelInformation.create(labelSummaries.size(), labelSummaries);
     }

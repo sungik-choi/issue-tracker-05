@@ -30,9 +30,9 @@ public class MilestoneService_Ragdoll {
     public MilestoneInformation findAllMilestones() {
         List<Milestone> milestones = milestoneDao.findAllMilestones();
         Set<MilestoneSummary> milestoneSummaries = milestones.stream()
-                                                             .map(milestone -> MilestoneSummary.create(milestone.getId(), milestone.getTitle()))
+                                                             .map(milestone -> MilestoneSummary.of(milestone.getId(), milestone.getTitle()))
                                                              .collect(Collectors.toSet());
-        return MilestoneInformation.create(milestoneSummaries.size(), milestoneSummaries);
+        return MilestoneInformation.of(milestoneSummaries.size(), milestoneSummaries);
     }
 
     public ListOfMilestonesDto findAllMilestonesWithDetails() {

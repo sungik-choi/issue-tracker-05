@@ -22,7 +22,7 @@ public class LabelDao {
                      "FROM label l JOIN issue_has_label il ON l.id = il.label_id " +
                      "WHERE il.issue_id = ?";
         return jdbcTemplate.query(sql, new Object[]{issueId},
-                (rs, rowNum) -> LabelSummary.create(rs.getInt("l.id"), rs.getString("l.name"),
+                (rs, rowNum) -> LabelSummary.of(rs.getInt("l.id"), rs.getString("l.name"),
                                                     rs.getString("l.hex_code")));
     }
 

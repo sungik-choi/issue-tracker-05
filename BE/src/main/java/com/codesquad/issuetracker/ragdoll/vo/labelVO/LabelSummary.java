@@ -2,38 +2,38 @@ package com.codesquad.issuetracker.ragdoll.vo.labelVO;
 
 public class LabelSummary {
 
-    private Integer labelId;
+    private Integer id;
 
-    private String labelName;
+    private String name;
 
     private String hexCode;
 
     public LabelSummary() {}
 
-    private LabelSummary(Integer labelId, String labelName, String hexCode) {
-        this.labelId = labelId;
-        this.labelName = labelName;
+    private LabelSummary(Integer id, String name, String hexCode) {
+        this.id = id;
+        this.name = name;
         this.hexCode = hexCode;
     }
 
-    public static LabelSummary create(Integer labelId, String labelName, String hexCode) {
-        return new LabelSummary(labelId, labelName, hexCode);
+    public static LabelSummary of(Integer id, String name, String hexCode) {
+        return new LabelSummary(id, name, hexCode);
     }
 
-    public Integer getLabelId() {
-        return labelId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setLabelId(Integer labelId) {
-        this.labelId = labelId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getLabelName() {
-        return labelName;
+    public String getName() {
+        return name;
     }
 
-    public void setLabelName(String labelName) {
-        this.labelName = labelName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getHexCode() {

@@ -4,48 +4,37 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 public class MilestoneSummary {
 
-    private Integer milestoneId;
+    private Integer id;
 
-    private String milestoneTitle;
+    private String title;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Double progress;
 
-    public MilestoneSummary() {}
-
-    public MilestoneSummary(Integer milestoneId, String milestoneTitle) {
-        this.milestoneId = milestoneId;
-        this.milestoneTitle = milestoneTitle;
-    }
-
-    public MilestoneSummary(Integer milestoneId, String milestoneTitle, Double progress) {
-        this.milestoneId = milestoneId;
-        this.milestoneTitle = milestoneTitle;
+    private MilestoneSummary(Integer id, String title, Double progress) {
+        this.id = id;
+        this.title = title;
         this.progress = progress;
     }
 
-    public static MilestoneSummary create(Integer milestoneId, String milestoneTitle) {
-        return new MilestoneSummary(milestoneId, milestoneTitle);
+    public static MilestoneSummary of(Integer id, String title, Double progress) {
+        return new MilestoneSummary(id, title, progress);
     }
 
-    public static MilestoneSummary create(Integer milestoneId, String milestoneTitle, Double progress) {
-        return new MilestoneSummary(milestoneId, milestoneTitle, progress);
+    public Integer getId() {
+        return id;
     }
 
-    public Integer getMilestoneId() {
-        return milestoneId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setMilestoneId(Integer milestoneId) {
-        this.milestoneId = milestoneId;
+    public String getTitle() {
+        return title;
     }
 
-    public String getMilestoneTitle() {
-        return milestoneTitle;
-    }
-
-    public void setMilestoneTitle(String milestoneTitle) {
-        this.milestoneTitle = milestoneTitle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Double getProgress() {

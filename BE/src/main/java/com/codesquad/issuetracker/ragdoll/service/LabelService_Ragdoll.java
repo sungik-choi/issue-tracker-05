@@ -28,7 +28,7 @@ public class LabelService_Ragdoll {
     public LabelInformation findAllLabels() {
         List<Label> labels = labelDaoRagdoll.findAllLabels();
         Set<LabelSummary> labelSummaries = labels.stream()
-                                                 .map(label -> LabelSummary.create(label.getId(), label.getName(), label.getHexCode()))
+                                                 .map(label -> LabelSummary.of(label.getId(), label.getName(), label.getHexCode()))
                                                  .collect(Collectors.toSet());
         return LabelInformation.create(labelSummaries.size(), labelSummaries);
     }

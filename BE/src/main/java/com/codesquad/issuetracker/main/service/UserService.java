@@ -28,7 +28,7 @@ public class UserService {
     public List<UserSummary> findAllAssignees() {
         List<User> allUsers = userDao.findAllUsers();
         return allUsers.stream()
-                       .map(user -> UserSummary.create(user.getId(), user.getName(), user.getAvatarUrl()))
+                       .map(user -> UserSummary.of(user.getId(), user.getName(), user.getAvatarUrl()))
                        .collect(Collectors.toList());
     }
 }

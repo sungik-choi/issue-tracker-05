@@ -10,9 +10,9 @@ import java.util.List;
 
 public class IssueDetails {
 
-    private Long issueId;
+    private Long id;
 
-    private String issueTitle;
+    private String title;
 
     private MilestoneSummary milestone;
 
@@ -29,9 +29,9 @@ public class IssueDetails {
 
     public IssueDetails() {}
 
-    private IssueDetails(Long issueId, String issueTitle, MilestoneSummary milestone, List<LabelSummary> attachedLabels, UserSummary author, List<UserSummary> allocatedAssignees, LocalDateTime createdAt, boolean opened) {
-        this.issueId = issueId;
-        this.issueTitle = issueTitle;
+    private IssueDetails(Long id, String title, MilestoneSummary milestone, List<LabelSummary> attachedLabels, UserSummary author, List<UserSummary> allocatedAssignees, LocalDateTime createdAt, boolean opened) {
+        this.id = id;
+        this.title = title;
         this.milestone = milestone;
         this.attachedLabels = attachedLabels;
         this.author = author;
@@ -40,20 +40,20 @@ public class IssueDetails {
         this.opened = opened;
     }
 
-    public Long getIssueId() {
-        return issueId;
+    public Long getId() {
+        return id;
     }
 
-    public void setIssueId(Long issueId) {
-        this.issueId = issueId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getIssueTitle() {
-        return issueTitle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setIssueTitle(String issueTitle) {
-        this.issueTitle = issueTitle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public MilestoneSummary getMilestone() {
