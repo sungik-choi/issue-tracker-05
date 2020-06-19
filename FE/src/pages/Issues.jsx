@@ -22,8 +22,6 @@ const Issues = () => {
     dispatch: issueListDispatch,
   });
 
-  console.log(loading);
-
   return (
     <>
       {!loading && (
