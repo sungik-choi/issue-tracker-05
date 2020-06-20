@@ -1,11 +1,11 @@
 import React from "react";
 
-import Title from "@Components/DetailedIssue/Header/Title/Title";
+import Header from "@Components/DetailedIssue/Header/Header";
 
 const DetailedIssue = () => {
   return (
     <>
-      <Title />
+      <Header />
     </>
   );
 };
