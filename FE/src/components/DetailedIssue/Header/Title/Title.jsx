@@ -2,6 +2,7 @@ import React from "react";
 
 import { data } from "@Mock/detailedIssue";
 import EditButton from "./EditButton";
+import InputBox from "./InputBox";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
@@ -15,10 +16,12 @@ const Title = () => {
 
   return (
     <Box display="flex" alignItems="center" justifyContent="space-between">
-      <Typography variant="h3" component="h2" gutterBottom>
+      {/* <Typography variant="h3" component="h2" gutterBottom>
         <span>{title}</span>
         <span className={classes.issueNum}>#{id}</span>
-      </Typography>
+      </Typography> */}
+      <InputBox />
+
       <EditButton />
     </Box>
   );
