@@ -1,10 +1,10 @@
 import React from "react";
 
 import { data } from "@Mock/detailedIssue";
+import EditButton from "./EditButton";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
 
 const Title = () => {
   const classes = useStyles();
@@ -13,10 +13,13 @@ const Title = () => {
   const id = data.issue.issueId;
 
   return (
-    <Typography variant="h3" component="h2" gutterBottom>
-      <span>{title}</span>
-      <span className={classes.issueNum}>#{id}</span>
-    </Typography>
+    <>
+      <Typography variant="h3" component="h2" gutterBottom>
+        <span>{title}</span>
+        <span className={classes.issueNum}>#{id}</span>
+      </Typography>
+      <EditButton />
+    </>
   );
 };
 
