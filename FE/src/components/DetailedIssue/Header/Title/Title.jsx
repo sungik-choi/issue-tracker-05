@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 
 import InputBox from "./InputBox";
 import TitleBox from "./TitleBox";
@@ -19,19 +19,19 @@ const Title = () => {
   const [inputTitle, setinputTitle] = useState(issueTitle);
   const [title, setTitle] = useState(issueTitle);
 
-  const onChangeInput = ({ target }) => {
+  const onChangeInput = useCallback(({ target }) => {
     setinputTitle(target.value);
-  };
+  });
 
-  const onToggle = () => {
+  const onToggle = useCallback(() => {
     setIsEdit((prevState) => !prevState);
-  };
+  });
 
-  const onClickSave = () => {
+  const onClickSave = useCallback(() => {
     setTitle(inputTitle);
     onToggle();
     //fetch
-  };
+  });
 
   const onClickClose = () => {
     setinputTitle(title);

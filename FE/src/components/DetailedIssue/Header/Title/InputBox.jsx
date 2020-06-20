@@ -14,8 +14,6 @@ const InputBox = ({ title, onChange, onClickSave, onClickClose }) => {
 
   const classes = useStyles();
 
-  //context로 값 가져오기
-
   const textField = (
     <TextField
       id="outlined-full-width"
