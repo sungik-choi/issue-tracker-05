@@ -1,7 +1,7 @@
 export const data = {
   issue: {
     issueId: 1,
-    issueTitle: "타이틀",
+    issueTitle: "타이틀ss",
     milestone: {
       milestoneId: 1,
       milestoneTitle: "마일스톤 제목",
