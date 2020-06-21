@@ -147,3 +147,10 @@ INSERT INTO assignee (issue_id, user_id) VALUES (29, 3);
 INSERT INTO assignee (issue_id, user_id) VALUES (29, 4);
 INSERT INTO assignee (issue_id, user_id) VALUES (30, 3);
 INSERT INTO assignee (issue_id, user_id) VALUES (30, 4);
+
+INSERT INTO comment (comment.description, comment.created_date_time, comment.issue_id, comment.user_id) VALUES ('댓글1', '2020-06-22 01:23:00', 1, 2);
+INSERT INTO comment (comment.description, comment.created_date_time, comment.issue_id, comment.user_id) VALUES ('댓글2', '2020-06-22 01:23:00', 1, 2);
+INSERT INTO comment (comment.description, comment.created_date_time, comment.issue_id, comment.user_id) VALUES ('댓글3', '2020-06-22 01:23:00', 1, 2);
+INSERT INTO comment (comment.description, comment.created_date_time, comment.issue_id, comment.user_id) VALUES ('댓글4', '2020-06-22 01:23:00', 1, 2);
+INSERT INTO comment (comment.description, comment.created_date_time, comment.issue_id, comment.user_id) VALUES ('댓글5', '2020-06-22 01:23:00', 1, 2);
+INSERT INTO comment (comment.description, comment.created_date_time, comment.issue_id, comment.user_id) VALUES ('댓글6', '2020-06-22 01:23:00', 1, 2);

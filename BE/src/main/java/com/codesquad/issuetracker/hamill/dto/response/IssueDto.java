@@ -1,6 +1,7 @@
 package com.codesquad.issuetracker.hamill.dto.response;
 
 import com.codesquad.issuetracker.hamill.vo.UserVO.UserSummary;
+import com.codesquad.issuetracker.hamill.vo.commentVO.CommentSummary;
 import com.codesquad.issuetracker.hamill.vo.issueVO.IssueDetails;
 import com.codesquad.issuetracker.hamill.vo.labelVO.LabelInformation;
 import com.codesquad.issuetracker.hamill.vo.milestoneVO.MilestoneInformation;
@@ -11,22 +12,26 @@ public class IssueDto {
 
     private IssueDetails issue;
 
+    private List<CommentSummary> comments;
+
     private LabelInformation labelInfo;
 
     private MilestoneInformation milestoneInfo;
 
     private List<UserSummary> users;
 
-    private IssueDto(IssueDetails issue, LabelInformation labelInfo, MilestoneInformation milestoneInfo, List<UserSummary> users) {
+    private IssueDto(IssueDetails issue, List<CommentSummary> comments, LabelInformation labelInfo, MilestoneInformation milestoneInfo, List<UserSummary> users) {
         this.issue = issue;
+        this.comments = comments;
         this.labelInfo = labelInfo;
         this.milestoneInfo = milestoneInfo;
         this.users = users;
     }
 
-    public static IssueDto of(IssueDetails issue, LabelInformation labelInfo, MilestoneInformation milestoneInfo, List<UserSummary> users) {
+    public static IssueDto of(IssueDetails issue, List<CommentSummary> comments, LabelInformation labelInfo, MilestoneInformation milestoneInfo, List<UserSummary> users) {
         return new Builder()
                 .issue(issue)
+                .comments(comments)
                 .labelInfo(labelInfo)
                 .milestoneInfo(milestoneInfo)
                 .users(users)
@@ -35,6 +40,10 @@ public class IssueDto {
 
     public IssueDetails getIssue() {
         return issue;
+    }
+
+    public List<CommentSummary> getComments() {
+        return comments;
     }
 
     public LabelInformation getLabelInfo() {
@@ -51,6 +60,7 @@ public class IssueDto {
 
     private static class Builder {
         private IssueDetails issue;
+        private List<CommentSummary> comments;
         private LabelInformation labelInfo;
         private MilestoneInformation milestoneInfo;
         private List<UserSummary> users;
@@ -60,6 +70,11 @@ public class IssueDto {
 
         public Builder issue(IssueDetails issue) {
             this.issue = issue;
+            return this;
+        }
+
+        public Builder comments(List<CommentSummary> comments) {
+            this.comments = comments;
             return this;
         }
 
@@ -79,7 +94,7 @@ public class IssueDto {
         }
 
         public IssueDto build() {
-            return new IssueDto(issue, labelInfo, milestoneInfo, users);
+            return new IssueDto(issue, comments, labelInfo, milestoneInfo, users);
         }
     }
 }

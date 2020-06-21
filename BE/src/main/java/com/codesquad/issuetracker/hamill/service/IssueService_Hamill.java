@@ -8,6 +8,7 @@ import com.codesquad.issuetracker.hamill.dto.request.NewIssueDto;
 import com.codesquad.issuetracker.hamill.dto.response.IssueDto;
 import com.codesquad.issuetracker.hamill.dto.response.ListOfIssuesDto;
 import com.codesquad.issuetracker.hamill.vo.UserVO.UserSummary;
+import com.codesquad.issuetracker.hamill.vo.commentVO.CommentSummary;
 import com.codesquad.issuetracker.hamill.vo.issueVO.IssueDetails;
 import com.codesquad.issuetracker.hamill.vo.labelVO.LabelInformation;
 import com.codesquad.issuetracker.hamill.vo.labelVO.LabelSummary;
@@ -45,10 +46,10 @@ public class IssueService_Hamill {
         List<IssueDetails> issueDetails = issues.stream().map(this::mapToIssueDetails).collect(Collectors.toList());
         LabelInformation labelInfo = labelService_hamill.findLabelInformation();
         MilestoneInformation milestoneInfo = milestoneService_hamill.findMilestoneInformation();
-        List<UserSummary> userSummary = userService_hamill.findUserInformation();
+        List<UserSummary> userSummaries = userService_hamill.findUserSummaries();
 
 
-        return ListOfIssuesDto.of(issueDetails, labelInfo, milestoneInfo, userSummary);
+        return ListOfIssuesDto.of(issueDetails, labelInfo, milestoneInfo, userSummaries);
     }
 
     private IssueDetails mapToIssueDetails(Issue issue) {
@@ -78,11 +79,12 @@ public class IssueService_Hamill {
     public IssueDto getIssueAndAllElements(Long issueId) {
         Issue issue = issueDao_Hamill.findIssueByIssueId(issueId);
         IssueDetails issueDetail = mapToIssueDetails(issue);
+        List<CommentSummary> comments = commentService_hamill.findCommentSummaries();
         LabelInformation labelInfo = labelService_hamill.findLabelInformation();
         MilestoneInformation milestoneInfo = milestoneService_hamill.findMilestoneInformation();
-        List<UserSummary> userSummary = userService_hamill.findUserInformation();
+        List<UserSummary> userSummaries = userService_hamill.findUserSummaries();
 
-        return IssueDto.of(issueDetail, labelInfo, milestoneInfo, userSummary);
+        return IssueDto.of(issueDetail, comments, labelInfo, milestoneInfo, userSummaries);
     }
 
 
