@@ -5,6 +5,7 @@ import com.codesquad.issuetracker.hamill.domain.Issue;
 import com.codesquad.issuetracker.hamill.domain.Milestone;
 import com.codesquad.issuetracker.hamill.domain.User;
 import com.codesquad.issuetracker.hamill.dto.ListOfIssuesDto;
+import com.codesquad.issuetracker.hamill.dto.RequestNewIssueDto;
 import com.codesquad.issuetracker.hamill.vo.UserVO.UserSummary;
 import com.codesquad.issuetracker.hamill.vo.issueVO.IssueDetails;
 import com.codesquad.issuetracker.hamill.vo.labelVO.LabelInformation;
@@ -43,6 +44,7 @@ public class IssueService_Hamill {
         MilestoneInformation milestoneInfo = milestoneService_hamill.findMilestoneInformation();
         List<UserSummary> userSummary = userService_hamill.findUserInformation();
 
+
         return ListOfIssuesDto.of(issueDetails, labelInfo, milestoneInfo, userSummary);
     }
 
@@ -61,6 +63,10 @@ public class IssueService_Hamill {
                 allocatedAssignees,
                 issue.getCreatedDateTime(),
                 issue.isOpened());
+    }
+
+    public void save(RequestNewIssueDto requestNewIssueDto) {
+        issueDao_Hamill.save(requestNewIssueDto);
     }
 
 
