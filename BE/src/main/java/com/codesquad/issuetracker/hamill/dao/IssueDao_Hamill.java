@@ -1,7 +1,7 @@
 package com.codesquad.issuetracker.hamill.dao;
 
 import com.codesquad.issuetracker.hamill.domain.Issue;
-import com.codesquad.issuetracker.hamill.dto.RequestNewIssueDto;
+import com.codesquad.issuetracker.hamill.dto.request.NewIssueDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -35,15 +35,28 @@ public class IssueDao_Hamill {
         );
     }
 
-    public void save(RequestNewIssueDto requestNewIssueDto) {
+    public void save(NewIssueDto newIssueDto) {
         String sql =
                 "INSERT INTO issue(title, created_date_time, is_opened, user_id) " +
                 "VALUES (?, ?, ?, ?)";
 
         jdbcTemplate.update(sql,
-                requestNewIssueDto.getTitle(),
+                newIssueDto.getTitle(),
                 Timestamp.valueOf(LocalDateTime.now()),
-                true, requestNewIssueDto.getUserId());
+                true, newIssueDto.getUserId());
+    }
+
+    public Issue findIssueByIssueId(Long issueId) {
+        return jdbcTemplate.queryForObject(
+                "SELECT i.id, i.title, i.created_date_time, i.is_opened, i.user_id, i.milestone_id FROM issue i WHERE i.id = ?",
+                (rs, rowNum) ->
+                        Issue.of(rs.getLong("id"),
+                                rs.getString("title"),
+                                rs.getTimestamp("created_date_time").toLocalDateTime(),
+                                rs.getBoolean("is_opened"),
+                                rs.getLong("user_id"),
+                                rs.getInt("milestone_id"))
+        , issueId);
     }
 
     public void saveNewIssueHasLabel(Long labelId, Long issueId) {
