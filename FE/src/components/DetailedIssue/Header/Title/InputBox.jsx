@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 
 import InputField from "@Components/Common/InputField";
 
@@ -7,7 +8,7 @@ import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { makeStyles } from "@material-ui/core/styles";
 
-const InputBox = ({ title, onChange, onClickSave, onClickClose }) => {
+const InputBox = ({ value, onChange, onClickSave, onClickClose }) => {
   const SAVE_BTN = "save";
   const CLOSE_BTN = "close";
 
@@ -23,7 +24,7 @@ const InputBox = ({ title, onChange, onClickSave, onClickClose }) => {
       <Box display="flex" alignItems="center" justifyContent="space-between">
         <InputField
           onChange={onChange}
-          value={title}
+          value={value}
           inputProps={{ "aria-label": "Issue title" }}
         />
         <ButtonGroup>
@@ -45,5 +46,19 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
 }));
+
+InputBox.defaultProps = {
+  value: "",
+  onChange: null,
+  onClickSave: null,
+  onClickClose: null,
+};
+
+InputBox.propTypes = {
+  value: PropTypes.string,
+  onChange: PropTypes.oneOfType([PropTypes.func, PropTypes.instanceOf(null)]),
+  onClickSave: PropTypes.oneOfType([PropTypes.func, PropTypes.instanceOf(null)]),
+  onClickClose: PropTypes.oneOfType([PropTypes.func, PropTypes.instanceOf(null)]),
+};
 
 export default InputBox;

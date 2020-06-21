@@ -5,8 +5,6 @@ import TitleBox from "./TitleBox";
 import { data } from "@Mock/detailedIssue";
 
 const Title = () => {
-  const EIDT_BTN_TEXT = "Edit";
-
   const issueTitle = data.issue.issueTitle;
   const issueId = data.issue.issueId;
   //context로 값 가져오기
@@ -24,7 +22,11 @@ const Title = () => {
   });
 
   const onClickSave = useCallback(() => {
-    setTitle(inputTitle);
+    if (inputTitle) setTitle(inputTitle);
+    else {
+      setTitle(title);
+      setinputTitle(title);
+    }
     onToggle();
     //fetch
   });
@@ -38,7 +40,7 @@ const Title = () => {
     <>
       {isEdit ? (
         <InputBox
-          title={inputTitle}
+          value={inputTitle}
           id={issueId}
           onChange={onChangeInput}
           onClickSave={onClickSave}

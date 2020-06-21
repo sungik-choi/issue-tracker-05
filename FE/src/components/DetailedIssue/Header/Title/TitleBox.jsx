@@ -14,7 +14,7 @@ const TitleBox = ({ id, title, onClickEdit }) => {
     <Box display="flex" alignItems="center" justifyContent="space-between">
       <Typography variant="h3" component="h2">
         <span>{title}</span>
-        <span className={classes.issueNum}>#{id}</span>
+        {id && <span className={classes.issueNum}>#{id}</span>}
       </Typography>
       <Button variant="contained" onClick={onClickEdit}>
         {EDIT_BTN}
@@ -29,5 +29,16 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(2),
   },
 }));
+
+// TitleBox.defaultProps = {
+//   text: "",
+//   title: "",
+//   clickHandler: null,
+//   options: {
+//     name: "",
+//     label: null,
+//     avatar: null,
+//   },
+// };
 
 export default TitleBox;

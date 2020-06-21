@@ -12,11 +12,4 @@ const Info = () => {
   );
 };
 
-// const useStyles = makeStyles((theme) => ({
-//   button: {
-//     marginLeft: theme.spacing(6),
-//     marginRight: theme.spacing(2),
-//   },
-// }));
-
 export default Info;
