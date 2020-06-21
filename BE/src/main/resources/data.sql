@@ -3,7 +3,7 @@ INSERT INTO user (name, email, github_id, created_date_time, avatar_url) VALUES 
 INSERT INTO user (name, email, github_id, created_date_time, avatar_url) VALUES ('ed', 'ed@naver.com', '102', '2020-06-11 01:17:32', 'https://cdn.pixabay.com/photo/2016/08/11/09/50/emoji-1585197_960_720.png');
 INSERT INTO user (name, email, github_id, created_date_time, avatar_url) VALUES ('ellin', 'ellin@naver.com', '103', '2020-06-11 01:17:32', 'https://cdn.pixabay.com/photo/2019/02/19/19/45/thumbs-up-4007573_960_720.png');
 
-INSERT INTO milestone (title, description, due_date, created_date_time, updated_date_time, progress) VALUES ('백엔드 1주차 마일스톤', 'DB 설계 이슈 목록 API 구현 이슈 생성 API 구현', '2020-06-08', '2020-06-11 01:22:32', '2020-06-11 01:22:32', 33.333);
+INSERT INTO milestone (title, description, due_date, created_date_time, updated_date_time, progress) VALUES ('백엔드 1주차 마일스톤', 'DB 설계 이슈 목록 API 구현, 이슈 생성 API 구현', '2020-06-08', '2020-06-11 01:22:32', '2020-06-11 01:22:32', 33.333);
 INSERT INTO milestone (title, description, due_date, created_date_time, updated_date_time, progress) VALUES ('FE WEEK1', '', '2020-06-12', '2020-06-08 01:22:32', '2020-06-13 01:22:32', 50.00);
 INSERT INTO milestone (title, description, due_date, created_date_time, updated_date_time, progress) VALUES ('FE WEEK2', '', '2020-06-19', '2020-06-09 01:22:32', '2020-06-20 01:22:32', 100.00);
 INSERT INTO milestone (title, description, due_date, created_date_time, updated_date_time, progress) VALUES ('FE WEEK3', '', '2020-06-26', '2020-06-10 01:22:32', '2020-06-27 01:22:32', 0.00);
