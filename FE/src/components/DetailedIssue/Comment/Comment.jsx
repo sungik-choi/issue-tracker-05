@@ -5,26 +5,35 @@ import ToolBar from "./ToolBar/ToolBar";
 import { data } from "@Mock/detailedIssue";
 
 import Box from "@material-ui/core/Box";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import CustomAvatar from "@Components/Common/CustomAvatar";
+import { makeStyles } from "@material-ui/core/styles";
 
 const Comment = () => {
-  const { userId, description } = data.issue.author;
+  const { userId, description, avatarUrl } = data.issue.author;
 
   const contents = [{ id: userId, contents: description }];
 
   const classes = useStyles();
 
   return (
-    <Box ml={"40px"} width="70%">
-      <CustomTable headContents={<ToolBar />} bodyContents={contents} className={classes.table} />
+    <Box position="relative">
+      <CustomAvatar id={userId} url={avatarUrl} className={classes.avatar} />
+      <Box ml={"40px"} width="70%">
+        <CustomTable headContents={<ToolBar />} bodyContents={contents} className={classes.table} />
+      </Box>
     </Box>
   );
 };
 
 const useStyles = makeStyles(() => ({
+  avatar: {
+    position: "absolute",
+    top: 12,
+    left: -4,
+  },
   table: {
     "& th": {
-      padding: "10px 20px",
+      padding: "7px 20px",
     },
   },
 }));

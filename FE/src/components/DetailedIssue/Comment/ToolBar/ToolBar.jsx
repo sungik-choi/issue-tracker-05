@@ -11,8 +11,9 @@ import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 
 const ToolBar = () => {
+  const EDIT_BTN_TEXT = "Edit";
   const {
-    author: { userId, userName, avatarUrl },
+    author: { userName },
     createdAt,
   } = data.issue;
 
@@ -21,8 +22,7 @@ const ToolBar = () => {
   const statusMessage = `commented ${calcTimeDiff(createdAt)}`;
 
   return (
-    <Box position="relative" display="flex" justifyContent="space-between" width="100%">
-      <CustomAvatar id={userId} url={avatarUrl} className={classes.avatar} />
+    <Box display="flex" justifyContent="space-between" width="100%">
       <Typography
         color="textSecondary"
         variant="subtitle1"
@@ -32,17 +32,12 @@ const ToolBar = () => {
         <strong>{userName}</strong>
         <span>{statusMessage}</span>
       </Typography>
-      <Button>Edit</Button>
+      <Button>{EDIT_BTN_TEXT}</Button>
     </Box>
   );
 };
 
 const useStyles = makeStyles((theme) => ({
-  avatar: {
-    position: "absolute",
-    top: 0,
-    left: -45,
-  },
   userName: {
     lineHeight: "40px",
     "& strong": {
