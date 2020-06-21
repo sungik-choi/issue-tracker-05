@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
@@ -30,15 +31,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// TitleBox.defaultProps = {
-//   text: "",
-//   title: "",
-//   clickHandler: null,
-//   options: {
-//     name: "",
-//     label: null,
-//     avatar: null,
-//   },
-// };
+TitleBox.defaultProps = {
+  id: null,
+};
+
+TitleBox.propTypes = {
+  id: PropTypes.number,
+  title: PropTypes.string.isRequired,
+  onClickEdit: PropTypes.func.isRequired,
+};
 
 export default TitleBox;

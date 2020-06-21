@@ -18,7 +18,7 @@ const StatusIcon = ({ closed, color }) => {
 
 StatusIcon.defaultProps = {
   closed: false,
-  color: { closed: "default", opened: "default" },
+  color: { closed: "inherit", opened: "inherit" },
 };
 
 StatusIcon.propTypes = {

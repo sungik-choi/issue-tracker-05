@@ -57,8 +57,8 @@ InputBox.defaultProps = {
 InputBox.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.oneOfType([PropTypes.func, PropTypes.instanceOf(null)]),
-  onClickSave: PropTypes.oneOfType([PropTypes.func, PropTypes.instanceOf(null)]),
-  onClickClose: PropTypes.oneOfType([PropTypes.func, PropTypes.instanceOf(null)]),
+  onClickSave: PropTypes.func.isRequired,
+  onClickClose: PropTypes.func.isRequired,
 };
 
 export default InputBox;
