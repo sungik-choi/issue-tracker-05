@@ -15,6 +15,7 @@ import com.codesquad.issuetracker.hamill.vo.milestoneVO.MilestoneSummary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,18 +24,19 @@ import java.util.stream.Collectors;
 public class IssueService_Hamill {
 
     private static final Logger logger = LoggerFactory.getLogger(IssueService_Hamill.class);
-    private static final int ZERO = 0;
 
     private IssueDao_Hamill issueDao_Hamill;
     private LabelService_Hamill labelService_hamill;
     private MilestoneService_Hamill milestoneService_hamill;
     private UserService_Hamill userService_hamill;
+    private CommentService_Hamill commentService_hamill;
 
-    public IssueService_Hamill(IssueDao_Hamill issueDao_Hamill, LabelService_Hamill labelService_hamill, MilestoneService_Hamill milestoneService_hamill, UserService_Hamill userService_hamill) {
+    public IssueService_Hamill(IssueDao_Hamill issueDao_Hamill, LabelService_Hamill labelService_hamill, MilestoneService_Hamill milestoneService_hamill, UserService_Hamill userService_hamill, CommentService_Hamill commentService_hamill) {
         this.issueDao_Hamill = issueDao_Hamill;
         this.labelService_hamill = labelService_hamill;
         this.milestoneService_hamill = milestoneService_hamill;
         this.userService_hamill = userService_hamill;
+        this.commentService_hamill = commentService_hamill;
     }
 
     public ListOfIssuesDto getIssuesAndAllElements() {
@@ -65,8 +67,11 @@ public class IssueService_Hamill {
                 issue.isOpened());
     }
 
+    @Transactional
     public void save(RequestNewIssueDto requestNewIssueDto) {
+
         issueDao_Hamill.save(requestNewIssueDto);
+        commentService_hamill.save(requestNewIssueDto);
     }
 
 
