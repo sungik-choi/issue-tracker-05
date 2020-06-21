@@ -7,6 +7,7 @@ import calcTimeDiff from "@Utils/calcTimeDiff";
 
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 
 const ToolBar = () => {
@@ -20,20 +21,19 @@ const ToolBar = () => {
   const statusMessage = `commented ${calcTimeDiff(createdAt)}`;
 
   return (
-    <>
-      <Box position="relative" pl={3}>
-        <CustomAvatar id={userId} url={avatarUrl} className={classes.avatar} />
-        <Typography
-          color="textSecondary"
-          variant="subtitle1"
-          component="div"
-          className={classes.userName}
-        >
-          <strong>{userName}</strong>
-          <span>{statusMessage}</span>
-        </Typography>
-      </Box>
-    </>
+    <Box position="relative" pl={3} display="flex" justifyContent="space-between" px={2}>
+      <CustomAvatar id={userId} url={avatarUrl} className={classes.avatar} />
+      <Typography
+        color="textSecondary"
+        variant="subtitle1"
+        component="div"
+        className={classes.userName}
+      >
+        <strong>{userName}</strong>
+        <span>{statusMessage}</span>
+      </Typography>
+      <Button>Edit</Button>
+    </Box>
   );
 };
 
