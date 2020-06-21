@@ -1,7 +1,22 @@
 import React from "react";
 
-const info = () => {
-  return <div></div>;
+import StatusIcon from "@Components/Common/StatusIcon";
+import PrimaryButton from "@Components/Common/PrimaryButton";
+import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
+
+const Info = () => {
+  return (
+    <div>
+      <PrimaryButton text="Open" startIcon={<StatusIcon />} />
+    </div>
+  );
 };
 
-export default info;
+// const useStyles = makeStyles((theme) => ({
+//   button: {
+//     marginLeft: theme.spacing(6),
+//     marginRight: theme.spacing(2),
+//   },
+// }));
+
+export default Info;

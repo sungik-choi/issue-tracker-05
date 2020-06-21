@@ -6,7 +6,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 
 import { userList } from "@Mock/data";
 import Contents from "./Contents/Contents";
-import StatusIcon from "./StatusIcon";
+import StatusIcon from "@Components/Common/StatusIcon";
 import AvatarStack from "./AvatarStack";
 
 const Issue = ({ id, isSelectedIssue, clickHandler }) => {
@@ -14,7 +14,7 @@ const Issue = ({ id, isSelectedIssue, clickHandler }) => {
     <>
       <Box display="flex" alignItems="center">
         <Checkbox color="primary" checked={isSelectedIssue(id)} onChange={() => clickHandler(id)} />
-        <StatusIcon />
+        <StatusIcon closed color={{ closed: "secondary", opened: "primary" }} />
         <Contents />
       </Box>
       <AvatarStack userData={userList} />
