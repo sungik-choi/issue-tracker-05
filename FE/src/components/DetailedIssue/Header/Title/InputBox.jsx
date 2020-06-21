@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import InputField from "@Components/Common/InputField";
-import PrimaryButton from "@Components/Common/PrimaryButton";
 
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
@@ -10,8 +9,8 @@ import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { makeStyles } from "@material-ui/core/styles";
 
 const InputBox = ({ value, onChange, onClickSave, onClickClose }) => {
-  const SAVE_BTN = "save";
-  const CLOSE_BTN = "close";
+  const SAVE_BTN_TEXT = "save";
+  const CANCEL_BTN_TEXT = "Cancel";
 
   const classes = useStyles();
 
@@ -30,10 +29,10 @@ const InputBox = ({ value, onChange, onClickSave, onClickClose }) => {
         />
         <ButtonGroup>
           <Button variant="contained" type="submit" value="submit" className={classes.button}>
-            {SAVE_BTN}
+            {SAVE_BTN_TEXT}
           </Button>
           <Button variant="contained" onClick={onClickClose}>
-            {CLOSE_BTN}
+            {CANCEL_BTN_TEXT}
           </Button>
         </ButtonGroup>
       </Box>

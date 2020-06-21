@@ -31,7 +31,7 @@ InputField.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.oneOfType([PropTypes.func, PropTypes.instanceOf(null)]),
   id: PropTypes.string,
-  fullWidth: PropTypes.boolen,
+  fullWidth: PropTypes.bool,
 };
 
 export default InputField;
