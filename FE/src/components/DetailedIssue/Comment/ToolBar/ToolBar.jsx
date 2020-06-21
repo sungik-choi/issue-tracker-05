@@ -3,7 +3,10 @@ import React from "react";
 import { data } from "@Mock/detailedIssue";
 import CustomAvatar from "@Components/Common/CustomAvatar";
 
+import calcTimeDiff from "@Utils/calcTimeDiff";
+
 import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 
 const ToolBar = () => {
@@ -14,11 +17,21 @@ const ToolBar = () => {
 
   const classes = useStyles();
 
+  const statusMessage = `commented ${calcTimeDiff(createdAt)}`;
+
   return (
     <>
-      <Box position="relative">
-        sss
+      <Box position="relative" pl={3}>
         <CustomAvatar id={userId} url={avatarUrl} className={classes.avatar} />
+        <Typography
+          color="textSecondary"
+          variant="subtitle1"
+          component="div"
+          className={classes.userName}
+        >
+          <strong>{userName}</strong>
+          <span>{statusMessage}</span>
+        </Typography>
       </Box>
     </>
   );
@@ -29,6 +42,14 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     top: 0,
     left: -45,
+  },
+  userName: {
+    lineHeight: "40px",
+    "& strong": {
+      fontWeight: "bold",
+      marginRight: theme.spacing(1),
+      color: theme.palette.text.primary,
+    },
   },
 }));
 
