@@ -1,6 +1,7 @@
 package com.codesquad.issuetracker.hamill.dao;
 
 import com.codesquad.issuetracker.hamill.domain.Comment;
+import com.codesquad.issuetracker.hamill.dto.request.NewCommentDto;
 import com.codesquad.issuetracker.hamill.dto.request.NewIssueDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,5 +46,17 @@ public class CommentDao_Hamill {
                 newIssueDto.getDescription(),
                 Timestamp.valueOf(LocalDateTime.now()),
                 newIssueDto.getUserId());
+    }
+
+    public void create(Long issueId, NewCommentDto newCommentDto) {
+        String sql =
+                "INSERT INTO comment(description, created_date_time, issue_id, user_id) " +
+                        "VALUES(?, ?, ?, ?)";
+
+        jdbcTemplate.update(sql,
+                newCommentDto.getDescription(),
+                Timestamp.valueOf(LocalDateTime.now()),
+                issueId,
+                newCommentDto.getUserId());
     }
 }

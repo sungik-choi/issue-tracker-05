@@ -3,6 +3,7 @@ package com.codesquad.issuetracker.hamill.service;
 import com.codesquad.issuetracker.hamill.dao.CommentDao_Hamill;
 import com.codesquad.issuetracker.hamill.domain.Comment;
 import com.codesquad.issuetracker.hamill.domain.User;
+import com.codesquad.issuetracker.hamill.dto.request.NewCommentDto;
 import com.codesquad.issuetracker.hamill.dto.request.NewIssueDto;
 import com.codesquad.issuetracker.hamill.vo.UserVO.UserSummary;
 import com.codesquad.issuetracker.hamill.vo.commentVO.CommentSummary;
@@ -24,10 +25,6 @@ public class CommentService_Hamill {
         this.commentDao_hamill = commentDao_hamill;
     }
 
-    public void save(NewIssueDto newIssueDto) {
-        commentDao_hamill.save(newIssueDto);
-    }
-
     public List<CommentSummary> findCommentSummaries() {
         List<Comment> comments = commentDao_hamill.findAllComments();
         List<CommentSummary> commentSummaries = new ArrayList<>();
@@ -38,5 +35,15 @@ public class CommentService_Hamill {
         }
 
         return commentSummaries;
+    }
+
+    // 이슈를 새로 생성할 때 comment 테이블에 데이터를 저장합니다
+    public void save(NewIssueDto newIssueDto) {
+        commentDao_hamill.save(newIssueDto);
+    }
+
+    // 상세 페이지에서 코멘트를 추가합니다
+    public void create(Long issueId, NewCommentDto newCommentDto) {
+        commentDao_hamill.create(issueId, newCommentDto);
     }
 }
