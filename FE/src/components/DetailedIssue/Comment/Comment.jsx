@@ -16,12 +16,29 @@ const Comment = () => {
   const classes = useStyles();
 
   return (
-    <Box position="relative">
-      <CustomAvatar id={userId} url={avatarUrl} className={classes.avatar} />
-      <Box ml={"40px"} width="70%">
-        <CustomTable headContents={<ToolBar />} bodyContents={contents} className={classes.table} />
+    <>
+      <Box position="relative" mb={4}>
+        <CustomAvatar id={userId} url={avatarUrl} className={classes.avatar} />
+        <Box ml={"40px"} width="70%">
+          <CustomTable
+            headContents={<ToolBar />}
+            bodyContents={contents}
+            className={classes.table}
+          />
+        </Box>
       </Box>
-    </Box>
+
+      <Box position="relative">
+        <CustomAvatar id={userId} url={avatarUrl} className={classes.avatar} />
+        <Box ml={"40px"} width="70%">
+          <CustomTable
+            headContents={<ToolBar />}
+            bodyContents={contents}
+            className={classes.table}
+          />
+        </Box>
+      </Box>
+    </>
   );
 };
 
@@ -34,6 +51,9 @@ const useStyles = makeStyles(() => ({
   table: {
     "& th": {
       padding: "7px 20px",
+    },
+    "& .MuiTableRow-hover": {
+      pointerEvents: "none",
     },
   },
 }));
