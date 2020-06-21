@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-import TextField from "@material-ui/core/TextField";
 import InputField from "@Components/Common/InputField";
 
 import Box from "@material-ui/core/Box";
@@ -20,9 +19,13 @@ const InputBox = ({ title, onChange, onClickSave, onClickClose }) => {
   };
 
   return (
-    <form onSubmit={onSubmitForm} className={classes.input}>
+    <form onSubmit={onSubmitForm}>
       <Box display="flex" alignItems="center" justifyContent="space-between">
-        <InputField onChange={onChange} value={title} />
+        <InputField
+          onChange={onChange}
+          value={title}
+          inputProps={{ "aria-label": "Issue title" }}
+        />
         <ButtonGroup>
           <Button variant="contained" type="submit" value="Submit" className={classes.button}>
             {SAVE_BTN}
@@ -37,9 +40,6 @@ const InputBox = ({ title, onChange, onClickSave, onClickClose }) => {
 };
 
 const useStyles = makeStyles((theme) => ({
-  input: {
-    width: "100%",
-  },
   button: {
     marginLeft: theme.spacing(6),
     marginRight: theme.spacing(2),
