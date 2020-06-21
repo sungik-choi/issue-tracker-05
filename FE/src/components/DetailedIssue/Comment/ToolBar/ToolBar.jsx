@@ -21,7 +21,7 @@ const ToolBar = () => {
   const statusMessage = `commented ${calcTimeDiff(createdAt)}`;
 
   return (
-    <Box position="relative" pl={3} display="flex" justifyContent="space-between" px={2}>
+    <Box position="relative" display="flex" justifyContent="space-between" width="100%">
       <CustomAvatar id={userId} url={avatarUrl} className={classes.avatar} />
       <Typography
         color="textSecondary"

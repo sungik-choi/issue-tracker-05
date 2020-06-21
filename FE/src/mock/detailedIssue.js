@@ -26,6 +26,7 @@ export const data = {
       userName: "Hamill",
       avatarUrl:
         "https://lh3.googleusercontent.com/lv3q0LxixvhfsBwhLKzpp53EPMQO92jq98uOKqT9sL0hv4gF8l9bl6SRN23FLxkeJH3ldxZt-PreP1zddg",
+      description: "댓글 내용 1",
     },
     allocatedAssignees: [
       {
