@@ -22,13 +22,15 @@ const Title = () => {
   });
 
   const onClickSave = useCallback(() => {
-    if (inputTitle) setTitle(inputTitle);
-    else {
+    onToggle();
+
+    if (inputTitle) {
+      setTitle(inputTitle);
+      //fetch
+    } else {
       setTitle(title);
       setinputTitle(title);
     }
-    onToggle();
-    //fetch
   });
 
   const onClickClose = () => {
