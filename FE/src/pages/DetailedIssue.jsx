@@ -1,7 +1,13 @@
 import React from "react";
 
+import Comment from "@Components/DetailedIssue/Comment/Comment";
+
 const DetailedIssue = () => {
-  return <div />;
+  return (
+    <>
+      <Comment />
+    </>
+  );
 };
 
 export default DetailedIssue;
