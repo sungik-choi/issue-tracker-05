@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import InputField from "@Components/Common/InputField";
+import PrimaryButton from "@Components/Common/PrimaryButton";
 
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
@@ -50,8 +51,6 @@ const useStyles = makeStyles((theme) => ({
 InputBox.defaultProps = {
   value: "",
   onChange: null,
-  onClickSave: null,
-  onClickClose: null,
 };
 
 InputBox.propTypes = {

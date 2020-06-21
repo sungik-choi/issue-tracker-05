@@ -1,14 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import TextField from "@material-ui/core/TextField";
 
-const InputField = ({
-  value,
-  onChange,
-  fullWidth = true,
-  id = "outlined-full-width",
-  ...props
-}) => {
+const InputField = ({ value, onChange, fullWidth, id, ...props }) => {
   return (
     <TextField
       id={id}
@@ -23,6 +18,20 @@ const InputField = ({
       {...props}
     />
   );
+};
+
+InputField.defaultProps = {
+  fullWidth: true,
+  id: "outlined-full-width",
+  value: "",
+  onChange: null,
+};
+
+InputField.propTypes = {
+  value: PropTypes.string,
+  onChange: PropTypes.oneOfType([PropTypes.func, PropTypes.instanceOf(null)]),
+  id: PropTypes.string,
+  fullWidth: PropTypes.boolen,
 };
 
 export default InputField;

@@ -10,7 +10,7 @@ import Box from "@material-ui/core/Box";
 import Chip from "@material-ui/core/Chip";
 import { makeStyles } from "@material-ui/core/styles";
 
-// context로 closed상태 가져옴
+// context로 data 가져옴
 
 const IssueStatus = () => {
   const OPEN_TEXT = "Open";
