@@ -1,4 +1,4 @@
-package com.codesquad.issuetracker.hamill.request;
+package com.codesquad.issuetracker.hamill.dto.request;
 
 public class NewIssueDto {
 

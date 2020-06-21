@@ -1,6 +1,6 @@
 package com.codesquad.issuetracker.hamill.dao;
 
-import com.codesquad.issuetracker.hamill.dto.RequestNewIssueDto;
+import com.codesquad.issuetracker.hamill.dto.request.NewIssueDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -20,14 +20,14 @@ public class CommentDao_Hamill {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public void save(RequestNewIssueDto requestNewIssueDto) {
+    public void save(NewIssueDto newIssueDto) {
         String sql =
                 "INSERT INTO comment(description, created_date_time, issue_id, user_id) " +
                 "VALUES(?, ?, LAST_INSERT_ID(), ?)";
 
         jdbcTemplate.update(sql,
-                requestNewIssueDto.getDescription(),
+                newIssueDto.getDescription(),
                 Timestamp.valueOf(LocalDateTime.now()),
-                requestNewIssueDto.getUserId());
+                newIssueDto.getUserId());
     }
 }

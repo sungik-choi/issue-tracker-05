@@ -1,4 +1,4 @@
-package com.codesquad.issuetracker.hamill.response;
+package com.codesquad.issuetracker.hamill.dto.response;
 
 public class ApiResponse<T> {
 

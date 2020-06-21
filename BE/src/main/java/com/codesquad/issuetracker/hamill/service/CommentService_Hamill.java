@@ -1,7 +1,7 @@
 package com.codesquad.issuetracker.hamill.service;
 
 import com.codesquad.issuetracker.hamill.dao.CommentDao_Hamill;
-import com.codesquad.issuetracker.hamill.dto.RequestNewIssueDto;
+import com.codesquad.issuetracker.hamill.dto.request.NewIssueDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class CommentService_Hamill {
         this.commentDao_hamill = commentDao_hamill;
     }
 
-    public void save(RequestNewIssueDto requestNewIssueDto) {
-        commentDao_hamill.save(requestNewIssueDto);
+    public void save(NewIssueDto newIssueDto) {
+        commentDao_hamill.save(newIssueDto);
     }
 }
