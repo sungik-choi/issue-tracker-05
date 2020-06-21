@@ -1,6 +1,6 @@
-package com.codesquad.issuetracker.hamill.dto;
+package com.codesquad.issuetracker.hamill.request;
 
-public class RequestNewIssueDto {
+public class NewIssueDto {
 
     private Long userId;
 
@@ -8,13 +8,13 @@ public class RequestNewIssueDto {
 
     private String description;
 
-    private RequestNewIssueDto(Long userId, String title, String description) {
+    private NewIssueDto(Long userId, String title, String description) {
         this.userId = userId;
         this.title = title;
         this.description = description;
     }
 
-    public static RequestNewIssueDto of(Long userId, String title, String description) {
+    public static NewIssueDto of(Long userId, String title, String description) {
         return new Builder()
                 .userId(userId)
                 .title(title)
@@ -54,8 +54,8 @@ public class RequestNewIssueDto {
             return this;
         }
 
-        private RequestNewIssueDto build() {
-            return new RequestNewIssueDto(userId, title, description);
+        private NewIssueDto build() {
+            return new NewIssueDto(userId, title, description);
         }
     }
 }
