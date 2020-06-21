@@ -12,8 +12,8 @@ const TitleBox = ({ id, title, onClickEdit }) => {
   const classes = useStyles();
 
   return (
-    <Box display="flex" alignItems="center" justifyContent="space-between">
-      <Typography variant="h3" component="h2">
+    <Box display="flex" alignItems="center" justifyContent="space-between" className={classes.wrap}>
+      <Typography variant="h4" component="h2">
         <span>{title}</span>
         {id && <span className={classes.issueNum}>#{id}</span>}
       </Typography>
@@ -28,6 +28,9 @@ const useStyles = makeStyles((theme) => ({
   issueNum: {
     color: theme.palette.text.secondary,
     marginLeft: theme.spacing(2),
+  },
+  wrap: {
+    height: 80,
   },
 }));
 
