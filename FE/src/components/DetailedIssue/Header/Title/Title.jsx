@@ -2,11 +2,7 @@ import React, { useState, useCallback } from "react";
 
 import InputBox from "./InputBox";
 import TitleBox from "./TitleBox";
-import Buttons from "./Buttons";
 import { data } from "@Mock/detailedIssue";
-
-import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
 
 const Title = () => {
   const EIDT_BTN_TEXT = "Edit";
@@ -39,7 +35,7 @@ const Title = () => {
   };
 
   return (
-    <Box display="flex" alignItems="center" justifyContent="space-between">
+    <>
       {isEdit ? (
         <InputBox
           title={inputTitle}
@@ -49,9 +45,9 @@ const Title = () => {
           onClickClose={onClickClose}
         />
       ) : (
-        <TitleBox title={title} onClickEdit={onToggle} />
+        <TitleBox title={title} id={issueId} onClickEdit={onToggle} />
       )}
-    </Box>
+    </>
   );
 };
 

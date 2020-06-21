@@ -14,6 +14,11 @@ const InputBox = ({ title, onChange, onClickSave, onClickClose }) => {
 
   const classes = useStyles();
 
+  const onSubmitForm = (e) => {
+    e.preventDefault();
+    onClickSave();
+  };
+
   const textField = (
     <TextField
       id="outlined-full-width"
@@ -30,11 +35,11 @@ const InputBox = ({ title, onChange, onClickSave, onClickClose }) => {
   );
 
   return (
-    <form className={classes.input}>
+    <form onSubmit={onSubmitForm} className={classes.input}>
       <Box display="flex" alignItems="center" justifyContent="space-between">
         {textField}
         <ButtonGroup>
-          <Button variant="contained" onClick={onClickSave} className={classes.button}>
+          <Button variant="contained" type="submit" value="Submit" className={classes.button}>
             {SAVE_BTN}
           </Button>
           <Button variant="contained" onClick={onClickClose}>
