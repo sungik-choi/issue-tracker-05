@@ -28,7 +28,7 @@ const InputBox = ({ value, onChange, onClickSave, onClickClose }) => {
           inputProps={{ "aria-label": "Issue title" }}
         />
         <ButtonGroup>
-          <Button variant="contained" type="submit" value="Submit" className={classes.button}>
+          <Button variant="contained" type="submit" value="submit" className={classes.button}>
             {SAVE_BTN}
           </Button>
           <Button variant="contained" onClick={onClickClose}>
