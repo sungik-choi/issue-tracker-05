@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 
 const TitleBox = ({ id, title, onClickEdit }) => {
-  const Edit_BTN = "edit";
+  const EDIT_BTN = "edit";
 
   const classes = useStyles();
 
@@ -17,7 +17,7 @@ const TitleBox = ({ id, title, onClickEdit }) => {
         <span className={classes.issueNum}>#{id}</span>
       </Typography>
       <Button variant="contained" onClick={onClickEdit}>
-        {Edit_BTN}
+        {EDIT_BTN}
       </Button>
     </Box>
   );

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import TextField from "@material-ui/core/TextField";
-import { data } from "@Mock/detailedIssue";
+import InputField from "@Components/Common/InputField";
 
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
@@ -19,25 +19,10 @@ const InputBox = ({ title, onChange, onClickSave, onClickClose }) => {
     onClickSave();
   };
 
-  const textField = (
-    <TextField
-      id="outlined-full-width"
-      style={{ margin: 8 }}
-      fullWidth
-      margin="normal"
-      InputLabelProps={{
-        shrink: true,
-      }}
-      variant="outlined"
-      onChange={onChange}
-      value={title}
-    />
-  );
-
   return (
     <form onSubmit={onSubmitForm} className={classes.input}>
       <Box display="flex" alignItems="center" justifyContent="space-between">
-        {textField}
+        <InputField onChange={onChange} value={title} />
         <ButtonGroup>
           <Button variant="contained" type="submit" value="Submit" className={classes.button}>
             {SAVE_BTN}
