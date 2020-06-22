@@ -6,8 +6,8 @@ import Checkbox from "@material-ui/core/Checkbox";
 
 import { assigneeType } from "@Types/issueType";
 
+import StatusIcon from "@Components/common/StatusIcon";
 import Contents from "./Contents/Contents";
-import StatusIcon from "./StatusIcon";
 import AvatarStack from "./AvatarStack";
 
 const Issue = ({
@@ -20,7 +20,7 @@ const Issue = ({
     <>
       <Box display="flex" alignItems="center">
         <Checkbox color="primary" checked={isSelectedIssue} onChange={clickHandler} />
-        <StatusIcon isOpened={isOpened} />
+        <StatusIcon closed />
         <Contents id={id} data={contentsData} />
       </Box>
       <AvatarStack allocatedAssignees={allocatedAssignees} />
