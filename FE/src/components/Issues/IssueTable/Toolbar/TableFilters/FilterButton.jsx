@@ -47,13 +47,7 @@ FilterButton.defaultProps = {
 FilterButton.propTypes = {
   type: PropTypes.string.isRequired,
   menuTitle: PropTypes.string.isRequired,
-  clearMenu: PropTypes.oneOfType([
-    PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      clickHandler: PropTypes.func.isRequired,
-    }),
-    PropTypes.instanceOf(null),
-  ]),
+  clearMenu: PropTypes.oneOfType([PropTypes.object, PropTypes.instanceOf(null)]),
   menuList: PropTypes.arrayOf(
     PropTypes.shape({
       text: PropTypes.string.isRequired,
