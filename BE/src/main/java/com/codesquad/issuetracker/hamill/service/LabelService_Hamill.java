@@ -2,6 +2,8 @@ package com.codesquad.issuetracker.hamill.service;
 
 import com.codesquad.issuetracker.hamill.dao.LabelDao_Hamill;
 import com.codesquad.issuetracker.hamill.domain.Label;
+import com.codesquad.issuetracker.hamill.vo.labelVO.ContainedDescriptionLabelInformation;
+import com.codesquad.issuetracker.hamill.vo.labelVO.ContainedDescriptionLabelSummary;
 import com.codesquad.issuetracker.hamill.vo.labelVO.LabelInformation;
 import com.codesquad.issuetracker.hamill.vo.labelVO.LabelSummary;
 import org.slf4j.Logger;
@@ -35,6 +37,17 @@ public class LabelService_Hamill {
                                                  .collect(Collectors.toList());
 
         return LabelInformation.of(labels.size(), labelSummaries);
+    }
+
+    public ContainedDescriptionLabelInformation containDescriptionLabelInformation() {
+        List<Label> labels = labelDao_hamill.findAllLabels();
+
+        // 함수형 프로그래밍
+        List<ContainedDescriptionLabelSummary> labelSummaries = labels.stream()
+                                                                      .map(label -> ContainedDescriptionLabelSummary.of(label.getId(), label.getName(), label.getDescription(), label.getBackgroundColor(), label.getColor()))
+                                                                      .collect(Collectors.toList());
+
+        return ContainedDescriptionLabelInformation.of(labels.size(), labelSummaries);
     }
 
     public List<LabelSummary> findLabelSummariesByIssueId(Long issueId) {
