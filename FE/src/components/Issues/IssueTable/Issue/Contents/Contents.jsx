@@ -10,15 +10,17 @@ import Label from "@Components/common/Label";
 import Title from "./Title";
 import Details from "./Details";
 
-const Contents = ({ id, data }) => {
-  const classes = useStyles();
-  const {
+const Contents = ({
+  id,
+  data: {
     title,
     attachedLabels,
     createdAt,
     milestone,
     author: { name },
-  } = data;
+  },
+}) => {
+  const classes = useStyles();
 
   return (
     <>
