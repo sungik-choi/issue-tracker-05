@@ -1,83 +1,64 @@
 package com.codesquad.issuetracker.ragdoll.vo.commentVO;
 
-
-import com.codesquad.issuetracker.ragdoll.vo.userVO.UserSummary;
-
 import java.time.LocalDateTime;
 
 public class CommentDetails {
 
-    private UserSummary commenter;
-
-    private Long commentId;
+    private Long id;
 
     private String description;
 
     private LocalDateTime createdAt;
 
-    public CommentDetails() {}
+    private Long userId;
 
-    private CommentDetails(UserSummary commenter, Long commentId, String description, LocalDateTime createdAt) {
-        this.commenter = commenter;
-        this.commentId = commentId;
+    private String name;
+
+    private String avatarUrl;
+
+    private CommentDetails(Long id, String description, LocalDateTime createdAt, Long userId, String name, String avatarUrl) {
+        this.id = id;
         this.description = description;
         this.createdAt = createdAt;
+        this.userId = userId;
+        this.name = name;
+        this.avatarUrl = avatarUrl;
     }
 
-    public static CommentDetails of(UserSummary commenter, Long commentId, String description, LocalDateTime createdAt) {
-        return new CommentDetails.Builder()
-                                 .commenter(commenter)
-                                 .commentId(commentId)
-                                 .description(description)
-                                 .createdAt(createdAt)
-                                 .build();
-    }
-
-    public UserSummary getCommenter() {
-        return commenter;
-    }
-
-    public void setCommenter(UserSummary commenter) {
-        this.commenter = commenter;
-    }
-
-    public Long getCommentId() {
-        return commentId;
-    }
-
-    public void setCommentId(Long commentId) {
-        this.commentId = commentId;
+    public Long getId() {
+        return id;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    public Long getUserId() {
+        return userId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
     }
 
     public static class Builder {
-        private UserSummary commenter;
-        private Long commentId;
+        private Long id;
         private String description;
         private LocalDateTime createdAt;
+        private Long userId;
+        private String name;
+        private String avatarUrl;
 
-        public Builder commenter(UserSummary commenter) {
-            this.commenter = commenter;
-            return this;
-        }
-
-        public Builder commentId(Long commentId) {
-            this.commentId = commentId;
+        public Builder id(Long id) {
+            this.id = id;
             return this;
         }
 
@@ -91,8 +72,23 @@ public class CommentDetails {
             return this;
         }
 
+        public Builder userId(Long userId) {
+            this.userId = userId;
+            return this;
+        }
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder avatarUrl(String avatarUrl) {
+            this.avatarUrl = avatarUrl;
+            return this;
+        }
+
         public CommentDetails build() {
-            return new CommentDetails(commenter, commentId, description, createdAt);
+            return new CommentDetails(id, description, createdAt, userId, name, avatarUrl);
         }
     }
 }

@@ -98,11 +98,9 @@ public class IssueService_Ragdoll {
     public DetailedInformationOfIssueDto showIssueDetails(Long issueId) {
         Issue issue = issueDao.findIssueById(issueId);
         List<Comment> allCommentsOfIssue = issueDao.findAllCommentsByIssueId(issueId);
-        List<CommentDetails> comments = allCommentsOfIssue.stream().map(comment -> {
-            User user = userService.findUserById(comment.getUserId());
-            UserSummary commenter = UserSummary.of(user.getId(), user.getName(), user.getAvatarUrl());
-            return CommentDetails.of(commenter, comment.getId(), comment.getDescription(), comment.getCreatedDateTime());
-        }).collect(Collectors.toList());
+        List<CommentDetails> comments = allCommentsOfIssue.stream()
+                                                          .map(this::mapToCommentDetails)
+                                                          .collect(Collectors.toList());
         return new DetailedInformationOfIssueDto.Builder()
                                                 .issue(mapToIssueDetails(issue))
                                                 .commentInfo(CommentInformation.of(comments.size(), comments))
@@ -203,5 +201,17 @@ public class IssueService_Ragdoll {
                                   .milestoneInfo(milestoneInformation)
                                   .assigneeInfo(assigneeInformation)
                                   .build();
+    }
+
+    private CommentDetails mapToCommentDetails(Comment comment) {
+        User user = userService.findUserById(comment.getUserId());
+        return new CommentDetails.Builder()
+                                 .id(comment.getId())
+                                 .description(comment.getDescription())
+                                 .createdAt(comment.getCreatedDateTime())
+                                 .userId(user.getId())
+                                 .name(user.getName())
+                                 .avatarUrl(user.getAvatarUrl())
+                                 .build();
     }
 }
