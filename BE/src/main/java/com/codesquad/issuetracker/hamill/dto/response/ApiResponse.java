@@ -17,6 +17,8 @@ public class ApiResponse<T> {
         return new ApiResponse<>(true, response);
     }
 
+    public static <T> ApiResponse<T> FORBIDDEN(T response) { return new ApiResponse<>(false, response); }
+
     public boolean isStatus() {
         return status;
     }
