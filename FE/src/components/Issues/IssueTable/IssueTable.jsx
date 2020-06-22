@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+
+import { IssueListContext } from "@Contexts/issueListContext";
 
 import CustomTable from "@Components/common/CustomTable";
 import Toolbar from "./Toolbar/Toolbar";
@@ -8,7 +10,10 @@ const IssueTable = () => {
   const [selectedIssue, setSelectedIssue] = useState(new Set());
 
   const selectedIssueSize = selectedIssue.size;
-  const isSelectedIssue = (id) => selectedIssue.has(id);
+  const isSelectedIssue = (id) => {
+    console.log(id, selectedIssue.has(id));
+    return selectedIssue.has(id);
+  };
   const isAtLeastOneSelectedIssue = (issueList) =>
     selectedIssueSize > 0 && selectedIssueSize < issueList.length;
   const isAllSelectedIssue = (issueList) =>
@@ -30,20 +35,27 @@ const IssueTable = () => {
     setSelectedIssue(new Set());
   };
 
-  const issueList = [
-    {
-      id: 1,
-      contents: (
-        <Issue id={1} isSelectedIssue={isSelectedIssue} clickHandler={handleCheckboxClick} />
-      ),
-    },
-    {
-      id: 2,
-      contents: (
-        <Issue id={2} isSelectedIssue={isSelectedIssue} clickHandler={handleCheckboxClick} />
-      ),
-    },
-  ];
+  const {
+    issueList: { issues },
+  } = useContext(IssueListContext);
+
+  const issueList = issues.reduce(
+    (allIssue, { id, ...data }) => [
+      ...allIssue,
+      {
+        id,
+        contents: (
+          <Issue
+            id={id}
+            data={data}
+            isSelectedIssue={isSelectedIssue(id)}
+            clickHandler={() => handleCheckboxClick(id)}
+          />
+        ),
+      },
+    ],
+    [],
+  );
 
   const toolbar = (
     <Toolbar

@@ -5,6 +5,7 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import OutlinedFlagIcon from "@material-ui/icons/OutlinedFlag";
 
+import { detailsType } from "@Types/issueType";
 
 import calcTimeDiff from "@Utils/calcTimeDiff";
 
@@ -35,5 +36,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+Details.propTypes = detailsType.isRequired;
 
 export default Details;

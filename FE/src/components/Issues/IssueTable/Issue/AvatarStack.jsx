@@ -1,9 +1,10 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import AvatarGroup from "@material-ui/lab/AvatarGroup";
+
+import { assigneeType } from "@Types/issueType";
 
 import CustomAvatar from "@Components/common/CustomAvatar";
 
@@ -32,13 +33,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 AvatarStack.propTypes = {
-  allocatedAssignees: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      avatarUrl: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
+  allocatedAssignees: assigneeType.isRequired,
 };
 
 export default AvatarStack;
