@@ -2,6 +2,7 @@ package com.codesquad.issuetracker.hamill.service;
 
 import com.codesquad.issuetracker.hamill.dao.LabelDao_Hamill;
 import com.codesquad.issuetracker.hamill.domain.Label;
+import com.codesquad.issuetracker.hamill.dto.request.NewLabelDto;
 import com.codesquad.issuetracker.hamill.vo.labelVO.ContainedDescriptionLabelInformation;
 import com.codesquad.issuetracker.hamill.vo.labelVO.ContainedDescriptionLabelSummary;
 import com.codesquad.issuetracker.hamill.vo.labelVO.LabelInformation;
@@ -52,5 +53,9 @@ public class LabelService_Hamill {
 
     public List<LabelSummary> findLabelSummariesByIssueId(Long issueId) {
         return labelDao_hamill.findLabelSummariesByIssueId(issueId);
+    }
+
+    public void create(NewLabelDto newLabelDto) {
+        labelDao_hamill.create(newLabelDto);
     }
 }

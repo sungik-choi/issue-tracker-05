@@ -1,6 +1,7 @@
 package com.codesquad.issuetracker.hamill.dao;
 
 import com.codesquad.issuetracker.hamill.domain.Label;
+import com.codesquad.issuetracker.hamill.dto.request.NewLabelDto;
 import com.codesquad.issuetracker.hamill.vo.labelVO.LabelSummary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,5 +44,14 @@ public class LabelDao_Hamill {
                                 rs.getString("background_color"),
                                 rs.getString("color"))
         , issueId);
+    }
+
+    public void create(NewLabelDto newLabelDto) {
+        String sql = "INSERT INTO label(name, description, background_color, color) VALUES(?, ?, ?, ?)";
+        jdbcTemplate.update(sql,
+                newLabelDto.getTitle(),
+                newLabelDto.getDescription(),
+                newLabelDto.getBackgroundColor(),
+                newLabelDto.getColor());
     }
 }
