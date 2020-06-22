@@ -10,10 +10,6 @@ const IssueTable = () => {
   const [selectedIssue, setSelectedIssue] = useState(new Set());
 
   const selectedIssueSize = selectedIssue.size;
-  const isSelectedIssue = (id) => {
-    console.log(id, selectedIssue.has(id));
-    return selectedIssue.has(id);
-  };
   const isAtLeastOneSelectedIssue = (issueList) =>
     selectedIssueSize > 0 && selectedIssueSize < issueList.length;
   const isAllSelectedIssue = (issueList) =>
@@ -21,7 +17,7 @@ const IssueTable = () => {
 
   const handleCheckboxClick = (id) => {
     const updatedSet = new Set(selectedIssue);
-    isSelectedIssue(id) ? updatedSet.delete(id) : updatedSet.add(id);
+    selectedIssue.has(id) ? updatedSet.delete(id) : updatedSet.add(id);
     setSelectedIssue(updatedSet);
   };
 
@@ -45,7 +41,7 @@ const IssueTable = () => {
       <Issue
         id={id}
         data={data}
-        isSelectedIssue={isSelectedIssue(id)}
+        isSelectedIssue={selectedIssue.has(id)}
         clickHandler={() => handleCheckboxClick(id)}
       />
     ),
