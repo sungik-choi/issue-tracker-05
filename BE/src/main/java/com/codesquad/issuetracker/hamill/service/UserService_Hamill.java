@@ -23,7 +23,7 @@ public class UserService_Hamill {
         this.userDao_hamill = userDao_hamill;
     }
 
-    public List<UserSummary> findUserInformation() {
+    public List<UserSummary> findUserSummaries() {
         List<User> users = userDao_hamill.findAllUsers();
         List<UserSummary> userSummaries = new ArrayList<>();
 
@@ -35,11 +35,15 @@ public class UserService_Hamill {
         return userSummaries;
     }
 
-    public List<UserSummary> findUserSummaryByIssueId(Long issueId) {
-        return userDao_hamill.findUserSummaryByIssueId(issueId);
+    public List<UserSummary> findUserSummariesByIssueId(Long issueId) {
+        return userDao_hamill.findUserSummariesByIssueId(issueId);
     }
 
     public User findUserByUserId(Long userId) {
         return userDao_hamill.findUserByUserId(userId);
+    }
+
+    public UserSummary findUserSummaryByIssueIdAndCommentId(Long issueId, Long commentId) {
+        return userDao_hamill.findUserSummaryByIssueIdAndCommentId(issueId, commentId);
     }
 }

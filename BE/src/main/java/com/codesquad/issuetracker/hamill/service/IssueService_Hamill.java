@@ -8,7 +8,7 @@ import com.codesquad.issuetracker.hamill.dto.request.NewIssueDto;
 import com.codesquad.issuetracker.hamill.dto.response.IssueDto;
 import com.codesquad.issuetracker.hamill.dto.response.ListOfIssuesDto;
 import com.codesquad.issuetracker.hamill.vo.UserVO.UserSummary;
-import com.codesquad.issuetracker.hamill.vo.commentVO.CommentSummary;
+import com.codesquad.issuetracker.hamill.vo.commentVO.CommentInformation;
 import com.codesquad.issuetracker.hamill.vo.issueVO.IssueDetails;
 import com.codesquad.issuetracker.hamill.vo.labelVO.LabelInformation;
 import com.codesquad.issuetracker.hamill.vo.labelVO.LabelSummary;
@@ -48,14 +48,13 @@ public class IssueService_Hamill {
         MilestoneInformation milestoneInfo = milestoneService_hamill.findMilestoneInformation();
         List<UserSummary> userSummaries = userService_hamill.findUserSummaries();
 
-
         return ListOfIssuesDto.of(issueDetails, labelInfo, milestoneInfo, userSummaries);
     }
 
     private IssueDetails mapToIssueDetails(Issue issue) {
         Milestone milestone = milestoneService_hamill.findMilestoneByMilestoneId(issue.getMilestoneId());
-        List<LabelSummary> attachedLabels = labelService_hamill.findLabelSummaryByIssueId(issue.getId());
-        List<UserSummary> allocatedAssignees = userService_hamill.findUserSummaryByIssueId(issue.getId());
+        List<LabelSummary> attachedLabels = labelService_hamill.findLabelSummariesByIssueId(issue.getId());
+        List<UserSummary> allocatedAssignees = userService_hamill.findUserSummariesByIssueId(issue.getId());
         User user = userService_hamill.findUserByUserId(issue.getUserId());
 
         return IssueDetails.of(
@@ -69,6 +68,17 @@ public class IssueService_Hamill {
                 issue.isOpened());
     }
 
+    public IssueDto getIssueAndAllElements(Long issueId) {
+        Issue issue = issueDao_Hamill.findIssueByIssueId(issueId);
+        IssueDetails issueDetail = mapToIssueDetails(issue);
+        CommentInformation commentInfo = commentService_hamill.findCommentInformation(issue);
+        LabelInformation labelInfo = labelService_hamill.findLabelInformation();
+        MilestoneInformation milestoneInfo = milestoneService_hamill.findMilestoneInformation();
+        List<UserSummary> userSummaries = userService_hamill.findUserSummaries();
+
+        return IssueDto.of(issueDetail, commentInfo, labelInfo, milestoneInfo, userSummaries);
+    }
+
     @Transactional
     public void save(NewIssueDto newIssueDto) {
 
@@ -76,16 +86,6 @@ public class IssueService_Hamill {
         commentService_hamill.save(newIssueDto);
     }
 
-    public IssueDto getIssueAndAllElements(Long issueId) {
-        Issue issue = issueDao_Hamill.findIssueByIssueId(issueId);
-        IssueDetails issueDetail = mapToIssueDetails(issue);
-        List<CommentSummary> comments = commentService_hamill.findCommentSummaries();
-        LabelInformation labelInfo = labelService_hamill.findLabelInformation();
-        MilestoneInformation milestoneInfo = milestoneService_hamill.findMilestoneInformation();
-        List<UserSummary> userSummaries = userService_hamill.findUserSummaries();
-
-        return IssueDto.of(issueDetail, comments, labelInfo, milestoneInfo, userSummaries);
-    }
 
 
 //    public IssuesDto findIssueByIssueId(Long issueId) {

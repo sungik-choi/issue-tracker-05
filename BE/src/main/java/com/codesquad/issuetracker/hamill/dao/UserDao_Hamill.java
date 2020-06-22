@@ -34,7 +34,7 @@ public class UserDao_Hamill {
         );
     }
 
-    public List<UserSummary> findUserSummaryByIssueId(Long issueId) {
+    public List<UserSummary> findUserSummariesByIssueId(Long issueId) {
         return jdbcTemplate.query(
                 "SELECT user.id, user.name, user.avatar_url FROM user " +
                         "JOIN assignee a ON user.id = a.user_id " +
@@ -57,5 +57,17 @@ public class UserDao_Hamill {
                                 rs.getString("avatar_url"),
                                 rs.getTimestamp("created_date_time").toLocalDateTime())
         ,userId);
+    }
+
+    public UserSummary findUserSummaryByIssueIdAndCommentId(Long issueId, Long commentId) {
+        return jdbcTemplate.queryForObject(
+                "SELECT user.id, user.name, user.avatar_url FROM user " +
+                        "JOIN comment c ON user.id = c.user_id " +
+                        "WHERE c.issue_id = ? AND c.id",
+                (rs, rowNum) ->
+                        UserSummary.of(rs.getLong("id"),
+                                rs.getString("name"),
+                                rs.getString("avatar_url"))
+                , issueId, commentId);
     }
 }

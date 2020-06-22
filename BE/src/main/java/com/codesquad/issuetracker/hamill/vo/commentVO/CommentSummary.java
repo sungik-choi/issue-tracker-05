@@ -1,5 +1,7 @@
 package com.codesquad.issuetracker.hamill.vo.commentVO;
 
+import com.codesquad.issuetracker.hamill.vo.UserVO.UserSummary;
+
 import java.time.LocalDateTime;
 
 public class CommentSummary {
@@ -10,21 +12,21 @@ public class CommentSummary {
 
     private LocalDateTime createdAt;
 
-    private Long userId;
+    private UserSummary commenter;
 
-    private CommentSummary(Long id, String description, LocalDateTime createdAt, Long userId) {
+    private CommentSummary(Long id, String description, LocalDateTime createdAt, UserSummary commenter) {
         this.id = id;
         this.description = description;
         this.createdAt = createdAt;
-        this.userId = userId;
+        this.commenter = commenter;
     }
 
-    public static CommentSummary of(Long id, String description, LocalDateTime createdAt, Long userId) {
+    public static CommentSummary of(Long id, String description, LocalDateTime createdAt, UserSummary commenter) {
         return new Builder()
                 .id(id)
                 .description(description)
                 .createdAt(createdAt)
-                .userId(userId)
+                .commenter(commenter)
                 .build();
     }
 
@@ -40,15 +42,15 @@ public class CommentSummary {
         return createdAt;
     }
 
-    public Long getUserId() {
-        return userId;
+    public UserSummary getCommenter() {
+        return commenter;
     }
 
     private static class Builder {
         private Long id;
         private String description;
         private LocalDateTime createdAt;
-        private Long userId;
+        private UserSummary commenter;
 
         private Builder id(Long id) {
             this.id = id;
@@ -65,13 +67,13 @@ public class CommentSummary {
             return this;
         }
 
-        private Builder userId(Long userId) {
-            this.userId = userId;
+        private Builder commenter(UserSummary commenter) {
+            this.commenter = commenter;
             return this;
         }
 
         private CommentSummary build() {
-            return new CommentSummary(id, description, createdAt, userId);
+            return new CommentSummary(id, description, createdAt, commenter);
         }
     }
 }

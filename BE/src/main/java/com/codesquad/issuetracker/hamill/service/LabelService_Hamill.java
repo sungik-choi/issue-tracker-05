@@ -29,13 +29,6 @@ public class LabelService_Hamill {
     public LabelInformation findLabelInformation() {
         List<Label> labels = labelDao_hamill.findAllLabels();
 
-//        // 명령형 프로그래밍
-//        Set<LabelSummary> labelSummaries2 = new HashSet<>();
-//        for (Label value : labels) {
-//            LabelSummary labelSummary = LabelSummary.of(value.getId(), value.getName(), value.getHexCode());
-//            labelSummaries2.add(labelSummary);
-//        }
-
         // 함수형 프로그래밍
         List<LabelSummary> labelSummaries = labels.stream()
                                                  .map(label -> of(label.getId(), label.getName(), label.getBackgroundColor(), label.getColor()))
@@ -44,13 +37,7 @@ public class LabelService_Hamill {
         return LabelInformation.of(labels.size(), labelSummaries);
     }
 
-    public List<LabelSummary> findLabelSummaryByIssueId(Long issueId) {
-        return labelDao_hamill.findLabelSummaryByIssueId(issueId);
+    public List<LabelSummary> findLabelSummariesByIssueId(Long issueId) {
+        return labelDao_hamill.findLabelSummariesByIssueId(issueId);
     }
-
-
-
-
-
-
 }

@@ -32,7 +32,7 @@ public class LabelDao_Hamill {
         );
     }
 
-    public List<LabelSummary> findLabelSummaryByIssueId(Long issueId) {
+    public List<LabelSummary> findLabelSummariesByIssueId(Long issueId) {
         return jdbcTemplate.query(
                 "SELECT label.id, label.name, label.background_color, label.color FROM label " +
                         "JOIN issue_has_label ON label.id = issue_has_label.label_id " +
