@@ -11,11 +11,11 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
-const CustomTable = ({ ariaLabel, headContents, bodyContents }) => {
+const CustomTable = ({ ariaLabel, headContents, bodyContents, ...props }) => {
   const classes = useStyles();
 
   return (
-    <TableContainer component={Paper} variant="outlined">
+    <TableContainer component={Paper} variant="outlined" {...props}>
       <Table aria-label={ariaLabel}>
         <TableHead>
           <TableRow>
@@ -67,7 +67,7 @@ CustomTable.propTypes = {
   bodyContents: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      contents: PropTypes.element.isRequired,
+      contents: PropTypes.oneOfType([PropTypes.element, PropTypes.string]).isRequired,
     }),
   ).isRequired,
 };
