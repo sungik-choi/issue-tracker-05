@@ -9,10 +9,8 @@ import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 
 const Table = ({ children, userId, avatarUrl }) => {
-  // const { userId, description, avatarUrl } = data.issue.author;
-  // const contents = [{ id: userId, contents: description }];
   const classes = useStyles();
-  console.log(userId);
+
   return (
     <Box position="relative" mb={4}>
       <CustomAvatar id={userId} url={avatarUrl} className={classes.avatar} />

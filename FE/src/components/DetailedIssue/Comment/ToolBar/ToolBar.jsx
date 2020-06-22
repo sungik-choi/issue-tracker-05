@@ -1,13 +1,11 @@
 import React from "react";
 
-import { data } from "@Mock/detailedIssue";
-import CustomAvatar from "@Components/Common/CustomAvatar";
-
 import calcTimeDiff from "@Utils/calcTimeDiff";
 
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import Chip from "@material-ui/core/Chip";
 import { makeStyles } from "@material-ui/core/styles";
 
 const ToolBar = ({ userName, createdAt }) => {
@@ -18,7 +16,7 @@ const ToolBar = ({ userName, createdAt }) => {
   const statusMessage = `commented ${calcTimeDiff(createdAt)}`;
 
   return (
-    <Box display="flex" justifyContent="space-between" width="100%">
+    <Box display="flex" alignItems="center" justifyContent="space-between" width="100%">
       <Typography
         color="textSecondary"
         variant="subtitle1"
@@ -28,7 +26,10 @@ const ToolBar = ({ userName, createdAt }) => {
         <strong>{userName}</strong>
         <span>{statusMessage}</span>
       </Typography>
-      <Button>{EDIT_BTN_TEXT}</Button>
+      <div>
+        <Chip label="Author" variant="outlined" />
+        <Button>{EDIT_BTN_TEXT}</Button>
+      </div>
     </Box>
   );
 };
