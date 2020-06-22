@@ -52,6 +52,7 @@ export const data = {
             "https://lh3.googleusercontent.com/lv3q0LxixvhfsBwhLKzpp53EPMQO92jq98uOKqT9sL0hv4gF8l9bl6SRN23FLxkeJH3ldxZt-PreP1zddg",
           description: "댓글 내용 1",
           createdAt: "2020-06-11 01:00:00",
+          author: true,
         },
         {
           userId: 3,
