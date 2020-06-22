@@ -39,22 +39,17 @@ const IssueTable = () => {
     issueList: { issues },
   } = useContext(IssueListContext);
 
-  const issueList = issues.reduce((accumulator, { id, ...data }) => {
-    return [
-      ...accumulator,
-      {
-        id,
-        contents: (
-          <Issue
-            id={id}
-            data={data}
-            isSelectedIssue={isSelectedIssue(id)}
-            clickHandler={() => handleCheckboxClick(id)}
-          />
-        ),
-      },
-    ];
-  }, []);
+  const issueList = issues.map(({ id, ...data }) => ({
+    id,
+    contents: (
+      <Issue
+        id={id}
+        data={data}
+        isSelectedIssue={isSelectedIssue(id)}
+        clickHandler={() => handleCheckboxClick(id)}
+      />
+    ),
+  }));
 
   const toolbar = (
     <Toolbar

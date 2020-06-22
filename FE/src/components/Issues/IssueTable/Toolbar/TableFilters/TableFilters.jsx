@@ -22,46 +22,31 @@ const TableFilters = ({ bSelectedIssueExist }) => {
   const MILESTONES = "Milestones";
   const ASSIGNEE = "Assignee";
 
-  const userFilterList = users.reduce((accumulator, { id, name, avatarUrl }) => {
-    return [
-      ...accumulator,
-      {
-        id,
-        text: name,
-        avatar: {
-          url: avatarUrl,
-        },
-        clickHandler: null,
-      },
-    ];
-  }, []);
+  const userFilterList = users.map(({ id, name, avatarUrl }) => ({
+    id,
+    text: name,
+    avatar: {
+      url: avatarUrl,
+    },
+    clickHandler: null,
+  }));
 
-  const labelFilterList = labels.reduce((accumulator, { id, name, backgroundColor, color }) => {
-    return [
-      ...accumulator,
-      {
-        id,
-        text: name,
-        label: {
-          name,
-          backgroundColor,
-          color,
-        },
-        clickHandler: null,
-      },
-    ];
-  }, []);
+  const labelFilterList = labels.map(({ id, name, backgroundColor, color }) => ({
+    id,
+    text: name,
+    label: {
+      name,
+      backgroundColor,
+      color,
+    },
+    clickHandler: null,
+  }));
 
-  const milestoneFilterList = milestones.reduce((accumulator, { id, title }) => {
-    return [
-      ...accumulator,
-      {
-        id,
-        text: title,
-        clickHandler: null,
-      },
-    ];
-  }, []);
+  const milestoneFilterList = milestones.map(({ id, title }) => ({
+    id,
+    text: title,
+    clickHandler: null,
+  }));
 
   const assigneeFilterList = userFilterList.map((user) => ({ ...user, clickHandler: null }));
 
