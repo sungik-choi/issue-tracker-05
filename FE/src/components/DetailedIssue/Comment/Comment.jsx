@@ -15,29 +15,31 @@ const Comment = () => {
 
   const classes = useStyles();
 
+  const tableRender = (userName, userId, description, createdAt) => {
+    return (
+      <CustomTable
+        headContents={<ToolBar userName={userName} createdAt={createdAt} />}
+        bodyContents={[{ id: userId, contents: description }]}
+        className={classes.table}
+      />
+    );
+  };
+
   return (
     <>
       {comments.map((comment) => {
-        const table = (
-          <Box position="relative" mb={4} key={comment.userId + 1}>
-            <CustomAvatar
-              id={comment.userName}
-              url={comment.avatarUrl}
-              className={classes.avatar}
-              tooltip
-              key={comment.userId + 2}
-            />
-            <Box ml={"40px"} width="70%" key={comment.userId + 3}>
-              <CustomTable
-                headContents={<ToolBar userName={comment.userName} createdAt={comment.createdAt} />}
-                bodyContents={[{ id: comment.userId, contents: comment.description }]}
-                className={classes.table}
-                key={comment.userId + 4}
-              />
+        const { userId, userName, avatarUrl, createdAt, description } = comment;
+
+        const commentTable = (
+          <Box position="relative" mb={4} key={userId}>
+            <CustomAvatar id={userName} url={avatarUrl} className={classes.avatar} tooltip />
+            <Box ml={"40px"} width="70%">
+              {tableRender(userName, userId, description, createdAt)}
             </Box>
           </Box>
         );
-        return table;
+
+        return commentTable;
       })}
     </>
   );
@@ -45,7 +47,7 @@ const Comment = () => {
 
 const useStyles = makeStyles(() => ({
   table: {
-    marginBottom: 35,
+    marginBottom: 40,
     "& th": {
       padding: "3px 20px",
     },
