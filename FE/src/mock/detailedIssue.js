@@ -46,20 +46,18 @@ export const data = {
       countOfComment: 3,
       comments: [
         {
-          commenter: {
-            userId: 2,
-            userName: "Ellin",
-            avatarUrl: "https://github.com/hamill/profile&*$#$%",
-          },
+          userId: 2,
+          userName: "Ellin",
+          avatarUrl:
+            "https://lh3.googleusercontent.com/lv3q0LxixvhfsBwhLKzpp53EPMQO92jq98uOKqT9sL0hv4gF8l9bl6SRN23FLxkeJH3ldxZt-PreP1zddg",
           description: "댓글 내용 1",
           createdAt: "2020-06-11 01:00:00",
         },
         {
-          commenter: {
-            userId: 3,
-            userName: "Ed",
-            avatarUrl: "https://github.com/hamill/profile&*$#$%",
-          },
+          userId: 3,
+          userName: "Ed",
+          avatarUrl:
+            "https://lh3.googleusercontent.com/lv3q0LxixvhfsBwhLKzpp53EPMQO92jq98uOKqT9sL0hv4gF8l9bl6SRN23FLxkeJH3ldxZt-PreP1zddg",
           description: "댓글 내용 2",
           createdAt: "2020-06-11 02:00:00",
         },

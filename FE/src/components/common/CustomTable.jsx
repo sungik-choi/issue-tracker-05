@@ -67,7 +67,7 @@ CustomTable.propTypes = {
   bodyContents: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      contents: PropTypes.element.isRequired,
+      contents: PropTypes.oneOfType([PropTypes.element, PropTypes.string]).isRequired,
     }),
   ).isRequired,
 };
