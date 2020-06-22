@@ -8,6 +8,7 @@ const useFetch = ({ url, actionType: { successAction, errorAction }, dispatch })
     const { response } = await data.json();
 
     try {
+      console.log("[log] fetch : ", response);
       dispatch(successAction(response));
     } catch (e) {
       dispatch(errorAction());
