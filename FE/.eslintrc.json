@@ -1,0 +1,55 @@
+{
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["@", "src"],
+          ["@Components", "./src/components/"],
+          ["@Pages", "./src/pages/"],
+          ["@Styles", "./src/styles/"],
+          ["@Mock", "./src/mock/"],
+          ["@Utils", "./src/utils/"],
+          ["@Reducers", "./src/reducers/"],
+          ["@Contexts", "./src/contexts/"],
+          ["@Public", "./public/"]
+        ],
+        "extensions": [".js", ".jsx", ".json"]
+      }
+    }
+  },
+  "extends": ["airbnb", "plugin:prettier/recommended", "prettier/react"],
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "jest": true,
+    "node": true
+  },
+  "rules": {
+    "jsx-a11y/href-no-hash": ["off"],
+    "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
+    "react/jsx-props-no-spreading": 0,
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "no-use-before-define": 0,
+    "no-unused-expressions": [
+      "warn",
+      {
+        "allowTernary": true
+      }
+    ],
+    "max-len": [
+      "warn",
+      {
+        "code": 100,
+        "tabWidth": 2,
+        "comments": 100,
+        "ignoreComments": false,
+        "ignoreTrailingComments": true,
+        "ignoreUrls": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreRegExpLiterals": true
+      }
+    ]
+  }
+}
