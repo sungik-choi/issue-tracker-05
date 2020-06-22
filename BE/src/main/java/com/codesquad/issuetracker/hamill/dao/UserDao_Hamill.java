@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -59,6 +61,11 @@ public class UserDao_Hamill {
         ,userId);
     }
 
+    public Boolean existUserByEmail(String email) {
+        String sql = "select exists(select * from user where email = ?) as success;";
+        return jdbcTemplate.queryForObject(sql, (rs, rowNum) -> rs.getBoolean("success"), email);
+    }
+
     public UserSummary findUserSummaryByIssueIdAndCommentId(Long issueId, Long commentId) {
         return jdbcTemplate.queryForObject(
                 "SELECT user.id, user.name, user.avatar_url FROM user " +
@@ -69,5 +76,12 @@ public class UserDao_Hamill {
                                 rs.getString("name"),
                                 rs.getString("avatar_url"))
                 , issueId, commentId);
+    }
+
+    public void save(String name, String email, Long githubId, String avatarUrl) {
+        String sql =
+                "INSERT INTO user(name, email, github_id, created_date_time, avatar_url) " +
+                "VALUES(?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql,name, email, githubId, Timestamp.valueOf(LocalDateTime.now()), avatarUrl);
     }
 }

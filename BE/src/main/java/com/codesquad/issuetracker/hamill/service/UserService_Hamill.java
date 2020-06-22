@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -43,7 +44,15 @@ public class UserService_Hamill {
         return userDao_hamill.findUserByUserId(userId);
     }
 
+    public Boolean existUserByEmail(String email) {
+        return userDao_hamill.existUserByEmail(email);
+    }
+
     public UserSummary findUserSummaryByIssueIdAndCommentId(Long issueId, Long commentId) {
         return userDao_hamill.findUserSummaryByIssueIdAndCommentId(issueId, commentId);
+    }
+
+    public void save(String name, String email, Long githubId, String avatarUrl) {
+        userDao_hamill.save(name, email, githubId, avatarUrl);
     }
 }
