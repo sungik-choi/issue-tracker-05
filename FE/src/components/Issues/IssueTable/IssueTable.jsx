@@ -39,9 +39,9 @@ const IssueTable = () => {
     issueList: { issues },
   } = useContext(IssueListContext);
 
-  const issueList = issues.reduce(
-    (allIssue, { id, ...data }) => [
-      ...allIssue,
+  const issueList = issues.reduce((accumulator, { id, ...data }) => {
+    return [
+      ...accumulator,
       {
         id,
         contents: (
@@ -53,9 +53,8 @@ const IssueTable = () => {
           />
         ),
       },
-    ],
-    [],
-  );
+    ];
+  }, []);
 
   const toolbar = (
     <Toolbar
