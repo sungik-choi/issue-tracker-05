@@ -12,8 +12,7 @@ const App = () => {
       <GlobalStyle />
       <Header />
       <Container maxWidth="lg">
-        {/* <Issues /> */}
-        <DetailedIssue />
+        <Issues />
       </Container>
     </>
   );

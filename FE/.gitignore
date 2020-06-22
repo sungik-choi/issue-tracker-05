@@ -10,3 +10,4 @@ bower_components
 
 *.sublime*
 .env
+.detailedIssue.js
