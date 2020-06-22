@@ -1,7 +1,7 @@
 package com.codesquad.issuetracker.ragdoll.vo.issueVO;
 
 import com.codesquad.issuetracker.ragdoll.vo.userVO.UserSummary;
-import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelSummary;
+import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelDetails;
 import com.codesquad.issuetracker.ragdoll.vo.milestoneVO.MilestoneSummary;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -16,7 +16,7 @@ public class IssueDetails {
 
     private MilestoneSummary milestone;
 
-    private List<LabelSummary> attachedLabels;
+    private List<LabelDetails> attachedLabels;
 
     private UserSummary author;
 
@@ -29,7 +29,7 @@ public class IssueDetails {
 
     public IssueDetails() {}
 
-    private IssueDetails(Long id, String title, MilestoneSummary milestone, List<LabelSummary> attachedLabels, UserSummary author, List<UserSummary> allocatedAssignees, LocalDateTime createdAt, boolean opened) {
+    private IssueDetails(Long id, String title, MilestoneSummary milestone, List<LabelDetails> attachedLabels, UserSummary author, List<UserSummary> allocatedAssignees, LocalDateTime createdAt, boolean opened) {
         this.id = id;
         this.title = title;
         this.milestone = milestone;
@@ -64,11 +64,11 @@ public class IssueDetails {
         this.milestone = milestone;
     }
 
-    public List<LabelSummary> getAttachedLabels() {
+    public List<LabelDetails> getAttachedLabels() {
         return attachedLabels;
     }
 
-    public void setAttachedLabels(List<LabelSummary> attachedLabels) {
+    public void setAttachedLabels(List<LabelDetails> attachedLabels) {
         this.attachedLabels = attachedLabels;
     }
 
@@ -108,7 +108,7 @@ public class IssueDetails {
         private Long issueId;
         private String issueTitle;
         private MilestoneSummary milestone;
-        private List<LabelSummary> attachedLabels;
+        private List<LabelDetails> attachedLabels;
         private UserSummary author;
         private List<UserSummary> allocatedAssignees;
         private LocalDateTime createdAt;
@@ -129,7 +129,7 @@ public class IssueDetails {
             return this;
         }
 
-        public Builder attachedLabels(List<LabelSummary> attachedLabels) {
+        public Builder attachedLabels(List<LabelDetails> attachedLabels) {
             this.attachedLabels = attachedLabels;
             return this;
         }

@@ -7,7 +7,7 @@ import com.codesquad.issuetracker.ragdoll.domain.User;
 import com.codesquad.issuetracker.ragdoll.dto.ListOfIssuesDto;
 import com.codesquad.issuetracker.ragdoll.vo.issueVO.IssueDetails;
 import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelInformation;
-import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelSummary;
+import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelDetails;
 import com.codesquad.issuetracker.ragdoll.vo.milestoneVO.MilestoneInformation;
 import com.codesquad.issuetracker.ragdoll.vo.milestoneVO.MilestoneSummary;
 import com.codesquad.issuetracker.ragdoll.vo.userVO.UserSummary;
@@ -52,7 +52,7 @@ public class IssueService {
 
     private IssueDetails mapToIssueDetails(Issue issue) {
         Milestone milestone = milestoneService.findMilestoneById(issue.getMilestoneId());
-        List<LabelSummary> attachedLabels = labelService.findAttachedLabelsByIssueId(issue.getId());
+        List<LabelDetails> attachedLabels = labelService.findAttachedLabelsByIssueId(issue.getId());
         List<UserSummary> allocatedAssignees = userService.findAllocatedAssigneesByIssueId(issue.getId());
         User user = userService.findUserById(issue.getUserId());
         return new IssueDetails.Builder()

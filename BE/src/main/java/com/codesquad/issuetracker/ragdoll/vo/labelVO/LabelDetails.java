@@ -1,20 +1,24 @@
 package com.codesquad.issuetracker.ragdoll.vo.labelVO;
 
-public class LabelSummary {
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+public class LabelDetails {
 
     private Integer id;
 
     private String name;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String description;
+
     private String backgroundColor;
 
     private String color;
 
-    public LabelSummary() {}
-
-    private LabelSummary(Integer id, String name, String backgroundColor, String color) {
+    private LabelDetails(Integer id, String name, String description, String backgroundColor, String color) {
         this.id = id;
         this.name = name;
+        this.description = description;
         this.backgroundColor = backgroundColor;
         this.color = color;
     }
@@ -35,6 +39,10 @@ public class LabelSummary {
         this.name = name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public String getBackgroundColor() {
         return backgroundColor;
     }
@@ -50,6 +58,7 @@ public class LabelSummary {
     public static class Builder {
         private Integer id;
         private String name;
+        private String description;
         private String backgroundColor;
         private String color;
 
@@ -63,6 +72,11 @@ public class LabelSummary {
             return this;
         }
 
+        public Builder description(String description) {
+            this.description = description;
+            return this;
+        }
+
         public Builder backgroundColor(String backgroundColor) {
             this.backgroundColor = backgroundColor;
             return this;
@@ -73,8 +87,8 @@ public class LabelSummary {
             return this;
         }
 
-        public LabelSummary build() {
-            return new LabelSummary(id, name, backgroundColor, color);
+        public LabelDetails build() {
+            return new LabelDetails(id, name, description, backgroundColor, color);
         }
     }
 }

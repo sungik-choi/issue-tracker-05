@@ -13,7 +13,7 @@ import com.codesquad.issuetracker.ragdoll.exception.UserUnauthorizedException;
 import com.codesquad.issuetracker.ragdoll.vo.commentVO.CommentDetails;
 import com.codesquad.issuetracker.ragdoll.vo.commentVO.CommentInformation;
 import com.codesquad.issuetracker.ragdoll.vo.issueVO.IssueDetails;
-import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelSummary;
+import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelDetails;
 import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelInformation;
 import com.codesquad.issuetracker.ragdoll.vo.milestoneVO.MilestoneInformation;
 import com.codesquad.issuetracker.ragdoll.vo.milestoneVO.MilestoneSummary;
@@ -61,7 +61,7 @@ public class IssueService_Ragdoll {
 
     private IssueDetails mapToIssueDetails(Issue issue) {
         Optional<Milestone> foundMilestone = Optional.ofNullable(milestoneService.findMilestoneById(issue.getMilestoneId()));
-        List<LabelSummary> attachedLabels = labelService.findAttachedLabelsByIssueId(issue.getId());
+        List<LabelDetails> attachedLabels = labelService.findAttachedLabelsByIssueId(issue.getId());
         List<UserSummary> allocatedAssignees = userService.findAllocatedAssigneesByIssueId(issue.getId());
         User user = userService.findUserById(issue.getUserId());
         return new IssueDetails.Builder()
