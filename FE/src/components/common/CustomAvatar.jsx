@@ -29,11 +29,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 CustomAvatar.defaultProps = {
+  userId: "",
   tooltip: false,
 };
 
 CustomAvatar.propTypes = {
-  userId: PropTypes.string.isRequired,
+  userId: PropTypes.string,
   url: PropTypes.string.isRequired,
   tooltip: PropTypes.bool,
 };
