@@ -22,10 +22,6 @@ const App = () => {
           </IssueListProvider>
         </Container>
       </UserProvider>
-      <Container maxWidth="lg">
-        {/* <Issues /> */}
-        <DetailedIssue />
-      </Container>
     </>
   );
 };
