@@ -5,11 +5,10 @@ import com.codesquad.issuetracker.ragdoll.dao.LabelDao_Ragdoll;
 import com.codesquad.issuetracker.ragdoll.domain.Label;
 import com.codesquad.issuetracker.ragdoll.dto.request.LabelRequestDto;
 import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelInformation;
-import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelSummary;
+import com.codesquad.issuetracker.ragdoll.vo.labelVO.LabelDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,20 +20,21 @@ public class LabelService_Ragdoll {
         this.labelDaoRagdoll = labelDaoRagdoll;
     }
 
-    public List<LabelSummary> findAttachedLabelsByIssueId(Long issueId) {
+    public List<LabelDetails> findAttachedLabelsByIssueId(Long issueId) {
         return labelDaoRagdoll.findAttachedLabelsByIssueId(issueId);
     }
 
     public LabelInformation findAllLabels() {
         List<Label> labels = labelDaoRagdoll.findAllLabels();
-        List<LabelSummary> labelSummaries = labels.stream()
-                                                 .map(label -> new LabelSummary.Builder()
-                                                                               .id(label.getId())
-                                                                               .name(label.getName())
-                                                                               .backgroundColor(label.getBackgroundColor())
-                                                                               .color(label.getColor())
-                                                                               .build()).collect(Collectors.toList());
-        return LabelInformation.create(labelSummaries.size(), labelSummaries);
+        List<LabelDetails> labelsForDetails = labels.stream()
+                                                    .map(label -> new LabelDetails.Builder()
+                                                                                  .id(label.getId())
+                                                                                  .name(label.getName())
+                                                                                  .description(label.getDescription())
+                                                                                  .backgroundColor(label.getBackgroundColor())
+                                                                                  .color(label.getColor())
+                                                                                  .build()).collect(Collectors.toList());
+        return LabelInformation.of(labelsForDetails.size(), labelsForDetails);
     }
 
     public String updateLabel(Integer labelId, String labelName, String description, String backgroundColor, String color) {
