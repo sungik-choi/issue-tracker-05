@@ -5,7 +5,6 @@ import Container from "@material-ui/core/Container";
 
 import Header from "@Components/common/Header/Header";
 import Issues from "@Pages/Issues";
-import DetailedIssue from "@Pages/DetailedIssue";
 
 import { UserProvider } from "@Contexts/userContext";
 import { IssueListProvider } from "@Contexts/issueListContext";
