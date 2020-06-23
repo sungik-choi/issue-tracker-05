@@ -1,7 +1,15 @@
 import React from "react";
 
+import Navigation from "@Components/Labels/Navigation/Navigation";
+import LabelTable from "@Components/Labels/LabelTable";
+
 const Labels = () => {
-  return <div />;
+  return (
+    <>
+      <Navigation />
+      <LabelTable />
+    </>
+  );
 };
 
 export default Labels;
