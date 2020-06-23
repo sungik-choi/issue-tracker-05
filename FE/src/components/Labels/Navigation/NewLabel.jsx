@@ -3,6 +3,8 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import CachedIcon from "@material-ui/icons/Cached";
 
 import CustomButton from "@Components/common/CustomButton";
 import Label from "@Components/common/Label";
@@ -18,51 +20,78 @@ const NewLabel = () => {
       <Box mb={2}>
         <Label name="default" size="medium" backgroundColor="black" color="white" />
       </Box>
-      <Box className={classes.textField} display="flex">
-        <InputField
-          label={LABEL_NAME}
-          placeholder={LABEL_NAME}
-          InputLabelProps={{
-            shrink: true,
-          }}
-          size="small"
-        />
-        <InputField
-          label={DESCRIPTION}
-          placeholder={DESCRIPTION}
-          InputLabelProps={{
-            shrink: true,
-          }}
-          size="small"
-        />
-        <Box>
+      <Grid container justify="center" alignItems="center" spacing={3}>
+        <Grid item xs={3}>
           <InputField
-            label="Color"
-            defaultValue="#FFFFFF"
+            label={LABEL_NAME}
+            placeholder={LABEL_NAME}
             InputLabelProps={{
               shrink: true,
             }}
             size="small"
           />
-        </Box>
-        <Box>
-          <CustomButton text="Create Label" clickHandler={null} />
-        </Box>
-      </Box>
+        </Grid>
+        <Grid item xs={4}>
+          <InputField
+            label={DESCRIPTION}
+            placeholder={DESCRIPTION}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            size="small"
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <Box display="flex" justifyContent="center" alignItems="center">
+            <CustomButton className={classes.iconButton} startIcon={<CachedIcon />} />
+            <InputField
+              label="Color"
+              defaultValue="#FFFFFF"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              size="small"
+            />
+          </Box>
+        </Grid>
+        <Grid item xs={3}>
+          <Box
+            className={classes.buttonWrap}
+            display="flex"
+            justifyContent="flex-end"
+            alignItems="center"
+            pt={1}
+          >
+            <CustomButton color="default" text="Cancel" clickHandler={null} />
+            <CustomButton text="Create Label" clickHandler={null} />
+          </Box>
+        </Grid>
+      </Grid>
     </Box>
   );
 };
 
 const useStyles = makeStyles((theme) => ({
   container: {
+    flexGrow: 1,
     backgroundColor: theme.palette.grey[100],
-  },
-  textField: {
-    "& > div + div": {
-      marginLeft: theme.spacing(2),
-    },
     "& input": {
       backgroundColor: theme.palette.common.white,
+    },
+  },
+  buttonWrap: {
+    "& > button + button": {
+      height: "100%",
+      marginLeft: theme.spacing(1),
+    },
+  },
+  iconButton: {
+    padding: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    marginTop: theme.spacing(1),
+    minWidth: "40px",
+    "& span": {
+      margin: 0,
     },
   },
 }));
