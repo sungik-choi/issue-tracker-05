@@ -3,18 +3,14 @@ import PropTypes from "prop-types";
 
 import TextField from "@material-ui/core/TextField";
 
-const InputField = ({ value, onChange, fullWidth, id, ...props }) => {
+const InputField = ({ onChange, fullWidth, id, ...props }) => {
   return (
     <TextField
       id={id}
       fullWidth={fullWidth}
       margin="normal"
-      InputLabelProps={{
-        shrink: true,
-      }}
       variant="outlined"
       onChange={onChange}
-      value={value}
       {...props}
     />
   );
