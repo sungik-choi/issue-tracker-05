@@ -10,24 +10,29 @@ import PrimaryButton from "@Components/common/PrimaryButton";
 
 const LoginForm = () => {
   const classes = useStyles();
+  const ID = "아이디";
+  const PASSWORD = "패스워드";
+  const LOGIN = "로그인";
+  const GITHUB_LOGIN = "Github 으로 로그인하기";
+  const SIGN_UP = "회원가입";
 
   return (
     <Box className={classes.wrap} display="flex" alignItems="center" justifyContent="center">
       <Box component={Paper} variant="outlined" width={400} p={5}>
         <form>
-          <InputField label="아이디" />
+          <InputField label={ID} />
           <InputField
-            label="비밀번호"
+            label={PASSWORD}
             id="standard-password-input"
             type="password"
             autoComplete="current-password"
           />
           <Box className={classes.buttonWrap}>
             <Box display="flex" justifyContent="center">
-              <Button>회원가입</Button>
+              <Button>{SIGN_UP}</Button>
             </Box>
-            <PrimaryButton color="default" className={classes.button} text="로그인" size="large" />
-            <PrimaryButton className={classes.button} text="Github 으로 로그인하기" size="large" />
+            <PrimaryButton color="default" className={classes.button} text={LOGIN} size="large" />
+            <PrimaryButton className={classes.button} text={GITHUB_LOGIN} size="large" />
           </Box>
         </form>
       </Box>
