@@ -11,6 +11,7 @@ const useFetch = ({ url, actionType: { successAction, errorAction }, dispatch })
       console.log("[log] fetch : ", response);
       dispatch(successAction(response));
     } catch (e) {
+      console.log("[log] error : ", response);
       dispatch(errorAction());
     }
     setLoading(false);
