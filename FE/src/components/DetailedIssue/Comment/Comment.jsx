@@ -2,12 +2,12 @@ import React from "react";
 
 import { data } from "@Mock/detailedIssue";
 
-import CustomTable from "@Components/common/CustomTable";
-import ToolBar from "./ToolBar";
-import CustomAvatar from "@Components/Common/CustomAvatar";
-
-import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
+
+import CustomTable from "@Components/common/CustomTable";
+import CustomAvatar from "@Components/common/CustomAvatar";
+import ToolBar from "./ToolBar";
 
 const Comment = () => {
   const { comments } = data.issue.commentInfo;
@@ -32,7 +32,7 @@ const Comment = () => {
         const commentTable = (
           <Box position="relative" mb={4} key={userId}>
             <CustomAvatar id={userName} url={avatarUrl} className={classes.avatar} tooltip />
-            <Box ml={"40px"} width="70%">
+            <Box ml="40px" width="70%">
               {tableRender(userName, userId, description, createdAt, author)}
             </Box>
           </Box>

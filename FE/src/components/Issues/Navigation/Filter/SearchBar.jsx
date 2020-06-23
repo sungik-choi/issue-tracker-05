@@ -7,8 +7,9 @@ import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
 
 const SearchBar = () => {
-  const SEARCH_PLACEHOLDER = "Search all issues";
   const classes = useStyles();
+
+  const SEARCH_PLACEHOLDER = "Search all issues";
 
   return (
     <Box

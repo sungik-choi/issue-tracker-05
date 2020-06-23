@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import CustomAvatar from "./CustomAvatar";
 import Label from "./Label";
 
-const MenuList = ({ text, title, clickHandler, options: { avatar, label, name } }) => {
+const MenuList = ({ text, title, clickHandler, options: { avatar, label } }) => {
   const classes = useStyles();
 
   const boxClassName = title ? classes.titleBox : classes.popupBox;
@@ -26,7 +26,7 @@ const MenuList = ({ text, title, clickHandler, options: { avatar, label, name } 
     >
       {avatar && (
         <Box mr={1}>
-          <CustomAvatar id={avatar.id} url={avatar.url} />
+          <CustomAvatar url={avatar.url} />
         </Box>
       )}
       {label && (
@@ -35,13 +35,6 @@ const MenuList = ({ text, title, clickHandler, options: { avatar, label, name } 
         </Box>
       )}
       <Typography variant={textVariant}>{boxText}</Typography>
-      {name && (
-        <Box ml={2}>
-          <Typography variant={textVariant} color="textSecondary">
-            {name}
-          </Typography>
-        </Box>
-      )}
     </Box>
   );
 };
@@ -65,7 +58,6 @@ MenuList.defaultProps = {
   title: "",
   clickHandler: null,
   options: {
-    name: "",
     label: null,
     avatar: null,
   },
@@ -77,7 +69,6 @@ MenuList.propTypes = {
   clickHandler: PropTypes.oneOfType([PropTypes.func, PropTypes.instanceOf(null)]),
   options: PropTypes.shape({
     avatar: PropTypes.shape({
-      id: PropTypes.string.isRequired,
       url: PropTypes.string.isRequired,
     }),
     name: PropTypes.string,

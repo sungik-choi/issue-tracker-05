@@ -1,6 +1,6 @@
 import React from "react";
 
-import StatusIcon from "@Components/Common/StatusIcon";
+import StatusIcon from "@Components/common/StatusIcon";
 import { data } from "@Mock/detailedIssue";
 
 import calcTimeDiff from "@Utils/calcTimeDiff";
@@ -21,7 +21,7 @@ const IssueStatus = () => {
     createdAt,
     author: { userName },
   } = data.issue;
-  const countOfComment = data.issue.commentInfo.countOfComment;
+  const { countOfComment } = data.issue.commentInfo;
 
   const classes = useStyles();
   const time = calcTimeDiff(createdAt);

@@ -14,9 +14,9 @@ export const userReducer = (state, action) => {
 
   switch (type) {
     case FETCH_SUCCESS:
-      return [...payload];
+      return { ...state, ...payload };
     case FETCH_ERROR:
-      return [...state];
+      return { ...state };
     default:
       return state;
   }

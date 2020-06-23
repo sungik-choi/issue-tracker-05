@@ -8,7 +8,7 @@ import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 
 import MenuList from "@Components/common/MenuList";
 
-const FilterButton = ({ type, menuTitle, menuList }) => {
+const FilterButton = ({ type, clearMenu, menuTitle, menuList }) => {
   return (
     <PopupState variant="popover" popupId={type}>
       {(popupState) => (
@@ -29,8 +29,9 @@ const FilterButton = ({ type, menuTitle, menuList }) => {
             }}
           >
             <MenuList title={menuTitle} />
-            {menuList.map(({ text, clickHandler, ...options }) => (
-              <MenuList key={text} text={text} clickHandler={clickHandler} options={options} />
+            {clearMenu && <MenuList text={clearMenu.text} clickHandler={clearMenu.clickHandler} />}
+            {menuList.map(({ id, text, clickHandler, ...options }) => (
+              <MenuList key={id} text={text} clickHandler={clickHandler} options={options} />
             ))}
           </Popover>
         </div>
@@ -39,9 +40,14 @@ const FilterButton = ({ type, menuTitle, menuList }) => {
   );
 };
 
+FilterButton.defaultProps = {
+  clearMenu: null,
+};
+
 FilterButton.propTypes = {
   type: PropTypes.string.isRequired,
   menuTitle: PropTypes.string.isRequired,
+  clearMenu: PropTypes.oneOfType([PropTypes.object, PropTypes.instanceOf(null)]),
   menuList: PropTypes.arrayOf(
     PropTypes.shape({
       text: PropTypes.string.isRequired,

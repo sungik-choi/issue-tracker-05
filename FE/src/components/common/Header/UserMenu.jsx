@@ -1,29 +1,28 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import Box from "@material-ui/core/Box";
 import Popover from "@material-ui/core/Popover";
 import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
-import Typography from "@material-ui/core/Typography";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
+import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
+import ExitToAppOutlinedIcon from "@material-ui/icons/ExitToAppOutlined";
 
 import CustomAvatar from "@Components/common/CustomAvatar";
 
-const UserMenu = ({ id }) => {
+const UserMenu = ({ userId, url }) => {
   const SIGN_OUT = "Sign out";
-
-  // ! CustomAvatar id, url 설정 추가
 
   return (
     <PopupState variant="popover" popupId="demo-popup-popover">
       {(popupState) => (
         <>
           <IconButton {...bindTrigger(popupState)}>
-            <CustomAvatar />
+            <CustomAvatar userId={userId} url={url} />
           </IconButton>
           <Popover
             {...bindPopover(popupState)}
@@ -38,16 +37,16 @@ const UserMenu = ({ id }) => {
           >
             <List>
               <ListItem>
-                <ListItemText
-                  primary={
-                    <Typography>
-                      <Box fontWeight={600}>{id}</Box>
-                    </Typography>
-                  }
-                />
+                <ListItemIcon>
+                  <AccountCircleOutlinedIcon />
+                </ListItemIcon>
+                <ListItemText primary={userId} />
               </ListItem>
               <Divider />
               <ListItem button>
+                <ListItemIcon>
+                  <ExitToAppOutlinedIcon />
+                </ListItemIcon>
                 <ListItemText primary={SIGN_OUT} />
               </ListItem>
             </List>
@@ -59,7 +58,8 @@ const UserMenu = ({ id }) => {
 };
 
 UserMenu.propTypes = {
-  id: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
 };
 
 export default UserMenu;

@@ -4,28 +4,38 @@ import PropTypes from "prop-types";
 import Box from "@material-ui/core/Box";
 import Checkbox from "@material-ui/core/Checkbox";
 
-import { userList } from "@Mock/data";
+import { assigneeType } from "@Types/issueType";
+
+import StatusIcon from "@Components/common/StatusIcon";
 import Contents from "./Contents/Contents";
-import StatusIcon from "@Components/Common/StatusIcon";
 import AvatarStack from "./AvatarStack";
 
-const Issue = ({ id, isSelectedIssue, clickHandler }) => {
+const Issue = ({
+  id,
+  isSelectedIssue,
+  clickHandler,
+  data: { allocatedAssignees, isOpened, ...contentsData },
+}) => {
   return (
     <>
       <Box display="flex" alignItems="center">
-        <Checkbox color="primary" checked={isSelectedIssue(id)} onChange={() => clickHandler(id)} />
-        <StatusIcon closed color={{ closed: "secondary", opened: "primary" }} />
-        <Contents />
+        <Checkbox color="primary" checked={isSelectedIssue} onChange={clickHandler} />
+        <StatusIcon closed />
+        <Contents id={id} data={contentsData} />
       </Box>
-      <AvatarStack userData={userList} />
+      <AvatarStack allocatedAssignees={allocatedAssignees} />
     </>
   );
 };
 
 Issue.propTypes = {
   id: PropTypes.number.isRequired,
-  isSelectedIssue: PropTypes.func.isRequired,
+  isSelectedIssue: PropTypes.bool.isRequired,
   clickHandler: PropTypes.func.isRequired,
+  data: PropTypes.shape({
+    allocatedAssignees: assigneeType.isRequired,
+    isOpened: PropTypes.bool.isRequired,
+  }).isRequired,
 };
 
 export default Issue;

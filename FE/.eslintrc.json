@@ -11,6 +11,8 @@
           ["@Utils", "./src/utils/"],
           ["@Reducers", "./src/reducers/"],
           ["@Contexts", "./src/contexts/"],
+          ["@Hooks", "./src/hooks/"],
+          ["@Types", "./src/types/"],
           ["@Public", "./public/"]
         ],
         "extensions": [".js", ".jsx", ".json"]

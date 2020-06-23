@@ -1,9 +1,9 @@
 import React from "react";
 
+import Box from "@material-ui/core/Box";
+
 import Title from "./Title/Title";
 import IssueStatus from "./IssueStatus/IssueStatus";
-
-import Box from "@material-ui/core/Box";
 
 const Header = () => {
   return (
