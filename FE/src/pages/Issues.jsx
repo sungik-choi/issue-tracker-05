@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 
-import Box from "@material-ui/core/Box";
-
+import Footer from "@Components/common/Footer";
 import IssueTable from "@Components/Issues/IssueTable/IssueTable";
 import Navigation from "@Components/Issues/Navigation/Navigation";
 import ClearButton from "@Components/Issues/ClearButton";
@@ -27,11 +26,12 @@ const Issues = () => {
   return (
     <>
       {!loading && (
-        <Box pb={10}>
+        <>
           <Navigation />
           <ClearButton />
           <IssueTable />
-        </Box>
+          <Footer />
+        </>
       )}
     </>
   );

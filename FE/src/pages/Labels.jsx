@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 
+import Footer from "@Components/common/Footer";
 import Navigation from "@Components/Labels/Navigation/Navigation";
 import LabelTable from "@Components/Labels/LabelTable";
 
@@ -23,8 +24,13 @@ const Labels = () => {
 
   return (
     <>
-      <Navigation />
-      <LabelTable />
+      {!loading && (
+        <>
+          <Navigation />
+          <LabelTable />
+          <Footer />
+        </>
+      )}
     </>
   );
 };
