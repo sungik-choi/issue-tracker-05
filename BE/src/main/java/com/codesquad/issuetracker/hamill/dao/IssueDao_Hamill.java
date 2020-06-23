@@ -1,19 +1,12 @@
 package com.codesquad.issuetracker.hamill.dao;
 
-import com.codesquad.issuetracker.hamill.controller.IssueController_Hamill;
 import com.codesquad.issuetracker.hamill.domain.Issue;
-import com.codesquad.issuetracker.hamill.dto.AssigneeDto;
-import com.codesquad.issuetracker.hamill.dto.AuthorDto;
-import com.codesquad.issuetracker.hamill.dto.info.IssuesDto;
-import com.codesquad.issuetracker.hamill.dto.label.LabelDto;
-import com.codesquad.issuetracker.hamill.dto.milestone.MilestoneDto;
+import com.codesquad.issuetracker.hamill.dto.request.NewIssueDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -42,11 +35,28 @@ public class IssueDao_Hamill {
         );
     }
 
-    public void saveNewIssue(Long issueId, String title, Long userId, Long milestoneId) {
+    public void save(NewIssueDto newIssueDto) {
         String sql =
-                "INSERT INTO issue(id, title, created_date_time, is_opened, user_id, milestone_id) " +
-                "VALUES (?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, issueId,title, Timestamp.valueOf(LocalDateTime.now()), true, userId, milestoneId);
+                "INSERT INTO issue(title, created_date_time, is_opened, user_id) " +
+                "VALUES (?, ?, ?, ?)";
+
+        jdbcTemplate.update(sql,
+                newIssueDto.getTitle(),
+                Timestamp.valueOf(LocalDateTime.now()),
+                true, newIssueDto.getUserId());
+    }
+
+    public Issue findIssueByIssueId(Long issueId) {
+        return jdbcTemplate.queryForObject(
+                "SELECT i.id, i.title, i.created_date_time, i.is_opened, i.user_id, i.milestone_id FROM issue i WHERE i.id = ?",
+                (rs, rowNum) ->
+                        Issue.of(rs.getLong("id"),
+                                rs.getString("title"),
+                                rs.getTimestamp("created_date_time").toLocalDateTime(),
+                                rs.getBoolean("is_opened"),
+                                rs.getLong("user_id"),
+                                rs.getInt("milestone_id"))
+        , issueId);
     }
 
     public void saveNewIssueHasLabel(Long labelId, Long issueId) {

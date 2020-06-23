@@ -10,8 +10,8 @@ CREATE TABLE IF NOT EXISTS user
 (
     id                BIGINT AUTO_INCREMENT,
     name              VARCHAR(128),
-    email             VARCHAR(128),
-    github_id         BIGINT,
+    email             VARCHAR(128) UNIQUE,
+    github_id         BIGINT UNIQUE,
     created_date_time DATETIME,
     avatar_url        VARCHAR(1024),
     PRIMARY KEY (id)
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS milestone
 
 CREATE TABLE IF NOT EXISTS issue
 (
-    id                BIGINT,
+    id                BIGINT AUTO_INCREMENT,
     title             VARCHAR(128),
     created_date_time DATETIME,
     is_opened         BOOLEAN,

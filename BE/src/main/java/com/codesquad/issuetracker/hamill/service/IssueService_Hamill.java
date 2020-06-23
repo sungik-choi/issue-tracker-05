@@ -4,8 +4,11 @@ import com.codesquad.issuetracker.hamill.dao.IssueDao_Hamill;
 import com.codesquad.issuetracker.hamill.domain.Issue;
 import com.codesquad.issuetracker.hamill.domain.Milestone;
 import com.codesquad.issuetracker.hamill.domain.User;
-import com.codesquad.issuetracker.hamill.dto.ListOfIssuesDto;
+import com.codesquad.issuetracker.hamill.dto.request.NewIssueDto;
+import com.codesquad.issuetracker.hamill.dto.response.IssueDto;
+import com.codesquad.issuetracker.hamill.dto.response.ListOfIssuesDto;
 import com.codesquad.issuetracker.hamill.vo.UserVO.UserSummary;
+import com.codesquad.issuetracker.hamill.vo.commentVO.CommentInformation;
 import com.codesquad.issuetracker.hamill.vo.issueVO.IssueDetails;
 import com.codesquad.issuetracker.hamill.vo.labelVO.LabelInformation;
 import com.codesquad.issuetracker.hamill.vo.labelVO.LabelSummary;
@@ -14,6 +17,7 @@ import com.codesquad.issuetracker.hamill.vo.milestoneVO.MilestoneSummary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,18 +26,19 @@ import java.util.stream.Collectors;
 public class IssueService_Hamill {
 
     private static final Logger logger = LoggerFactory.getLogger(IssueService_Hamill.class);
-    private static final int ZERO = 0;
 
     private IssueDao_Hamill issueDao_Hamill;
     private LabelService_Hamill labelService_hamill;
     private MilestoneService_Hamill milestoneService_hamill;
     private UserService_Hamill userService_hamill;
+    private CommentService_Hamill commentService_hamill;
 
-    public IssueService_Hamill(IssueDao_Hamill issueDao_Hamill, LabelService_Hamill labelService_hamill, MilestoneService_Hamill milestoneService_hamill, UserService_Hamill userService_hamill) {
+    public IssueService_Hamill(IssueDao_Hamill issueDao_Hamill, LabelService_Hamill labelService_hamill, MilestoneService_Hamill milestoneService_hamill, UserService_Hamill userService_hamill, CommentService_Hamill commentService_hamill) {
         this.issueDao_Hamill = issueDao_Hamill;
         this.labelService_hamill = labelService_hamill;
         this.milestoneService_hamill = milestoneService_hamill;
         this.userService_hamill = userService_hamill;
+        this.commentService_hamill = commentService_hamill;
     }
 
     public ListOfIssuesDto getIssuesAndAllElements() {
@@ -41,15 +46,15 @@ public class IssueService_Hamill {
         List<IssueDetails> issueDetails = issues.stream().map(this::mapToIssueDetails).collect(Collectors.toList());
         LabelInformation labelInfo = labelService_hamill.findLabelInformation();
         MilestoneInformation milestoneInfo = milestoneService_hamill.findMilestoneInformation();
-        List<UserSummary> userSummary = userService_hamill.findUserInformation();
+        List<UserSummary> userSummaries = userService_hamill.findUserSummaries();
 
-        return ListOfIssuesDto.of(issueDetails, labelInfo, milestoneInfo, userSummary);
+        return ListOfIssuesDto.of(issueDetails, labelInfo, milestoneInfo, userSummaries);
     }
 
     private IssueDetails mapToIssueDetails(Issue issue) {
         Milestone milestone = milestoneService_hamill.findMilestoneByMilestoneId(issue.getMilestoneId());
-        List<LabelSummary> attachedLabels = labelService_hamill.findLabelSummaryByIssueId(issue.getId());
-        List<UserSummary> allocatedAssignees = userService_hamill.findUserSummaryByIssueId(issue.getId());
+        List<LabelSummary> attachedLabels = labelService_hamill.findLabelSummariesByIssueId(issue.getId());
+        List<UserSummary> allocatedAssignees = userService_hamill.findUserSummariesByIssueId(issue.getId());
         User user = userService_hamill.findUserByUserId(issue.getUserId());
 
         return IssueDetails.of(
@@ -62,6 +67,25 @@ public class IssueService_Hamill {
                 issue.getCreatedDateTime(),
                 issue.isOpened());
     }
+
+    public IssueDto getIssueAndAllElements(Long issueId) {
+        Issue issue = issueDao_Hamill.findIssueByIssueId(issueId);
+        IssueDetails issueDetail = mapToIssueDetails(issue);
+        CommentInformation commentInfo = commentService_hamill.findCommentInformation(issue);
+        LabelInformation labelInfo = labelService_hamill.findLabelInformation();
+        MilestoneInformation milestoneInfo = milestoneService_hamill.findMilestoneInformation();
+        List<UserSummary> userSummaries = userService_hamill.findUserSummaries();
+
+        return IssueDto.of(issueDetail, commentInfo, labelInfo, milestoneInfo, userSummaries);
+    }
+
+    @Transactional
+    public void save(NewIssueDto newIssueDto) {
+
+        issueDao_Hamill.save(newIssueDto);
+        commentService_hamill.save(newIssueDto);
+    }
+
 
 
 //    public IssuesDto findIssueByIssueId(Long issueId) {

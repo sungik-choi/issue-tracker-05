@@ -1,4 +1,4 @@
-package com.codesquad.issuetracker.hamill.response;
+package com.codesquad.issuetracker.hamill.dto.response;
 
 public class ApiResponse<T> {
 
@@ -16,6 +16,8 @@ public class ApiResponse<T> {
     public static <T> ApiResponse<T> OK(T response) {
         return new ApiResponse<>(true, response);
     }
+
+    public static <T> ApiResponse<T> FORBIDDEN(T response) { return new ApiResponse<>(false, response); }
 
     public boolean isStatus() {
         return status;

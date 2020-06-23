@@ -17,14 +17,14 @@ public class JwtService {
 
     private Logger logger = LoggerFactory.getLogger(JwtService.class);
 
-    public static final Integer EXPIRE_TIME = 1000 * 60 * 1000;
+    public static final Integer EXPIRE_TIME = 1000 * 60 * 500;
     private String secretKey = "ThisIsIssueTracker05SecretKey";
     private byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(secretKey);
     private SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
     private final Key KEY = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
 
 
-    public String makeJwt(String nickname, String name, String email) throws Exception {
+    public String makeJwt(Long id, String name, String avatarUrl) throws Exception {
         Date expireTime = new Date();
         expireTime.setTime(expireTime.getTime() + EXPIRE_TIME);
 
@@ -35,9 +35,9 @@ public class JwtService {
 
         Map<String, Object> map= new HashMap<>();
 
-        map.put("nickname", nickname);
+        map.put("id", id);
         map.put("name", name);
-        map.put("email", email);
+        map.put("avatarUrl", avatarUrl);
 
         JwtBuilder builder = Jwts.builder().setHeader(headerMap)
                                  .setClaims(map)

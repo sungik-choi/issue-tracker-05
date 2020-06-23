@@ -21,7 +21,9 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(jwtInterceptor)
-                .addPathPatterns("/properties/**", "/reservations/**", "/saved/**")
+                // 토큰이 필요한 API
+//                .addPathPatterns("/hamill/api/issues")
+                // 토큰이 필요하지 않은 API는 배제한다
                 .excludePathPatterns(EXCLUDE_PATHS);
     }
 

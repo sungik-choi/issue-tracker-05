@@ -1,5 +1,4 @@
-package com.codesquad.issuetracker.hamill.dto;
-
+package com.codesquad.issuetracker.hamill.dto.response;
 
 import com.codesquad.issuetracker.hamill.vo.UserVO.UserSummary;
 import com.codesquad.issuetracker.hamill.vo.issueVO.IssueDetails;
