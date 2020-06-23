@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 
 import Button from "@material-ui/core/Button";
 
-const PrimaryButton = ({ text, clickHandler }) => {
+const PrimaryButton = ({ text, clickHandler, ...props }) => {
   return (
-    <Button variant="contained" color="primary" disableElevation onClick={clickHandler}>
+    <Button variant="contained" color="primary" disableElevation onClick={clickHandler} {...props}>
       {text}
     </Button>
   );
