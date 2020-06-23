@@ -1,4 +1,4 @@
-package com.codesquad.issuetracker.main.domain;
+package com.codesquad.issuetracker.main.dto;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,106 +17,111 @@ public class Milestone {
 
     private LocalDateTime updatedDateTime;
 
-    private Double progress;
+    public Milestone() {}
 
-    private Milestone(Integer id, String title, String description, LocalDate dueDate, LocalDateTime createdDateTime, LocalDateTime updatedDateTime, Double progress) {
+    private Milestone(Integer id, String title, String description, LocalDate dueDate, LocalDateTime createdDateTime, LocalDateTime updatedDateTime) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.createdDateTime = createdDateTime;
         this.updatedDateTime = updatedDateTime;
-        this.progress = progress;
     }
 
-    public static Milestone of(Integer id, String title, String description, LocalDate dueDate, LocalDateTime createdDateTime, LocalDateTime updatedDateTime, Double progress) {
-        return new Builder()
-                .id(id)
-                .title(title)
-                .description(description)
-                .dueDate(dueDate)
-                .createdDateTime(createdDateTime)
-                .updatedDateTime(updatedDateTime)
-                .progress(progress)
-                .build();
+    public static Milestone create(Integer id, String title, String description, LocalDate dueDate, LocalDateTime createdDateTime, LocalDateTime updatedDateTime) {
+        return new Milestone(id, title, description, dueDate, createdDateTime, updatedDateTime);
     }
 
     public Integer getId() {
         return id;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public LocalDate getDueDate() {
         return dueDate;
+    }
+
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
     }
 
     public LocalDateTime getCreatedDateTime() {
         return createdDateTime;
     }
 
+    public void setCreatedDateTime(LocalDateTime createdDateTime) {
+        this.createdDateTime = createdDateTime;
+    }
+
     public LocalDateTime getUpdatedDateTime() {
         return updatedDateTime;
     }
 
-    public Double getProgress() {
-        return progress;
+    public void setUpdatedDateTime(LocalDateTime updatedDateTime) {
+        this.updatedDateTime = updatedDateTime;
     }
 
-    private static class Builder {
+    public static class Builder {
         private Integer id;
         private String title;
         private String description;
         private LocalDate dueDate;
         private LocalDateTime createdDateTime;
         private LocalDateTime updatedDateTime;
-        private Double progress;
 
-        private Builder() {}
+        public Builder() {}
 
-        private Builder id(Integer id) {
+        public Builder id(Integer id) {
             this.id = id;
             return this;
         }
 
-        private Builder title(String title) {
+        public Builder title(String title) {
             this.title = title;
             return this;
         }
 
-        private Builder description(String description) {
+        public Builder description(String description) {
             this.description = description;
             return this;
         }
 
-        private Builder dueDate(LocalDate dueDate) {
+        public Builder dueDate(LocalDate dueDate) {
             this.dueDate = dueDate;
             return this;
         }
 
-        private Builder createdDateTime(LocalDateTime createdDateTime) {
+        public Builder createdDateTime(LocalDateTime createdDateTime) {
             this.createdDateTime = createdDateTime;
             return this;
         }
 
-        private Builder updatedDateTime(LocalDateTime updatedDateTime) {
+        public Builder updatedDateTime(LocalDateTime updatedDateTime) {
             this.updatedDateTime = updatedDateTime;
             return this;
         }
 
-        private Builder progress(Double progress) {
-            this.progress = progress;
-            return this;
-        }
-
-        private Milestone build() {
-            return new Milestone(id, title, description, dueDate, createdDateTime, updatedDateTime, progress);
+        public Milestone build() {
+            return new Milestone(id, title, description, dueDate, createdDateTime, updatedDateTime);
         }
     }
 }

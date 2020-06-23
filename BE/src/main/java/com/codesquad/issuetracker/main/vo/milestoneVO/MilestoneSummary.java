@@ -2,34 +2,28 @@ package com.codesquad.issuetracker.main.vo.milestoneVO;
 
 public class MilestoneSummary {
 
-    private Integer milestoneId;
+    private Integer id;
 
-    private String milestoneTitle;
+    private String title;
 
-    public MilestoneSummary() {}
+    private Double progress;
 
-    public MilestoneSummary(Integer milestoneId, String milestoneTitle) {
-        this.milestoneId = milestoneId;
-        this.milestoneTitle = milestoneTitle;
+    private MilestoneSummary(Integer id, String title, Double progress) {
+        this.id = id;
+        this.title = title;
+        this.progress = progress;
     }
 
-    public static MilestoneSummary create(Integer milestoneId, String milestoneTitle) {
-        return new MilestoneSummary(milestoneId, milestoneTitle);
+    public static MilestoneSummary of(Integer id, String title, Double progress) {
+        return new MilestoneSummary(id, title, progress);
     }
 
-    public Integer getMilestoneId() {
-        return milestoneId;
-    }
+    public Integer getId() { return id; }
 
-    public void setMilestoneId(Integer milestoneId) {
-        this.milestoneId = milestoneId;
-    }
+    public String getTitle() { return title; }
 
-    public String getMilestoneTitle() {
-        return milestoneTitle;
-    }
-
-    public void setMilestoneTitle(String milestoneTitle) {
-        this.milestoneTitle = milestoneTitle;
+    public Double getProgress() {
+        return progress;
     }
 }
+

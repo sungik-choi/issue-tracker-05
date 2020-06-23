@@ -2,45 +2,34 @@ package com.codesquad.issuetracker.main.vo.labelVO;
 
 public class LabelSummary {
 
-    private Integer labelId;
+    private Integer id;
 
-    private String labelName;
+    private String name;
 
-    private String hexCode;
+    private String backgroundColor;
 
-    public LabelSummary() {}
+    private String color;
 
-    private LabelSummary(Integer labelId, String labelName, String hexCode) {
-        this.labelId = labelId;
-        this.labelName = labelName;
-        this.hexCode = hexCode;
+    private LabelSummary(Integer id, String name, String backgroundColor, String color) {
+        this.id = id;
+        this.name = name;
+        this.backgroundColor = backgroundColor;
+        this.color = color;
     }
 
-    public static LabelSummary create(Integer labelId, String labelName, String hexCode) {
-        return new LabelSummary(labelId, labelName, hexCode);
+    public static LabelSummary of(Integer id, String name, String backgroundColor, String color) {
+        return new LabelSummary(id, name, backgroundColor, color);
     }
 
-    public Integer getLabelId() {
-        return labelId;
+    public Integer getId() { return id; }
+
+    public String getName() { return name; }
+
+    public String getBackgroundColor() {
+        return backgroundColor;
     }
 
-    public void setLabelId(Integer labelId) {
-        this.labelId = labelId;
-    }
-
-    public String getLabelName() {
-        return labelName;
-    }
-
-    public void setLabelName(String labelName) {
-        this.labelName = labelName;
-    }
-
-    public String getHexCode() {
-        return hexCode;
-    }
-
-    public void setHexCode(String hexCode) {
-        this.hexCode = hexCode;
+    public String getColor() {
+        return color;
     }
 }

@@ -2,54 +2,86 @@ package com.codesquad.issuetracker.main.dao;
 
 import com.codesquad.issuetracker.main.domain.User;
 import com.codesquad.issuetracker.main.vo.UserVO.UserSummary;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import javax.sql.DataSource;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
 public class UserDao {
 
-    private final JdbcTemplate jdbcTemplate;
+    private static final Logger logger = LoggerFactory.getLogger(UserDao.class);
 
-    public UserDao(DataSource dataSource) {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
-    }
+    private JdbcTemplate jdbcTemplate;
 
-    public List<UserSummary> findAllocatedAssigneesByIssueId(Long issueId) {
-        String sql = "SELECT u.id, u.name, u.avatar_url " +
-                     "FROM user u JOIN assignee a ON u.id = a.user_id " +
-                     "WHERE a.issue_id = ?";
-        return jdbcTemplate.query(sql, new Object[] {issueId},
-                (rs, rowNum) -> UserSummary.create(rs.getLong("u.id"), rs.getString("u.name"),
-                                                   rs.getString("u.avatar_url")));
-    }
-
-    public User findUserById(Long userId) {
-        String sql = "SELECT id, name, email, github_id, avatar_url, created_date_time " +
-                     "FROM user WHERE id = ?";
-        return jdbcTemplate.queryForObject(sql, new Object[]{userId},
-                (rs, rowNum) -> new User.Builder()
-                                        .id(rs.getLong("id"))
-                                        .name(rs.getString("name"))
-                                        .email(rs.getString("email"))
-                                        .githubId(rs.getLong("github_id"))
-                                        .avatarUrl(rs.getString("avatar_url"))
-                                        .createdDateTime(rs.getTimestamp("created_date_time").toLocalDateTime())
-                                        .build());
+    public UserDao(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     public List<User> findAllUsers() {
-        String sql = "SELECT id, name, email, github_id, avatar_url, created_date_time " +
-                     "FROM user";
-        return jdbcTemplate.query(sql, (rs, rowNum) -> new User.Builder()
-                                                               .id(rs.getLong("id"))
-                                                               .name(rs.getString("name"))
-                                                               .email(rs.getString("email"))
-                                                               .githubId(rs.getLong("github_id"))
-                                                               .avatarUrl(rs.getString("avatar_url"))
-                                                               .createdDateTime(rs.getTimestamp("created_date_time").toLocalDateTime())
-                                                               .build());
+
+        return jdbcTemplate.query(
+                "SELECT u.id, u.name, u.email, u.github_id, u.avatar_url, u.created_date_time FROM user u",
+                (rs, rowNum) ->
+                        User.of(rs.getLong("id"),
+                                rs.getString("name"),
+                                rs.getString("email"),
+                                rs.getLong("github_id"),
+                                rs.getString("avatar_url"),
+                                rs.getTimestamp("created_date_time").toLocalDateTime())
+        );
+    }
+
+    public List<UserSummary> findUserSummariesByIssueId(Long issueId) {
+        return jdbcTemplate.query(
+                "SELECT user.id, user.name, user.avatar_url FROM user " +
+                        "JOIN assignee a ON user.id = a.user_id " +
+                        "WHERE a.issue_id = ?",
+                (rs, rowNum) ->
+                        UserSummary.of(rs.getLong("id"),
+                                rs.getString("name"),
+                                rs.getString("avatar_url"))
+        , issueId);
+    }
+
+    public User findUserByUserId(Long userId) {
+        return jdbcTemplate.queryForObject(
+                "SELECT u.id, u.name, u.email, u.github_id, u.avatar_url, u.created_date_time FROM user u WHERE u.id = ?",
+                (rs, rowNum) ->
+                        User.of(rs.getLong("id"),
+                                rs.getString("name"),
+                                rs.getString("email"),
+                                rs.getLong("github_id"),
+                                rs.getString("avatar_url"),
+                                rs.getTimestamp("created_date_time").toLocalDateTime())
+        ,userId);
+    }
+
+    public Boolean existUserByEmail(String email) {
+        String sql = "select exists(select * from user where email = ?) as success;";
+        return jdbcTemplate.queryForObject(sql, (rs, rowNum) -> rs.getBoolean("success"), email);
+    }
+
+    public UserSummary findUserSummaryByIssueIdAndCommentId(Long issueId, Long commentId) {
+        return jdbcTemplate.queryForObject(
+                "SELECT user.id, user.name, user.avatar_url FROM user " +
+                        "JOIN comment c ON user.id = c.user_id " +
+                        "WHERE c.issue_id = ? AND c.id",
+                (rs, rowNum) ->
+                        UserSummary.of(rs.getLong("id"),
+                                rs.getString("name"),
+                                rs.getString("avatar_url"))
+                , issueId, commentId);
+    }
+
+    public void save(String name, String email, Long githubId, String avatarUrl) {
+        String sql =
+                "INSERT INTO user(name, email, github_id, created_date_time, avatar_url) " +
+                "VALUES(?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql,name, email, githubId, Timestamp.valueOf(LocalDateTime.now()), avatarUrl);
     }
 }

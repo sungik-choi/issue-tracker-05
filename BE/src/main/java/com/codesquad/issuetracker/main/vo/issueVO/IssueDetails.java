@@ -10,9 +10,9 @@ import java.util.List;
 
 public class IssueDetails {
 
-    private Long issueId;
+    private Long id;
 
-    private String issueTitle;
+    private String title;
 
     private MilestoneSummary milestone;
 
@@ -27,20 +27,9 @@ public class IssueDetails {
     @JsonProperty("isOpened")
     private boolean opened;
 
-    public IssueDetails() {}
-
-    public IssueDetails(Long issueId, String issueTitle, MilestoneSummary milestone, UserSummary author, LocalDateTime createdAt, boolean opened) {
-        this.issueId = issueId;
-        this.issueTitle = issueTitle;
-        this.milestone = milestone;
-        this.author = author;
-        this.createdAt = createdAt;
-        this.opened = opened;
-    }
-
-    private IssueDetails(Long issueId, String issueTitle, MilestoneSummary milestone, List<LabelSummary> attachedLabels, UserSummary author, List<UserSummary> allocatedAssignees, LocalDateTime createdAt, boolean opened) {
-        this.issueId = issueId;
-        this.issueTitle = issueTitle;
+    private IssueDetails(Long id, String title, MilestoneSummary milestone, List<LabelSummary> attachedLabels, UserSummary author, List<UserSummary> allocatedAssignees, LocalDateTime createdAt, boolean opened) {
+        this.id = id;
+        this.title = title;
         this.milestone = milestone;
         this.attachedLabels = attachedLabels;
         this.author = author;
@@ -49,60 +38,41 @@ public class IssueDetails {
         this.opened = opened;
     }
 
-    public Long getIssueId() {
-        return issueId;
+    public static IssueDetails of(Long id, String title, MilestoneSummary milestone, List<LabelSummary> attachedLabels, UserSummary author, List<UserSummary> allocatedAssignees, LocalDateTime createdAt, boolean opened) {
+        return new Builder()
+                .id(id)
+                .title(title)
+                .milestone(milestone)
+                .attachedLabels(attachedLabels)
+                .author(author)
+                .allocatedAssignees(allocatedAssignees)
+                .createdAt(createdAt)
+                .opened(opened)
+                .build();
     }
 
-    public void setIssueId(Long issueId) {
-        this.issueId = issueId;
-    }
+    public Long getId() { return id; }
 
-    public String getIssueTitle() {
-        return issueTitle;
-    }
-
-    public void setIssueTitle(String issueTitle) {
-        this.issueTitle = issueTitle;
-    }
+    public String getTitle() { return title; }
 
     public MilestoneSummary getMilestone() {
         return milestone;
-    }
-
-    public void setMilestone(MilestoneSummary milestone) {
-        this.milestone = milestone;
     }
 
     public List<LabelSummary> getAttachedLabels() {
         return attachedLabels;
     }
 
-    public void setAttachedLabels(List<LabelSummary> attachedLabels) {
-        this.attachedLabels = attachedLabels;
-    }
-
     public UserSummary getAuthor() {
         return author;
-    }
-
-    public void setAuthor(UserSummary author) {
-        this.author = author;
     }
 
     public List<UserSummary> getAllocatedAssignees() {
         return allocatedAssignees;
     }
 
-    public void setAllocatedAssignees(List<UserSummary> allocatedAssignees) {
-        this.allocatedAssignees = allocatedAssignees;
-    }
-
     public LocalDateTime getCreatedAt() {
         return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
     }
 
     @JsonProperty("isOpened")
@@ -110,14 +80,9 @@ public class IssueDetails {
         return opened;
     }
 
-    @JsonProperty("isOpened")
-    public void setOpened(boolean opened) {
-        this.opened = opened;
-    }
-
-    public static class Builder {
-        private Long issueId;
-        private String issueTitle;
+    private static class Builder {
+        private Long id;
+        private String title;
         private MilestoneSummary milestone;
         private List<LabelSummary> attachedLabels;
         private UserSummary author;
@@ -125,48 +90,48 @@ public class IssueDetails {
         private LocalDateTime createdAt;
         private boolean opened;
 
-        public Builder issueId(Long issueId) {
-            this.issueId = issueId;
+        private Builder id(Long id) {
+            this.id = id;
             return this;
         }
 
-        public Builder issueTitle(String issueTitle) {
-            this.issueTitle = issueTitle;
+        private Builder title(String title) {
+            this.title = title;
             return this;
         }
 
-        public Builder milestone(MilestoneSummary milestone) {
+        private Builder milestone(MilestoneSummary milestone) {
             this.milestone = milestone;
             return this;
         }
 
-        public Builder attachedLabels(List<LabelSummary> attachedLabels) {
+        private Builder attachedLabels(List<LabelSummary> attachedLabels) {
             this.attachedLabels = attachedLabels;
             return this;
         }
 
-        public Builder author(UserSummary author) {
+        private Builder author(UserSummary author) {
             this.author = author;
             return this;
         }
 
-        public Builder allocatedAssignees(List<UserSummary> allocatedAssignees) {
+        private Builder allocatedAssignees(List<UserSummary> allocatedAssignees) {
             this.allocatedAssignees = allocatedAssignees;
             return this;
         }
 
-        public Builder createdAt(LocalDateTime createdAt) {
+        private Builder createdAt(LocalDateTime createdAt) {
             this.createdAt = createdAt;
             return this;
         }
 
-        public Builder opened(boolean opened) {
+        private Builder opened(boolean opened) {
             this.opened = opened;
             return this;
         }
 
-        public IssueDetails build() {
-            return new IssueDetails(issueId, issueTitle, milestone, attachedLabels, author, allocatedAssignees, createdAt, opened);
+        private IssueDetails build() {
+            return new IssueDetails(id, title, milestone, attachedLabels, author, allocatedAssignees, createdAt, opened);
         }
     }
 }
