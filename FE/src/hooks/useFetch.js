@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
 
-const useFetch = ({ url, actionType: { successAction, errorAction }, dispatch }) => {
+const useFetch = ({
+  url,
+  dispatch,
+  actionType: { successAction, errorAction },
+  fetchOption = {},
+}) => {
   const [loading, setLoading] = useState(true);
-
   const getData = async () => {
-    const data = await fetch(url);
+    const data = await fetch(url, fetchOption);
     const { response } = await data.json();
 
     try {
