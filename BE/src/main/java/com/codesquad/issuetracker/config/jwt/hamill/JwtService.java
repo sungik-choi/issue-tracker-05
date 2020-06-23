@@ -17,7 +17,7 @@ public class JwtService {
 
     private Logger logger = LoggerFactory.getLogger(JwtService.class);
 
-    public static final Integer EXPIRE_TIME = 1000 * 60 * 1000;
+    public static final Integer EXPIRE_TIME = 1000 * 60 * 500;
     private String secretKey = "ThisIsIssueTracker05SecretKey";
     private byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(secretKey);
     private SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
