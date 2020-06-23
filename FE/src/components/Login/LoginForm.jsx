@@ -6,7 +6,7 @@ import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 
 import InputField from "@Components/common/InputField";
-import PrimaryButton from "@Components/common/PrimaryButton";
+import CustomButton from "@Components/common/CustomButton";
 
 const LoginForm = () => {
   const classes = useStyles();
@@ -31,8 +31,8 @@ const LoginForm = () => {
             <Box display="flex" justifyContent="center">
               <Button>{SIGN_UP}</Button>
             </Box>
-            <PrimaryButton color="default" className={classes.button} text={LOGIN} size="large" />
-            <PrimaryButton className={classes.button} text={GITHUB_LOGIN} size="large" />
+            <CustomButton color="default" className={classes.button} text={LOGIN} size="large" />
+            <CustomButton className={classes.button} text={GITHUB_LOGIN} size="large" />
           </Box>
         </form>
       </Box>
