@@ -24,7 +24,7 @@ const LinkButtons = ({ labelCount, milestoneCount, activeButton }) => {
         disableElevation
       />
       <LinkButton
-        primary={isMilestonesButtonActivated && "primary"}
+        color={isMilestonesButtonActivated && "primary"}
         text={MILESTONES}
         icon={<OutlinedFlagIcon />}
         count={milestoneCount}
