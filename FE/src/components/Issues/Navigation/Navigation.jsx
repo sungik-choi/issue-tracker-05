@@ -18,7 +18,14 @@ const Navigation = () => {
   } = useContext(IssueListContext);
 
   return (
-    <Box component="nav" mt={6} mb={2} maxHeight={38} display="flex" justifyContent="space-between">
+    <Box
+      component="nav"
+      mt={14}
+      mb={2}
+      maxHeight={38}
+      display="flex"
+      justifyContent="space-between"
+    >
       <Filter />
       <LinkButtons labelCount={countOfLabel} milestoneCount={countOfMilestone} />
       <PrimaryButton text={NEW_ISSUE_BTN_TEXT} clickHandler={null} />
