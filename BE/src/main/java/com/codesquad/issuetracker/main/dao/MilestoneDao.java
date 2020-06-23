@@ -1,44 +1,51 @@
 package com.codesquad.issuetracker.main.dao;
 
-import com.codesquad.issuetracker.ragdoll.domain.Milestone;
+import com.codesquad.issuetracker.main.domain.Milestone;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import javax.sql.DataSource;
 import java.util.List;
 
 @Repository
 public class MilestoneDao {
 
-    private final JdbcTemplate jdbcTemplate;
+    private static final Logger logger = LoggerFactory.getLogger(MilestoneDao.class);
 
-    public MilestoneDao(DataSource dataSource) {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
-    }
+    private JdbcTemplate jdbcTemplate;
 
-    public Milestone findMilestoneById(Integer milestoneId) {
-        String sql = "SELECT id, title, description, due_date, created_date_time, updated_date_time " +
-                     "FROM milestone WHERE id = ?";
-        return jdbcTemplate.queryForObject(sql, new Object[]{milestoneId},
-                (rs, rowNum) -> new Milestone.Builder()
-                                             .id(rs.getInt("id"))
-                                             .title(rs.getString("title"))
-                                             .description(rs.getString("description"))
-                                             .dueDate(rs.getDate("due_date").toLocalDate())
-                                             .createdDateTime(rs.getTimestamp("created_date_time").toLocalDateTime())
-                                             .updatedDateTime(rs.getTimestamp("updated_date_time").toLocalDateTime())
-                                             .build());
+    public MilestoneDao(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     public List<Milestone> findAllMilestones() {
-        String sql = "SELECT id, title, description, due_date, created_date_time, updated_date_time " +
-                     "FROM milestone";
-        return jdbcTemplate.query(sql, (rs, rowNum) -> new Milestone.Builder()
-                                                                    .id(rs.getInt("id"))
-                                                                    .title(rs.getString("title"))
-                                                                    .dueDate(rs.getDate("due_date").toLocalDate())
-                                                                    .createdDateTime(rs.getTimestamp("created_date_time").toLocalDateTime())
-                                                                    .updatedDateTime(rs.getTimestamp("updated_date_time").toLocalDateTime())
-                                                                    .build());
+        return jdbcTemplate.query(
+                "SELECT m.id, m.title, m.description, m.due_date, m.created_date_time, m.updated_date_time, m.progress " +
+                        "FROM milestone m",
+                (rs, rowNum) ->
+                        Milestone.of(rs.getInt("id"),
+                                rs.getString("title"),
+                                rs.getString("description"),
+                                rs.getDate("due_date").toLocalDate(),
+                                rs.getTimestamp("created_date_time").toLocalDateTime(),
+                                rs.getTimestamp("updated_date_time").toLocalDateTime(),
+                                rs.getDouble("progress"))
+        );
+    }
+
+    public Milestone findMilestoneByMilestoneId(Integer milestoneId) {
+        return jdbcTemplate.queryForObject(
+                "SELECT m.id, m.title, m.description, m.due_date, m.created_date_time, m.updated_date_time, m.progress " +
+                        "FROM milestone m WHERE m.id = ?",
+                (rs, rowNum) ->
+                        Milestone.of(rs.getInt("id"),
+                                rs.getString("title"),
+                                rs.getString("description"),
+                                rs.getDate("due_date").toLocalDate(),
+                                rs.getTimestamp("created_date_time").toLocalDateTime(),
+                                rs.getTimestamp("updated_date_time").toLocalDateTime(),
+                                rs.getDouble("progress"))
+        , milestoneId);
     }
 }

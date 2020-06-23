@@ -1,4 +1,4 @@
-package com.codesquad.issuetracker.main.domain;
+package com.codesquad.issuetracker.main.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -18,6 +18,8 @@ public class Issue {
 
     private Integer milestoneId;
 
+    public Issue() {}
+
     private Issue(Long id, String title, LocalDateTime createdDateTime, boolean opened, Long userId, Integer milestoneId) {
         this.id = id;
         this.title = title;
@@ -27,27 +29,32 @@ public class Issue {
         this.milestoneId = milestoneId;
     }
 
-    public static Issue of(Long id, String title, LocalDateTime createdDateTime, boolean opened, Long userId, Integer milestoneId) {
-        return new Builder()
-                .id(id)
-                .title(title)
-                .createdDateTime(createdDateTime)
-                .opened(opened)
-                .userId(userId)
-                .milestoneId(milestoneId)
-                .build();
+    public static Issue create(Long id, String title, LocalDateTime createdDateTime, boolean opened, Long userId, Integer milestoneId) {
+        return new Issue(id, title, createdDateTime, opened, userId, milestoneId);
     }
 
     public Long getId() {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getTitle() {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public LocalDateTime getCreatedDateTime() {
         return createdDateTime;
+    }
+
+    public void setCreatedDateTime(LocalDateTime createdDateTime) {
+        this.createdDateTime = createdDateTime;
     }
 
     @JsonProperty("isOpened")
@@ -55,15 +62,28 @@ public class Issue {
         return opened;
     }
 
+    @JsonProperty("isOpened")
+    public void setOpened(boolean opened) {
+        this.opened = opened;
+    }
+
     public Long getUserId() {
         return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Integer getMilestoneId() {
         return milestoneId;
     }
 
-    private static class Builder {
+    public void setMilestoneId(Integer milestoneId) {
+        this.milestoneId = milestoneId;
+    }
+
+    public static class Builder {
         private Long id;
         private String title;
         private LocalDateTime createdDateTime;
@@ -71,39 +91,39 @@ public class Issue {
         private Long userId;
         private Integer milestoneId;
 
-        private Builder() {}
+        public Builder() {}
 
-        private Builder id(Long id) {
+        public Builder id(Long id) {
             this.id = id;
             return this;
         }
 
-        private Builder title(String title) {
+        public Builder title(String title) {
             this.title = title;
             return this;
         }
 
-        private Builder createdDateTime(LocalDateTime createdDateTime) {
+        public Builder createdDateTime(LocalDateTime createdDateTime) {
             this.createdDateTime = createdDateTime;
             return this;
         }
 
-        private Builder opened(boolean opened) {
+        public Builder opened(boolean opened) {
             this.opened = opened;
             return this;
         }
 
-        private Builder userId(Long userId) {
+        public Builder userId(Long userId) {
             this.userId = userId;
             return this;
         }
 
-        private Builder milestoneId(Integer milestoneId) {
+        public Builder milestoneId(Integer milestoneId) {
             this.milestoneId = milestoneId;
             return this;
         }
 
-        private Issue build() {
+        public Issue build() {
             return new Issue(id, title, createdDateTime, opened, userId, milestoneId);
         }
     }

@@ -1,4 +1,4 @@
-package com.codesquad.issuetracker.main.domain;
+package com.codesquad.issuetracker.main.dto;
 
 import java.time.LocalDateTime;
 
@@ -14,6 +14,8 @@ public class Comment {
 
     private Long userId;
 
+    public Comment() {}
+
     private Comment(Long id, String description, LocalDateTime createdDateTime, Long issueId, Long userId) {
         this.id = id;
         this.description = description;
@@ -22,71 +24,85 @@ public class Comment {
         this.userId = userId;
     }
 
-    public static Comment of(Long id, String description, LocalDateTime createdDateTime, Long issueId, Long userId) {
-        return new Builder()
-                .id(id)
-                .description(description)
-                .createdDateTime(createdDateTime)
-                .issueId(issueId)
-                .userId(userId)
-                .build();
+    public static Comment create(Long id, String description, LocalDateTime createdDateTime, Long issueId, Long userId) {
+        return new Comment(id, description, createdDateTime, issueId, userId);
     }
 
     public Long getId() {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getDescription() {
         return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public LocalDateTime getCreatedDateTime() {
         return createdDateTime;
     }
 
+    public void setCreatedDateTime(LocalDateTime createdDateTime) {
+        this.createdDateTime = createdDateTime;
+    }
+
     public Long getIssueId() {
         return issueId;
+    }
+
+    public void setIssueId(Long issueId) {
+        this.issueId = issueId;
     }
 
     public Long getUserId() {
         return userId;
     }
 
-    private static class Builder {
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public static class Builder {
         private Long id;
         private String description;
         private LocalDateTime createdDateTime;
         private Long issueId;
         private Long userId;
 
-        private Builder() {}
+        public Builder() {}
 
-        private Builder id(Long id) {
+        public Builder id(Long id) {
             this.id = id;
             return this;
         }
 
-        private Builder description(String description) {
+        public Builder description(String description) {
             this.description = description;
             return this;
         }
 
-        private Builder createdDateTime(LocalDateTime createdDateTime) {
+        public Builder createdDateTime(LocalDateTime createdDateTime) {
             this.createdDateTime = createdDateTime;
             return this;
         }
 
-        private Builder issueId(Long issueId) {
+        public Builder issueId(Long issueId) {
             this.issueId = issueId;
             return this;
         }
 
-        private Builder userId(Long userId) {
+        public Builder userId(Long userId) {
             this.userId = userId;
             return this;
         }
 
-        private Comment build() {
+        public Comment build() {
             return new Comment(id, description, createdDateTime, issueId, userId);
         }
     }

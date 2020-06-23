@@ -1,4 +1,4 @@
-package com.codesquad.issuetracker.main.domain;
+package com.codesquad.issuetracker.main.dto;
 
 import java.time.LocalDateTime;
 
@@ -16,6 +16,8 @@ public class User {
 
     private LocalDateTime createdDateTime;
 
+    public User () {}
+
     private User(Long id, String name, String email, Long githubId, String avatarUrl, LocalDateTime createdDateTime) {
         this.id = id;
         this.name = name;
@@ -25,42 +27,59 @@ public class User {
         this.createdDateTime = createdDateTime;
     }
 
-    public static User of(Long id, String name, String email, Long githubId, String avatarUrl, LocalDateTime createdDateTime) {
-        return new Builder()
-                .id(id)
-                .name(name)
-                .email(email)
-                .githubId(githubId)
-                .avatarUrl(avatarUrl)
-                .createdDateTime(createdDateTime)
-                .build();
+    public static User create(Long id, String name, String email, Long githubId, String avatarUrl, LocalDateTime createdDateTime) {
+        return new User(id, name, email, githubId, avatarUrl, createdDateTime);
     }
 
     public Long getId() {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
         return email;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public Long getGithubId() {
         return githubId;
+    }
+
+    public void setGithubId(Long githubId) {
+        this.githubId = githubId;
     }
 
     public String getAvatarUrl() {
         return avatarUrl;
     }
 
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
     public LocalDateTime getCreatedDateTime() {
         return createdDateTime;
     }
 
-    private static class Builder {
+    public void setCreatedDateTime(LocalDateTime createdDateTime) {
+        this.createdDateTime = createdDateTime;
+    }
+
+    public static class Builder {
         private Long id;
         private String name;
         private String email;
@@ -68,39 +87,39 @@ public class User {
         private String avatarUrl;
         private LocalDateTime createdDateTime;
 
-        private Builder() {}
+        public Builder() {}
 
-        private Builder id(Long id) {
+        public Builder id(Long id) {
             this.id = id;
             return this;
         }
 
-        private Builder name(String name) {
+        public Builder name(String name) {
             this.name = name;
             return this;
         }
 
-        private Builder email(String email) {
+        public Builder email(String email) {
             this.email = email;
             return this;
         }
 
-        private Builder githubId(Long githubId) {
+        public Builder githubId(Long githubId) {
             this.githubId = githubId;
             return this;
         }
 
-        private Builder avatarUrl(String avatarUrl) {
+        public Builder avatarUrl(String avatarUrl) {
             this.avatarUrl = avatarUrl;
             return this;
         }
 
-        private Builder createdDateTime(LocalDateTime createdDateTime) {
+        public Builder createdDateTime(LocalDateTime createdDateTime) {
             this.createdDateTime = createdDateTime;
             return this;
         }
 
-        private User build() {
+        public User build() {
             return new User(id, name, email, githubId, avatarUrl, createdDateTime);
         }
     }

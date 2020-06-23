@@ -1,10 +1,8 @@
-package com.codesquad.issuetracker.main.domain;
+package com.codesquad.issuetracker.main.dto.request;
 
-public class Label {
+public class NewLabelDto {
 
-    private Integer id;
-
-    private String name;
+    private String title;
 
     private String description;
 
@@ -12,30 +10,24 @@ public class Label {
 
     private String color;
 
-    private Label(Integer id, String name, String description, String backgroundColor, String color) {
-        this.id = id;
-        this.name = name;
+    private NewLabelDto(String title, String description, String backgroundColor, String color) {
+        this.title = title;
         this.description = description;
         this.backgroundColor = backgroundColor;
         this.color = color;
     }
 
-    public static Label of(Integer id, String name, String description, String backgroundColor, String color) {
+    public static NewLabelDto of(String title, String description, String backgroundColor, String color) {
         return new Builder()
-                .id(id)
-                .name(name)
+                .title(title)
                 .description(description)
                 .backgroundColor(backgroundColor)
                 .color(color)
                 .build();
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
     public String getDescription() {
@@ -51,21 +43,13 @@ public class Label {
     }
 
     private static class Builder {
-        private Integer id;
-        private String name;
+        private String title;
         private String description;
         private String backgroundColor;
         private String color;
 
-        private Builder() {}
-
-        private Builder id(Integer id) {
-            this.id = id;
-            return this;
-        }
-
-        private Builder name(String name) {
-            this.name = name;
+        private Builder title(String title) {
+            this.title = title;
             return this;
         }
 
@@ -84,9 +68,8 @@ public class Label {
             return this;
         }
 
-        private Label build() {
-            return new Label(id, name, description, backgroundColor, color);
+        private NewLabelDto build() {
+            return new NewLabelDto(title, description, backgroundColor, color);
         }
     }
-
 }
