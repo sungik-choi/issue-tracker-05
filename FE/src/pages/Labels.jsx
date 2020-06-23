@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 
 import Footer from "@Components/common/Footer";
-import Navigation from "@Components/Labels/Navigation/Navigation";
+import LoadingIndicator from "@Components/common/LoadingIndicator";
+import Navigation from "@Components/Labels/Navigation";
 import LabelTable from "@Components/Labels/LabelTable";
 
 import { LabelListContext } from "@Contexts/labelListContext";
@@ -24,7 +25,9 @@ const Labels = () => {
 
   return (
     <>
-      {!loading && (
+      {loading ? (
+        <LoadingIndicator />
+      ) : (
         <>
           <Navigation />
           <LabelTable />

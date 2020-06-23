@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 
 import Footer from "@Components/common/Footer";
+import LoadingIndicator from "@Components/common/LoadingIndicator";
 import IssueTable from "@Components/Issues/IssueTable/IssueTable";
 import Navigation from "@Components/Issues/Navigation/Navigation";
 import ClearButton from "@Components/Issues/ClearButton";
@@ -25,7 +26,9 @@ const Issues = () => {
 
   return (
     <>
-      {!loading && (
+      {loading ? (
+        <LoadingIndicator />
+      ) : (
         <>
           <Navigation />
           <ClearButton />
