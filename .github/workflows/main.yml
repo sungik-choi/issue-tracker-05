@@ -16,7 +16,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: be
+        working-directory: BE
 
     steps:
       - name: Checkout
