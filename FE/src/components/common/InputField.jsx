@@ -19,12 +19,10 @@ const InputField = ({ onChange, fullWidth, id, ...props }) => {
 InputField.defaultProps = {
   fullWidth: true,
   id: "outlined-full-width",
-  value: "",
   onChange: null,
 };
 
 InputField.propTypes = {
-  value: PropTypes.string,
   onChange: PropTypes.oneOfType([PropTypes.func, PropTypes.instanceOf(null)]),
   id: PropTypes.string,
   fullWidth: PropTypes.bool,
