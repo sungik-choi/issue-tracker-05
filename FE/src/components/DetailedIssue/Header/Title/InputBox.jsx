@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import PropTypes from "prop-types";
+
+import { DetailedIssueContext } from "@Contexts/detailedIssueContext";
+import { editTitleFetchOptions } from "@Reducers/detailedIssueReducer";
 
 import InputField from "@Components/common/InputField";
 
@@ -8,15 +11,26 @@ import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { makeStyles } from "@material-ui/core/styles";
 
-const InputBox = ({ value, onChange, onClickSave, onClickClose }) => {
-  const SAVE_BTN_TEXT = "save";
-  const CANCEL_BTN_TEXT = "Cancel";
+import pipe from "@Utils/pipe";
+import useFetch from "@Hooks/useFetch";
 
+const SAVE_BTN_TEXT = "save";
+const CANCEL_BTN_TEXT = "Cancel";
+
+const InputBox = ({ value, onChange, onClickSave, onClickClose }) => {
+  const {
+    detailedIssue: {
+      issue: { id },
+    },
+    detailedIssueDispatch,
+  } = useContext(DetailedIssueContext);
+
+  const { getData } = pipe(editTitleFetchOptions, useFetch)({ detailedIssueDispatch, id, value });
   const classes = useStyles();
 
   const onSubmitForm = (e) => {
     e.preventDefault();
-    onClickSave();
+    onClickSave(getData);
   };
 
   return (
@@ -55,6 +69,7 @@ InputBox.defaultProps = {
 InputBox.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.oneOfType([PropTypes.func, PropTypes.instanceOf(null)]),
+  reFetch: PropTypes.func,
   onClickSave: PropTypes.func.isRequired,
   onClickClose: PropTypes.func.isRequired,
 };

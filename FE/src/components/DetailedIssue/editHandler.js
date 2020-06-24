@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 
-const editHandler = (initialValue, fetchFunc) => {
+const editHandler = (initialValue) => {
   const [isEdit, setIsEdit] = useState(false);
   const [inputTitle, setinputTitle] = useState(initialValue);
   const [titleValue, setTitleValue] = useState(initialValue);
@@ -13,7 +13,7 @@ const editHandler = (initialValue, fetchFunc) => {
     setIsEdit((prevState) => !prevState);
   });
 
-  const onClickSave = useCallback(() => {
+  const onClickSave = useCallback((fetchFunc) => {
     onToggle();
 
     if (inputTitle) {

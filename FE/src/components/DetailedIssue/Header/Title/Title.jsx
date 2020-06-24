@@ -6,7 +6,6 @@ import { editTitleFetchOptions } from "@Reducers/detailedIssueReducer";
 import InputBox from "./InputBox";
 import TitleBox from "./TitleBox";
 import editHandler from "@Components/DetailedIssue/editHandler";
-import { data } from "@Mock/detailedIssue";
 
 import pipe from "@Utils/pipe";
 import useFetch from "@Hooks/useFetch";
@@ -19,8 +18,18 @@ const Title = () => {
     detailedIssueDispatch,
   } = useContext(DetailedIssueContext);
 
-  const { getData } = pipe(editTitleFetchOptions, useFetch)({ detailedIssueDispatch, id, title });
-  console.log(getData);
+  console.log(title);
+
+  // const [reFetchFunc, setReFetchFunc] = useState(null);
+
+  const getReFetchFunc = (inputTitle) => {
+    const { getData } = pipe(
+      editTitleFetchOptions,
+      useFetch,
+    )({ detailedIssueDispatch, id, inputTitle });
+    return getData;
+  };
+
   const {
     isEdit,
     titleValue,
@@ -29,7 +38,7 @@ const Title = () => {
     onChangeInput,
     onClickSave,
     onClickClose,
-  } = editHandler(title, getData);
+  } = editHandler(title);
   //context로 값 가져오기
 
   // const [isEdit, setIsEdit] = useState(false);
@@ -69,6 +78,7 @@ const Title = () => {
           onChange={onChangeInput}
           onClickSave={onClickSave}
           onClickClose={onClickClose}
+          getReFetchFunc={getReFetchFunc}
         />
       ) : (
         <TitleBox title={titleValue} id={id} onClickEdit={onToggle} />

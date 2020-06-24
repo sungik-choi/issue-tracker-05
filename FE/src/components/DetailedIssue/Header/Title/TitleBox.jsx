@@ -36,11 +36,12 @@ const useStyles = makeStyles((theme) => ({
 
 TitleBox.defaultProps = {
   id: null,
+  title: "",
 };
 
 TitleBox.propTypes = {
   id: PropTypes.number,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   onClickEdit: PropTypes.func.isRequired,
 };
 
