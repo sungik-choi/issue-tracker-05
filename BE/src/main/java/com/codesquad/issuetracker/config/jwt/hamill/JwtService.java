@@ -53,9 +53,9 @@ public class JwtService {
                                 .parseClaimsJws(jwt).getBody(); // 정상 수행된다면 해당 토큰은 정상토큰
 
             logger.info("expireTime :" + claims.getExpiration());
-            logger.info("nickname :" + claims.get("nickname"));
+            logger.info("id :" + claims.get("id"));
             logger.info("name :" + claims.get("name"));
-            logger.info("email :" + claims.get("email"));
+            logger.info("avatarUrl :" + claims.get("avatarUrl"));
 
             return true;
         } catch (ExpiredJwtException exception) {
@@ -67,31 +67,11 @@ public class JwtService {
         }
     }
 
-    public Object getUserEmail(String jwt) throws RuntimeException {
-        try {
-            Claims claims = Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary(secretKey))
-                                .parseClaimsJws(jwt).getBody();
-            return claims.get("email");
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
     public Object getUserName(String jwt) throws RuntimeException {
         try {
             Claims claims = Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary(secretKey))
                                 .parseClaimsJws(jwt).getBody();
             return claims.get("name");
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    public Object getUserNickname(String jwt) throws RuntimeException {
-        try {
-            Claims claims = Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary(secretKey))
-                                .parseClaimsJws(jwt).getBody();
-            return claims.get("nickname");
         } catch (Exception e) {
             return null;
         }
