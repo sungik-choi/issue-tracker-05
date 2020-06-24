@@ -29,7 +29,7 @@ const LoginForm = () => {
             type="password"
             autoComplete="current-password"
           />
-          <Box className={classes.buttonWrap}>
+          <Box>
             <Box display="flex" justifyContent="center">
               <Button disabled>{SIGN_UP}</Button>
             </Box>
@@ -40,7 +40,12 @@ const LoginForm = () => {
               text={LOGIN}
               size="large"
             />
-            <CustomButton className={classes.button} text={GITHUB_LOGIN} size="large" />
+            <CustomButton
+              className={classes.githubButton}
+              text={GITHUB_LOGIN}
+              size="large"
+              href={process.env.OAUTH_URL}
+            />
           </Box>
         </form>
       </Box>
@@ -55,10 +60,9 @@ const useStyles = makeStyles((theme) => ({
   button: {
     width: "100%",
   },
-  buttonWrap: {
-    "& > button": {
-      marginTop: theme.spacing(1.5),
-    },
+  githubButton: {
+    width: "100%",
+    marginTop: theme.spacing(1.5),
   },
 }));
 
