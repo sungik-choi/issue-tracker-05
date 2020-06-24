@@ -2,19 +2,19 @@ import { useState, useEffect } from "react";
 
 const useFetch = ({
   url,
+  deps = [],
   dispatch,
   actionType: { successAction, errorAction },
-  deps = null,
-  fetchOption = {},
-  isValidRequest = true,
+  option = {},
+  skip = false,
 }) => {
   const [loading, setLoading] = useState(true);
   const getData = async () => {
-    const data = await fetch(url, fetchOption);
+    const data = await fetch(url, option);
     const { response } = await data.json();
 
     try {
-      console.log("[log] fetch : ", response);
+      console.log("[log] data : ", response);
       dispatch(successAction(response));
     } catch (e) {
       console.log("[log] error : ", response);
@@ -24,11 +24,12 @@ const useFetch = ({
   };
 
   useEffect(() => {
-    if (!isValidRequest) return;
+    if (skip) return;
     getData();
-  }, [deps]);
+    // eslint-disable-next-line
+  }, deps);
 
-  return loading;
+  return { loading, getData };
 };
 
 export default useFetch;

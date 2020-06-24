@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import PropTypes from "prop-types";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -22,8 +22,8 @@ const CREATE_LABEL = "Create Label";
 const NewLabel = ({
   state: { title, backgroundColor, color },
   dispatch,
-  clickCreateButtonHandler,
-  clickCancelButtonHandler,
+  submitHandler,
+  clickHandler,
 }) => {
   const classes = useStyles();
 
@@ -64,8 +64,8 @@ const NewLabel = ({
             alignItems="center"
             pt={1}
           >
-            <CustomButton color="default" text={CANCEL} clickHandler={clickCancelButtonHandler} />
-            <CustomButton text={CREATE_LABEL} clickHandler={clickCreateButtonHandler} />
+            <CustomButton color="default" text={CANCEL} clickHandler={clickHandler} />
+            <CustomButton text={CREATE_LABEL} clickHandler={submitHandler} />
           </Box>
         </Grid>
       </Grid>
@@ -109,8 +109,8 @@ NewLabel.propTypes = {
     color: PropTypes.string.isRequired,
   }).isRequired,
   dispatch: PropTypes.func.isRequired,
-  clickCreateButtonHandler: PropTypes.func.isRequired,
-  clickCancelButtonHandler: PropTypes.func.isRequired,
+  submitHandler: PropTypes.func.isRequired,
+  clickHandler: PropTypes.func.isRequired,
 };
 
 export default NewLabel;

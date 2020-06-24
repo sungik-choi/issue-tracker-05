@@ -13,7 +13,7 @@ import { getInitialData } from "@Reducers/issueListReducer";
 
 const Issues = () => {
   const { issueListDispatch } = useContext(IssueListContext);
-  const loading = useFetch(getInitialData(issueListDispatch));
+  const { loading } = useFetch(getInitialData(issueListDispatch));
 
   return (
     <>

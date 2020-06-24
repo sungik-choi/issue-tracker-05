@@ -46,15 +46,16 @@ export const labelReducer = (state, action) => {
   }
 };
 
-export const createNewLabel = (data, dispatch) => ({
+export const createNewLabel = ({ data, dispatch }) => ({
   url: labelsUrl,
+  dispatch,
   actionType: {
     successAction: fetchSuccess,
     errorAction: fetchError,
   },
-  dispatch,
-  fetchOption: {
+  option: {
     method: "POST",
     body: JSON.stringify(data),
   },
+  skip: true,
 });

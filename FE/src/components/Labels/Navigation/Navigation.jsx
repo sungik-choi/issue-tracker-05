@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useReducer } from "react";
 
 import Box from "@material-ui/core/Box";
 
@@ -17,11 +17,13 @@ const Navigation = () => {
   const [labelState, dispatchLabelState] = useReducer(labelReducer, initialState);
 
   const toggleNewLabel = () => setShowNewLabel(!showNewLabel);
-  // const clickCreateButtonHandler = useFetch(createNewLabel(labelState, dispatchLabelState));
 
-  useEffect(() => {
-    console.log(labelState);
-  }, [labelState]);
+  const { getData } = useFetch(
+    createNewLabel({
+      data: labelState,
+      dispatch: dispatchLabelState,
+    }),
+  );
 
   return (
     <>
@@ -40,8 +42,8 @@ const Navigation = () => {
         <NewLabel
           state={labelState}
           dispatch={dispatchLabelState}
-          clickCreateButtonHandler={null}
-          clickCancelButtonHandler={toggleNewLabel}
+          submitHandler={getData}
+          clickHandler={toggleNewLabel}
         />
       )}
     </>

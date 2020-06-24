@@ -12,7 +12,7 @@ import { getInitialData } from "@Reducers/labelListReducer";
 
 const Labels = () => {
   const { labelListDispatch } = useContext(LabelListContext);
-  const loading = useFetch(getInitialData(labelListDispatch));
+  const { loading, getData } = useFetch(getInitialData(labelListDispatch));
 
   return (
     <>
@@ -20,8 +20,8 @@ const Labels = () => {
         <LoadingIndicator />
       ) : (
         <>
-          <Navigation />
-          <LabelTable />
+          <Navigation reFetch={getData} />
+          <LabelTable reFetch={getData} />
           <Footer />
         </>
       )}
