@@ -11,7 +11,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
-const CustomTable = ({ ariaLabel, headContents, bodyContents, ...props }) => {
+const CustomTable = ({ ariaLabel, headContents, bodyContents, hover, ...props }) => {
   const classes = useStyles();
 
   return (
@@ -28,7 +28,7 @@ const CustomTable = ({ ariaLabel, headContents, bodyContents, ...props }) => {
         </TableHead>
         <TableBody className={classes.table}>
           {bodyContents.map(({ id, contents }) => (
-            <TableRow hover key={id}>
+            <TableRow hover={hover} key={id}>
               <TableCell>
                 <Box display="flex" justifyContent="space-between">
                   {contents}
@@ -59,9 +59,11 @@ const useStyles = makeStyles(() => ({
 
 CustomTable.defaultProps = {
   ariaLabel: "table",
+  hover: false,
 };
 
 CustomTable.propTypes = {
+  hover: PropTypes.bool,
   ariaLabel: PropTypes.string,
   headContents: PropTypes.element.isRequired,
   bodyContents: PropTypes.arrayOf(
