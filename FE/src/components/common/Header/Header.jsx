@@ -21,7 +21,7 @@ const Header = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" className={classes.colorDefault}>
+      <AppBar position="fixed" className={classes.colorDefault}>
         <Toolbar>
           <Box mr={2}>
             <CollectionsBookmarkIcon />

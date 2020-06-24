@@ -5,6 +5,7 @@ import Container from "@material-ui/core/Container";
 
 import Header from "@Components/common/Header/Header";
 import Issues from "@Pages/Issues";
+import Login from "@Pages/Login";
 
 import { UserProvider } from "@Contexts/userContext";
 import { IssueListProvider } from "@Contexts/issueListContext";
@@ -15,11 +16,12 @@ const App = () => {
       <GlobalStyle />
       <UserProvider>
         <Header />
-        <Container maxWidth="lg">
-          <IssueListProvider>
-            <Issues />
-          </IssueListProvider>
-        </Container>
+        <IssueListProvider>
+          <Container maxWidth="lg">
+            {/* <Issues /> */}
+            <Login />
+          </Container>
+        </IssueListProvider>
       </UserProvider>
     </>
   );

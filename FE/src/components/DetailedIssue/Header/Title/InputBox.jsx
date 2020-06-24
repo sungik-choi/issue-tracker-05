@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import InputField from "@Components/Common/InputField";
+import InputField from "@Components/common/InputField";
 
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";

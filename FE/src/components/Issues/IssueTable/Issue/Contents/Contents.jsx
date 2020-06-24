@@ -29,8 +29,13 @@ const Contents = ({
           <Title title={title} />
           <Box className={classes.labels}>
             {attachedLabels &&
-              attachedLabels.map(({ id, name, backgroundColor, color }) => (
-                <Label key={id} name={name} backgroundColor={backgroundColor} color={color} />
+              attachedLabels.map(({ backgroundColor, color, ...labelData }) => (
+                <Label
+                  key={labelData.id}
+                  name={labelData.name}
+                  backgroundColor={backgroundColor}
+                  color={color}
+                />
               ))}
           </Box>
         </Box>
