@@ -13,6 +13,7 @@
           ["@Contexts", "./src/contexts/"],
           ["@Hooks", "./src/hooks/"],
           ["@Types", "./src/types/"],
+          ["@Constants", "./src/constants/"],
           ["@Public", "./public/"]
         ],
         "extensions": [".js", ".jsx", ".json"]

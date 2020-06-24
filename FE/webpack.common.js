@@ -38,6 +38,7 @@ module.exports = {
       "@Contexts": path.resolve(__dirname, "src/contexts/"),
       "@Hooks": path.resolve(__dirname, "src/hooks/"),
       "@Types": path.resolve(__dirname, "src/types/"),
+      "@Constants": path.resolve(__dirname, "src/constants/"),
       "@Public": path.resolve(__dirname, "public/"),
     },
     extensions: [".js", ".jsx"],
