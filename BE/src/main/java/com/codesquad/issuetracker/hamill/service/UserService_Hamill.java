@@ -2,6 +2,7 @@ package com.codesquad.issuetracker.hamill.service;
 
 import com.codesquad.issuetracker.hamill.dao.UserDao_Hamill;
 import com.codesquad.issuetracker.hamill.domain.User;
+import com.codesquad.issuetracker.hamill.dto.request.UpdateAllocatedAssigneesDto;
 import com.codesquad.issuetracker.hamill.vo.UserVO.UserSummary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,5 +55,16 @@ public class UserService_Hamill {
 
     public void save(String name, String email, Long githubId, String avatarUrl) {
         userDao_hamill.save(name, email, githubId, avatarUrl);
+    }
+
+    public void updateAllocatedAssignees(Long issueId, UpdateAllocatedAssigneesDto updateAllocatedAssigneesDto) {
+
+        for (int i = 0; i < updateAllocatedAssigneesDto.getAddedAssigneeId().size(); i++) {
+            userDao_hamill.addedAssignees(issueId, updateAllocatedAssigneesDto.getAddedAssigneeId().get(i));
+        }
+
+        for (int i = 0; i < updateAllocatedAssigneesDto.getDeletedAssigneeId().size(); i++) {
+            userDao_hamill.deletedAssignees(issueId, updateAllocatedAssigneesDto.getDeletedAssigneeId().get(i));
+        }
     }
 }

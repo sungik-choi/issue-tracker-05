@@ -6,7 +6,7 @@ import com.codesquad.issuetracker.hamill.dto.response.IssueDto;
 import com.codesquad.issuetracker.hamill.dto.response.ListOfIssuesDto;
 import com.codesquad.issuetracker.hamill.service.IssueService_Hamill;
 import com.codesquad.issuetracker.hamill.service.LabelService_Hamill;
-import com.codesquad.issuetracker.hamill.service.MilestoneService_Hamill;
+import com.codesquad.issuetracker.hamill.service.UserService_Hamill;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -23,10 +23,12 @@ public class IssueController_Hamill {
 
     private IssueService_Hamill issueService_Hamill;
     private LabelService_Hamill labelService_hamill;
+    private UserService_Hamill userService_hamill;
 
-    public IssueController_Hamill(IssueService_Hamill issueService_Hamill, LabelService_Hamill labelService_hamill) {
+    public IssueController_Hamill(IssueService_Hamill issueService_Hamill, LabelService_Hamill labelService_hamill, UserService_Hamill userService_hamill) {
         this.issueService_Hamill = issueService_Hamill;
         this.labelService_hamill = labelService_hamill;
+        this.userService_hamill = userService_hamill;
     }
 
     @GetMapping("")
@@ -73,9 +75,18 @@ public class IssueController_Hamill {
 
     // 이슈에 달려있는 milestone 추가, 삭제
     @PatchMapping("/{issueId}/milestone")
+    public ResponseEntity<ApiResponse<?>> updateMilestoneIdOfIssue(@PathVariable Long issueId,
+                                                                   @RequestBody UpdateMilestoneIdOfIssueDto updateMilestoneIdOfIssueDto) {
+        issueService_Hamill.updateMilestoneIdOfIssue(issueId, updateMilestoneIdOfIssueDto);
+
+        return new ResponseEntity<>(ApiResponse.OK("SUCCESS"), HttpStatus.OK);
+    }
+
+    // 이슈에 달려있는 assignee 추가, 삭제
+    @PutMapping("/{issueId}/assignees")
     public ResponseEntity<ApiResponse<?>> updateAllocatedAssignees(@PathVariable Long issueId,
                                                                    @RequestBody UpdateAllocatedAssigneesDto updateAllocatedAssigneesDto) {
-        issueService_Hamill.updateAllocatedAssignees(issueId, updateAllocatedAssigneesDto);
+        userService_hamill.updateAllocatedAssignees(issueId, updateAllocatedAssigneesDto);
 
         return new ResponseEntity<>(ApiResponse.OK("SUCCESS"), HttpStatus.OK);
     }

@@ -71,7 +71,7 @@ public class IssueDao_Hamill {
         jdbcTemplate.update(sql, isOpened, issueId);
     }
 
-    public void updateAllocatedAssignees(Long issueId, Integer milestoneId) {
+    public void updateMilestoneIdOfIssue(Long issueId, Integer milestoneId) {
         String sql = "UPDATE issue SET milestone_id = ? WHERE id = ?";
         jdbcTemplate.update(sql, milestoneId, issueId);
     }

@@ -4,10 +4,7 @@ import com.codesquad.issuetracker.hamill.dao.IssueDao_Hamill;
 import com.codesquad.issuetracker.hamill.domain.Issue;
 import com.codesquad.issuetracker.hamill.domain.Milestone;
 import com.codesquad.issuetracker.hamill.domain.User;
-import com.codesquad.issuetracker.hamill.dto.request.NewIssueDto;
-import com.codesquad.issuetracker.hamill.dto.request.UpdateAllocatedAssigneesDto;
-import com.codesquad.issuetracker.hamill.dto.request.UpdateStateOfIssueDto;
-import com.codesquad.issuetracker.hamill.dto.request.UpdateTitleDto;
+import com.codesquad.issuetracker.hamill.dto.request.*;
 import com.codesquad.issuetracker.hamill.dto.response.IssueDto;
 import com.codesquad.issuetracker.hamill.dto.response.ListOfIssuesDto;
 import com.codesquad.issuetracker.hamill.vo.UserVO.UserSummary;
@@ -21,7 +18,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.HttpClientErrorException;
 
 import javax.naming.AuthenticationException;
 import java.util.List;
@@ -112,12 +108,10 @@ public class IssueService_Hamill {
         }
     }
 
-    public void updateAllocatedAssignees(Long issueId, UpdateAllocatedAssigneesDto updateAllocatedAssigneesDto) {
+    public void updateMilestoneIdOfIssue(Long issueId, UpdateMilestoneIdOfIssueDto updateMilestoneIdOfIssueDto) {
 
-        issueDao_Hamill.updateAllocatedAssignees(issueId, updateAllocatedAssigneesDto.getMilestoneId());
+        issueDao_Hamill.updateMilestoneIdOfIssue(issueId, updateMilestoneIdOfIssueDto.getMilestoneId());
     }
-
-
 
 //    public IssuesDto findIssueByIssueId(Long issueId) {
 //

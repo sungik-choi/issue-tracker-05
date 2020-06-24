@@ -1,25 +1,34 @@
 package com.codesquad.issuetracker.hamill.dto.request;
 
+import java.util.List;
+
 public class UpdateAllocatedAssigneesDto {
 
     private Long userId;
 
-    private Integer milestoneId;
+    private List<Integer> addedAssigneeId;
 
-    private UpdateAllocatedAssigneesDto(Long userId, Integer milestoneId) {
+    private List<Integer> deletedAssigneeId;
+
+    private UpdateAllocatedAssigneesDto(Long userId, List<Integer> addedAssigneeId, List<Integer> deletedAssigneeId) {
         this.userId = userId;
-        this.milestoneId = milestoneId;
+        this.addedAssigneeId = addedAssigneeId;
+        this.deletedAssigneeId = deletedAssigneeId;
     }
 
-    public static UpdateAllocatedAssigneesDto of(Long userId, Integer milestoneId) {
-        return new UpdateAllocatedAssigneesDto(userId, milestoneId);
+    public static UpdateAllocatedAssigneesDto of(Long userId, List<Integer> addedAssigneeId, List<Integer> deletedAssigneeId) {
+        return new UpdateAllocatedAssigneesDto(userId, addedAssigneeId, deletedAssigneeId);
     }
 
     public Long getUserId() {
         return userId;
     }
 
-    public Integer getMilestoneId() {
-        return milestoneId;
+    public List<Integer> getAddedAssigneeId() {
+        return addedAssigneeId;
+    }
+
+    public List<Integer> getDeletedAssigneeId() {
+        return deletedAssigneeId;
     }
 }
