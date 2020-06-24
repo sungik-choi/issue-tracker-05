@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 
+// import LoadingIndicator from "@Components/common/LoadingIndicator";
 import Header from "@Components/DetailedIssue/Header/Header";
 import Comment from "@Components/DetailedIssue/Comment/Comment";
 
@@ -8,16 +9,28 @@ import Box from "@material-ui/core/Box";
 import pipe from "@Utils/pipe";
 import useFetch from "@Hooks/useFetch";
 
-import { detailedIssueDispatch } from "@Contexts/detailedIssueContext";
+import { DetailedIssueContext } from "@Contexts/DetailedIssueContext";
 import { initDataFetchOptions } from "@Reducers/detailedIssueReducer";
 
+const id = 1;
+//라우팅 처리후 변경하기
+
 const DetailedIssue = () => {
+  const { detailedIssueDispatch } = useContext(DetailedIssueContext);
   const { loading, getData } = pipe(initDataFetchOptions, useFetch)(detailedIssueDispatch);
+
+  console.log(getData);
   return (
-    <Box pt={5}>
-      <Header />
-      <Comment />
-    </Box>
+    <>
+      {loading ? (
+        "로딩중"
+      ) : (
+        <Box pt={5}>
+          <Header />
+          <Comment />
+        </Box>
+      )}
+    </>
   );
 };
 

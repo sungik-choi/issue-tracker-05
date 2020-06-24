@@ -10,6 +10,7 @@ import Login from "@Pages/Login";
 
 import { UserProvider } from "@Contexts/userContext";
 import { IssueListProvider } from "@Contexts/issueListContext";
+import { DetailedIssueProvider } from "@Contexts/DetailedIssueContext";
 
 const App = () => {
   return (
@@ -21,7 +22,9 @@ const App = () => {
           <Container maxWidth="lg">
             {/* <Issues /> */}
             {/* <Login /> */}
-            <DetailedIssue />
+            <DetailedIssueProvider>
+              <DetailedIssue />
+            </DetailedIssueProvider>
           </Container>
         </IssueListProvider>
       </UserProvider>

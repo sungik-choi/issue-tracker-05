@@ -1,6 +1,8 @@
 import React, { createContext, useMemo, useReducer } from "react";
 import PropTypes from "prop-types";
 
+import { detailedIssueReducer, initialState } from "@Reducers/detailedIssueReducer";
+
 export const DetailedIssueContext = createContext();
 
 export const DetailedIssueProvider = ({ children }) => {

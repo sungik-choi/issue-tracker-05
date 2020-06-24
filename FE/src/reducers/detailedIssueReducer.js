@@ -1,3 +1,5 @@
+const detailedIssueUrl = process.env.REACT_APP_DB_HOST_ISSUES;
+
 export const initialState = {
   issues: null,
   labelInfo: null,
@@ -29,8 +31,9 @@ export const detailedIssueReducer = (state, action) => {
   }
 };
 
-export const detailedIssueFetchOptions = (dispatch) => ({
-  url: issuesUrl,
+export const initDataFetchOptions = (dispatch) => ({
+  // url: `${detailedIssueUrl}/${id}`,
+  url: `${detailedIssueUrl}`,
   dispatch,
   actionType: {
     fetchSuccess,

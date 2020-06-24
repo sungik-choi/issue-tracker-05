@@ -35,6 +35,7 @@ const useFetch = ({
   option = {},
   skip = false,
 }) => {
+  console.log(url);
   const [loading, setLoading] = useState(true);
   const getData = async () => {
     const data = await fetch(url, option);
