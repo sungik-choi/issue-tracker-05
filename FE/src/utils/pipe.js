@@ -1,3 +1,3 @@
-const pipe = (...functions) => (...args) => functions.reduce((arg, fn) => fn(arg), args);
+const pipe = (...functions) => (arg) => functions.reduce((prev, fn) => fn(prev), arg);
 
 export default pipe;

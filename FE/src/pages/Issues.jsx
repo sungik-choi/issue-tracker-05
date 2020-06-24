@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 
 import useFetch from "@Hooks/useFetch";
+import pipe from "@Utils/pipe";
 
 import Footer from "@Components/common/Footer";
 import LoadingIndicator from "@Components/common/LoadingIndicator";
@@ -9,11 +10,11 @@ import Navigation from "@Components/Issues/Navigation/Navigation";
 import ClearButton from "@Components/Issues/ClearButton";
 
 import { IssueListContext } from "@Contexts/issueListContext";
-import { getInitialData } from "@Reducers/issueListReducer";
+import { initDataFetchOptions } from "@Reducers/issueListReducer";
 
 const Issues = () => {
   const { issueListDispatch } = useContext(IssueListContext);
-  const { loading } = useFetch(getInitialData(issueListDispatch));
+  const { loading } = pipe(initDataFetchOptions, useFetch)(issueListDispatch);
 
   return (
     <>

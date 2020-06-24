@@ -31,12 +31,12 @@ export const issueListReducer = (state, action) => {
   }
 };
 
-export const getInitialData = (dispatch) => ({
+export const initDataFetchOptions = (dispatch) => ({
   url: issuesUrl,
   dispatch,
   actionType: {
-    successAction: fetchSuccess,
-    errorAction: fetchError,
+    fetchSuccess,
+    fetchError,
   },
   option: {
     method: "GET",

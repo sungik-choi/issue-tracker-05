@@ -43,12 +43,12 @@ export const labelListReducer = (state, action) => {
   }
 };
 
-export const getInitialData = (dispatch) => ({
+export const initDataFetchOptions = (dispatch) => ({
   url: labelsUrl,
   dispatch,
   actionType: {
-    successAction: fetchSuccess,
-    errorAction: fetchError,
+    fetchSuccess,
+    fetchError,
   },
   option: {
     method: "GET",

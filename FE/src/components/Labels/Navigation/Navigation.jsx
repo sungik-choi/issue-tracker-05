@@ -2,9 +2,9 @@ import React, { useState, useReducer } from "react";
 
 import Box from "@material-ui/core/Box";
 
+import { labelReducer, initialState, createLabelFetchOptions } from "@Reducers/labelReducer";
 import useFetch from "@Hooks/useFetch";
-
-import { labelReducer, initialState, createNewLabel } from "@Reducers/labelReducer";
+import pipe from "@Utils/pipe";
 
 import CustomButton from "@Components/common/CustomButton";
 import LinkButtons from "@Components/common/LinkButtons/LinkButtons";
@@ -18,12 +18,13 @@ const Navigation = () => {
 
   const toggleNewLabel = () => setShowNewLabel(!showNewLabel);
 
-  const { getData } = useFetch(
-    createNewLabel({
-      data: labelState,
-      dispatch: dispatchLabelState,
-    }),
-  );
+  const { getData } = pipe(
+    createLabelFetchOptions,
+    useFetch,
+  )({
+    data: labelState,
+    dispatch: dispatchLabelState,
+  });
 
   return (
     <>

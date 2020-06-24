@@ -40,18 +40,18 @@ export const labelReducer = (state, action) => {
     case FETCH_SUCCESS:
       return { ...initialState, ...generateRandomColor() };
     case FETCH_ERROR:
-      return { ...state };
+      return { ...initialState, ...generateRandomColor() };
     default:
       return state;
   }
 };
 
-export const createNewLabel = ({ data, dispatch }) => ({
+export const createLabelFetchOptions = ({ data, dispatch }) => ({
   url: labelsUrl,
   dispatch,
   actionType: {
-    successAction: fetchSuccess,
-    errorAction: fetchError,
+    fetchSuccess,
+    fetchError,
   },
   option: {
     method: "POST",

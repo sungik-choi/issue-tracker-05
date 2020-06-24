@@ -4,7 +4,7 @@ const useFetch = ({
   url,
   deps = [],
   dispatch,
-  actionType: { successAction, errorAction },
+  actionType: { fetchSuccess, fetchError },
   option = {},
   skip = false,
 }) => {
@@ -15,10 +15,10 @@ const useFetch = ({
 
     try {
       console.log("[log] data : ", response);
-      dispatch(successAction(response));
+      dispatch(fetchSuccess(response));
     } catch (e) {
       console.log("[log] error : ", response);
-      dispatch(errorAction());
+      dispatch(fetchError());
     }
     setLoading(false);
   };
