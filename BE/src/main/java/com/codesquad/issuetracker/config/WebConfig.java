@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
     private static final String[] EXCLUDE_PATHS = {
-            "/"
+            "/api/issues/{issueId}"
     };
 
     private final JwtInterceptor jwtInterceptor;
@@ -22,7 +22,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(jwtInterceptor)
                 // 토큰이 필요한 API
-                .addPathPatterns("/api/**")
+                .addPathPatterns("/api/issues", "/api/labels")
                 // 토큰이 필요하지 않은 API 는 배제한다
                 .excludePathPatterns(EXCLUDE_PATHS);
     }
