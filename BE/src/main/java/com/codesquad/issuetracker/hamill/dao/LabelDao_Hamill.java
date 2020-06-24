@@ -54,4 +54,11 @@ public class LabelDao_Hamill {
                 newLabelDto.getBackgroundColor(),
                 newLabelDto.getColor());
     }
+
+    public void update(Integer labelId, NewLabelDto newLabelDto) {
+        String sql = "UPDATE label SET name = ?, description = ?, background_color = ?, color = ? WHERE id = ?";
+        jdbcTemplate.update(sql,
+                newLabelDto.getTitle(), newLabelDto.getDescription(),
+                newLabelDto.getBackgroundColor(), newLabelDto.getColor(), labelId);
+    }
 }

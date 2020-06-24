@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/hamill")
+@RequestMapping("/hamill/api/labels")
 public class LabelController_Hamill {
 
     private static final Logger logger = LoggerFactory.getLogger(LabelController_Hamill.class);
@@ -23,14 +23,24 @@ public class LabelController_Hamill {
         this.labelService_hamill = labelService_hamill;
     }
 
-    @GetMapping("/api/labels")
+    @GetMapping("")
     public ResponseEntity<ApiResponse<ContainedDescriptionLabelInformation>> showLabels() {
         return new ResponseEntity<>(ApiResponse.OK(labelService_hamill.containDescriptionLabelInformation()), HttpStatus.OK);
     }
 
-    @PostMapping("/api/labels")
+    @PostMapping("")
     public ResponseEntity<ApiResponse<?>> create(@RequestBody NewLabelDto newLabelDto) {
         labelService_hamill.create(newLabelDto);
+        return new ResponseEntity<>(ApiResponse.OK("SUCCESS"), HttpStatus.OK);
+    }
+
+    @PatchMapping("{labelId}")
+    public ResponseEntity<ApiResponse<?>> update(@PathVariable Integer labelId,@RequestBody NewLabelDto newLabelDto) throws Exception {
+        try {
+            labelService_hamill.update(labelId, newLabelDto);
+        } catch (Exception e) {
+            return new ResponseEntity<>(ApiResponse.FORBIDDEN("backgroundColor, color 를 hex code 형식으로 넣어주세요(예:#ffffff)"), HttpStatus.FORBIDDEN);
+        }
         return new ResponseEntity<>(ApiResponse.OK("SUCCESS"), HttpStatus.OK);
     }
 }

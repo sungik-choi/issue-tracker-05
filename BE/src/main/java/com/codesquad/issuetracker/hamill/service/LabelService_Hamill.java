@@ -58,4 +58,12 @@ public class LabelService_Hamill {
     public void create(NewLabelDto newLabelDto) {
         labelDao_hamill.create(newLabelDto);
     }
+
+    public void update(Integer labelId, NewLabelDto newLabelDto) throws Exception {
+        // backgroundColor 와 color 의 형태가 hex code 형태이어야 한다
+        if (!(newLabelDto.getBackgroundColor().startsWith("#") && newLabelDto.getColor().startsWith("#"))) {
+            throw new Exception("backgroundColor, color 를 hex code 형식으로 넣어주세요(예:#ffffff)");
+        }
+        labelDao_hamill.update(labelId, newLabelDto);
+    }
 }
