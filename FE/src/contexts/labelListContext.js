@@ -1,11 +1,7 @@
 import React, { createContext, useMemo, useReducer } from "react";
 import PropTypes from "prop-types";
 
-import { labelListReducer } from "@Reducers/labelListReducer";
-
-export const initialState = {
-  labelInfo: null,
-};
+import { labelListReducer, initialState } from "@Reducers/labelListReducer";
 
 export const LabelListContext = createContext();
 

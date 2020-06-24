@@ -1,3 +1,10 @@
+export const initialState = {
+  issues: null,
+  labelInfo: null,
+  milestoneInfo: null,
+  users: null,
+};
+
 export const FETCH_SUCCESS = "FETCH_SUCCESS";
 export const FETCH_ERROR = "FETCH_ERROR";
 

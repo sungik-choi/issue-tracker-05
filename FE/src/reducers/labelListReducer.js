@@ -1,3 +1,7 @@
+export const initialState = {
+  labelInfo: null,
+};
+
 export const FETCH_SUCCESS = "FETCH_SUCCESS";
 export const FETCH_ERROR = "FETCH_ERROR";
 export const CREATE_LABEL = "CREATE_LABEL";
