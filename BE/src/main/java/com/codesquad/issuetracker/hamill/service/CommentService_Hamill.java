@@ -75,4 +75,14 @@ public class CommentService_Hamill {
 
         commentDao_hamill.update(issueId, commentId, newCommentDto.getDescription());
     }
+
+    public void delete(Long issueId, Long commentId, Long userId) throws AuthenticationException {
+        Comment comment = commentDao_hamill.findCommentByIssueIdAndCommentId(issueId, commentId);
+
+        if (!comment.getUserId().equals(userId)) {
+            throw new AuthenticationException("코멘트 작성자가 아닙니다. 접근을 금지합니다.");
+        }
+
+        commentDao_hamill.delete(issueId, commentId);
+    }
 }

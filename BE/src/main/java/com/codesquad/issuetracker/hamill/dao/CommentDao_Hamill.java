@@ -105,4 +105,9 @@ public class CommentDao_Hamill {
         String sql = "UPDATE comment SET description = ? WHERE issue_id = ? AND id = ?";
         jdbcTemplate.update(sql, description, issueId, commentId);
     }
+
+    public void delete(Long issueId, Long commentId) {
+        String sql = "DELETE FROM comment WHERE issue_id = ? AND id = ?";
+        jdbcTemplate.update(sql, issueId, commentId);
+    }
 }
