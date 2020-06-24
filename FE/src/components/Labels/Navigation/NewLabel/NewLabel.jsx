@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -31,6 +31,11 @@ const NewLabel = ({
 
   const changeDescriptionHandler = ({ target }) =>
     dispatch(setLabelInfo({ description: target.value }));
+
+  const clickCreateButtonHandler = () => {
+    submitHandler();
+    clickHandler();
+  };
 
   return (
     <Box className={classes.container} component={Paper} variant="outlined" p={2} mb={2}>
@@ -65,7 +70,11 @@ const NewLabel = ({
             pt={1}
           >
             <CustomButton color="default" text={CANCEL} clickHandler={clickHandler} />
-            <CustomButton text={CREATE_LABEL} clickHandler={submitHandler} />
+            <CustomButton
+              disabled={!title}
+              text={CREATE_LABEL}
+              clickHandler={clickCreateButtonHandler}
+            />
           </Box>
         </Grid>
       </Grid>
@@ -73,6 +82,7 @@ const NewLabel = ({
   );
 };
 
+// eslint-disable-next-line react/prop-types
 const StyledInputField = ({ text, required, ...props }) => (
   <InputField
     required={required}
