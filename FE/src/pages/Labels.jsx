@@ -28,7 +28,7 @@ const Labels = () => {
       ) : (
         <>
           <Navigation reFetch={getData} />
-          <LabelTable reFetch={getData} />
+          <LabelTable />
           <Footer />
         </>
       )}
