@@ -32,4 +32,20 @@ public class LabelController {
         labelService_hamill.create(newLabelDto);
         return new ResponseEntity<>(ApiResponse.OK("SUCCESS"), HttpStatus.OK);
     }
+
+    @PatchMapping("/{labelId}")
+    public ResponseEntity<ApiResponse<?>> update(@PathVariable Integer labelId, @RequestBody NewLabelDto newLabelDto) throws Exception {
+        try {
+            labelService_hamill.update(labelId, newLabelDto);
+        } catch (Exception e) {
+            return new ResponseEntity<>(ApiResponse.FORBIDDEN("backgroundColor, color 를 hex code 형식으로 넣어주세요(예:#ffffff)"), HttpStatus.FORBIDDEN);
+        }
+        return new ResponseEntity<>(ApiResponse.OK("SUCCESS"), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{labelId}")
+    public ResponseEntity<ApiResponse<?>> delete(@PathVariable Integer labelId) {
+        labelService_hamill.delete(labelId);
+        return new ResponseEntity<>(ApiResponse.OK("SUCCESS"), HttpStatus.OK);
+    }
 }

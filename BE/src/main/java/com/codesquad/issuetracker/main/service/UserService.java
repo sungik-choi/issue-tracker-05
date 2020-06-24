@@ -1,5 +1,6 @@
 package com.codesquad.issuetracker.main.service;
 
+import com.codesquad.issuetracker.main.dto.request.UpdateAllocatedAssigneesDto;
 import com.codesquad.issuetracker.main.dao.UserDao;
 import com.codesquad.issuetracker.main.domain.User;
 import com.codesquad.issuetracker.main.vo.UserVO.UserSummary;
@@ -51,5 +52,16 @@ public class UserService {
 
     public void save(String name, String email, Long githubId, String avatarUrl) {
         userDao.save(name, email, githubId, avatarUrl);
+    }
+
+    public void updateAllocatedAssignees(Long issueId, UpdateAllocatedAssigneesDto updateAllocatedAssigneesDto) {
+
+        for (int i = 0; i < updateAllocatedAssigneesDto.getAddedAssigneeId().size(); i++) {
+            userDao.addedAssignees(issueId, updateAllocatedAssigneesDto.getAddedAssigneeId().get(i));
+        }
+
+        for (int i = 0; i < updateAllocatedAssigneesDto.getDeletedAssigneeId().size(); i++) {
+            userDao.deletedAssignees(issueId, updateAllocatedAssigneesDto.getDeletedAssigneeId().get(i));
+        }
     }
 }

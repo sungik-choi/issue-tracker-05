@@ -1,5 +1,8 @@
 package com.codesquad.issuetracker.main.service;
 
+import com.codesquad.issuetracker.main.dto.request.UpdateMilestoneIdOfIssueDto;
+import com.codesquad.issuetracker.main.dto.request.UpdateStateOfIssueDto;
+import com.codesquad.issuetracker.main.dto.request.UpdateTitleDto;
 import com.codesquad.issuetracker.main.dao.IssueDao;
 import com.codesquad.issuetracker.main.domain.Issue;
 import com.codesquad.issuetracker.main.domain.Milestone;
@@ -19,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.naming.AuthenticationException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -81,47 +85,29 @@ public class IssueService {
 
     @Transactional
     public void save(NewIssueDto newIssueDto) {
-
         issueDao.save(newIssueDto);
         commentService.save(newIssueDto);
     }
 
+    public void updateTitle(Long issueId, UpdateTitleDto updateTitleDto) throws AuthenticationException {
+        // issue 작성자가 아니면 title 을 수정할 수 없다
+        Issue issue = issueDao.findIssueByIssueId(issueId);
 
+        if (!issue.getUserId().equals(updateTitleDto.getUserId())) {
+            throw new AuthenticationException("이슈 작성자가 아닙니다. 접근을 금지합니다.");
+        }
 
-//    public IssuesDto findIssueByIssueId(Long issueId) {
-//
-//        IssuesDto issuesDto = issueDao_Hamill.findIssueByIssueId(issueId);
-//        issuesDto.setAttachedLabels(issueDao_Hamill.findLabelsByIssuesId(issueId));
-//        issuesDto.setAllocatedAssignees(issueDao_Hamill.findAssigneeByIssueId(issueId));
-//        return issuesDto;
-//    }
-//
-//    public void save(RequestNewIssueDto requestNewIssueDto) {
-//        Long newIssueId = issueDao_Hamill.getCountOfIssues() + 1L;
-//        issueDao_Hamill.saveNewIssue(
-//                newIssueId,
-//                requestNewIssueDto.getTitle(),
-//                requestNewIssueDto.getUserId(),
-//                requestNewIssueDto.getMilestone().getMilestoneId());
-//
-//        saveNewIssueHasLabel(requestNewIssueDto);
-//        saveAssignees(requestNewIssueDto);
-//
-//        IssuesDto issuesDto = issueDao_Hamill.findIssueByIssueId(newIssueId);
-//        issuesDto.setAttachedLabels(requestNewIssueDto.getAttachedLabels());
-//        issuesDto.setAllocatedAssignees(requestNewIssueDto.getAllocatedAssignees());
-//    }
+        issueDao.updateTitle(issueId, updateTitleDto.getIssueTitle());
+    }
 
-//    private void saveNewIssueHasLabel(RequestNewIssueDto requestNewIssueDto) {
-//        for (int i = ZERO; i < requestNewIssueDto.getAttachedLabels().size(); i++) {
-//            issueDao_Hamill.saveNewIssueHasLabel(requestNewIssueDto.getAttachedLabels().get(i).getLabelId(), (long)issueDao_Hamill.getCountOfIssues());
-//        }
-//    }
-//
-//    private void saveAssignees(RequestNewIssueDto requestNewIssueDto) {
-//        for (int i = ZERO; i < requestNewIssueDto.getAllocatedAssignees().size(); i++) {
-//            issueDao_Hamill.saveAssignees((long)issueDao_Hamill.getCountOfIssues(), requestNewIssueDto.getAllocatedAssignees().get(i).getUserId());
-//        }
-//    }
+    public void updateStateOfIssue(UpdateStateOfIssueDto updateStateOfIssueDto) {
+        for (int i = 0; i < updateStateOfIssueDto.getIssueId().size(); i++) {
+            issueDao.updateStateOfIssue(updateStateOfIssueDto.isOpened(),
+                    updateStateOfIssueDto.getIssueId().get(i));
+        }
+    }
 
+    public void updateMilestoneIdOfIssue(Long issueId, UpdateMilestoneIdOfIssueDto updateMilestoneIdOfIssueDto) {
+        issueDao.updateMilestoneIdOfIssue(issueId, updateMilestoneIdOfIssueDto.getMilestoneId());
+    }
 }

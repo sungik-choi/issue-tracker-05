@@ -84,4 +84,14 @@ public class UserDao {
                 "VALUES(?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql,name, email, githubId, Timestamp.valueOf(LocalDateTime.now()), avatarUrl);
     }
+
+    public void addedAssignees(Long issueId, Integer assigneeId) {
+        String sql = "INSERT INTO assignee (issue_id, user_id) VALUES(?, ?)";
+        jdbcTemplate.update(sql,issueId, assigneeId);
+    }
+
+    public void deletedAssignees(Long issueId, Integer userId) {
+        String sql = "DELETE FROM assignee WHERE issue_id = ? AND user_id = ?";
+        jdbcTemplate.update(sql,issueId, userId);
+    }
 }
