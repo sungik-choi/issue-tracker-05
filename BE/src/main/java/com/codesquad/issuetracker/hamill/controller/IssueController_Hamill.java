@@ -1,14 +1,12 @@
 package com.codesquad.issuetracker.hamill.controller;
 
-import com.codesquad.issuetracker.hamill.dto.request.NewIssueDto;
-import com.codesquad.issuetracker.hamill.dto.request.UpdateAttachedLabelsDto;
-import com.codesquad.issuetracker.hamill.dto.request.UpdateStateOfIssueDto;
-import com.codesquad.issuetracker.hamill.dto.request.UpdateTitleDto;
+import com.codesquad.issuetracker.hamill.dto.request.*;
 import com.codesquad.issuetracker.hamill.dto.response.ApiResponse;
 import com.codesquad.issuetracker.hamill.dto.response.IssueDto;
 import com.codesquad.issuetracker.hamill.dto.response.ListOfIssuesDto;
 import com.codesquad.issuetracker.hamill.service.IssueService_Hamill;
 import com.codesquad.issuetracker.hamill.service.LabelService_Hamill;
+import com.codesquad.issuetracker.hamill.service.MilestoneService_Hamill;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -65,9 +63,19 @@ public class IssueController_Hamill {
         return new ResponseEntity<>(ApiResponse.OK("SUCCESS"), HttpStatus.OK);
     }
 
+    // 이슈에 달려있는 label 추가, 삭제
     @PutMapping("/{issueId}/labels")
     public ResponseEntity<ApiResponse<?>> updateAttachedLabels(@PathVariable Long issueId, @RequestBody UpdateAttachedLabelsDto updateAttachedLabelsDto) {
         labelService_hamill.updateAttachedLabels(issueId, updateAttachedLabelsDto);
+
+        return new ResponseEntity<>(ApiResponse.OK("SUCCESS"), HttpStatus.OK);
+    }
+
+    // 이슈에 달려있는 milestone 추가, 삭제
+    @PatchMapping("/{issueId}/milestone")
+    public ResponseEntity<ApiResponse<?>> updateAllocatedAssignees(@PathVariable Long issueId,
+                                                                   @RequestBody UpdateAllocatedAssigneesDto updateAllocatedAssigneesDto) {
+        issueService_Hamill.updateAllocatedAssignees(issueId, updateAllocatedAssigneesDto);
 
         return new ResponseEntity<>(ApiResponse.OK("SUCCESS"), HttpStatus.OK);
     }

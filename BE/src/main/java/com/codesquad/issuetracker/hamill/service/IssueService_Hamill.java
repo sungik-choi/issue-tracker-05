@@ -5,6 +5,7 @@ import com.codesquad.issuetracker.hamill.domain.Issue;
 import com.codesquad.issuetracker.hamill.domain.Milestone;
 import com.codesquad.issuetracker.hamill.domain.User;
 import com.codesquad.issuetracker.hamill.dto.request.NewIssueDto;
+import com.codesquad.issuetracker.hamill.dto.request.UpdateAllocatedAssigneesDto;
 import com.codesquad.issuetracker.hamill.dto.request.UpdateStateOfIssueDto;
 import com.codesquad.issuetracker.hamill.dto.request.UpdateTitleDto;
 import com.codesquad.issuetracker.hamill.dto.response.IssueDto;
@@ -109,6 +110,11 @@ public class IssueService_Hamill {
             issueDao_Hamill.updateStateOfIssue(updateStateOfIssueDto.isOpened(),
                     updateStateOfIssueDto.getIssueId().get(i));
         }
+    }
+
+    public void updateAllocatedAssignees(Long issueId, UpdateAllocatedAssigneesDto updateAllocatedAssigneesDto) {
+
+        issueDao_Hamill.updateAllocatedAssignees(issueId, updateAllocatedAssigneesDto.getMilestoneId());
     }
 
 
