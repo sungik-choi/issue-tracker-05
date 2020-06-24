@@ -43,7 +43,7 @@ export const labelListReducer = (state, action) => {
   }
 };
 
-export const initDataFetchOptions = (dispatch) => ({
+export const initDataFetchOptions = ({ dispatch, token }) => ({
   url: labelsUrl,
   dispatch,
   actionType: {
@@ -52,5 +52,8 @@ export const initDataFetchOptions = (dispatch) => ({
   },
   option: {
     method: "GET",
+    header: {
+      Authorization: token,
+    },
   },
 });

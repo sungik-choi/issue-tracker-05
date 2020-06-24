@@ -1,18 +1,23 @@
 import React, { useState, useReducer } from "react";
+import { useCookies } from "react-cookie";
+import useFetch from "@Hooks/useFetch";
+import pipe from "@Utils/pipe";
 
 import Box from "@material-ui/core/Box";
 
 import { labelReducer, initialState, createLabelFetchOptions } from "@Reducers/labelReducer";
-import useFetch from "@Hooks/useFetch";
-import pipe from "@Utils/pipe";
 
 import CustomButton from "@Components/common/CustomButton";
 import LinkButtons from "@Components/common/LinkButtons/LinkButtons";
+
+import { TOKEN } from "@Constants/constants";
+
 import NewLabel from "./NewLabel/NewLabel";
 
 const NEW_LABEL_BTN_TEXT = "New Label";
 
 const Navigation = () => {
+  const [{ token }] = useCookies([TOKEN]);
   const [showNewLabel, setShowNewLabel] = useState(false);
   const [labelState, labelStateDispatch] = useReducer(labelReducer, initialState);
 
@@ -24,6 +29,7 @@ const Navigation = () => {
   )({
     data: labelState,
     dispatch: labelStateDispatch,
+    token,
   });
 
   return (
