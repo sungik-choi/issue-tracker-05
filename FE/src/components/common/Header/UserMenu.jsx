@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
+import { useHistory } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import pipe from "@Utils/pipe";
 
@@ -26,8 +27,10 @@ const SIGN_OUT = "Sign out";
 const UserMenu = ({ userId, url }) => {
   const [, , removeCookie] = useCookies([TOKEN]);
   const { userDispatch } = useContext(UserContext);
+  const history = useHistory();
 
-  const signOutHandler = () => pipe(removeCookie, deleteUserData, userDispatch)(TOKEN);
+  const signOutHandler = () =>
+    pipe(removeCookie, deleteUserData, userDispatch, history.push("/login"))(TOKEN);
 
   return (
     <PopupState variant="popover" popupId="demo-popup-popover">
