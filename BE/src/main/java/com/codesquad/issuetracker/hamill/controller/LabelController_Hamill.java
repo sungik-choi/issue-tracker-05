@@ -4,14 +4,11 @@ import com.codesquad.issuetracker.hamill.dto.request.NewLabelDto;
 import com.codesquad.issuetracker.hamill.dto.response.ApiResponse;
 import com.codesquad.issuetracker.hamill.service.LabelService_Hamill;
 import com.codesquad.issuetracker.hamill.vo.labelVO.ContainedDescriptionLabelInformation;
-import com.codesquad.issuetracker.hamill.vo.labelVO.LabelInformation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
 
 @RestController
 @RequestMapping("/hamill/api/labels")

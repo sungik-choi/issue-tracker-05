@@ -43,7 +43,7 @@ public class LabelDao_Hamill {
                                 rs.getString("name"),
                                 rs.getString("background_color"),
                                 rs.getString("color"))
-        , issueId);
+                , issueId);
     }
 
     public void create(NewLabelDto newLabelDto) {

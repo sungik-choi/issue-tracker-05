@@ -1,13 +1,14 @@
 package com.codesquad.issuetracker.hamill.controller;
 
 import com.codesquad.issuetracker.hamill.dto.request.NewIssueDto;
+import com.codesquad.issuetracker.hamill.dto.request.UpdateAttachedLabelsDto;
 import com.codesquad.issuetracker.hamill.dto.request.UpdateStateOfIssueDto;
 import com.codesquad.issuetracker.hamill.dto.request.UpdateTitleDto;
 import com.codesquad.issuetracker.hamill.dto.response.ApiResponse;
 import com.codesquad.issuetracker.hamill.dto.response.IssueDto;
 import com.codesquad.issuetracker.hamill.dto.response.ListOfIssuesDto;
 import com.codesquad.issuetracker.hamill.service.IssueService_Hamill;
-import com.codesquad.issuetracker.hamill.service.UserService_Hamill;
+import com.codesquad.issuetracker.hamill.service.LabelService_Hamill;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -23,9 +24,11 @@ public class IssueController_Hamill {
     private static final Logger logger = LoggerFactory.getLogger(IssueController_Hamill.class);
 
     private IssueService_Hamill issueService_Hamill;
+    private LabelService_Hamill labelService_hamill;
 
-    public IssueController_Hamill(IssueService_Hamill issueService_Hamill) {
+    public IssueController_Hamill(IssueService_Hamill issueService_Hamill, LabelService_Hamill labelService_hamill) {
         this.issueService_Hamill = issueService_Hamill;
+        this.labelService_hamill = labelService_hamill;
     }
 
     @GetMapping("")
@@ -61,4 +64,11 @@ public class IssueController_Hamill {
 
         return new ResponseEntity<>(ApiResponse.OK("SUCCESS"), HttpStatus.OK);
     }
- }
+
+    @PutMapping("/{issueId}/labels")
+    public ResponseEntity<ApiResponse<?>> updateAttachedLabels(@PathVariable Long issueId, @RequestBody UpdateAttachedLabelsDto updateAttachedLabelsDto) {
+        labelService_hamill.updateAttachedLabels(issueId, updateAttachedLabelsDto);
+
+        return new ResponseEntity<>(ApiResponse.OK("SUCCESS"), HttpStatus.OK);
+    }
+}
