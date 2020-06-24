@@ -48,46 +48,46 @@ public class IssueController {
     }
 
     @PatchMapping("{issueId}/title")
-    public ResponseEntity<com.codesquad.issuetracker.hamill.dto.response.ApiResponse<?>> updateTitle(@PathVariable Long issueId, @RequestBody UpdateTitleDto updateTitleDto) throws AuthenticationException {
+    public ResponseEntity<ApiResponse<?>> updateTitle(@PathVariable Long issueId, @RequestBody UpdateTitleDto updateTitleDto) throws AuthenticationException {
         try {
             issueService.updateTitle(issueId, updateTitleDto);
         } catch (AuthenticationException e) {
-            return new ResponseEntity<>(com.codesquad.issuetracker.hamill.dto.response.ApiResponse.UNAUTHORIZED("권한이 없습니다. 사용자 인증 후 다시 요청 해주세요."), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(ApiResponse.UNAUTHORIZED("권한이 없습니다. 사용자 인증 후 다시 요청 해주세요."), HttpStatus.UNAUTHORIZED);
         }
-        return new ResponseEntity<>(com.codesquad.issuetracker.hamill.dto.response.ApiResponse.OK("SUCCESS"), HttpStatus.OK);
+        return new ResponseEntity<>(ApiResponse.OK("SUCCESS"), HttpStatus.OK);
     }
 
     // 이슈 Open/Closed 수정 기능
     @PatchMapping("/mark")
-    public ResponseEntity<com.codesquad.issuetracker.hamill.dto.response.ApiResponse<?>> updateStatusOfIssue(@RequestBody UpdateStateOfIssueDto updateStateOfIssueDto) {
+    public ResponseEntity<ApiResponse<?>> updateStatusOfIssue(@RequestBody UpdateStateOfIssueDto updateStateOfIssueDto) {
         issueService.updateStateOfIssue(updateStateOfIssueDto);
 
-        return new ResponseEntity<>(com.codesquad.issuetracker.hamill.dto.response.ApiResponse.OK("SUCCESS"), HttpStatus.OK);
+        return new ResponseEntity<>(ApiResponse.OK("SUCCESS"), HttpStatus.OK);
     }
 
     // 이슈에 달려있는 label 추가, 삭제
     @PutMapping("/{issueId}/labels")
-    public ResponseEntity<com.codesquad.issuetracker.hamill.dto.response.ApiResponse<?>> updateAttachedLabels(@PathVariable Long issueId, @RequestBody UpdateAttachedLabelsDto updateAttachedLabelsDto) {
+    public ResponseEntity<ApiResponse<?>> updateAttachedLabels(@PathVariable Long issueId, @RequestBody UpdateAttachedLabelsDto updateAttachedLabelsDto) {
         labelService.updateAttachedLabels(issueId, updateAttachedLabelsDto);
 
-        return new ResponseEntity<>(com.codesquad.issuetracker.hamill.dto.response.ApiResponse.OK("SUCCESS"), HttpStatus.OK);
+        return new ResponseEntity<>(ApiResponse.OK("SUCCESS"), HttpStatus.OK);
     }
 
     // 이슈에 달려있는 milestone 추가, 삭제
     @PatchMapping("/{issueId}/milestone")
-    public ResponseEntity<com.codesquad.issuetracker.hamill.dto.response.ApiResponse<?>> updateMilestoneIdOfIssue(@PathVariable Long issueId,
-                                                                                                                  @RequestBody UpdateMilestoneIdOfIssueDto updateMilestoneIdOfIssueDto) {
+    public ResponseEntity<ApiResponse<?>> updateMilestoneIdOfIssue(@PathVariable Long issueId,
+                                                                   @RequestBody UpdateMilestoneIdOfIssueDto updateMilestoneIdOfIssueDto) {
         issueService.updateMilestoneIdOfIssue(issueId, updateMilestoneIdOfIssueDto);
 
-        return new ResponseEntity<>(com.codesquad.issuetracker.hamill.dto.response.ApiResponse.OK("SUCCESS"), HttpStatus.OK);
+        return new ResponseEntity<>(ApiResponse.OK("SUCCESS"), HttpStatus.OK);
     }
 
     // 이슈에 달려있는 assignee 추가, 삭제
     @PutMapping("/{issueId}/assignees")
-    public ResponseEntity<com.codesquad.issuetracker.hamill.dto.response.ApiResponse<?>> updateAllocatedAssignees(@PathVariable Long issueId,
-                                                                                                                  @RequestBody UpdateAllocatedAssigneesDto updateAllocatedAssigneesDto) {
+    public ResponseEntity<ApiResponse<?>> updateAllocatedAssignees(@PathVariable Long issueId,
+                                                                   @RequestBody UpdateAllocatedAssigneesDto updateAllocatedAssigneesDto) {
         userService.updateAllocatedAssignees(issueId, updateAllocatedAssigneesDto);
 
-        return new ResponseEntity<>(com.codesquad.issuetracker.hamill.dto.response.ApiResponse.OK("SUCCESS"), HttpStatus.OK);
+        return new ResponseEntity<>(ApiResponse.OK("SUCCESS"), HttpStatus.OK);
     }
  }
