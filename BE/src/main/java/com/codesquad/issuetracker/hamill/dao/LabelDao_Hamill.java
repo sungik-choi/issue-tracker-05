@@ -43,7 +43,7 @@ public class LabelDao_Hamill {
                                 rs.getString("name"),
                                 rs.getString("background_color"),
                                 rs.getString("color"))
-        , issueId);
+                , issueId);
     }
 
     public void create(NewLabelDto newLabelDto) {
@@ -53,5 +53,17 @@ public class LabelDao_Hamill {
                 newLabelDto.getDescription(),
                 newLabelDto.getBackgroundColor(),
                 newLabelDto.getColor());
+    }
+
+    public void update(Integer labelId, NewLabelDto newLabelDto) {
+        String sql = "UPDATE label SET name = ?, description = ?, background_color = ?, color = ? WHERE id = ?";
+        jdbcTemplate.update(sql,
+                newLabelDto.getTitle(), newLabelDto.getDescription(),
+                newLabelDto.getBackgroundColor(), newLabelDto.getColor(), labelId);
+    }
+
+    public void delete(Integer labelId) {
+        String sql = "DELETE FROM label WHERE id = ?";
+        jdbcTemplate.update(sql, labelId);
     }
 }

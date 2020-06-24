@@ -37,5 +37,4 @@ public class MilestoneService_Hamill {
     public Milestone findMilestoneByMilestoneId(Integer milestoneId) {
         return milestoneDao_hamill.findMilestoneByMilestoneId(milestoneId);
     }
-
 }

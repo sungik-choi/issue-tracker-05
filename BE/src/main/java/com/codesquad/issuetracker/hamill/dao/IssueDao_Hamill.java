@@ -2,6 +2,8 @@ package com.codesquad.issuetracker.hamill.dao;
 
 import com.codesquad.issuetracker.hamill.domain.Issue;
 import com.codesquad.issuetracker.hamill.dto.request.NewIssueDto;
+import com.codesquad.issuetracker.hamill.dto.request.UpdateStateOfIssueDto;
+import com.codesquad.issuetracker.hamill.dto.request.UpdateTitleDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -57,6 +59,21 @@ public class IssueDao_Hamill {
                                 rs.getLong("user_id"),
                                 rs.getInt("milestone_id"))
         , issueId);
+    }
+
+    public void updateTitle(Long issueId, String title) {
+        String sql = "UPDATE issue SET title = ? WHERE id = ?";
+        jdbcTemplate.update(sql, title, issueId);
+    }
+
+    public void updateStateOfIssue(boolean isOpened, Long issueId) {
+        String sql = "UPDATE issue SET is_opened = ? WHERE id = ?";
+        jdbcTemplate.update(sql, isOpened, issueId);
+    }
+
+    public void updateMilestoneIdOfIssue(Long issueId, Integer milestoneId) {
+        String sql = "UPDATE issue SET milestone_id = ? WHERE id = ?";
+        jdbcTemplate.update(sql, milestoneId, issueId);
     }
 
     public void saveNewIssueHasLabel(Long labelId, Long issueId) {

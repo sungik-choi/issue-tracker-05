@@ -4,7 +4,7 @@ import com.codesquad.issuetracker.hamill.dao.IssueDao_Hamill;
 import com.codesquad.issuetracker.hamill.domain.Issue;
 import com.codesquad.issuetracker.hamill.domain.Milestone;
 import com.codesquad.issuetracker.hamill.domain.User;
-import com.codesquad.issuetracker.hamill.dto.request.NewIssueDto;
+import com.codesquad.issuetracker.hamill.dto.request.*;
 import com.codesquad.issuetracker.hamill.dto.response.IssueDto;
 import com.codesquad.issuetracker.hamill.dto.response.ListOfIssuesDto;
 import com.codesquad.issuetracker.hamill.vo.UserVO.UserSummary;
@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.naming.AuthenticationException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -86,7 +87,31 @@ public class IssueService_Hamill {
         commentService_hamill.save(newIssueDto);
     }
 
+    public void updateTitle(Long issueId, UpdateTitleDto updateTitleDto) throws AuthenticationException {
+        // issue 작성자가 아니면 title 을 수정할 수 없다
+        Issue issue = issueDao_Hamill.findIssueByIssueId(issueId);
 
+        if (!issue.getUserId().equals(updateTitleDto.getUserId())) {
+            throw new AuthenticationException("이슈 작성자가 아닙니다. 접근을 금지합니다.");
+        }
+
+        issueDao_Hamill.updateTitle(issueId, updateTitleDto.getIssueTitle());
+    }
+
+    public void updateStateOfIssue(UpdateStateOfIssueDto updateStateOfIssueDto) {
+        logger.info("##### update1, {}", updateStateOfIssueDto.getUserId());
+        logger.info("##### update2. {}", updateStateOfIssueDto.getIssueId());
+        logger.info("##### update3, {}", updateStateOfIssueDto.isOpened());
+        for (int i = 0; i < updateStateOfIssueDto.getIssueId().size(); i++) {
+            issueDao_Hamill.updateStateOfIssue(updateStateOfIssueDto.isOpened(),
+                    updateStateOfIssueDto.getIssueId().get(i));
+        }
+    }
+
+    public void updateMilestoneIdOfIssue(Long issueId, UpdateMilestoneIdOfIssueDto updateMilestoneIdOfIssueDto) {
+
+        issueDao_Hamill.updateMilestoneIdOfIssue(issueId, updateMilestoneIdOfIssueDto.getMilestoneId());
+    }
 
 //    public IssuesDto findIssueByIssueId(Long issueId) {
 //
