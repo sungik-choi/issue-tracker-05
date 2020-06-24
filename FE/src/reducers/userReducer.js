@@ -1,28 +1,29 @@
 export const initialState = {
-  id: "sungik-choi",
-  avatarUrl:
-    "https://lh3.googleusercontent.com/lv3q0LxixvhfsBwhLKzpp53EPMQO92jq98uOKqT9sL0hv4gF8l9bl6SRN23FLxkeJH3ldxZt-PreP1zddg",
+  id: null,
+  exp: null,
+  name: "",
+  avatarUrl: "",
 };
 
-export const FETCH_SUCCESS = "FETCH_SUCCESS";
-export const FETCH_ERROR = "FETCH_ERROR";
+export const SET_USER_DATA = "SET_USER_DATA";
+export const DELETE_USER_DATA = "DELETE_USER_DATA";
 
-export const fetchSuccess = (payload) => {
-  return { type: FETCH_SUCCESS, payload };
+export const setUserData = (payload) => {
+  return { type: SET_USER_DATA, payload };
 };
 
-export const fetchError = () => {
-  return { type: FETCH_ERROR };
+export const deleteUserData = () => {
+  return { type: DELETE_USER_DATA };
 };
 
 export const userReducer = (state, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case FETCH_SUCCESS:
+    case SET_USER_DATA:
       return { ...state, ...payload };
-    case FETCH_ERROR:
-      return { ...state };
+    case DELETE_USER_DATA:
+      return { ...initialState };
     default:
       return state;
   }
