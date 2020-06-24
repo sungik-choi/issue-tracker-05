@@ -1,4 +1,3 @@
-import useFetch from "@Hooks/useFetch";
 import { issuesUrl } from "@Utils/urls";
 
 export const initialState = {
@@ -32,15 +31,14 @@ export const issueListReducer = (state, action) => {
   }
 };
 
-export const initialFetch = (dispatch) =>
-  useFetch({
-    url: issuesUrl,
-    actionType: {
-      successAction: fetchSuccess,
-      errorAction: fetchError,
-    },
-    dispatch,
-    fetchOption: {
-      method: "GET",
-    },
-  });
+export const getInitialData = (dispatch) => ({
+  url: issuesUrl,
+  actionType: {
+    successAction: fetchSuccess,
+    errorAction: fetchError,
+  },
+  dispatch,
+  fetchOption: {
+    method: "GET",
+  },
+});

@@ -4,7 +4,9 @@ const useFetch = ({
   url,
   dispatch,
   actionType: { successAction, errorAction },
+  deps = null,
   fetchOption = {},
+  isValidRequest = true,
 }) => {
   const [loading, setLoading] = useState(true);
   const getData = async () => {
@@ -22,8 +24,9 @@ const useFetch = ({
   };
 
   useEffect(() => {
+    if (!isValidRequest) return;
     getData();
-  }, []);
+  }, [deps]);
 
   return loading;
 };

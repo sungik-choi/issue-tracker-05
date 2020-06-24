@@ -19,7 +19,12 @@ const DEFAULT_LABEL_NAME = "Label Preview";
 const CANCEL = "Cancel";
 const CREATE_LABEL = "Create Label";
 
-const NewLabel = ({ state: { title, backgroundColor, color }, dispatch, clickHandler }) => {
+const NewLabel = ({
+  state: { title, backgroundColor, color },
+  dispatch,
+  clickCreateButtonHandler,
+  clickCancelButtonHandler,
+}) => {
   const classes = useStyles();
 
   const changeTitleHandler = ({ target }) => dispatch(setLabelInfo({ title: target.value }));
@@ -59,8 +64,8 @@ const NewLabel = ({ state: { title, backgroundColor, color }, dispatch, clickHan
             alignItems="center"
             pt={1}
           >
-            <CustomButton color="default" text={CANCEL} clickHandler={clickHandler} />
-            <CustomButton text={CREATE_LABEL} clickHandler={clickHandler} />
+            <CustomButton color="default" text={CANCEL} clickHandler={clickCancelButtonHandler} />
+            <CustomButton text={CREATE_LABEL} clickHandler={clickCreateButtonHandler} />
           </Box>
         </Grid>
       </Grid>
@@ -104,7 +109,8 @@ NewLabel.propTypes = {
     color: PropTypes.string.isRequired,
   }).isRequired,
   dispatch: PropTypes.func.isRequired,
-  clickHandler: PropTypes.func.isRequired,
+  clickCreateButtonHandler: PropTypes.func.isRequired,
+  clickCancelButtonHandler: PropTypes.func.isRequired,
 };
 
 export default NewLabel;

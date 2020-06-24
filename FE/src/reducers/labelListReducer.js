@@ -1,4 +1,3 @@
-import useFetch from "@Hooks/useFetch";
 import { labelsUrl } from "@Utils/urls";
 
 export const initialState = {
@@ -44,15 +43,14 @@ export const labelListReducer = (state, action) => {
   }
 };
 
-export const initialFetch = (dispatch) =>
-  useFetch({
-    url: labelsUrl,
-    actionType: {
-      successAction: fetchSuccess,
-      errorAction: fetchError,
-    },
-    dispatch,
-    fetchOption: {
-      method: "GET",
-    },
-  });
+export const getInitialData = (dispatch) => ({
+  url: labelsUrl,
+  actionType: {
+    successAction: fetchSuccess,
+    errorAction: fetchError,
+  },
+  dispatch,
+  fetchOption: {
+    method: "GET",
+  },
+});

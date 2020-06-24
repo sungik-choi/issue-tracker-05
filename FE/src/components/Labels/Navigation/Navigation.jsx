@@ -2,7 +2,9 @@ import React, { useState, useEffect, useReducer } from "react";
 
 import Box from "@material-ui/core/Box";
 
-import { labelReducer, initialState } from "@Reducers/labelReducer";
+import useFetch from "@Hooks/useFetch";
+
+import { labelReducer, initialState, createNewLabel } from "@Reducers/labelReducer";
 
 import CustomButton from "@Components/common/CustomButton";
 import LinkButtons from "@Components/common/LinkButtons/LinkButtons";
@@ -13,6 +15,9 @@ const NEW_LABEL_BTN_TEXT = "New Label";
 const Navigation = () => {
   const [showNewLabel, setShowNewLabel] = useState(false);
   const [labelState, dispatchLabelState] = useReducer(labelReducer, initialState);
+
+  const toggleNewLabel = () => setShowNewLabel(!showNewLabel);
+  // const clickCreateButtonHandler = useFetch(createNewLabel(labelState, dispatchLabelState));
 
   useEffect(() => {
     console.log(labelState);
@@ -29,16 +34,14 @@ const Navigation = () => {
         justifyContent="space-between"
       >
         <LinkButtons activeButton="labels" />
-        <CustomButton
-          text={NEW_LABEL_BTN_TEXT}
-          clickHandler={() => setShowNewLabel(!showNewLabel)}
-        />
+        <CustomButton text={NEW_LABEL_BTN_TEXT} clickHandler={toggleNewLabel} />
       </Box>
       {showNewLabel && (
         <NewLabel
           state={labelState}
           dispatch={dispatchLabelState}
-          clickHandler={() => setShowNewLabel(!showNewLabel)}
+          clickCreateButtonHandler={null}
+          clickCancelButtonHandler={toggleNewLabel}
         />
       )}
     </>

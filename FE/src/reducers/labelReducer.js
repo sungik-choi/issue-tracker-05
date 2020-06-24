@@ -1,3 +1,5 @@
+import { labelsUrl } from "@Utils/urls";
+
 import generateRandomColor from "@Utils/generateRandomColor";
 
 export const initialState = {
@@ -6,8 +8,18 @@ export const initialState = {
   ...generateRandomColor(),
 };
 
+export const FETCH_SUCCESS = "FETCH_SUCCESS";
+export const FETCH_ERROR = "FETCH_ERROR";
 export const SET_LABEL_COLOR = "SET_LABEL_COLOR";
 export const SET_LABEL_INFO = "SET_LABEL_INFO";
+
+export const fetchSuccess = () => {
+  return { type: FETCH_SUCCESS };
+};
+
+export const fetchError = () => {
+  return { type: FETCH_ERROR };
+};
 
 export const setLabelColor = () => {
   return { type: SET_LABEL_COLOR };
@@ -25,7 +37,24 @@ export const labelReducer = (state, action) => {
       return { ...state, ...generateRandomColor() };
     case SET_LABEL_INFO:
       return { ...state, ...payload };
+    case FETCH_SUCCESS:
+      return { ...initialState, ...generateRandomColor() };
+    case FETCH_ERROR:
+      return { ...state };
     default:
       return state;
   }
 };
+
+export const createNewLabel = (data, dispatch) => ({
+  url: labelsUrl,
+  actionType: {
+    successAction: fetchSuccess,
+    errorAction: fetchError,
+  },
+  dispatch,
+  fetchOption: {
+    method: "POST",
+    body: JSON.stringify(data),
+  },
+});
