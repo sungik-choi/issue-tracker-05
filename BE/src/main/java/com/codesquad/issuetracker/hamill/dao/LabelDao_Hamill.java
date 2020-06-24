@@ -61,4 +61,9 @@ public class LabelDao_Hamill {
                 newLabelDto.getTitle(), newLabelDto.getDescription(),
                 newLabelDto.getBackgroundColor(), newLabelDto.getColor(), labelId);
     }
+
+    public void delete(Integer labelId) {
+        String sql = "DELETE FROM label WHERE id = ?";
+        jdbcTemplate.update(sql, labelId);
+    }
 }

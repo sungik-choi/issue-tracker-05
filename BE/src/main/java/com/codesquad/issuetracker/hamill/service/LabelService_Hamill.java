@@ -1,5 +1,6 @@
 package com.codesquad.issuetracker.hamill.service;
 
+import com.codesquad.issuetracker.hamill.dao.IssueHasLabelDao_Hamill;
 import com.codesquad.issuetracker.hamill.dao.LabelDao_Hamill;
 import com.codesquad.issuetracker.hamill.domain.Label;
 import com.codesquad.issuetracker.hamill.dto.request.NewLabelDto;
@@ -11,9 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import static com.codesquad.issuetracker.hamill.vo.labelVO.LabelSummary.of;
@@ -24,9 +23,11 @@ public class LabelService_Hamill {
     private static final Logger logger = LoggerFactory.getLogger(LabelService_Hamill.class);
 
     private LabelDao_Hamill labelDao_hamill;
+    private IssueHasLabelDao_Hamill issueHasLabelDao_hamill;
 
-    public LabelService_Hamill(LabelDao_Hamill labelDao_hamill) {
+    public LabelService_Hamill(LabelDao_Hamill labelDao_hamill, IssueHasLabelDao_Hamill issueHasLabelDao_hamill) {
         this.labelDao_hamill = labelDao_hamill;
+        this.issueHasLabelDao_hamill = issueHasLabelDao_hamill;
     }
 
     public LabelInformation findLabelInformation() {
@@ -65,5 +66,10 @@ public class LabelService_Hamill {
             throw new Exception("backgroundColor, color 를 hex code 형식으로 넣어주세요(예:#ffffff)");
         }
         labelDao_hamill.update(labelId, newLabelDto);
+    }
+
+    public void delete(Integer labelId) {
+        issueHasLabelDao_hamill.deleteIssueHasLabelByLabelId(labelId);
+        labelDao_hamill.delete(labelId);
     }
 }
