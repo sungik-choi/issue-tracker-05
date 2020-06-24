@@ -52,7 +52,7 @@ export const initDataFetchOptions = ({ dispatch, token }) => ({
   },
   option: {
     method: "GET",
-    header: {
+    headers: {
       Authorization: token,
     },
   },

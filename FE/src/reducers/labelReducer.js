@@ -56,7 +56,7 @@ export const createLabelFetchOptions = ({ data, dispatch, token }) => ({
   option: {
     method: "POST",
     body: JSON.stringify(data),
-    header: {
+    headers: {
       Authorization: token,
     },
   },
