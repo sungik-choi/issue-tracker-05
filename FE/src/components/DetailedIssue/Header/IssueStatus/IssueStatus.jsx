@@ -28,13 +28,21 @@ const IssueStatus = () => {
 
   const statusMessage = `opened this issue ${time} ago · ${countOfComment} comment`;
 
+  const statusChipRender = () => {
+    return isOpened ? (
+      <Chip color="primary" label={OPEN_TEXT} icon={<StatusIcon color={{ opened: "white" }} />} />
+    ) : (
+      <Chip
+        color="secondary"
+        label={CLOSE_TEXT}
+        icon={<StatusIcon color={{ closed: "white" }} closed />}
+      />
+    );
+  };
+
   return (
     <Box display="flex" alignItems="center" mt={1}>
-      {isOpened ? (
-        <Chip color="primary" label={OPEN_TEXT} icon={<StatusIcon color="white" />} />
-      ) : (
-        <Chip color="secondary" label={CLOSE_TEXT} icon={<StatusIcon color="white" closed />} />
-      )}
+      {statusChipRender()}
       <Typography color="textSecondary" variant="subtitle1" component="div">
         <strong className={classes.userName}>{userName}</strong>
         {statusMessage}
