@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 
 import Box from "@material-ui/core/Box";
+
+import { labelReducer, initialState } from "@Reducers/labelReducer";
 
 import CustomButton from "@Components/common/CustomButton";
 import LinkButtons from "@Components/common/LinkButtons/LinkButtons";
@@ -10,6 +12,11 @@ const NEW_LABEL_BTN_TEXT = "New Label";
 
 const Navigation = () => {
   const [showNewLabel, setShowNewLabel] = useState(false);
+  const [labelState, dispatchLabelState] = useReducer(labelReducer, initialState);
+
+  useEffect(() => {
+    console.log(labelState);
+  }, [labelState]);
 
   return (
     <>
@@ -29,8 +36,9 @@ const Navigation = () => {
       </Box>
       {showNewLabel && (
         <NewLabel
-          clickCancelButtonHandler={() => setShowNewLabel(!showNewLabel)}
-          clickCreateButtonHandler={() => setShowNewLabel(!showNewLabel)}
+          state={labelState}
+          dispatch={dispatchLabelState}
+          clickHandler={() => setShowNewLabel(!showNewLabel)}
         />
       )}
     </>
