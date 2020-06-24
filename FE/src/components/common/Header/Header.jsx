@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
@@ -23,13 +24,13 @@ const Header = () => {
   return (
     <div className={classes.root}>
       <AppBar position="fixed" className={classes.colorDefault}>
-        <Toolbar>
-          <Box mr={2}>
-            <CollectionsBookmarkIcon />
+        <Toolbar className={classes.toolbar}>
+          <Box className={classes.title} component={Link} to="/" display="flex" alignItems="center">
+            <Box mr={2}>
+              <CollectionsBookmarkIcon />
+            </Box>
+            <Typography variant="h6">{TITLE_TEXT}</Typography>
           </Box>
-          <Typography variant="h6" className={classes.title}>
-            {TITLE_TEXT}
-          </Typography>
           {name && <UserMenu userId={name} url={avatarUrl} />}
         </Toolbar>
       </AppBar>
@@ -41,8 +42,14 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
+  toolbar: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
   title: {
-    flexGrow: 1,
+    color: theme.palette.common.white,
+    textDecoration: "none",
   },
   colorDefault: {
     backgroundColor: theme.palette.grey[900],
