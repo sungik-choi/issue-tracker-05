@@ -7,9 +7,9 @@ import LinkButtons from "@Components/common/LinkButtons/LinkButtons";
 import { IssueListContext } from "@Contexts/issueListContext";
 import Filter from "./Filter/Filter";
 
-const Navigation = () => {
-  const NEW_ISSUE_BTN_TEXT = "New issue";
+const NEW_ISSUE_BTN_TEXT = "New issue";
 
+const Navigation = () => {
   const {
     issueList: {
       labelInfo: { countOfLabel },

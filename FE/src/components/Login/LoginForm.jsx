@@ -8,13 +8,14 @@ import Button from "@material-ui/core/Button";
 import InputField from "@Components/common/InputField";
 import CustomButton from "@Components/common/CustomButton";
 
+const ID = "아이디";
+const PASSWORD = "패스워드";
+const LOGIN = "로그인";
+const GITHUB_LOGIN = "Github 으로 로그인하기";
+const SIGN_UP = "회원가입";
+
 const LoginForm = () => {
   const classes = useStyles();
-  const ID = "아이디";
-  const PASSWORD = "패스워드";
-  const LOGIN = "로그인";
-  const GITHUB_LOGIN = "Github 으로 로그인하기";
-  const SIGN_UP = "회원가입";
 
   return (
     <Box className={classes.wrap} display="flex" alignItems="center" justifyContent="center">

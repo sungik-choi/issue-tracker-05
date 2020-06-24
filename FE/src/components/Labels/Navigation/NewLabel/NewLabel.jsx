@@ -9,15 +9,18 @@ import generateRandomColor from "@Utils/generateRandomColor";
 
 import Label from "@Components/common/Label";
 import InputField from "@Components/common/InputField";
+import CustomButton from "@Components/common/CustomButton";
 
 import ColorGenerateButton from "./ColorGenerateButton";
 import CreateAndCancelButton from "./CreateAndCancelButton";
 
-const NewLabel = () => {
+const LABEL_NAME = "Label name";
+const DESCRIPTION = "Description";
+const LABEL_PREVIEW = "Label Preview";
+const CANCEL = "Cancel";
+const CREATE_LABEL = "Create Label";
+
   const classes = useStyles();
-  const LABEL_NAME = "Label name";
-  const DESCRIPTION = "Description";
-  const LABEL_PREVIEW = "Label Preview";
 
   const [labelColor, setLabelColor] = useState(generateRandomColor());
   const { backgroundColor, color } = labelColor;

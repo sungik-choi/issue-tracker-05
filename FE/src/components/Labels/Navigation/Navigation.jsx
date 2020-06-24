@@ -6,10 +6,10 @@ import CustomButton from "@Components/common/CustomButton";
 import LinkButtons from "@Components/common/LinkButtons/LinkButtons";
 import NewLabel from "./NewLabel/NewLabel";
 
+const NEW_LABEL_BTN_TEXT = "New Label";
+
 const Navigation = () => {
   const [showNewLabel, setShowNewLabel] = useState(false);
-
-  const NEW_LABEL_BTN_TEXT = "New Label";
 
   return (
     <>

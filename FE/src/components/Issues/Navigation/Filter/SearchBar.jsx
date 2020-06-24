@@ -6,10 +6,10 @@ import Box from "@material-ui/core/Box";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
 
+const SEARCH_PLACEHOLDER = "Search all issues";
+
 const SearchBar = () => {
   const classes = useStyles();
-
-  const SEARCH_PLACEHOLDER = "Search all issues";
 
   return (
     <Box
@@ -28,7 +28,7 @@ const SearchBar = () => {
           root: classes.inputRoot,
           input: classes.inputInput,
         }}
-        inputProps={{ "aria-label": "Search all issues" }}
+        inputProps={{ "aria-label": SEARCH_PLACEHOLDER }}
       />
     </Box>
   );

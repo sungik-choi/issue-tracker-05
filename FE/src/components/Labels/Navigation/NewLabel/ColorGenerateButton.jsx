@@ -9,12 +9,14 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import CustomButton from "@Components/common/CustomButton";
 import InputField from "@Components/common/InputField";
 
+const SHARP = "#";
+
 const ColorGenerateButton = ({ backgroundColor, color, setLabelColor }) => {
   const props = { backgroundColor, color };
   const classes = useStyles(props);
 
-  const SHARP = "#";
   const INDEX_OF_SHARP = 1;
+
   const colorValueExceptSharp = (colorValue) => colorValue.substring(INDEX_OF_SHARP);
 
   return (
