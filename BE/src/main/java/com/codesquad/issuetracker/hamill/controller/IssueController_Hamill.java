@@ -1,6 +1,7 @@
 package com.codesquad.issuetracker.hamill.controller;
 
 import com.codesquad.issuetracker.hamill.dto.request.NewIssueDto;
+import com.codesquad.issuetracker.hamill.dto.request.UpdateStateOfIssueDto;
 import com.codesquad.issuetracker.hamill.dto.request.UpdateTitleDto;
 import com.codesquad.issuetracker.hamill.dto.response.ApiResponse;
 import com.codesquad.issuetracker.hamill.dto.response.IssueDto;
@@ -50,6 +51,14 @@ public class IssueController_Hamill {
         } catch (AuthenticationException e) {
             return new ResponseEntity<>(ApiResponse.UNAUTHORIZED("권한이 없습니다. 사용자 인증 후 다시 요청 해주세요."), HttpStatus.UNAUTHORIZED);
         }
+        return new ResponseEntity<>(ApiResponse.OK("SUCCESS"), HttpStatus.OK);
+    }
+
+    // 이슈 Open/Closed 수정 기능
+    @PatchMapping("/mark")
+    public ResponseEntity<ApiResponse<?>> updateStatusOfIssue(@RequestBody UpdateStateOfIssueDto updateStateOfIssueDto) {
+        issueService_Hamill.updateStateOfIssue(updateStateOfIssueDto);
+
         return new ResponseEntity<>(ApiResponse.OK("SUCCESS"), HttpStatus.OK);
     }
  }

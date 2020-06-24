@@ -5,6 +5,7 @@ import com.codesquad.issuetracker.hamill.domain.Issue;
 import com.codesquad.issuetracker.hamill.domain.Milestone;
 import com.codesquad.issuetracker.hamill.domain.User;
 import com.codesquad.issuetracker.hamill.dto.request.NewIssueDto;
+import com.codesquad.issuetracker.hamill.dto.request.UpdateStateOfIssueDto;
 import com.codesquad.issuetracker.hamill.dto.request.UpdateTitleDto;
 import com.codesquad.issuetracker.hamill.dto.response.IssueDto;
 import com.codesquad.issuetracker.hamill.dto.response.ListOfIssuesDto;
@@ -98,6 +99,16 @@ public class IssueService_Hamill {
         }
 
         issueDao_Hamill.updateTitle(issueId, updateTitleDto.getIssueTitle());
+    }
+
+    public void updateStateOfIssue(UpdateStateOfIssueDto updateStateOfIssueDto) {
+        logger.info("##### update1, {}", updateStateOfIssueDto.getUserId());
+        logger.info("##### update2. {}", updateStateOfIssueDto.getIssueId());
+        logger.info("##### update3, {}", updateStateOfIssueDto.isOpened());
+        for (int i = 0; i < updateStateOfIssueDto.getIssueId().size(); i++) {
+            issueDao_Hamill.updateStateOfIssue(updateStateOfIssueDto.isOpened(),
+                    updateStateOfIssueDto.getIssueId().get(i));
+        }
     }
 
 
