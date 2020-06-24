@@ -41,9 +41,6 @@ const useStyles = makeStyles(() => ({
     "& .MuiTableRow-hover": {
       pointerEvents: "none",
     },
-    "& textarea": {
-      width: "100%",
-    },
   },
 }));
 

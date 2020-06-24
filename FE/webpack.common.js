@@ -49,8 +49,6 @@ module.exports = {
       filename: "index.html",
       showErrors: true,
     }),
-    new Dotenv({
-      path: path.resolve(__dirname, "./.env.development"),
-    }),
+    new Dotenv(),
   ],
 };

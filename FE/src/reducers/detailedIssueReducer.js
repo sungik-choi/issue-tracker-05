@@ -31,9 +31,8 @@ export const detailedIssueReducer = (state, action) => {
   }
 };
 
-export const initDataFetchOptions = (dispatch) => ({
-  // url: `${detailedIssueUrl}/${id}`,
-  url: `${detailedIssueUrl}`,
+export const initDataFetchOptions = ({ dispatch, id }) => ({
+  url: detailedIssueUrl + id,
   dispatch,
   actionType: {
     fetchSuccess,

@@ -16,20 +16,20 @@ const id = 1;
 //라우팅 처리후 변경하기
 
 const DetailedIssue = () => {
-  const { detailedIssueDispatch } = useContext(DetailedIssueContext);
-  const { loading, getData } = pipe(initDataFetchOptions, useFetch)(detailedIssueDispatch);
+  // const { detailedIssueDispatch } = useContext(DetailedIssueContext);
+  // const { loading, getData } = pipe(initDataFetchOptions, useFetch)({ detailedIssueDispatch, id });
 
-  console.log(getData);
+  {
+    /* {loading ? (
+    "로딩중"
+  ) : ( */
+  }
   return (
     <>
-      {loading ? (
-        "로딩중"
-      ) : (
-        <Box pt={5}>
-          <Header />
-          <Comment />
-        </Box>
-      )}
+      <Box pt={5}>
+        <Header />
+        <Comment />
+      </Box>
     </>
   );
 };
