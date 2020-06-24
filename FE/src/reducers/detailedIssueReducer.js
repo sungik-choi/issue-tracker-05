@@ -43,3 +43,23 @@ export const initDataFetchOptions = ({ detailedIssueDispatch, id }) => ({
     method: "GET",
   },
 });
+
+export const editTitleFetchOptions = ({ detailedIssueDispatch, id, title }) => ({
+  url: `${detailedIssueUrl}${id}/title`,
+  dispatch: detailedIssueDispatch,
+  actionType: {
+    fetchSuccess,
+    fetchError,
+  },
+  skip: true,
+  option: {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    method: "PATCH",
+    body: JSON.stringify({
+      userId: id,
+      issueTitle: title,
+    }),
+  },
+});

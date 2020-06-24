@@ -17,7 +17,7 @@ const id = 1;
 
 const DetailedIssue = () => {
   const { detailedIssueDispatch } = useContext(DetailedIssueContext);
-  const { loading, getData } = pipe(initDataFetchOptions, useFetch)({ detailedIssueDispatch, id });
+  const { loading } = pipe(initDataFetchOptions, useFetch)({ detailedIssueDispatch, id });
 
   return (
     <>

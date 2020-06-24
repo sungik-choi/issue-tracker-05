@@ -1,22 +1,35 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useContext } from "react";
+
+import { DetailedIssueContext } from "@Contexts/detailedIssueContext";
+import { editTitleFetchOptions } from "@Reducers/detailedIssueReducer";
 
 import InputBox from "./InputBox";
 import TitleBox from "./TitleBox";
 import editHandler from "@Components/DetailedIssue/editHandler";
 import { data } from "@Mock/detailedIssue";
 
+import pipe from "@Utils/pipe";
+import useFetch from "@Hooks/useFetch";
+
 const Title = () => {
-  const issueTitle = data.issue.issueTitle;
-  const issueId = data.issue.issueId;
+  const {
+    detailedIssue: {
+      issue: { id, title },
+    },
+    detailedIssueDispatch,
+  } = useContext(DetailedIssueContext);
+
+  const { getData } = pipe(editTitleFetchOptions, useFetch)({ detailedIssueDispatch, id, title });
+  console.log(getData);
   const {
     isEdit,
-    title,
+    titleValue,
     inputTitle,
     onToggle,
     onChangeInput,
     onClickSave,
     onClickClose,
-  } = editHandler(issueTitle);
+  } = editHandler(title, getData);
   //context로 값 가져오기
 
   // const [isEdit, setIsEdit] = useState(false);
@@ -58,7 +71,7 @@ const Title = () => {
           onClickClose={onClickClose}
         />
       ) : (
-        <TitleBox title={title} id={issueId} onClickEdit={onToggle} />
+        <TitleBox title={titleValue} id={id} onClickEdit={onToggle} />
       )}
     </>
   );

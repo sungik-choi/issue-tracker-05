@@ -1,9 +1,9 @@
 import React, { useState, useCallback } from "react";
 
-const editHandler = (initialValue) => {
+const editHandler = (initialValue, fetchFunc) => {
   const [isEdit, setIsEdit] = useState(false);
   const [inputTitle, setinputTitle] = useState(initialValue);
-  const [title, setTitle] = useState(initialValue);
+  const [titleValue, setTitleValue] = useState(initialValue);
 
   const onChangeInput = useCallback(({ target }) => {
     setinputTitle(target.value);
@@ -17,22 +17,22 @@ const editHandler = (initialValue) => {
     onToggle();
 
     if (inputTitle) {
-      setTitle(inputTitle);
-      //fetch함수 인자로 받음
+      setTitleValue(inputTitle);
+      fetchFunc();
     } else {
-      setTitle(title);
-      setinputTitle(title);
+      setTitleValue(titleValue);
+      setinputTitle(titleValue);
     }
   });
 
   const onClickClose = () => {
-    setinputTitle(title);
+    setinputTitle(titleValue);
     onToggle();
   };
 
   return {
     isEdit,
-    title,
+    titleValue,
     inputTitle,
     onToggle,
     onChangeInput,
