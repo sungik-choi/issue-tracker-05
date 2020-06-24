@@ -42,12 +42,19 @@ const Comment = () => {
           {
             id: userId,
             contents: (
-              <Edit value={titleValue} inputValue={inputTitle} onChangeInput={onChangeInput} />
+              <Edit
+                value={inputTitle}
+                onChange={onChangeInput}
+                inputValue={inputTitle}
+                onChangeInput={onChangeInput}
+                onClickClose={onClickClose}
+                onClickSave={onClickSave}
+              />
             ),
           },
         ];
       } else {
-        return [{ id: userId, contents: description }];
+        return [{ id: userId, contents: titleValue }];
       }
     };
 
