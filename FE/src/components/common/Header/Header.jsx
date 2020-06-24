@@ -11,9 +11,10 @@ import { UserContext } from "@Contexts/userContext";
 
 import UserMenu from "./UserMenu";
 
+const TITLE_TEXT = "Issue Tracker";
+
 const Header = () => {
   const classes = useStyles();
-  const TITLE_TEXT = "Issue Tracker";
 
   const {
     user: { id, avatarUrl },

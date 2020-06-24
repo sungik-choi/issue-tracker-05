@@ -7,14 +7,14 @@ import Checkbox from "@material-ui/core/Checkbox";
 
 import TableFilters from "./TableFilters/TableFilters";
 
+const SELECTED_TEXT = "selected";
+
 const Toolbar = ({
   selectedIssueSize,
   bAtLeastOneSelectedIssue,
   bAllSelectedIssue,
   clickHandler,
 }) => {
-  const SELECTED_TEXT = "selected";
-
   return (
     <>
       <Box display="flex" alignItems="center">

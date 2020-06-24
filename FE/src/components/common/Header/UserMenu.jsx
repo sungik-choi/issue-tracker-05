@@ -14,9 +14,9 @@ import ExitToAppOutlinedIcon from "@material-ui/icons/ExitToAppOutlined";
 
 import CustomAvatar from "@Components/common/CustomAvatar";
 
-const UserMenu = ({ userId, url }) => {
-  const SIGN_OUT = "Sign out";
+const SIGN_OUT = "Sign out";
 
+const UserMenu = ({ userId, url }) => {
   return (
     <PopupState variant="popover" popupId="demo-popup-popover">
       {(popupState) => (

@@ -8,20 +8,20 @@ import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import MenuList from "@Components/common/MenuList";
 
+const menuListText = [
+  "Open issues",
+  "Close issues",
+  "Your issues",
+  "Everything assigned to you",
+  "Everything mentioning you",
+  "Closed issues",
+];
+
+const FILTER_BTN_TEXT = "Filters";
+const MENU_LIST_TITLE = "Filter Issues";
+
 const Menu = () => {
   const classes = useStyles();
-
-  const menuListText = [
-    "Open issues",
-    "Close issues",
-    "Your issues",
-    "Everything assigned to you",
-    "Everything mentioning you",
-    "Closed issues",
-  ];
-
-  const FILTER_BTN_TEXT = "Filters";
-  const MENU_LIST_TITLE = "Filter Issues";
 
   const menuList = menuListText.map((text) => <MenuList text={text} key={text} />);
   return (

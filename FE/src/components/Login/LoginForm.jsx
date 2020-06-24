@@ -6,15 +6,16 @@ import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 
 import InputField from "@Components/common/InputField";
-import PrimaryButton from "@Components/common/PrimaryButton";
+import CustomButton from "@Components/common/CustomButton";
+
+const ID = "아이디";
+const PASSWORD = "패스워드";
+const LOGIN = "로그인";
+const GITHUB_LOGIN = "Github 으로 로그인하기";
+const SIGN_UP = "회원가입";
 
 const LoginForm = () => {
   const classes = useStyles();
-  const ID = "아이디";
-  const PASSWORD = "패스워드";
-  const LOGIN = "로그인";
-  const GITHUB_LOGIN = "Github 으로 로그인하기";
-  const SIGN_UP = "회원가입";
 
   return (
     <Box className={classes.wrap} display="flex" alignItems="center" justifyContent="center">
@@ -31,8 +32,8 @@ const LoginForm = () => {
             <Box display="flex" justifyContent="center">
               <Button>{SIGN_UP}</Button>
             </Box>
-            <PrimaryButton color="default" className={classes.button} text={LOGIN} size="large" />
-            <PrimaryButton className={classes.button} text={GITHUB_LOGIN} size="large" />
+            <CustomButton color="default" className={classes.button} text={LOGIN} size="large" />
+            <CustomButton className={classes.button} text={GITHUB_LOGIN} size="large" />
           </Box>
         </form>
       </Box>

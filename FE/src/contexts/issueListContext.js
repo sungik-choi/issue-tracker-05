@@ -1,14 +1,7 @@
 import React, { createContext, useMemo, useReducer } from "react";
 import PropTypes from "prop-types";
 
-import { issueListReducer } from "@Reducers/issueListReducer";
-
-export const initialState = {
-  issues: null,
-  labelInfo: null,
-  milestoneInfo: null,
-  users: null,
-};
+import { issueListReducer, initialState } from "@Reducers/issueListReducer";
 
 export const IssueListContext = createContext();
 

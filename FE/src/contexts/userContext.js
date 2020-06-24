@@ -1,15 +1,7 @@
 import React, { createContext, useMemo, useReducer } from "react";
 import PropTypes from "prop-types";
 
-import { userReducer } from "@Reducers/userReducer";
-
-// ! Mock User Data
-
-export const initialState = {
-  id: "sungik-choi",
-  avatarUrl:
-    "https://lh3.googleusercontent.com/lv3q0LxixvhfsBwhLKzpp53EPMQO92jq98uOKqT9sL0hv4gF8l9bl6SRN23FLxkeJH3ldxZt-PreP1zddg",
-};
+import { userReducer, initialState } from "@Reducers/userReducer";
 
 export const UserContext = createContext();
 
