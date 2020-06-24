@@ -1,7 +1,8 @@
 const detailedIssueUrl = process.env.REACT_APP_DB_HOST_ISSUES;
 
 export const initialState = {
-  issues: null,
+  issue: null,
+  commentInfo: null,
   labelInfo: null,
   milestoneInfo: null,
   users: null,

@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 
+import { DetailedIssueContext } from "@Contexts/detailedIssueContext";
 import { data } from "@Mock/detailedIssue";
 
 import CustomTable from "@Components/common/CustomTable";
@@ -13,8 +14,12 @@ import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import { makeStyles } from "@material-ui/core/styles";
 
 const Comment = () => {
-  const authorName = data.issue.author.userName;
-  const { comments } = data.issue.commentInfo;
+  const {
+    commentInfo: { comments },
+    issue: {
+      author: { name },
+    },
+  } = useContext(DetailedIssueContext).detailedIssue;
 
   const classes = useStyles();
 
@@ -24,14 +29,14 @@ const Comment = () => {
         ariaLabel={"Issue comment"}
         className={classes.table}
         hover={false}
-        headContents={<ToolBar userName={userName} createdAt={createdAt} authorName={authorName} />}
+        headContents={<ToolBar userName={userName} createdAt={createdAt} authorName={name} />}
         bodyContents={[{ id: userId, contents: description }]}
-        bodyContents={[
-          {
-            id: userId,
-            contents: <TextareaAutosize aria-label="Comment edit" rowsMin={3} />,
-          },
-        ]}
+        // bodyContents={[
+        //   {
+        //     id: userId,
+        //     contents: <TextareaAutosize aria-label="Comment edit" rowsMin={3} />,
+        //   },
+        // ]}
       />
     );
   };
@@ -39,15 +44,17 @@ const Comment = () => {
   return (
     <Box my={4} ml={"40px"} width="70%">
       {comments.map((comment) => {
-        const { userId, userName, avatarUrl, createdAt, description, author } = comment;
+        const {
+          id,
+          createdAt,
+          description,
+          commenter: { avatarUrl, name },
+        } = comment;
 
         const commentTable = (
-          <Box position="relative" mb={4} key={userId}>
-            <CustomAvatar id={userName} url={avatarUrl} className={classes.avatar} tooltip />
-            <Box>{tableRender(userName, userId, description, createdAt, author)}</Box>
-            {/* <Box ml="40px" width="70%">
-              {tableRender(userName, userId, description, createdAt, author)}
-            </Box> */}
+          <Box position="relative" mb={4} key={id}>
+            <CustomAvatar id={name} url={avatarUrl} className={classes.avatar} tooltip />
+            <Box>{tableRender(name, id, description, createdAt)}</Box>
           </Box>
         );
 

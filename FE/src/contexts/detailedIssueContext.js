@@ -13,7 +13,7 @@ export const DetailedIssueProvider = ({ children }) => {
       detailedIssue,
       detailedIssueDispatch,
     }),
-    [detailedIssue],
+    [detailedIssue, detailedIssueDispatch],
   );
 
   return (

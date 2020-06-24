@@ -9,7 +9,7 @@ import Box from "@material-ui/core/Box";
 import pipe from "@Utils/pipe";
 import useFetch from "@Hooks/useFetch";
 
-import { DetailedIssueContext } from "@Contexts/DetailedIssueContext";
+import { DetailedIssueContext } from "@Contexts/detailedIssueContext";
 import { initDataFetchOptions } from "@Reducers/detailedIssueReducer";
 
 const id = 1;

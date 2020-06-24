@@ -10,7 +10,7 @@ import Login from "@Pages/Login";
 
 import { UserProvider } from "@Contexts/userContext";
 import { IssueListProvider } from "@Contexts/issueListContext";
-import { DetailedIssueProvider } from "@Contexts/DetailedIssueContext";
+import { DetailedIssueProvider } from "@Contexts/detailedIssueContext";
 
 const App = () => {
   return (
