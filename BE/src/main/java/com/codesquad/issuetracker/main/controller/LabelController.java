@@ -1,9 +1,9 @@
 package com.codesquad.issuetracker.main.controller;
 
-import com.codesquad.issuetracker.hamill.dto.request.NewLabelDto;
-import com.codesquad.issuetracker.hamill.dto.response.ApiResponse;
-import com.codesquad.issuetracker.hamill.service.LabelService_Hamill;
-import com.codesquad.issuetracker.hamill.vo.labelVO.ContainedDescriptionLabelInformation;
+import com.codesquad.issuetracker.main.dto.request.NewLabelDto;
+import com.codesquad.issuetracker.main.dto.response.ApiResponse;
+import com.codesquad.issuetracker.main.vo.labelVO.ContainedDescriptionLabelInformation;
+import com.codesquad.issuetracker.main.service.LabelService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -16,27 +16,27 @@ public class LabelController {
 
     private static final Logger logger = LoggerFactory.getLogger(LabelController.class);
 
-    private final LabelService_Hamill labelService_hamill;
+    private final LabelService labelService;
 
-    public LabelController(LabelService_Hamill labelService_hamill) {
-        this.labelService_hamill = labelService_hamill;
+    public LabelController(LabelService labelService) {
+        this.labelService = labelService;
     }
 
     @GetMapping("")
     public ResponseEntity<ApiResponse<ContainedDescriptionLabelInformation>> showLabels() {
-        return new ResponseEntity<>(ApiResponse.OK(labelService_hamill.containDescriptionLabelInformation()), HttpStatus.OK);
+        return new ResponseEntity<>(ApiResponse.OK(labelService.containDescriptionLabelInformation()), HttpStatus.OK);
     }
 
     @PostMapping("")
     public ResponseEntity<ApiResponse<?>> create(@RequestBody NewLabelDto newLabelDto) {
-        labelService_hamill.create(newLabelDto);
+        labelService.create(newLabelDto);
         return new ResponseEntity<>(ApiResponse.OK("SUCCESS"), HttpStatus.OK);
     }
 
     @PatchMapping("/{labelId}")
     public ResponseEntity<ApiResponse<?>> update(@PathVariable Integer labelId, @RequestBody NewLabelDto newLabelDto) throws Exception {
         try {
-            labelService_hamill.update(labelId, newLabelDto);
+            labelService.update(labelId, newLabelDto);
         } catch (Exception e) {
             return new ResponseEntity<>(ApiResponse.FORBIDDEN("backgroundColor, color 를 hex code 형식으로 넣어주세요(예:#ffffff)"), HttpStatus.FORBIDDEN);
         }
@@ -45,7 +45,7 @@ public class LabelController {
 
     @DeleteMapping("/{labelId}")
     public ResponseEntity<ApiResponse<?>> delete(@PathVariable Integer labelId) {
-        labelService_hamill.delete(labelId);
+        labelService.delete(labelId);
         return new ResponseEntity<>(ApiResponse.OK("SUCCESS"), HttpStatus.OK);
     }
 }
