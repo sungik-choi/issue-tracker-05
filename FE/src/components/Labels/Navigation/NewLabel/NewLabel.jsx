@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import pipe from "@Utils/pipe";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
@@ -32,10 +33,7 @@ const NewLabel = ({
   const changeDescriptionHandler = ({ target }) =>
     dispatch(setLabelInfo({ description: target.value }));
 
-  const clickCreateButtonHandler = () => {
-    submitHandler();
-    clickHandler();
-  };
+  const clickCreateButtonHandler = () => pipe(submitHandler, clickHandler)();
 
   return (
     <Box className={classes.container} component={Paper} variant="outlined" p={2} mb={2}>
