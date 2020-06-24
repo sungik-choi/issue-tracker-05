@@ -31,9 +31,9 @@ const IssueStatus = () => {
   return (
     <Box display="flex" alignItems="center" mt={1}>
       {isOpened ? (
-        <Chip color="primary" label={OPEN_TEXT} icon={<StatusIcon />} />
+        <Chip color="primary" label={OPEN_TEXT} icon={<StatusIcon color="white" />} />
       ) : (
-        <Chip color="secondary" label={CLOSE_TEXT} icon={<StatusIcon closed />} />
+        <Chip color="secondary" label={CLOSE_TEXT} icon={<StatusIcon color="white" closed />} />
       )}
       <Typography color="textSecondary" variant="subtitle1" component="div">
         <strong className={classes.userName}>{userName}</strong>
