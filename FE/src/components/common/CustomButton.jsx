@@ -14,11 +14,12 @@ const CustomButton = ({ color, text, clickHandler, ...props }) => {
 CustomButton.defaultProps = {
   clickHandler: null,
   color: "primary",
+  text: "",
 };
 
 CustomButton.propTypes = {
   color: PropTypes.string,
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
   clickHandler: PropTypes.oneOfType([PropTypes.func, PropTypes.instanceOf(null)]),
 };
 
