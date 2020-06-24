@@ -21,7 +21,7 @@ const CANCEL = "Cancel";
 const CREATE_LABEL = "Create Label";
 
 const NewLabel = ({
-  state: { title, backgroundColor, color },
+  state: { title, description, backgroundColor, color },
   dispatch,
   submitHandler,
   clickHandler,
@@ -47,10 +47,19 @@ const NewLabel = ({
       </Box>
       <Grid container component="form" justify="center" alignItems="center" spacing={3}>
         <Grid item xs={3}>
-          <StyledInputField text={LABEL_NAME} required onChange={changeTitleHandler} />
+          <StyledInputField
+            defaultValue={title}
+            text={LABEL_NAME}
+            required
+            onChange={changeTitleHandler}
+          />
         </Grid>
         <Grid item xs={4}>
-          <StyledInputField text={DESCRIPTION} onChange={changeDescriptionHandler} />
+          <StyledInputField
+            defaultValue={description}
+            text={DESCRIPTION}
+            onChange={changeDescriptionHandler}
+          />
         </Grid>
         <Grid item xs={2}>
           <ColorGenerateButton
@@ -113,6 +122,7 @@ const useStyles = makeStyles((theme) => ({
 NewLabel.propTypes = {
   state: PropTypes.shape({
     title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
     backgroundColor: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired,
   }).isRequired,
