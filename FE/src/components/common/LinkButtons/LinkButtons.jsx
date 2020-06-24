@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import LocalOfferOutlinedIcon from "@material-ui/icons/LocalOfferOutlined";
@@ -16,6 +17,8 @@ const LinkButtons = ({ labelCount, milestoneCount, activeButton }) => {
   return (
     <ButtonGroup variant="outlined">
       <LinkButton
+        component={Link}
+        to="/labels"
         color={isLabelButtonActivated && "primary"}
         text={LABELS}
         icon={<LocalOfferOutlinedIcon />}
@@ -24,6 +27,8 @@ const LinkButtons = ({ labelCount, milestoneCount, activeButton }) => {
         disableElevation
       />
       <LinkButton
+        component={Link}
+        to="/milestones"
         color={isMilestonesButtonActivated && "primary"}
         text={MILESTONES}
         icon={<OutlinedFlagIcon />}
