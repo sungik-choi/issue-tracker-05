@@ -13,7 +13,9 @@ const ColorGenerateButton = ({ backgroundColor, color, setLabelColor }) => {
   const props = { backgroundColor, color };
   const classes = useStyles(props);
 
-  const colorValueExceptSharp = (colorValue) => colorValue.substring(1);
+  const SHARP = "#";
+  const INDEX_OF_SHARP = 1;
+  const colorValueExceptSharp = (colorValue) => colorValue.substring(INDEX_OF_SHARP);
 
   return (
     <Box display="flex" justifyContent="center" alignItems="center">
@@ -27,7 +29,7 @@ const ColorGenerateButton = ({ backgroundColor, color, setLabelColor }) => {
         label="Color"
         value={colorValueExceptSharp(backgroundColor)}
         InputProps={{
-          startAdornment: <InputAdornment position="start">#</InputAdornment>,
+          startAdornment: <InputAdornment position="start">{SHARP}</InputAdornment>,
           readOnly: true,
         }}
         InputLabelProps={{
