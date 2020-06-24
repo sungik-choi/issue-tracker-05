@@ -1,4 +1,5 @@
 import React from "react";
+import { Switch, Route } from "react-router-dom";
 
 import GlobalStyle from "@Styles/GlobalStyle";
 import Container from "@material-ui/core/Container";
@@ -20,11 +21,21 @@ const App = () => {
       <UserProvider>
         <Header />
         <Container maxWidth="lg">
-          {/* <IssueListProvider><Issues /></IssueListProvider> */}
-          <LabelListProvider>
-            <Labels />
-          </LabelListProvider>
-          {/* <Login /> */}
+          <Switch>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path={["/", "/issues"]} exact>
+              <IssueListProvider>
+                <Issues />
+              </IssueListProvider>
+            </Route>
+            <Route path="/labels">
+              <LabelListProvider>
+                <Labels />
+              </LabelListProvider>
+            </Route>
+          </Switch>
         </Container>
       </UserProvider>
     </>
