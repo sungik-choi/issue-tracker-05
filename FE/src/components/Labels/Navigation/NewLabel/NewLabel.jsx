@@ -12,7 +12,6 @@ import InputField from "@Components/common/InputField";
 import CustomButton from "@Components/common/CustomButton";
 
 import ColorGenerateButton from "./ColorGenerateButton";
-import CreateAndCancelButton from "./CreateAndCancelButton";
 
 const LABEL_NAME = "Label name";
 const DESCRIPTION = "Description";
@@ -20,6 +19,7 @@ const LABEL_PREVIEW = "Label Preview";
 const CANCEL = "Cancel";
 const CREATE_LABEL = "Create Label";
 
+const NewLabel = ({ clickCancelButtonHandler, clickCreateButtonHandler }) => {
   const classes = useStyles();
 
   const [labelColor, setLabelColor] = useState(generateRandomColor());
@@ -57,7 +57,16 @@ const CREATE_LABEL = "Create Label";
           />
         </Grid>
         <Grid item xs={3}>
-          <CreateAndCancelButton />
+          <Box
+            className={classes.buttonWrap}
+            display="flex"
+            justifyContent="flex-end"
+            alignItems="center"
+            pt={1}
+          >
+            <CustomButton color="default" text={CANCEL} clickHandler={clickCancelButtonHandler} />
+            <CustomButton text={CREATE_LABEL} clickHandler={clickCreateButtonHandler} />
+          </Box>
         </Grid>
       </Grid>
     </Box>
@@ -70,6 +79,12 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.grey[100],
     "& input": {
       backgroundColor: theme.palette.common.white,
+    },
+  },
+  buttonWrap: {
+    "& > button + button": {
+      height: "100%",
+      marginLeft: theme.spacing(1),
     },
   },
 }));

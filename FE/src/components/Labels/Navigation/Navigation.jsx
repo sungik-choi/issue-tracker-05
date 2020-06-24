@@ -27,7 +27,12 @@ const Navigation = () => {
           clickHandler={() => setShowNewLabel(!showNewLabel)}
         />
       </Box>
-      {showNewLabel && <NewLabel />}
+      {showNewLabel && (
+        <NewLabel
+          clickCancelButtonHandler={() => setShowNewLabel(!showNewLabel)}
+          clickCreateButtonHandler={() => setShowNewLabel(!showNewLabel)}
+        />
+      )}
     </>
   );
 };
