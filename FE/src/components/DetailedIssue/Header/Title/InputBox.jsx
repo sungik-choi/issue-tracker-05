@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 
 import { DetailedIssueContext } from "@Contexts/detailedIssueContext";
@@ -26,6 +26,7 @@ const InputBox = ({ value, onChange, onClickSave, onClickClose }) => {
   } = useContext(DetailedIssueContext);
 
   const { getData } = pipe(editTitleFetchOptions, useFetch)({ detailedIssueDispatch, id, value });
+
   const classes = useStyles();
 
   const onSubmitForm = (e) => {
@@ -38,7 +39,7 @@ const InputBox = ({ value, onChange, onClickSave, onClickClose }) => {
       <Box display="flex" alignItems="center" justifyContent="space-between">
         <InputField
           onChange={onChange}
-          value={value}
+          value={value || ""}
           inputProps={{ "aria-label": "Issue title" }}
         />
         <ButtonGroup>

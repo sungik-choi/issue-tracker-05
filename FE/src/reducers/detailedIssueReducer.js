@@ -44,7 +44,7 @@ export const initDataFetchOptions = ({ detailedIssueDispatch, id }) => ({
   },
 });
 
-export const editTitleFetchOptions = ({ detailedIssueDispatch, id, title }) => ({
+export const editTitleFetchOptions = ({ detailedIssueDispatch, id, value }) => ({
   url: `${detailedIssueUrl}${id}/title`,
   dispatch: detailedIssueDispatch,
   actionType: {
@@ -52,6 +52,7 @@ export const editTitleFetchOptions = ({ detailedIssueDispatch, id, title }) => (
     fetchError,
   },
   skip: true,
+  deps: [value],
   option: {
     headers: {
       "Content-Type": "application/json",
@@ -59,7 +60,7 @@ export const editTitleFetchOptions = ({ detailedIssueDispatch, id, title }) => (
     method: "PATCH",
     body: JSON.stringify({
       userId: id,
-      issueTitle: title,
+      issueTitle: value,
     }),
   },
 });
