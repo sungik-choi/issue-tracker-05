@@ -20,7 +20,7 @@ const App = () => {
       <UserProvider>
         <Header />
         <Container maxWidth="lg">
-          <IssueListProvider>{/* <Issues /> */}</IssueListProvider>
+          {/* <IssueListProvider><Issues /></IssueListProvider> */}
           <LabelListProvider>
             <Labels />
           </LabelListProvider>
