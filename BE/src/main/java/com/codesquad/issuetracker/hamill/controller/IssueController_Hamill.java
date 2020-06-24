@@ -45,7 +45,11 @@ public class IssueController_Hamill {
 
     @PatchMapping("{issueId}/title")
     public ResponseEntity<ApiResponse<?>> updateTitle(@PathVariable Long issueId, @RequestBody UpdateTitleDto updateTitleDto) throws AuthenticationException {
-        issueService_Hamill.updateTitle(issueId, updateTitleDto);
+        try {
+            issueService_Hamill.updateTitle(issueId, updateTitleDto);
+        } catch (AuthenticationException e) {
+            return new ResponseEntity<>(ApiResponse.UNAUTHORIZED("권한이 없습니다. 사용자 인증 후 다시 요청 해주세요."), HttpStatus.UNAUTHORIZED);
+        }
         return new ResponseEntity<>(ApiResponse.OK("SUCCESS"), HttpStatus.OK);
     }
  }
