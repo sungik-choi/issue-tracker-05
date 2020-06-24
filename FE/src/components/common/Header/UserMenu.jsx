@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { useCookies } from "react-cookie";
+import pipe from "@Utils/pipe";
 
 import Popover from "@material-ui/core/Popover";
 import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
@@ -26,10 +27,7 @@ const UserMenu = ({ userId, url }) => {
   const [, , removeCookie] = useCookies([TOKEN]);
   const { userDispatch } = useContext(UserContext);
 
-  const signOutHandler = () => {
-    removeCookie(TOKEN);
-    userDispatch(deleteUserData());
-  };
+  const signOutHandler = () => pipe(removeCookie, deleteUserData, userDispatch)(TOKEN);
 
   return (
     <PopupState variant="popover" popupId="demo-popup-popover">

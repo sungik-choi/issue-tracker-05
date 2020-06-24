@@ -1,8 +1,6 @@
 import React, { useContext, useEffect } from "react";
-
 import jwtDecode from "jwt-decode";
 import { useCookies } from "react-cookie";
-
 import pipe from "@Utils/pipe";
 
 import { UserContext } from "@Contexts/userContext";
