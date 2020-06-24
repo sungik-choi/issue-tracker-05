@@ -21,8 +21,9 @@ const LoginForm = () => {
     <Box className={classes.wrap} display="flex" alignItems="center" justifyContent="center">
       <Box component={Paper} variant="outlined" width={400} p={5}>
         <form>
-          <InputField label={ID} />
+          <InputField disabled label={ID} />
           <InputField
+            disabled
             label={PASSWORD}
             id="standard-password-input"
             type="password"
@@ -30,9 +31,15 @@ const LoginForm = () => {
           />
           <Box className={classes.buttonWrap}>
             <Box display="flex" justifyContent="center">
-              <Button>{SIGN_UP}</Button>
+              <Button disabled>{SIGN_UP}</Button>
             </Box>
-            <CustomButton color="default" className={classes.button} text={LOGIN} size="large" />
+            <CustomButton
+              disabled
+              color="default"
+              className={classes.button}
+              text={LOGIN}
+              size="large"
+            />
             <CustomButton className={classes.button} text={GITHUB_LOGIN} size="large" />
           </Box>
         </form>
