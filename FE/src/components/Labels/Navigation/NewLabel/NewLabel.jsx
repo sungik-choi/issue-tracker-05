@@ -28,12 +28,14 @@ const NewLabel = ({
 }) => {
   const classes = useStyles();
 
-  const changeTitleHandler = ({ target }) => dispatch(setLabelInfo({ title: target.value }));
+  const changeTitleHandler = ({ target }) => pipe(setLabelInfo, dispatch)({ title: target.value });
 
   const changeDescriptionHandler = ({ target }) =>
-    dispatch(setLabelInfo({ description: target.value }));
+    pipe(setLabelInfo, dispatch)({ description: target.value });
 
   const clickCreateButtonHandler = () => pipe(submitHandler, clickHandler)();
+
+  const setLabelColorHandler = () => pipe(setLabelColor, dispatch)();
 
   return (
     <Box className={classes.container} component={Paper} variant="outlined" p={2} mb={2}>
@@ -65,7 +67,7 @@ const NewLabel = ({
           <ColorGenerateButton
             backgroundColor={backgroundColor}
             color={color}
-            setLabelColor={() => dispatch(setLabelColor())}
+            setLabelColor={setLabelColorHandler}
           />
         </Grid>
         <Grid item xs={3}>
