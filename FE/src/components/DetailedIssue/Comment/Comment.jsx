@@ -7,6 +7,8 @@ import CustomTable from "@Components/common/CustomTable";
 import CustomAvatar from "@Components/common/CustomAvatar";
 import ToolBar from "./ToolBar";
 import Write from "./Write/Write";
+import Edit from "./Edit/Edit";
+import editHandler from "@Components/DetailedIssue/editHandler";
 
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
@@ -24,19 +26,45 @@ const Comment = () => {
   const classes = useStyles();
 
   const tableRender = (userName, userId, description, createdAt) => {
+    const {
+      isEdit,
+      titleValue,
+      inputTitle,
+      onToggle,
+      onChangeInput,
+      onClickSave,
+      onClickClose,
+    } = editHandler(description);
+
+    const bodyContentRender = () => {
+      if (isEdit) {
+        return [
+          {
+            id: userId,
+            contents: (
+              <Edit value={titleValue} inputValue={inputTitle} onChangeInput={onChangeInput} />
+            ),
+          },
+        ];
+      } else {
+        return [{ id: userId, contents: description }];
+      }
+    };
+
     return (
       <CustomTable
         ariaLabel={"Issue comment"}
         className={classes.table}
         hover={false}
-        headContents={<ToolBar userName={userName} createdAt={createdAt} authorName={name} />}
-        bodyContents={[{ id: userId, contents: description }]}
-        // bodyContents={[
-        //   {
-        //     id: userId,
-        //     contents: <TextareaAutosize aria-label="Comment edit" rowsMin={3} />,
-        //   },
-        // ]}
+        headContents={
+          <ToolBar
+            userName={userName}
+            createdAt={createdAt}
+            authorName={name}
+            clickHandler={onToggle}
+          />
+        }
+        bodyContents={bodyContentRender()}
       />
     );
   };
@@ -74,12 +102,11 @@ const useStyles = makeStyles(() => ({
     "& .MuiTableRow-hover": {
       pointerEvents: "none",
     },
-  },
-  edit: {
     "& textarea": {
       width: "100%",
     },
   },
+  edit: {},
   avatar: {
     position: "absolute",
     top: 3,

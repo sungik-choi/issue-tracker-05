@@ -9,7 +9,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const COMMENT_BTN_TEXT = "comment ";
 const CANCEL_BTN_TEXT = "Cancel";
 
-const TextArea = () => {
+const Edit = () => {
   const classes = useStyles();
 
   return (
@@ -34,4 +34,4 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default TextArea;
+export default Edit;
