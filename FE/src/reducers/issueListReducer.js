@@ -1,3 +1,6 @@
+import useFetch from "@Hooks/useFetch";
+import { issuesUrl } from "@Utils/urls";
+
 export const initialState = {
   issues: null,
   labelInfo: null,
@@ -28,3 +31,16 @@ export const issueListReducer = (state, action) => {
       return state;
   }
 };
+
+export const initialFetch = (dispatch) =>
+  useFetch({
+    url: issuesUrl,
+    actionType: {
+      successAction: fetchSuccess,
+      errorAction: fetchError,
+    },
+    dispatch,
+    fetchOption: {
+      method: "GET",
+    },
+  });
