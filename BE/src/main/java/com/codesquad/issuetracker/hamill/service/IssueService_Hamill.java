@@ -5,6 +5,7 @@ import com.codesquad.issuetracker.hamill.domain.Issue;
 import com.codesquad.issuetracker.hamill.domain.Milestone;
 import com.codesquad.issuetracker.hamill.domain.User;
 import com.codesquad.issuetracker.hamill.dto.request.NewIssueDto;
+import com.codesquad.issuetracker.hamill.dto.request.UpdateTitleDto;
 import com.codesquad.issuetracker.hamill.dto.response.IssueDto;
 import com.codesquad.issuetracker.hamill.dto.response.ListOfIssuesDto;
 import com.codesquad.issuetracker.hamill.vo.UserVO.UserSummary;
@@ -18,7 +19,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.HttpClientErrorException;
 
+import javax.naming.AuthenticationException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -84,6 +87,17 @@ public class IssueService_Hamill {
 
         issueDao_Hamill.save(newIssueDto);
         commentService_hamill.save(newIssueDto);
+    }
+
+    public void updateTitle(Long issueId, UpdateTitleDto updateTitleDto) throws AuthenticationException {
+        // issue 작성자가 아니면 title 을 수정할 수 없다
+        Issue issue = issueDao_Hamill.findIssueByIssueId(issueId);
+
+        if (!issue.getUserId().equals(updateTitleDto.getUserId())) {
+            throw new AuthenticationException("이슈 작성자가 아닙니다. 접근을 금지합니다.");
+        }
+
+        issueDao_Hamill.updateTitle(issueId, updateTitleDto.getIssueTitle());
     }
 
 
