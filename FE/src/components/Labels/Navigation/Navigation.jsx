@@ -14,7 +14,7 @@ const NEW_LABEL_BTN_TEXT = "New Label";
 
 const Navigation = () => {
   const [showNewLabel, setShowNewLabel] = useState(false);
-  const [labelState, dispatchLabelState] = useReducer(labelReducer, initialState);
+  const [labelState, labelStateDispatch] = useReducer(labelReducer, initialState);
 
   const toggleNewLabel = () => setShowNewLabel(!showNewLabel);
 
@@ -23,7 +23,7 @@ const Navigation = () => {
     useFetch,
   )({
     data: labelState,
-    dispatch: dispatchLabelState,
+    dispatch: labelStateDispatch,
   });
 
   return (
@@ -42,7 +42,7 @@ const Navigation = () => {
       {showNewLabel && (
         <NewLabel
           state={labelState}
-          dispatch={dispatchLabelState}
+          dispatch={labelStateDispatch}
           submitHandler={getData}
           clickHandler={toggleNewLabel}
         />
