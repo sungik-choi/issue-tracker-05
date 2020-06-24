@@ -59,6 +59,21 @@ public class IssueDao {
         , issueId);
     }
 
+    public void updateTitle(Long issueId, String title) {
+        String sql = "UPDATE issue SET title = ? WHERE id = ?";
+        jdbcTemplate.update(sql, title, issueId);
+    }
+
+    public void updateStateOfIssue(boolean isOpened, Long issueId) {
+        String sql = "UPDATE issue SET is_opened = ? WHERE id = ?";
+        jdbcTemplate.update(sql, isOpened, issueId);
+    }
+
+    public void updateMilestoneIdOfIssue(Long issueId, Integer milestoneId) {
+        String sql = "UPDATE issue SET milestone_id = ? WHERE id = ?";
+        jdbcTemplate.update(sql, milestoneId, issueId);
+    }
+
     public void saveNewIssueHasLabel(Long labelId, Long issueId) {
         logger.info("##### labelId: {}", labelId);
         logger.info("##### issueId: {}", issueId);

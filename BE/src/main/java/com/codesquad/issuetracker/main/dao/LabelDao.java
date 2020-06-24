@@ -1,7 +1,7 @@
 package com.codesquad.issuetracker.main.dao;
 
-import com.codesquad.issuetracker.main.domain.Label;
 import com.codesquad.issuetracker.main.dto.request.NewLabelDto;
+import com.codesquad.issuetracker.main.domain.Label;
 import com.codesquad.issuetracker.main.vo.labelVO.LabelSummary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,5 +53,17 @@ public class LabelDao {
                 newLabelDto.getDescription(),
                 newLabelDto.getBackgroundColor(),
                 newLabelDto.getColor());
+    }
+
+    public void update(Integer labelId, NewLabelDto newLabelDto) {
+        String sql = "UPDATE label SET name = ?, description = ?, background_color = ?, color = ? WHERE id = ?";
+        jdbcTemplate.update(sql,
+                newLabelDto.getTitle(), newLabelDto.getDescription(),
+                newLabelDto.getBackgroundColor(), newLabelDto.getColor(), labelId);
+    }
+
+    public void delete(Integer labelId) {
+        String sql = "DELETE FROM label WHERE id = ?";
+        jdbcTemplate.update(sql, labelId);
     }
 }

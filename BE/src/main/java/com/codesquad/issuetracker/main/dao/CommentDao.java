@@ -76,6 +76,30 @@ public class CommentDao {
                 newIssueDto.getUserId());
     }
 
+    public com.codesquad.issuetracker.hamill.domain.Comment findCommentByIssueIdAndCommentId(Long issueId, Long commentId) {
+        String sql = "SELECT id, description, created_date_time, issue_id, user_id FROM comment WHERE issue_id = ? AND id= ?";
+        return jdbcTemplate.queryForObject(sql,
+                (rs,rowNum) ->
+                        com.codesquad.issuetracker.hamill.domain.Comment.of(
+                                rs.getLong("id"),
+                                rs.getString("description"),
+                                rs.getTimestamp("created_date_time").toLocalDateTime(),
+                                rs.getLong("issue_id"),
+                                rs.getLong("user_id")),
+                issueId, commentId);
+    }
+
+    public void save(com.codesquad.issuetracker.hamill.dto.request.NewIssueDto newIssueDto) {
+        String sql =
+                "INSERT INTO comment(description, created_date_time, issue_id, user_id) " +
+                        "VALUES(?, ?, LAST_INSERT_ID(), ?)";
+
+        jdbcTemplate.update(sql,
+                newIssueDto.getDescription(),
+                Timestamp.valueOf(LocalDateTime.now()),
+                newIssueDto.getUserId());
+    }
+
     public void create(Long issueId, NewCommentDto newCommentDto) {
         String sql =
                 "INSERT INTO comment(description, created_date_time, issue_id, user_id) " +
@@ -86,5 +110,15 @@ public class CommentDao {
                 Timestamp.valueOf(LocalDateTime.now()),
                 issueId,
                 newCommentDto.getUserId());
+    }
+
+    public void update(Long issueId, Long commentId, String description) {
+        String sql = "UPDATE comment SET description = ? WHERE issue_id = ? AND id = ?";
+        jdbcTemplate.update(sql, description, issueId, commentId);
+    }
+
+    public void delete(Long issueId, Long commentId) {
+        String sql = "DELETE FROM comment WHERE issue_id = ? AND id = ?";
+        jdbcTemplate.update(sql, issueId, commentId);
     }
 }
