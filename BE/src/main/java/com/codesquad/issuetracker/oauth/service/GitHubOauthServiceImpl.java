@@ -112,6 +112,7 @@ public class GitHubOauthServiceImpl implements GitHubOauthService {
 
     public void sendUserCookies(HttpServletResponse response, String jwt, String url) throws IOException {
         Cookie cookie = new Cookie("token", jwt);
+        cookie.setPath("/");
         response.addCookie(cookie);
         response.sendRedirect(url);
     }
