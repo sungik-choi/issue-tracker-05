@@ -1,46 +1,103 @@
-import React from "react";
+import React, { useContext } from "react";
 
+import { DetailedIssueContext } from "@Contexts/detailedIssueContext";
 import { data } from "@Mock/detailedIssue";
-
-import { makeStyles } from "@material-ui/core/styles";
-import Box from "@material-ui/core/Box";
 
 import CustomTable from "@Components/common/CustomTable";
 import CustomAvatar from "@Components/common/CustomAvatar";
 import ToolBar from "./ToolBar";
+import Write from "./Write/Write";
+import Edit from "./Edit/Edit";
+import editHandler from "@Components/DetailedIssue/editHandler";
+
+import Box from "@material-ui/core/Box";
+import { makeStyles } from "@material-ui/core/styles";
 
 const Comment = () => {
-  const { comments } = data.issue.commentInfo;
+  const {
+    commentInfo: { comments },
+    issue: {
+      id,
+      author: { name },
+    },
+  } = useContext(DetailedIssueContext).detailedIssue;
 
   const classes = useStyles();
 
-  const tableRender = (userName, userId, description, createdAt, author) => {
+  const tableRender = (userName, userId, description, createdAt) => {
+    const {
+      isEdit,
+      titleValue,
+      inputTitle,
+      onToggle,
+      onChangeInput,
+      onClickSave,
+      onClickClose,
+    } = editHandler(description);
+
+    const bodyContentRender = () => {
+      if (isEdit) {
+        return [
+          {
+            id: userId,
+            contents: (
+              <Edit
+                id={id}
+                userId={userId}
+                value={inputTitle}
+                onChange={onChangeInput}
+                inputValue={inputTitle}
+                onChangeInput={onChangeInput}
+                onClickClose={onClickClose}
+                onClickSave={onClickSave}
+              />
+            ),
+          },
+        ];
+      } else {
+        return [{ id: userId, contents: titleValue }];
+      }
+    };
+
     return (
       <CustomTable
-        headContents={<ToolBar userName={userName} createdAt={createdAt} author={author} />}
-        bodyContents={[{ id: userId, contents: description }]}
+        ariaLabel={"Issue comment"}
         className={classes.table}
+        hover={false}
+        headContents={
+          <ToolBar
+            userName={userName}
+            createdAt={createdAt}
+            authorName={name}
+            clickHandler={onToggle}
+          />
+        }
+        bodyContents={bodyContentRender()}
       />
     );
   };
 
   return (
-    <>
+    <Box my={4} ml={"40px"} width="70%">
       {comments.map((comment) => {
-        const { userId, userName, avatarUrl, createdAt, description, author } = comment;
+        const {
+          id,
+          createdAt,
+          description,
+          commenter: { avatarUrl, name },
+        } = comment;
 
         const commentTable = (
-          <Box position="relative" mb={4} key={userId}>
-            <CustomAvatar id={userName} url={avatarUrl} className={classes.avatar} tooltip />
-            <Box ml="40px" width="70%">
-              {tableRender(userName, userId, description, createdAt, author)}
-            </Box>
+          <Box position="relative" mb={4} key={id}>
+            <CustomAvatar id={name} url={avatarUrl} className={classes.avatar} tooltip />
+            <Box>{tableRender(name, id, description, createdAt)}</Box>
           </Box>
         );
 
         return commentTable;
       })}
-    </>
+      <Write />
+    </Box>
   );
 };
 
@@ -53,14 +110,15 @@ const useStyles = makeStyles(() => ({
     "& .MuiTableRow-hover": {
       pointerEvents: "none",
     },
-    "& .author": {
-      backgroundColor: "red",
+    "& textarea": {
+      width: "100%",
     },
   },
+  edit: {},
   avatar: {
     position: "absolute",
     top: 3,
-    left: -5,
+    left: -47,
   },
 }));
 

@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
 import Chip from "@material-ui/core/Chip";
 import { makeStyles } from "@material-ui/core/styles";
 
-const ToolBar = ({ userName, createdAt, author }) => {
+const ToolBar = ({ userName, createdAt, authorName, clickHandler }) => {
   const EDIT_BTN_TEXT = "Edit";
 
   const classes = useStyles();
@@ -26,10 +26,10 @@ const ToolBar = ({ userName, createdAt, author }) => {
         <strong>{userName}</strong>
         <span>{statusMessage}</span>
       </Typography>
-      {author && (
+      {userName === authorName && (
         <div>
           <Chip label="Author" variant="outlined" />
-          <Button>{EDIT_BTN_TEXT}</Button>
+          <Button onClick={clickHandler}>{EDIT_BTN_TEXT}</Button>
         </div>
       )}
     </Box>

@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
+
+import { DetailedIssueContext } from "@Contexts/detailedIssueContext";
+import { editTitleFetchOptions } from "@Reducers/detailedIssueReducer";
 
 import InputField from "@Components/common/InputField";
 
@@ -8,15 +11,27 @@ import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { makeStyles } from "@material-ui/core/styles";
 
+import pipe from "@Utils/pipe";
+import useFetch from "@Hooks/useFetch";
+
+const SAVE_BTN_TEXT = "save";
+const CANCEL_BTN_TEXT = "Cancel";
+
 const InputBox = ({ value, onChange, onClickSave, onClickClose }) => {
-  const SAVE_BTN_TEXT = "save";
-  const CANCEL_BTN_TEXT = "Cancel";
+  const {
+    detailedIssue: {
+      issue: { id },
+    },
+    detailedIssueDispatch,
+  } = useContext(DetailedIssueContext);
+
+  const { getData } = pipe(editTitleFetchOptions, useFetch)({ detailedIssueDispatch, id, value });
 
   const classes = useStyles();
 
   const onSubmitForm = (e) => {
     e.preventDefault();
-    onClickSave();
+    onClickSave(getData);
   };
 
   return (
@@ -24,7 +39,7 @@ const InputBox = ({ value, onChange, onClickSave, onClickClose }) => {
       <Box display="flex" alignItems="center" justifyContent="space-between">
         <InputField
           onChange={onChange}
-          value={value}
+          value={value || ""}
           inputProps={{ "aria-label": "Issue title" }}
         />
         <ButtonGroup>

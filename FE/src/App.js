@@ -6,11 +6,13 @@ import Container from "@material-ui/core/Container";
 import Header from "@Components/common/Header/Header";
 
 import Issues from "@Pages/Issues";
+import DetailedIssue from "@Pages/DetailedIssue";
 import Login from "@Pages/Login";
 import Labels from "@Pages/Labels";
 
 import { UserProvider } from "@Contexts/userContext";
 import { IssueListProvider } from "@Contexts/issueListContext";
+import { DetailedIssueProvider } from "@Contexts/detailedIssueContext";
 import { LabelListProvider } from "@Contexts/labelListContext";
 
 const App = () => {
@@ -24,6 +26,9 @@ const App = () => {
           <LabelListProvider>
             <Labels />
           </LabelListProvider>
+          <DetailedIssueProvider>
+              <DetailedIssue />
+          </DetailedIssueProvider>
           {/* <Login /> */}
         </Container>
       </UserProvider>
