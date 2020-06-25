@@ -31,7 +31,7 @@ export const issueListReducer = (state, action) => {
   }
 };
 
-export const initDataFetchOptions = (dispatch) => ({
+export const initDataFetchOptions = ({ dispatch, token }) => ({
   url: issuesUrl,
   dispatch,
   actionType: {
@@ -40,5 +40,8 @@ export const initDataFetchOptions = (dispatch) => ({
   },
   option: {
     method: "GET",
+    headers: {
+      Authorization: token,
+    },
   },
 });

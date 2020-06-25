@@ -21,19 +21,31 @@ const LoginForm = () => {
     <Box className={classes.wrap} display="flex" alignItems="center" justifyContent="center">
       <Box component={Paper} variant="outlined" width={400} p={5}>
         <form>
-          <InputField label={ID} />
+          <InputField disabled label={ID} />
           <InputField
+            disabled
             label={PASSWORD}
             id="standard-password-input"
             type="password"
             autoComplete="current-password"
           />
-          <Box className={classes.buttonWrap}>
+          <Box>
             <Box display="flex" justifyContent="center">
-              <Button>{SIGN_UP}</Button>
+              <Button disabled>{SIGN_UP}</Button>
             </Box>
-            <CustomButton color="default" className={classes.button} text={LOGIN} size="large" />
-            <CustomButton className={classes.button} text={GITHUB_LOGIN} size="large" />
+            <CustomButton
+              disabled
+              color="default"
+              className={classes.button}
+              text={LOGIN}
+              size="large"
+            />
+            <CustomButton
+              className={classes.githubButton}
+              text={GITHUB_LOGIN}
+              size="large"
+              href={process.env.OAUTH_URL}
+            />
           </Box>
         </form>
       </Box>
@@ -48,10 +60,9 @@ const useStyles = makeStyles((theme) => ({
   button: {
     width: "100%",
   },
-  buttonWrap: {
-    "& > button": {
-      marginTop: theme.spacing(1.5),
-    },
+  githubButton: {
+    width: "100%",
+    marginTop: theme.spacing(1.5),
   },
 }));
 

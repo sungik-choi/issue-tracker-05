@@ -46,7 +46,7 @@ export const labelReducer = (state, action) => {
   }
 };
 
-export const createLabelFetchOptions = ({ data, dispatch }) => ({
+export const createLabelFetchOptions = ({ data, dispatch, token }) => ({
   url: labelsUrl,
   dispatch,
   actionType: {
@@ -56,6 +56,10 @@ export const createLabelFetchOptions = ({ data, dispatch }) => ({
   option: {
     method: "POST",
     body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token,
+    },
   },
   skip: true,
 });

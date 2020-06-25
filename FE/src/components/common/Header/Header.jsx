@@ -17,7 +17,7 @@ const Header = () => {
   const classes = useStyles();
 
   const {
-    user: { id, avatarUrl },
+    user: { name, avatarUrl },
   } = useContext(UserContext);
 
   return (
@@ -30,7 +30,7 @@ const Header = () => {
           <Typography variant="h6" className={classes.title}>
             {TITLE_TEXT}
           </Typography>
-          {id && <UserMenu userId={id} url={avatarUrl} />}
+          {name && <UserMenu userId={name} url={avatarUrl} />}
         </Toolbar>
       </AppBar>
     </div>

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-
+import { useCookies } from "react-cookie";
 import useFetch from "@Hooks/useFetch";
 import pipe from "@Utils/pipe";
 
@@ -11,9 +11,15 @@ import LabelTable from "@Components/Labels/LabelTable";
 import { LabelListContext } from "@Contexts/labelListContext";
 import { initDataFetchOptions } from "@Reducers/labelListReducer";
 
+import { TOKEN } from "@Constants/constants";
+
 const Labels = () => {
+  const [{ token }] = useCookies([TOKEN]);
   const { labelListDispatch } = useContext(LabelListContext);
-  const { loading, getData } = pipe(initDataFetchOptions, useFetch)(labelListDispatch);
+  const { loading, getData } = pipe(
+    initDataFetchOptions,
+    useFetch,
+  )({ dispatch: labelListDispatch, token });
 
   return (
     <>
@@ -22,7 +28,7 @@ const Labels = () => {
       ) : (
         <>
           <Navigation reFetch={getData} />
-          <LabelTable reFetch={getData} />
+          <LabelTable />
           <Footer />
         </>
       )}

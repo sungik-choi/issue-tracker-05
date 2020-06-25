@@ -10,14 +10,13 @@ const useFetch = ({
 }) => {
   const [loading, setLoading] = useState(true);
   const getData = async () => {
-    const data = await fetch(url, option);
-    const { response } = await data.json();
-
     try {
+      const data = await fetch(url, option);
+      const { response } = await data.json();
       console.log("[log] data : ", response);
       dispatch(fetchSuccess(response));
-    } catch (e) {
-      console.log("[log] error : ", response);
+    } catch (err) {
+      console.log("[log] error : ", err);
       dispatch(fetchError());
     }
     setLoading(false);
