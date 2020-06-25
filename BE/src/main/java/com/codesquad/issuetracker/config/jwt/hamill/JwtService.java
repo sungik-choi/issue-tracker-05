@@ -17,14 +17,14 @@ public class JwtService {
 
     private Logger logger = LoggerFactory.getLogger(JwtService.class);
 
-    public static final Integer EXPIRE_TIME = 1000 * 60 * 1000;
+    public static final Integer EXPIRE_TIME = 1000 * 60 * 500;
     private String secretKey = "ThisIsIssueTracker05SecretKey";
     private byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(secretKey);
     private SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
     private final Key KEY = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
 
 
-    public String makeJwt(String nickname, String name, String email) throws Exception {
+    public String makeJwt(Long id, String name, String avatarUrl) throws Exception {
         Date expireTime = new Date();
         expireTime.setTime(expireTime.getTime() + EXPIRE_TIME);
 
@@ -35,9 +35,9 @@ public class JwtService {
 
         Map<String, Object> map= new HashMap<>();
 
-        map.put("nickname", nickname);
+        map.put("id", id);
         map.put("name", name);
-        map.put("email", email);
+        map.put("avatarUrl", avatarUrl);
 
         JwtBuilder builder = Jwts.builder().setHeader(headerMap)
                                  .setClaims(map)
@@ -53,9 +53,9 @@ public class JwtService {
                                 .parseClaimsJws(jwt).getBody(); // 정상 수행된다면 해당 토큰은 정상토큰
 
             logger.info("expireTime :" + claims.getExpiration());
-            logger.info("nickname :" + claims.get("nickname"));
+            logger.info("id :" + claims.get("id"));
             logger.info("name :" + claims.get("name"));
-            logger.info("email :" + claims.get("email"));
+            logger.info("avatarUrl :" + claims.get("avatarUrl"));
 
             return true;
         } catch (ExpiredJwtException exception) {
@@ -67,31 +67,11 @@ public class JwtService {
         }
     }
 
-    public Object getUserEmail(String jwt) throws RuntimeException {
-        try {
-            Claims claims = Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary(secretKey))
-                                .parseClaimsJws(jwt).getBody();
-            return claims.get("email");
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
     public Object getUserName(String jwt) throws RuntimeException {
         try {
             Claims claims = Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary(secretKey))
                                 .parseClaimsJws(jwt).getBody();
             return claims.get("name");
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    public Object getUserNickname(String jwt) throws RuntimeException {
-        try {
-            Claims claims = Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary(secretKey))
-                                .parseClaimsJws(jwt).getBody();
-            return claims.get("nickname");
         } catch (Exception e) {
             return null;
         }

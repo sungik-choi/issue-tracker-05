@@ -1,4 +1,4 @@
-package com.codesquad.issuetracker.ragdoll.vo.commentVO;
+package com.codesquad.issuetracker.main.vo.commentVO;
 
 import java.util.List;
 
@@ -6,14 +6,14 @@ public class CommentInformation {
 
     private int countOfComment;
 
-    private List<CommentDetails> comments;
+    private List<CommentSummary> comments;
 
-    private CommentInformation(int countOfComment, List<CommentDetails> comments) {
+    private CommentInformation(int countOfComment, List<CommentSummary> comments) {
         this.countOfComment = countOfComment;
         this.comments = comments;
     }
 
-    public static CommentInformation of(int countOfComment, List<CommentDetails> comments) {
+    public static CommentInformation of(int countOfComment, List<CommentSummary> comments) {
         return new CommentInformation(countOfComment, comments);
     }
 
@@ -21,7 +21,7 @@ public class CommentInformation {
         return countOfComment;
     }
 
-    public List<CommentDetails> getComments() {
+    public List<CommentSummary> getComments() {
         return comments;
     }
 }
