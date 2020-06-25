@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { CookiesProvider } from "react-cookie";
+import { UserProvider } from "@Contexts/userContext";
 
 import App from "./App";
 
@@ -11,7 +12,9 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <CookiesProvider>
-        <App />
+        <UserProvider>
+          <App />
+        </UserProvider>
       </CookiesProvider>
     </BrowserRouter>
   </React.StrictMode>,

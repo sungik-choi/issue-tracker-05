@@ -29,8 +29,10 @@ const UserMenu = ({ userId, url }) => {
   const { userDispatch } = useContext(UserContext);
   const history = useHistory();
 
-  const signOutHandler = () =>
-    pipe(removeCookie, deleteUserData, userDispatch, history.push("/login"))(TOKEN);
+  const signOutHandler = () => {
+    pipe(removeCookie, deleteUserData, userDispatch)(TOKEN);
+    history.push("/login");
+  };
 
   return (
     <PopupState variant="popover" popupId="demo-popup-popover">
