@@ -1,37 +1,35 @@
 import React, { useContext } from "react";
+import { useCookies } from "react-cookie";
+import useFetch from "@Hooks/useFetch";
+import pipe from "@Utils/pipe";
 
-import Box from "@material-ui/core/Box";
-
+import Footer from "@Components/common/Footer";
+import LoadingIndicator from "@Components/common/LoadingIndicator";
 import IssueTable from "@Components/Issues/IssueTable/IssueTable";
 import Navigation from "@Components/Issues/Navigation/Navigation";
 import ClearButton from "@Components/Issues/ClearButton";
 
 import { IssueListContext } from "@Contexts/issueListContext";
-import { fetchSuccess, fetchError } from "@Reducers/issueListReducer";
+import { initDataFetchOptions } from "@Reducers/issueListReducer";
 
-import useFetch from "@Hooks/useFetch";
-import { issuesUrl } from "@Utils/urls";
+import { TOKEN } from "@Constants/constants";
 
 const Issues = () => {
+  const [{ token }] = useCookies([TOKEN]);
   const { issueListDispatch } = useContext(IssueListContext);
-
-  const loading = useFetch({
-    url: issuesUrl,
-    actionType: {
-      successAction: fetchSuccess,
-      errorAction: fetchError,
-    },
-    dispatch: issueListDispatch,
-  });
+  const { loading } = pipe(initDataFetchOptions, useFetch)({ dispatch: issueListDispatch, token });
 
   return (
     <>
-      {!loading && (
-        <Box pb={10}>
+      {loading ? (
+        <LoadingIndicator />
+      ) : (
+        <>
           <Navigation />
           <ClearButton />
           <IssueTable />
-        </Box>
+          <Footer />
+        </>
       )}
     </>
   );

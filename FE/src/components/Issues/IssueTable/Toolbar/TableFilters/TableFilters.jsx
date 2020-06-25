@@ -7,6 +7,12 @@ import { IssueListContext } from "@Contexts/issueListContext";
 
 import FilterButton from "./FilterButton";
 
+const FILTER_BY_TEXT = "Filter by";
+const AUTHOR = "author";
+const LABEL = "Label";
+const MILESTONES = "Milestones";
+const ASSIGNEE = "Assignee";
+
 const TableFilters = ({ bSelectedIssueExist }) => {
   const {
     issueList: {
@@ -15,12 +21,6 @@ const TableFilters = ({ bSelectedIssueExist }) => {
       users,
     },
   } = useContext(IssueListContext);
-
-  const FILTER_BY_TEXT = "Filter by";
-  const AUTHOR = "author";
-  const LABEL = "Label";
-  const MILESTONES = "Milestones";
-  const ASSIGNEE = "Assignee";
 
   const userFilterList = users.map(({ id, name, avatarUrl }) => ({
     id,
