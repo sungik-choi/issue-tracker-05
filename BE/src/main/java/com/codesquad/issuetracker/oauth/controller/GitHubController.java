@@ -23,7 +23,7 @@ public class GitHubController {
         this.gitHubOauthService = gitHubOauthService;
     }
 
-    @GetMapping("/login/oauth")
+    @GetMapping("/oauth")
     public void login(@PathParam("code") String code, HttpServletRequest request, HttpServletResponse response) throws IOException {
         logger.info("##### code: {}", code);
         gitHubOauthService.login( request, response, REDIRECT_URL, code);
