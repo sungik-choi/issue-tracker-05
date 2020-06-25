@@ -4,6 +4,7 @@ os: linux
 files:
   - source: /
     destination: /home/ubuntu/issue_tracker
+    overwrite: yes
 
 permissions:
   - object: /home/ubuntu/issue_tracker
