@@ -24,7 +24,7 @@ public class LoginController {
     }
 
     // replace with Github login
-    @PostMapping("/api/users")
+    @PostMapping("/users")
     public ResponseEntity<ApiResponse<?>> login(@RequestBody AuthCredential authCredential, HttpSession session) {
         if ("true".equals(authCredential.getCredential())) {
             userService_hamill.save(

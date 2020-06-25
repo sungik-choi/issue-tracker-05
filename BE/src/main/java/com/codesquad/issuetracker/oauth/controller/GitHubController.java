@@ -13,7 +13,7 @@ import javax.websocket.server.PathParam;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping
 public class GitHubController {
     private static final Logger logger = LoggerFactory.getLogger(GitHubController.class);
 
