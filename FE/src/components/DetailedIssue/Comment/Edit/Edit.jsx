@@ -24,11 +24,8 @@ const Edit = ({ id, userId, value, onChange, onClickClose, onClickSave }) => {
     useFetch,
   )({ detailedIssueDispatch, id, userId, value });
 
-  console.log(value);
-
   const onSubmitForm = (e) => {
     e.preventDefault();
-    console.log(getData, 2);
     onClickSave(getData);
   };
 

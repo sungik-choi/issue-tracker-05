@@ -26,8 +26,7 @@ const ToolBar = ({ userName, createdAt, authorName, clickHandler }) => {
         <strong>{userName}</strong>
         <span>{statusMessage}</span>
       </Typography>
-      {/* {userName === authorName && ( */}
-      {true && (
+      {userName === authorName && (
         <div>
           <Chip label="Author" variant="outlined" />
           <Button onClick={clickHandler}>{EDIT_BTN_TEXT}</Button>

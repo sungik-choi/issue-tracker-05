@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import editHandler from "@Components/DetailedIssue/editHandler";
 
@@ -15,7 +16,7 @@ const REOPEN_BTN_TEXT = "reopen issue";
 const TextArea = () => {
   const classes = useStyles();
 
-  const { isEdit, onToggle, onClickSave, onClickClose } = editHandler();
+  const { isEdit, onToggle } = editHandler();
 
   return (
     <Box className={classes.root}>

@@ -11,8 +11,6 @@ import Edit from "./Edit/Edit";
 import editHandler from "@Components/DetailedIssue/editHandler";
 
 import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import { makeStyles } from "@material-ui/core/styles";
 
 const Comment = () => {

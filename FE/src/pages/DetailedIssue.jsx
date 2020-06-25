@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 // import LoadingIndicator from "@Components/common/LoadingIndicator";
 import Header from "@Components/DetailedIssue/Header/Header";
 import Comment from "@Components/DetailedIssue/Comment/Comment";
+import Pickers from "@Components/DetailedIssue/Pickers/Pickers";
 
 import Box from "@material-ui/core/Box";
 
@@ -26,7 +27,10 @@ const DetailedIssue = () => {
       ) : (
         <Box pt={5}>
           <Header />
-          <Comment />
+          <Box display="flex" justifyContent="space-between">
+            <Comment />
+            <Pickers />
+          </Box>
         </Box>
       )}
     </>
