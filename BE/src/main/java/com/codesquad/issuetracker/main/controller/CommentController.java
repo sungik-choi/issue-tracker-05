@@ -13,7 +13,7 @@ import javax.naming.AuthenticationException;
 import java.util.HashMap;
 
 @RestController
-@RequestMapping("/api/issues")
+@RequestMapping("/issues")
 public class CommentController {
 
     private static final Logger logger = LoggerFactory.getLogger(CommentController.class);

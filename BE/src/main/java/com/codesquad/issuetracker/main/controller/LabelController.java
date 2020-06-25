@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/labels")
+@RequestMapping("/labels")
 public class LabelController {
 
     private static final Logger logger = LoggerFactory.getLogger(LabelController.class);
