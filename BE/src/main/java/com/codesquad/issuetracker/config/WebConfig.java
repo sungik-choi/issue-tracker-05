@@ -9,7 +9,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
     private static final String[] EXCLUDE_PATHS = {
-            "/api/issues/{issueId}"
+            "/api/issues/{issueId}",
+            "/api/issues/{issueId}/comments",
+            "/api/issues/{issueId}/comments/{commentId}",
+            "/api/issues/{issueId}/title"
     };
 
     private final JwtInterceptor jwtInterceptor;
