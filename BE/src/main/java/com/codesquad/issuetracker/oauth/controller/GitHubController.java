@@ -15,7 +15,7 @@ import java.io.IOException;
 public class GitHubController {
     private static final Logger logger = LoggerFactory.getLogger(GitHubController.class);
 
-    public static final String REDIRECT_URL = "http://localhost:8080";
+    public static final String REDIRECT_URL = "http://13.209.34.90";
 
     private final GitHubOauthService gitHubOauthService;
 
