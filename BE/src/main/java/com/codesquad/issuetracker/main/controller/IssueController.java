@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.naming.AuthenticationException;
 
 @RestController
-@RequestMapping("/api/issues")
+@RequestMapping("/issues")
 public class IssueController {
 
     private static final Logger logger = LoggerFactory.getLogger(IssueController.class);
