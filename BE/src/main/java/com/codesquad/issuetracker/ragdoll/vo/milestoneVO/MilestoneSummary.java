@@ -1,35 +1,56 @@
 package com.codesquad.issuetracker.ragdoll.vo.milestoneVO;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 public class MilestoneSummary {
 
-    private Integer milestoneId;
+    private Integer id;
 
-    private String milestoneTitle;
+    private String title;
 
-    public MilestoneSummary() {}
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Double progress;
 
-    public MilestoneSummary(Integer milestoneId, String milestoneTitle) {
-        this.milestoneId = milestoneId;
-        this.milestoneTitle = milestoneTitle;
+    private MilestoneSummary(Integer id, String title) {
+        this.id = id;
+        this.title = title;
     }
 
-    public static MilestoneSummary create(Integer milestoneId, String milestoneTitle) {
-        return new MilestoneSummary(milestoneId, milestoneTitle);
+    private MilestoneSummary(Integer id, String title, Double progress) {
+        this.id = id;
+        this.title = title;
+        this.progress = progress;
     }
 
-    public Integer getMilestoneId() {
-        return milestoneId;
+    public static MilestoneSummary of(Integer id, String title) {
+        return new MilestoneSummary(id, title);
     }
 
-    public void setMilestoneId(Integer milestoneId) {
-        this.milestoneId = milestoneId;
+    public static MilestoneSummary of(Integer id, String title, Double progress) {
+        return new MilestoneSummary(id, title, progress);
     }
 
-    public String getMilestoneTitle() {
-        return milestoneTitle;
+    public Integer getId() {
+        return id;
     }
 
-    public void setMilestoneTitle(String milestoneTitle) {
-        this.milestoneTitle = milestoneTitle;
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Double getProgress() {
+        return progress;
+    }
+
+    public void setProgress(Double progress) {
+        this.progress = progress;
     }
 }

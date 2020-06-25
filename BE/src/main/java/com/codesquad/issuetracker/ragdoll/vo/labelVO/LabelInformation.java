@@ -1,21 +1,21 @@
 package com.codesquad.issuetracker.ragdoll.vo.labelVO;
 
-import java.util.Set;
+import java.util.List;
 
 public class LabelInformation {
 
     private int countOfLabel;
 
-    private Set<LabelSummary> labels;
+    private List<LabelDetails> labels;
 
     public LabelInformation() {}
 
-    private LabelInformation(int countOfLabel, Set<LabelSummary> labels) {
+    private LabelInformation(int countOfLabel, List<LabelDetails> labels) {
         this.countOfLabel = countOfLabel;
         this.labels = labels;
     }
 
-    public static LabelInformation create(int countOfLabel, Set<LabelSummary> labels) {
+    public static LabelInformation of(int countOfLabel, List<LabelDetails> labels) {
         return new LabelInformation(countOfLabel, labels);
     }
 
@@ -27,11 +27,11 @@ public class LabelInformation {
         this.countOfLabel = countOfLabel;
     }
 
-    public Set<LabelSummary> getLabels() {
+    public List<LabelDetails> getLabels() {
         return labels;
     }
 
-    public void setLabels(Set<LabelSummary> labels) {
+    public void setLabels(List<LabelDetails> labels) {
         this.labels = labels;
     }
 }

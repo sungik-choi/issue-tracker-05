@@ -13,7 +13,7 @@ public class MilestoneInformation {
         this.milestones = milestones;
     }
 
-    public static MilestoneInformation create(int countOfMilestone, Set<MilestoneSummary> milestones) {
+    public static MilestoneInformation of(int countOfMilestone, Set<MilestoneSummary> milestones) {
         return new MilestoneInformation(countOfMilestone, milestones);
     }
 

@@ -1,18 +1,21 @@
-package com.codesquad.issuetracker.ragdoll.domain;
+package com.codesquad.issuetracker.ragdoll.vo.labelVO;
 
-public class Label {
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+public class LabelDetails {
 
     private Integer id;
 
     private String name;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String description;
 
     private String backgroundColor;
 
     private String color;
 
-    private Label(Integer id, String name, String description, String backgroundColor, String color) {
+    private LabelDetails(Integer id, String name, String description, String backgroundColor, String color) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -40,10 +43,6 @@ public class Label {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getBackgroundColor() {
         return backgroundColor;
     }
@@ -54,10 +53,6 @@ public class Label {
 
     public String getColor() {
         return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     public static class Builder {
@@ -92,8 +87,8 @@ public class Label {
             return this;
         }
 
-        public Label build() {
-            return new Label(id, name, description, backgroundColor, color);
+        public LabelDetails build() {
+            return new LabelDetails(id, name, description, backgroundColor, color);
         }
     }
 }
