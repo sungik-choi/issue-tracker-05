@@ -14,6 +14,7 @@ const editHandler = (initialValue) => {
   });
 
   const onClickSave = useCallback((fetchFunc) => {
+    console.log(fetchFunc);
     onToggle();
 
     if (inputTitle) {

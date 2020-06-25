@@ -19,6 +19,7 @@ const Comment = () => {
   const {
     commentInfo: { comments },
     issue: {
+      id,
       author: { name },
     },
   } = useContext(DetailedIssueContext).detailedIssue;
@@ -43,6 +44,8 @@ const Comment = () => {
             id: userId,
             contents: (
               <Edit
+                id={id}
+                userId={userId}
                 value={inputTitle}
                 onChange={onChangeInput}
                 inputValue={inputTitle}

@@ -64,3 +64,24 @@ export const editTitleFetchOptions = ({ detailedIssueDispatch, id, value }) => (
     }),
   },
 });
+
+export const editCommentFetchOptions = ({ detailedIssueDispatch, id, userId, value }) => ({
+  url: `${detailedIssueUrl}${id}/comments/${userId}`,
+  dispatch: detailedIssueDispatch,
+  actionType: {
+    fetchSuccess,
+    fetchError,
+  },
+  skip: true,
+  deps: [value],
+  option: {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    method: "PATCH",
+    body: JSON.stringify({
+      userId: userId,
+      description: value,
+    }),
+  },
+});
